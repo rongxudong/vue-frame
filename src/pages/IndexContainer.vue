@@ -41,7 +41,10 @@
     }
 </script>
 
-<style scoped>
+<style>
+    @import "../assets/css/_variable.less";
+    @import "../assets/css/_common.css";
+
     .source {
         padding: 0;
         display: -ms-flexbox;

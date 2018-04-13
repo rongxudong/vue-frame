@@ -1,9 +1,12 @@
 <template>
-    <el-carousel indicator-position="outside" height="500px" :interval="5000">
-        <el-carousel-item v-for="item in banner" :key="item.id">
-            <img :src="item.image"/>
-        </el-carousel-item>
-    </el-carousel>
+    <div>
+        <el-carousel indicator-position="outside" height="500px" :interval="5000">
+            <el-carousel-item v-for="item in banner" :key="item.id">
+                <img :src="item.image"/>
+            </el-carousel-item>
+        </el-carousel>
+        <div class="pic"></div>
+    </div>
 </template>
 
 <script>
@@ -25,6 +28,11 @@
 
 <style lang="less" rel="stylesheet/less">
     @import "../assets/css/_variable.less";
+    @import "../assets/css/_common.css";
+
+    #xdd {
+        .text_overflow;
+    }
     .el-carousel__item img {
         object-fit: cover;
     }

@@ -63,7 +63,7 @@ webpack只会压缩一次，除非你的样式是带有scoped属性的，系统�
 个人推荐imagemin-webpack-plugin这款插件，当然也有其他的压缩插件，看个人喜好~
 ```
 
-https://github.com/Klathmon/imagemin-webpack-plugin
+图片压缩插件网址：https://github.com/Klathmon/imagemin-webpack-plugin
 
 ``` bash
 （3）因为使用了vue-router懒加载功能，导致在文件压缩的时候，会多出对应个数的js文件，命名格式为js/[id].[chunkhash].js，

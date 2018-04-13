@@ -39,3 +39,25 @@ src文件夹 （资源文件夹，以后我们就在这个目录下写代码，�
     assets (静态资源，js、css之类的可以放在里面) 
     components （公用组件编写的地方）
     pages （页面编写的地方，页面使用组建拼出来的，也是vue文件）
+    router （路由文件夹，配置页面跳转）
+    main.js （页面程序入口文件，加载各种公共组件）
+
+static （静态资源，如图片、json数据之类等）
+
+test （单元测试、代码测试）
+
+.babelrc (ES6语法编译配置，用来将es6代码转换为游览器识别的代码)
+
+.editorconfig (定义代码格式)
+
+如果在创建vue-cli项目的时候，安装了eslint，会有.eslintignore (设置所需监听的文件区域，详情可查看百度)
+
+.eslintrc.js (省略)
+
+.gitignore （git上传需要忽略的文件格式）
+
+.postcssrc.js (转换css工具)
+
+index.html (页面入口)
+
+package.json (项目基本信息，项目开发所需模块、项目)

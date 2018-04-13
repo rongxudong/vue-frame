@@ -66,7 +66,7 @@ webpack只会压缩一次，除非你的样式是带有scoped属性的，系统�
 （2）url-loader 和 file-loader不会压缩图片，只是帮你重新命名图片名，
 个人推荐imagemin-webpack-plugin这款插件，当然也有其他的压缩插件，看个人喜好~
 ```
-
+小tips：imagemin-webpack-plugin插件配置要放在copy-webpack-plugin插件配置之后，下面的路径文档有说明哦！！！
 图片压缩插件网址：https://github.com/Klathmon/imagemin-webpack-plugin
 
 ``` bash

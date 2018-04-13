@@ -1,0 +1,9 @@
+.common-main {
+    display: flex;
+    align-items: center;
+}
+#flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

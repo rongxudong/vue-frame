@@ -51,6 +51,10 @@ test    // 单元测试、代码测试
 index.html      // 页面入口
 package.json    // 项目基本信息，项目开发所需模块、项目
 ```
+小tips：所有你想要压缩的文件都放在assets文件夹下，将不用压缩的静态文件放在static文件夹下！
+因为webpack会通过copy-webpack-plugin插件，将static里的文件复制到dist里，具体放置在哪里，看具体配置情况。
+我们可以在webpack.prod.conf.js里进行查看。
+
 
 ``` bash
 项目打包：

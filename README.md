@@ -77,5 +77,6 @@ webpack只会压缩一次，除非你的样式是带有scoped属性的，系统�
 
 （3）因为使用了vue-router懒加载功能，导致在文件压缩的时候，会多出对应个数的js文件，命名格式为js/[id].[chunkhash].js，
 可以在webpack.prod.conf.js里查看。
+
 提示：image的路径要用相对路径，如果用绝对路劲，在项目打包压缩后，image路径会报错
 ```

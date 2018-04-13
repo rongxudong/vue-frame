@@ -29,6 +29,7 @@ npm test
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
+``` bash
 build文件夹 （webpack相关配置）
 
 config文件夹 （vue基本配置文件，如监听端口，打包输出等相关配置）
@@ -36,11 +37,11 @@ config文件夹 （vue基本配置文件，如监听端口，打包输出等相�
 node_modules文件夹 （npm安装的依赖包）
 
 src文件夹 （资源文件夹，以后我们就在这个目录下写代码，下面是它的子文件夹）
-    assets (静态资源，js、css之类的可以放在里面) 
-    components （公用组件编写的地方）
-    pages （页面编写的地方，页面使用组建拼出来的，也是vue文件）
-    router （路由文件夹，配置页面跳转）
-    main.js （页面程序入口文件，加载各种公共组件）
+assets (静态资源，js、css之类的可以放在里面) 
+components （公用组件编写的地方）
+pages （页面编写的地方，页面使用组建拼出来的，也是vue文件）
+router （路由文件夹，配置页面跳转）
+main.js （页面程序入口文件，加载各种公共组件）
 
 static （静态资源，如图片、json数据之类等）
 
@@ -61,3 +62,4 @@ test （单元测试、代码测试）
 index.html (页面入口)
 
 package.json (项目基本信息，项目开发所需模块、项目)
+```

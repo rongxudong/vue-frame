@@ -22,6 +22,7 @@ export default new Router({
             component: resolve => require(['@/pages/IndexBanner'], resolve)
         },
         // {
+        // 动态路径参数 以冒号开头
         //     path: '/content/:id',
         //     name: 'Content',
         //     component: Content

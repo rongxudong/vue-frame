@@ -6,6 +6,7 @@
             </el-carousel-item>
         </el-carousel>
         <div class="pic"></div>
+        <img src="../assets/img/banner_2.png"/>
     </div>
 </template>
 

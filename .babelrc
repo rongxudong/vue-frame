@@ -14,6 +14,7 @@
     "plugins": [
         "transform-vue-jsx",
         "transform-runtime",
+        "transform-object-rest-spread", // vuex中使用对象展开运算符插件
         [
             "component",
             {

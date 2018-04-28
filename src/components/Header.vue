@@ -46,7 +46,7 @@
                     default:
                         this.moment.locale('zh-cn');
                 }
-                console.log(`${this.moment.locale()}`)
+                console.log(`${this.moment.locale()}`);
                 LangStorage.setLang(val);
             }
         },

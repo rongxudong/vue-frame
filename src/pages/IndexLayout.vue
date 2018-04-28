@@ -24,7 +24,7 @@
         methods: {
             getData () {
                 this.$http.get('topics', null, r => {
-                    this.list = r.data
+                    this.list = r.data;
                 })
             }
         }

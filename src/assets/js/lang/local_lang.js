@@ -1,18 +1,18 @@
-import Moment from 'moment';
+import moment from 'moment';
 
 export default {
     browserLanguage(element) {
         switch(true){
             case element.indexOf('zh') > -1 :
-                Moment.locale('zh-cn');
+                moment.locale('zh-cn');
                 return 'CN';
                 break;
             case element.indexOf('en') > -1 :
-                Moment.locale('en-gb');
+                moment.locale('en-gb');
                 return 'EN';
                 break;
             default:
-                Moment.locale('zh-cn');
+                moment.locale('zh-cn');
                 return 'CN';
         }
     },

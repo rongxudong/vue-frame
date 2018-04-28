@@ -1,29 +1,29 @@
 <template>
     <div class="source">
         <div class="block">
-            <span class="demonstration">周</span>
+            <span class="demonstration">{{$t('indexContainer.week')}}</span>
             <el-date-picker
                     v-model="value1"
                     type="week"
                     format="yyyy 第 WW 周"
-                    placeholder="选择周">
+                    :placeholder="$t('indexContainer.placeholderWeek')">
             </el-date-picker>
         </div>
         <div class="block">
-            <span class="demonstration">月</span>
+            <span class="demonstration">{{$t('indexContainer.month')}}</span>
             <el-date-picker
                     v-model="value2"
                     type="month"
-                    placeholder="选择月">
+                    :placeholder="$t('indexContainer.placeholderMonth')">
             </el-date-picker>
         </div>
         <div class="block">
-            <span class="demonstration">年</span>
+            <span class="demonstration">{{$t('indexContainer.year')}}</span>
             <el-date-picker
                     v-model="value3"
                     align="right"
                     type="year"
-                    placeholder="选择年">
+                    :placeholder="$t('indexContainer.placeholderYear')">
             </el-date-picker>
         </div>
     </div>
@@ -37,7 +37,8 @@
                 value2: "",
                 value3: ""
             }
-        }
+        },
+        computed: {}
     }
 </script>
 

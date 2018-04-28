@@ -12,6 +12,10 @@ Vue.use(Router)
 export default new Router({
     routes: [
         {
+            path: '/',
+            redirect: '/Basic'
+        },
+        {
             path: '/Basic',
             name: 'Basic',
             component: Basic// 懒加载

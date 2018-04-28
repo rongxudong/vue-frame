@@ -23,7 +23,7 @@
         },
         methods: {
             getData () {
-                this.$api.get('topics', null, r => {
+                this.$http.get('topics', null, r => {
                     this.list = r.data
                 })
             }

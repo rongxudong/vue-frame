@@ -1,6 +1,7 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue';
+import Vuex from 'vuex';
 import App from './App';
 import router from './router';
 import VueI18n from 'vue-i18n';
@@ -9,19 +10,22 @@ import enLocale from 'element-ui/lib/locale/lang/en'
 import zhLocale from 'element-ui/lib/locale/lang/zh-CN'
 import Moment from 'moment';
 
+// Vuex 依赖 Promise,如果你支持的浏览器并没有实现 Promise (比如 IE),那么你可以使用一个 polyfill 的库，例如 es6-promise。
+import 'es6-promise/auto'
+
 import 'element-ui/lib/theme-chalk/index.css';
 import 'normalize.css';
 import './assets/css/_reset.css';
 
 // 引用js文件(自己的)
-import api from './api/base-ajax';
+import http from './api/base-ajax';
 import LangStorage from './assets/js/lang/local_lang';
 
 // 引用js文件(插件)
 
 
 // 将方法绑定到全局
-Vue.prototype.$api = api;
+Vue.prototype.$http = http;
 Vue.prototype.moment = Moment;
 
 // moment选择对应的语言
@@ -29,6 +33,7 @@ Vue.prototype.moment = Moment;
 
 Vue.config.productionTip = false;
 Vue.use(VueI18n);
+Vue.use(Vuex);
 
 const messages = {
     // 将我们项目中的语言包与Element的语言包进行合并

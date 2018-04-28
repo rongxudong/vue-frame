@@ -22,7 +22,7 @@
     export default {
         name: 'app',
         created () {
-            this.$api.get('topics', null, r => {
+            this.$http.get('topics', null, r => {
                 console.log(r)
             })
         },

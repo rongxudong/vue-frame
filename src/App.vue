@@ -1,7 +1,7 @@
 <template>
     <div id="app">
         <el-container>
-            <el-header class="header">
+            <el-header :class="$style.header">
                 <web-header></web-header>
             </el-header>
             <el-container>
@@ -34,11 +34,13 @@
 
 </script>
 
-<style>
-    /*@import "./style/_reset.css";*/
+<style module lang="less" rel="stylesheet/less">
+    @import "assets/css/_variable";
+    @import "assets/css/_mixin";
     .header {
-        background-color: #409EFF;
+        background-color: @base-blue;
         color: #fff;
         line-height: 60px;
+        .opacity(.9);
     }
 </style>

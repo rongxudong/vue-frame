@@ -1,7 +1,7 @@
 <template>
     <el-row>
         <el-col :span="22">
-            <div class="head-wrap">{{ $t('header.name')}}</div>
+            <div class="head-wrap">{{ $t('header.name') }}</div>
         </el-col>
         <el-col :span="2">
             <el-select v-model="value" placeholder="请选择" value="切换语言">
@@ -46,7 +46,7 @@
                     default:
                         this.moment.locale('zh-cn');
                 }
-                console.log(`${this.moment.locale()}`);
+//                console.log(`${this.moment.locale()}`);
                 LangStorage.setLang(val);
             }
         },
@@ -59,6 +59,6 @@
 </script>
 <style scoped>
     .head-wrap{
-
+        color: #000;
     }
 </style>

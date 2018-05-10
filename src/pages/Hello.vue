@@ -20,7 +20,7 @@
         },
         methods: {
             async getContent () {
-                this.$http.get('hello', null, r => {
+                this.$http.get('hello?ID=12345', null, r => {
                     this.content = r.data.content;
                 })
             }

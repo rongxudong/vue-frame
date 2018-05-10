@@ -18,6 +18,8 @@ npm run build
 npm run mock
 
 # npm run mockdev (同时执行npm run mock指令和npm run mock指令)
+npm run mockdev
+
 # build for production and view the bundle analyzer report
 npm run build --report
 

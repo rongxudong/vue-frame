@@ -36,7 +36,7 @@
 
 <style module lang="less" rel="stylesheet/less">
     @import "assets/css/_variable";
-    @import "assets/css/_mixin";
+    @import "../node_modules/bootstrap/less/mixins";
     .header {
         background-color: @base-blue;
         color: #fff;

@@ -30,11 +30,6 @@ module.exports = [
         id: '6',
         sub: [
             {
-                id: '7',
-                name: 'Radio 单选框',
-                componentName: 'FormRadio'
-            },
-            {
                 id: '8',
                 name: 'Checkbox 多选框',
                 componentName: 'FormCheckbox'

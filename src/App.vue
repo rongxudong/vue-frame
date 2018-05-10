@@ -22,9 +22,9 @@
     export default {
         name: 'app',
         created () {
-            this.$http.get('topics', null, r => {
-                console.log(r)
-            })
+//            this.$http.get('topics', null, r => {
+//                console.log(r)
+//            })
         },
         components: {
             'nav-menu': NavMenu,

@@ -1,11 +1,12 @@
-import { Message,Notification } from 'element-ui'
-
+import { Message } from 'element-ui';
+// 引用axios
+import axios from 'axios';
 
 // 配置API接口地址
 // let root = 'https://cnodejs.org/api/v1'
-let root = '/api/v1';
-// 引用axios
-let axios = require('axios');
+let root = '/api',
+    cancel ,
+    promiseArr = {};
 // 自定义判断元素类型JS
 function toType (obj) {
     return ({}).toString.call(obj).match(/\s([a-zA-Z]+)/)[1].toLowerCase()
@@ -29,47 +30,92 @@ function filterNull (o) {
 
 //添加一个请求拦截器
 axios.interceptors.request.use(config=> {
+    // 配置config
+    config.headers.Accept = 'application/json';
+    // config.headers.System = 'vue';
+    // let token = Vue.localStorage.get('token');
+    // if(token){
+    //     config.headers.Token = token;
+    // }
     //在请求发出之前进行一些操作
-    return config;
+    if (promiseArr[config.url]) {
+        promiseArr[config.url]('操作取消')
+        promiseArr[config.url] = cancel
+    }
+    else {
+        promiseArr[config.url] = cancel
+    }
+    return config
 }, err=> {
     Message.error({
         showClose: true,
         message: '请求超时!'
     });
-    return Promise.resolve(err);
+    return Promise.resolve(err)
 })
 
 //添加一个响应拦截器
-axios.interceptors.response.use(data=> {
+axios.interceptors.response.use(response => {
     //在这里对返回的数据进行处理
-    if (data.status && data.status == 200 && data.data.status == 'error') {
+    if (response.status && response.status == 200 && response.data.status == 'error') {
         Message.error({
             showClose: true,
-            message: data.data.msg
+            message: response.data.msg
         });
         return;
     }
-    return data;
-}, err=> {
-    if (err.response.status == 504||err.response.status == 404) {
-        Message.error({
-            showClose: true,
-            message: '服务器被吃了⊙﹏⊙∥'
-        });
-    }
-    else if (err.response.status == 403) {
-        Message.error({
-            showClose: true,
-            message: '权限不足,请联系管理员!'
-        });
+    return response;
+}, err => {
+    if (err && err.response) {
+        switch (err.response.status) {
+            case 400:
+                err.message = '错误请求'
+                break;
+            case 401:
+                err.message = '未授权，请重新登录'
+                break;
+            case 403:
+                err.message = '拒绝访问'
+                break;
+            case 404:
+                err.message = '请求错误,未找到该资源'
+                break;
+            case 405:
+                err.message = '请求方法未允许'
+                break;
+            case 408:
+                err.message = '请求超时'
+                break;
+            case 500:
+                err.message = '服务器端出错'
+                break;
+            case 501:
+                err.message = '网络未实现'
+                break;
+            case 502:
+                err.message = '网络错误'
+                break;
+            case 503:
+                err.message = '服务不可用'
+                break;
+            case 504:
+                err.message = '网络超时'
+                break;
+            case 505:
+                err.message = 'http版本不支持该请求'
+                break;
+            default:
+                err.message = '连接错误' + err.response.status
+        }
     }
     else {
-        Message.error({
-            showClose: true,
-            message: '未知错误!'
-        });
+        err.message = "连接到服务器失败"
     }
-    return Promise.resolve(err);
+    Message.error({
+        showClose: true,
+        message: err.message
+    });
+    return Promise.resolve(err.response)
 })
 
 /*
@@ -113,22 +159,13 @@ function apiAxios (method, url, params, success, failure) {
         maxRedirects: 5
     })
     // then时进行response数据处理
-        .then(function (res) {
-            if (res.data.success === true) {
-                if (success) {
-                    success(res.data)
-                }
-            } else {
-                if (failure) {
-                    failure(res.data)
-                } else {
-                    Notification.error({
-                        title: '错误',
-                        message: JSON.stringify(res.data)
-                    })
-                }
+    .then(function (res) {
+        if (res.data.success === true) {
+            if (success) {
+                success(res.data)
             }
-        })
+        }
+    })
 }
 
 // 返回在vue模板中的调用接口

@@ -22,6 +22,11 @@
                 </el-submenu>
 
             </el-menu>
+            <div>
+                <router-link to="/FormRadio/1234">FormRadio</router-link>
+                <router-link to="/IndexBanner">IndexBanner</router-link>
+                <router-link to="/Hello">Hello</router-link>
+            </div>
         </el-col>
     </el-row>
 </template>

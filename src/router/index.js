@@ -25,6 +25,11 @@ export default new Router({
             name: 'IndexBanner',
             component: resolve => require(['@/pages/IndexBanner'], resolve)
         },
+        {
+            path: '/Hello',
+            name: 'Hello',
+            component: resolve => require(['@/pages/Hello'], resolve)
+        },
         // {
         // 动态路径参数 以冒号开头
         //     path: '/content/:id',
@@ -47,7 +52,7 @@ export default new Router({
             component: resolve => require(['@/pages/FormCheckbox'], resolve)
         },
         {
-            path: '/FormRadio',
+            path: '/FormRadio/:id',
             name: 'FormRadio',
             component: resolve => require(['@/pages/FormRadio'], resolve)
         }

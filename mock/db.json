@@ -1,0 +1,25 @@
+{
+    "posts": {
+        "success": true,
+        "data": {
+            "id": 1,
+            "title":
+            "json-server",
+            "author": "typicode"
+        }
+    },
+    "comments": {
+        "success": true,
+        "data": {
+            "id": 1,
+            "body": "some comment",
+            "postId": 1
+        }
+    },
+    "hello": {
+        "success": true,
+        "data": {
+            "content": "大家好！！！大家好！！！大家好！！！大家好！！！大家好！！！大家好！！！大家好！！！大家好！！！大家好！！！大家好！！！"
+        }
+    }
+}

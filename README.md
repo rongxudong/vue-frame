@@ -14,6 +14,10 @@ npm run dev
 # build for production with minification （打包压缩项目命令）
 npm run build
 
+# npm run mock 命令 运行 mock server (mock数据使用)
+npm run mock
+
+# npm run mockdev (同时执行npm run mock指令和npm run mock指令)
 # build for production and view the bundle analyzer report
 npm run build --report
 

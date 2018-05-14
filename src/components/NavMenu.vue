@@ -23,7 +23,7 @@
 
             </el-menu>
             <div>
-                <router-link to="/FormRadio/1234">FormRadio</router-link>
+                <i class="iconfont icon-eye"></i><router-link to="/FormRadio/1234">FormRadio</router-link>
                 <router-link to="/IndexBanner">IndexBanner</router-link>
                 <router-link to="/Hello">Hello</router-link>
             </div>
@@ -39,8 +39,10 @@
 
 <script>
     import menu from '@/config/menu-config'
+    import Icon from '../../node_modules/vue-icon-font/src/IconFont.vue'
 
     export default {
+        components: {Icon},
         data () {
             return {
                 menu: menu

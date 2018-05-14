@@ -40,11 +40,16 @@ build文件夹    // webpack相关配置
 config文件夹   // vue基本配置文件，如监听端口，打包输出等相关配置
 node_modules文件夹    // npm安装的依赖包
 src文件夹    // 资源文件夹，以后我们就在这个目录下写代码，下面是它的子文件夹
-    assets    // 静态资源，js、css之类的可以放在里面 
+    api     // 存放axios的封装和url管理的数据池（axios相当于搭配vue的ajax）
+    assets    // 静态资源、js、css之类的可以放在里面
     components     // 公用组件编写的地方
+    config    // 后台实现菜单栏或者nav等管理
     pages     // 页面编写的地方，页面使用组建拼出来的，也是vue文件
-    router     //路由文件夹，配置页面跳转
-    main.js    //页面程序入口文件，加载各种公共组件
+    router     // 路由文件夹，配置页面跳转
+    vuex       // Vuex 是一个专为 Vue.js 应用程序开发的状态管理模式
+    App.vue    // 主界面
+    Global.js  // Vue.js 的插件应当有一个公开方法 install ，专用于全局方法，属性设置等
+    main.js    // 页面程序入口文件，加载各种公共组件
 static      //静态资源，如图片、json数据之类等
 test    // 单元测试、代码测试
 .babelrc    // ES6语法编译配置，用来将es6代码转换为游览器识别的代码

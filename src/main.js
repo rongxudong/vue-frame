@@ -1,6 +1,7 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue';
+import VueIconFont from 'vue-icon-font';
 import Vuex from 'vuex';
 import StoreOption from './vuex/store';
 import App from './App';
@@ -12,18 +13,22 @@ import zhLocale from 'element-ui/lib/locale/lang/zh-CN';
 import Moment from 'moment';
 
 // Vuex 依赖 Promise,如果你支持的浏览器并没有实现 Promise (比如 IE),那么你可以使用一个 polyfill 的库，例如 es6-promise。
-import 'es6-promise/auto'
+import 'es6-promise/auto';
 
 import 'element-ui/lib/theme-chalk/index.css';
 import 'normalize.css';
 import './assets/css/_reset.css';
 
+/* font-class */
+import '../static/iconfont/iconfont.css';
+
 // 引用js文件(自己的)
 import http from './api/base-ajax';
 import LangStorage from './assets/js/lang/local_lang';
+import MyPlugin from './Global';
 
 // 引用js文件(插件)
-
+// import '../static/iconfont/iconfont';
 
 // 将方法绑定到全局
 Vue.prototype.$http = http;
@@ -33,8 +38,10 @@ Vue.prototype.moment = Moment;
 
 
 Vue.config.productionTip = false;
-Vue.use(VueI18n);
+Vue.use(VueIconFont);
 Vue.use(Vuex);
+Vue.use(VueI18n);
+Vue.use(MyPlugin);
 
 // 创建一个 store 对象用于管理应用状态
 const store = new Vuex.Store(StoreOption);

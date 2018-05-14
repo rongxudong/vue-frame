@@ -40,7 +40,7 @@
     }
 
     .el-carousel__item:nth-child(2n) {
-        background-color: @base-blue;
+        background-color: @base;
     }
 
     .el-carousel__item:nth-child(2n+1) {

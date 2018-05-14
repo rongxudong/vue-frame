@@ -23,13 +23,15 @@
         data() {
             return {
                 activeIndex: '1',
-                options: [{
-                    value: 'zh_CN',
-                    label: '中文'
-                }, {
-                    value: 'en',
-                    label: 'English'
-                }],
+                options: [
+                    {
+                        value: 'zh_CN',
+                        label: '中文'
+                    }, {
+                        value: 'en',
+                        label: 'English'
+                    }
+                ],
                 value: this.$i18n.locale
             };
         },

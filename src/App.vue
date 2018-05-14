@@ -1,7 +1,7 @@
 <template>
     <div id="app">
         <el-container>
-            <el-header :class="$style.header">
+            <el-header :class="$style.header" :style="{backgroundColor:color}">
                 <web-header></web-header>
             </el-header>
             <el-container>
@@ -21,7 +21,13 @@
 
     export default {
         name: 'app',
+        data () {
+            return {
+                color: this.getRandColor,
+            }
+        },
         created () {
+            console.log('现在的api: ', this.$msg)      // 初始化项目时，会打印 Hello I am test.js
 //            this.$http.get('topics', null, r => {
 //                console.log(r)
 //            })
@@ -38,7 +44,7 @@
     @import "assets/css/_variable";
     @import "../node_modules/bootstrap/less/mixins";
     .header {
-        background-color: @base-blue;
+        background-color: @base;
         color: #fff;
         line-height: 60px;
         .opacity(.9);

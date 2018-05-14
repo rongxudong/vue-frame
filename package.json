@@ -13,7 +13,8 @@
         "lint": "eslint --ext .js,.vue src test/unit test/e2e/specs",
         "build": "node build/build.js",
         "mock": "json-server --watch mock/db.json",
-        "mockdev": "npm-run-all --parallel dev mock"
+        "mockdev": "npm-run-all --parallel dev mock",
+        "faker": "json-server mock/faker-data.js"
     },
     "dependencies": {
         "element-ui": "^2.3.3",
@@ -60,6 +61,7 @@
         "eslint-plugin-standard": "^3.0.1",
         "eslint-plugin-vue": "^4.0.0",
         "extract-text-webpack-plugin": "^3.0.0",
+        "faker": "^4.1.0",
         "file-loader": "^1.1.4",
         "friendly-errors-webpack-plugin": "^1.6.1",
         "html-webpack-plugin": "^2.30.1",

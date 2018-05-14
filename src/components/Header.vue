@@ -24,10 +24,10 @@
             return {
                 activeIndex: '1',
                 options: [{
-                    value: 'CN',
+                    value: 'zh_CN',
                     label: '中文'
                 }, {
-                    value: 'EN',
+                    value: 'en',
                     label: 'English'
                 }],
                 value: this.$i18n.locale
@@ -37,10 +37,10 @@
             value (val) {
                 this.$i18n.locale = val;
                 switch (val) {
-                    case 'CN':
+                    case 'zh_CN':
                         this.moment.locale('zh-cn');
                         break;
-                    case 'EN':
+                    case 'en':
                         this.moment.locale('en-gb');
                         break;
                     default:

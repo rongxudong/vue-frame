@@ -5,15 +5,15 @@ export default {
         switch(true){
             case element.indexOf('zh') > -1 :
                 moment.locale('zh-cn');
-                return 'CN';
+                return 'zh_CN';
                 break;
             case element.indexOf('en') > -1 :
                 moment.locale('en-gb');
-                return 'EN';
+                return 'en';
                 break;
             default:
                 moment.locale('zh-cn');
-                return 'CN';
+                return 'zh_CN';
         }
     },
     setLang(lang) {

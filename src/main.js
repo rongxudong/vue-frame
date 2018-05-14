@@ -41,8 +41,8 @@ const store = new Vuex.Store(StoreOption);
 
 const messages = {
     // 将我们项目中的语言包与Element的语言包进行合并
-    'CN': Object.assign(require('./assets/js/lang/zh-cn'),zhLocale),
-    'EN': Object.assign(require('./assets/js/lang/en'),enLocale)
+    'zh_CN': Object.assign(require('./assets/js/lang/zh-cn'),zhLocale),
+    'en': Object.assign(require('./assets/js/lang/en'),enLocale)
 }
 
 // 国际化

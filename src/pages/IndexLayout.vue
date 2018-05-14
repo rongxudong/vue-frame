@@ -2,7 +2,7 @@
     <div class="article_list">
         <ul>
             <li v-for="i in list" :key="i.id">发表于
-                <time v-text="moment(i.create_at).fromNow()"></time>
+                <!--<time v-text="moment(i.create_at).fromNow()"></time>-->
                 <router-link :to="'/content/' + i.id">
                     {{ i.title }}
                 </router-link>
@@ -12,6 +12,9 @@
 </template>
 
 <script>
+    let date = new Date();
+    let timer = date.getTime().toString();
+
     export default {
         data () {
             return {
@@ -23,8 +26,9 @@
         },
         methods: {
             getData () {
-                this.$http.get('topics', null, r => {
-                    this.list = r.data;
+                this.$http.get('topics?timer=' + timer, null, r => {
+                    console.log(r);
+                    this.list = r;
                 })
             }
         }

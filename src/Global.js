@@ -4,6 +4,7 @@ MyPlugin.install = function (Vue, options) {
     // 1. 添加全局方法或属性
     Vue.myGlobalMethod = function () {
         // 逻辑...
+        console.log("添加全局方法或属性");
     }
 
     // 2. 添加全局资源

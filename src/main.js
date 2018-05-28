@@ -23,7 +23,7 @@ import './assets/css/_reset.css';
 import '../static/iconfont/iconfont.css';
 
 // 引用js文件(自己的)
-import http from './api/base-ajax';
+import ajax from './api/base-ajax';
 import LangStorage from './assets/js/lang/local_lang';
 import MyPlugin from './Global';
 
@@ -31,7 +31,7 @@ import MyPlugin from './Global';
 // import '../static/iconfont/iconfont';
 
 // 将方法绑定到全局
-Vue.prototype.$http = http;
+Vue.prototype.$ajax = ajax;
 Vue.prototype.moment = Moment;
 
 // moment选择对应的语言

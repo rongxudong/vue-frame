@@ -38,7 +38,7 @@
                 this.error = this.post = null
                 this.loading = true
                 // replace getPost with your data fetching util / API wrapper
-                this.$http.post(this.$route.params.id, (err, post) => {
+                this.$ajax.post(this.$route.params.id, (err, post) => {
                     this.loading = false
                     if (err) {
                         this.error = err.toString()

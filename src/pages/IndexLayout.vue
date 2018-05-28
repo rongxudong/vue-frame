@@ -26,7 +26,7 @@
         },
         methods: {
             getData () {
-                this.$http.get('topics?timer=' + timer, null, r => {
+                this.$ajax.get('topics?timer=' + timer, null, r => {
                     console.log(r);
                     this.list = r;
                 })

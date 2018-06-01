@@ -26,19 +26,27 @@
                     :placeholder="$t('indexContainer.placeholderYear')">
             </el-date-picker>
         </div>
+        <goods :list.sync="list"></goods>
     </div>
 </template>
 
 <script>
+    import goods from '@/components/goods'
     export default {
         data () {
             return {
                 value1: "",
                 value2: "",
-                value3: ""
+                value3: "",
+                list: [
+                    {name:'xx', progress: 30},
+                    {name:'bb', progress: 90},
+                ]
             }
         },
-        computed: {}
+        components: {
+            'goods': goods
+        }
     }
 </script>
 

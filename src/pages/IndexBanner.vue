@@ -1,12 +1,16 @@
 <template>
     <div>
         <el-carousel indicator-position="outside" height="500px" :interval="5000">
-            <el-carousel-item v-for="item in banner" :key="item.id">
+            <el-carousel-item v-for="item in params.row" :key="item.id">
                 <img :src="item.image"/>
             </el-carousel-item>
         </el-carousel>
         <div class="pic"></div>
-        <img src="../assets/img/banner_2.png"/>
+        <!--<img :src="basic"/>-->
+        <img-elem :data="imgUrl">
+            <p slot="foo">first</p>
+            <p>second</p>
+        </img-elem>
     </div>
 </template>
 
@@ -14,14 +18,51 @@
     export default {
         data () {
             return {
-                banner: [
-                    { id:'1', image: 'https://img.mukewang.com/5abcc39c00018fd009360316.jpg' },
-                    { id:'2', image: 'https://img.mukewang.com/5ac4a7940001a9aa09360316.jpg' },
-                    { id:'3', image: 'https://img.mukewang.com/5acecbcd00019e0b09360316.jpg' },
-                    { id:'4', image: 'https://img.mukewang.com/5ac3142b000166ec09360316.jpg' },
-                    { id:'5', image: 'https://img.mukewang.com/5ac4a754000113f009360316.jpg' },
-                    { id:'6', image: 'https://img.mukewang.com/5acde54700014ee509360316.jpg' }
-                ]
+//                params: [
+//                    { "id":"1", "image": "https://img.mukewang.com/5abcc39c00018fd009360316.jpg" },
+//                    { "id":"2", "image": "https://img.mukewang.com/5ac4a7940001a9aa09360316.jpg" },
+//                    { "id":"3", "image": "https://img.mukewang.com/5acecbcd00019e0b09360316.jpg" },
+//                    { "id":"4", "image": "https://img.mukewang.com/5ac3142b000166ec09360316.jpg" },
+//                    { "id":"5", "image": "https://img.mukewang.com/5ac4a754000113f009360316.jpg" },
+//                    { "id":"6", "image": "https://img.mukewang.com/5acde54700014ee509360316.jpg" }
+//                ]
+                params: {
+                    row: []
+                },
+                imgUrl: ""
+            }
+        },
+        methods: {
+            getBannerList () {
+                this.$ajax.get('banner', null, r => {
+                    this.params.row = r.data.bannerList;
+                    this.imgUrl = this.params.row[3].image;
+                })
+            }
+        },
+        created () {
+            this.getBannerList();
+        },
+        components: {
+            'img-elem': {
+                data (){
+                    return {
+                        defaultCover: "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2423595334,4074539958&fm=27&gp=0.jpg"
+                    }
+                },
+                props: ['data'],
+                render: function (createElement, context) {
+                    return createElement('img',{
+                        attrs: {
+                            src: this.data //后台返回的图片
+                        },
+                        on: {
+                            'error': () => {
+                                this.imgUrl = this.defaultCover //本地的默认图片重新赋值
+                            }
+                        }
+                    }, this.$slots.default)
+                }
             }
         }
     }

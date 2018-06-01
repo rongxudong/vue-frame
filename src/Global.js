@@ -13,6 +13,10 @@ MyPlugin.install = function (Vue, options) {
             // 逻辑...
         }
     })
+    // filter
+    Vue.filter('time', function(value) {
+        return new Date(parseInt(value) * 1000).toLocaleString().replace(/年|月/g, "-").replace(/日/g, " ");
+    })
 
     // 3. 注入组件
     Vue.mixin({

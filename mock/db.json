@@ -20,5 +20,18 @@
         "data": {
             "content": "大家好！！！大家好！！！大家好！！！大家好！！！大家好！！！大家好！！！大家好！！！大家好！！！大家好！！！大家好！！！"
         }
+    },
+    "banner": {
+        "success": true,
+        "data": {
+            "bannerList": [
+                { "id":"1", "image": "https://img.mukewang.com/5abcc39c00018fd009360316.jpg" },
+                { "id":"2", "image": "https://img.mukewang.com/5ac4a7940001a9aa09360316.jpg" },
+                { "id":"3", "image": "https://img.mukewang.com/5acecbcd00019e0b09360316.jpg" },
+                { "id":"4", "image": "https://img.mukewang.com/5ac3142b000166ec09360316.jpg" },
+                { "id":"5", "image": "https://img.mukewang.com/5ac4a754000113f009360316.jpg" },
+                { "id":"6", "image": "https://img.mukewang.com/5acde54700014ee509360316.jpg" }
+            ]
+        }
     }
 }

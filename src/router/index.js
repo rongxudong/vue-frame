@@ -1,11 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-// import IndexContainer from '@/pages/IndexContainer'
-// import IndexLayout from '@/pages/IndexLayout'
-// import IndexBanner from '@/pages/IndexBanner'
-// import FormCheckbox from '@/pages/FormCheckbox'
-// import FormRadio from '@/pages/FormRadio'
 import Basic from '@/pages/Basic'
+
+const IndexBanner = r => require.ensure([], () => r(require('@/pages/IndexBanner.vue')), 'chunkname1')
+const IndexContainer = r => require.ensure([], () => r(require('@/pages/IndexContainer.vue')), 'chunkname1')
+const IndexLayout = r => require.ensure([], () => r(require('@/pages/IndexLayout.vue')), 'chunkname1')
+const FormCheckbox = r => require.ensure([], () => r(require('@/pages/FormCheckbox.vue')), 'chunkname2')
+const FormRadio = r => require.ensure([], () => r(require('@/pages/FormRadio.vue')), 'chunkname3')
+const Hello = r => require.ensure([], () => r(require('@/pages/Hello.vue')), 'chunkname3')
 
 Vue.use(Router)
 
@@ -23,38 +25,32 @@ export default new Router({
         {
             path: '/IndexBanner',
             name: 'IndexBanner',
-            component: resolve => require(['@/pages/IndexBanner'], resolve)
+            component: IndexBanner
         },
         {
             path: '/Hello',
             name: 'Hello',
-            component: resolve => require(['@/pages/Hello'], resolve)
+            component: Hello
         },
-        // {
-        // 动态路径参数 以冒号开头
-        //     path: '/content/:id',
-        //     name: 'Content',
-        //     component: Content
-        // },
         {
             path: '/IndexContainer',
             name: 'IndexContainer',
-            component: resolve => require(['@/pages/IndexContainer'], resolve)
+            component: IndexContainer
         },
         {
             path: '/IndexLayout',
             name: 'IndexLayout',
-            component: resolve => require(['@/pages/IndexLayout'], resolve)
+            component: IndexLayout
         },
         {
             path: '/FormCheckbox',
             name: 'FormCheckbox',
-            component: resolve => require(['@/pages/FormCheckbox'], resolve)
+            component: FormCheckbox
         },
         {
             path: '/FormRadio/:id',
             name: 'FormRadio',
-            component: resolve => require(['@/pages/FormRadio'], resolve)
+            component: FormRadio
         }
     ]
 })

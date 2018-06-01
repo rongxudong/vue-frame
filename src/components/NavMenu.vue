@@ -20,11 +20,10 @@
                         </el-menu-item>
                     </el-menu-item-group>
                 </el-submenu>
-
             </el-menu>
             <div>
-                <i class="iconfont icon-eye"></i><router-link to="/FormRadio/1234">FormRadio</router-link>
-                <router-link to="/IndexBanner">IndexBanner</router-link>
+                <i class="iconfont icon-eye"></i>
+                <router-link to="/FormRadio/1234">FormRadio</router-link>
                 <router-link to="/Hello">Hello</router-link>
             </div>
         </el-col>

@@ -11,6 +11,7 @@ import ElementUI from 'element-ui';
 import enLocale from 'element-ui/lib/locale/lang/en';
 import zhLocale from 'element-ui/lib/locale/lang/zh-CN';
 import Moment from 'moment';
+import 'babel-polyfill';
 
 // Vuex 依赖 Promise,如果你支持的浏览器并没有实现 Promise (比如 IE),那么你可以使用一个 polyfill 的库，例如 es6-promise。
 import 'es6-promise/auto';

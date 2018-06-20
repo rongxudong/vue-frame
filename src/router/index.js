@@ -20,12 +20,23 @@ export default new Router({
         {
             path: '/Basic',
             name: 'Basic',
-            component: Basic// 懒加载
+            component: Basic,
+            meta: {
+                keepAlive: true // 需要被缓存
+            }
         },
         {
             path: '/IndexBanner',
             name: 'IndexBanner',
-            component: IndexBanner
+            component: IndexBanner,
+            meta: {
+                keepAlive: true // 需要被缓存
+            }
+        },
+        {
+            path: '/IndexLayout',
+            name: 'IndexLayout',
+            component: IndexLayout
         },
         {
             path: '/Hello',
@@ -36,11 +47,6 @@ export default new Router({
             path: '/IndexContainer',
             name: 'IndexContainer',
             component: IndexContainer
-        },
-        {
-            path: '/IndexLayout',
-            name: 'IndexLayout',
-            component: IndexLayout
         },
         {
             path: '/FormCheckbox',

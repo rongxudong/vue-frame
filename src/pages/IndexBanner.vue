@@ -43,6 +43,10 @@
         created () {
             this.getBannerList();
         },
+        beforeRouteEnter(to, from, next) {
+            console.log(to.meta.keepAlive)
+            next();
+        },
         components: {
             'img-elem': {
                 data (){
@@ -77,6 +81,8 @@
         .text_overflow;
     }
     .el-carousel__item img {
+        width: 100%;
+        height: 100%;
         object-fit: cover;
     }
 

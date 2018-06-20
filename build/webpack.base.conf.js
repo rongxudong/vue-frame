@@ -83,6 +83,10 @@ module.exports = {
             {
                 test: /\.less$/,
                 loader: 'style-loader!css-loader!postcss-loader!less-loader'
+            },
+            {
+                test: /\.pug$/,
+                loader: 'pug'
             }
         ]
     },

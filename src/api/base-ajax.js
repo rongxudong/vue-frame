@@ -28,15 +28,15 @@ function filterNull (o) {
     return o
 }
 
-//添加一个请求拦截器
+    //添加一个请求拦截器
 axios.interceptors.request.use(config=> {
     // 配置config
     config.headers.Accept = 'application/json';
     // config.headers.System = 'vue';
-    // let token = Vue.localStorage.get('token');
-    // if(token){
-    //     config.headers.Token = token;
-    // }
+        // let token = Vue.localStorage.get('token');
+        // if(token){
+        //     config.headers.Token = token;
+        // }
     //在请求发出之前进行一些操作
     if (promiseArr[config.url]) {
         promiseArr[config.url]('操作取消')

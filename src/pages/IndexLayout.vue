@@ -29,7 +29,7 @@
                 list: []
             }
         },
-        created () {
+        mounted () {
             this.getData();
         },
         beforeRouteLeave(to, from, next) {
@@ -39,10 +39,11 @@
         },
         methods: {
             getData () {
-                this.$ajax.get('topics?timer=' + timer, null, r => {
-//                    console.log(r);
-                    this.list = r;
-                })
+//                console.log(11)
+//                this.$ajax.get('topics?timer=' + timer, null, r => {
+////                    console.log(r);
+//                    this.list = r;
+//                })
             }
         }
     }

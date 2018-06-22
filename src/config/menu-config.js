@@ -1,38 +1,68 @@
 module.exports = [
+    // {
+    //     name: '首页',
+    //     id: '10000',
+    //     icon: 'icon-shouye',
+    //     sub: []
+    // },
     {
-        name: '首页',
-        id: '1',
+        name: '授信管理',
+        id: '20000',
+        icon: 'icon-jiaoyiguanli',
         sub: [
             {
-                id: '2',
-                name: '基础',
-                componentName: 'Basic'
+                id: '20001',
+                name: '签署协议',
+                componentName: 'IndexLayout',
+                route: '/IndexLayout'
             },
             {
-                id: '3',
-                name: '轮播图',
-                componentName: 'IndexBanner'
+                id: '20002',
+                name: '授信申请',
+                componentName: 'IndexContainer',
+                route: '/IndexContainer'
             },
             {
-                id: '4',
-                name: 'Layout 布局',
-                componentName: 'IndexLayout'
+                id: '20003',
+                name: '授信额度申请表',
+                componentName: 'FormCheckbox',
+                route: '/FormCheckbox'
             },
             {
-                id: '5',
-                name: 'Container 布局容器',
-                componentName: 'IndexContainer'
+                id: '20004',
+                name: '尽职调查',
+                componentName: 'FormRadio',
+                route: '/FormRadio'
             }
         ]
     },
+    // {
+    //     name: 'Form',
+    //     id: '3',
+    //     sub: [
+    //         {
+    //             id: '8',
+    //             name: 'Checkbox 多选框',
+    //             componentName: 'FormCheckbox'
+    //         }
+    //     ]
+    // },
     {
-        name: 'Form',
-        id: '6',
+        name: '客户信息',
+        id: '40000',
+        icon: 'icon-rongzixiangmu00',
         sub: [
             {
-                id: '8',
-                name: 'Checkbox 多选框',
-                componentName: 'FormCheckbox'
+                id: '40001',
+                name: '实名认证',
+                componentName: 'IndexBanner',
+                route: '/IndexBanner'
+            },
+            {
+                id: '40002',
+                name: '客户池',
+                componentName: 'Hello',
+                route: '/Hello'
             }
         ]
     }

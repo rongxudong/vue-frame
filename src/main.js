@@ -1,7 +1,6 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue';
-import VueIconFont from 'vue-icon-font';
 import Vuex from 'vuex';
 import StoreOption from './vuex/store';
 import App from './App';
@@ -29,7 +28,7 @@ import LangStorage from './assets/js/lang/local_lang';
 import MyPlugin from './Global';
 
 // 引用js文件(插件)
-// import '../static/iconfont/iconfont';
+import '../static/iconfont/iconfont';
 
 // 将方法绑定到全局
 Vue.prototype.$ajax = ajax;
@@ -39,7 +38,6 @@ Vue.prototype.moment = Moment;
 
 
 Vue.config.productionTip = false;
-Vue.use(VueIconFont);
 Vue.use(Vuex);
 Vue.use(VueI18n);
 Vue.use(MyPlugin);

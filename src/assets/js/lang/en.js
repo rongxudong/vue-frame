@@ -2,7 +2,7 @@
 
 module.exports = {
     header: {
-        name: "rongxudong"
+        name: "Zhejiang Avenue Wind Control system"
     },
     indexContainer: {
         week: "week",

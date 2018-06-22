@@ -1,17 +1,32 @@
 <template>
-    <el-row>
-        <el-col :span="22">
-            <div class="head-wrap">{{ $t('header.name') }}</div>
+    <el-row type="flex" class="row-bg" justify="space-between">
+        <el-col :span="6">
+            <div class="grid-content bg-purple head-wrap">{{ $t('header.name') }}</div>
         </el-col>
-        <el-col :span="2">
-            <el-select v-model="value" placeholder="请选择" value="切换语言">
-                <el-option
-                        v-for="item in options"
-                        :key="item.value"
-                        :label="item.label"
-                        :value="item.value">
-                </el-option>
-            </el-select>
+        <!--<el-col :span="6"><div class="grid-content bg-purple-light"></div></el-col>-->
+        <el-col :span="4">
+            <div class="grid-content bg-purple">
+                <el-row type="flex" class="row-bg" justify="space-between" align="middle">
+                    <el-col :span="3">
+                        <el-badge is-dot class="item">
+                            <i class="iconfont icon-xiaoxi"></i>
+                        </el-badge>
+                    </el-col>
+                    <el-col :span="3">
+                        <i class="iconfont icon-yonghu"></i>
+                    </el-col>
+                    <el-col :span="12">
+                        <el-select v-model="value" placeholder="请选择" value="切换语言">
+                            <el-option
+                                    v-for="item in options"
+                                    :key="item.value"
+                                    :label="item.label"
+                                    :value="item.value">
+                            </el-option>
+                        </el-select>
+                    </el-col>
+                </el-row>
+            </div>
         </el-col>
     </el-row>
 </template>
@@ -59,8 +74,21 @@
         }
     }
 </script>
-<style scoped>
-    .head-wrap{
-        color: #000;
+<style scoped lang="less" rel="stylesheet/less">
+    @import "../assets/css/_variable";
+
+    .head-wrap {
+        font-size: 20px;
+        color: @base;
+        font-weight: bold;
+    }
+    .el-badge {
+        line-height: 20px;
+    }
+    .icon-xiaoxi:before ,
+    .icon-yonghu:before {
+        font-size: 20px;
+        color: #bcc3c7;
+        cursor: pointer;
     }
 </style>

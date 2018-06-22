@@ -11,7 +11,7 @@
             }
         },
         mounted () {
-            console.log(this.progress); // => 30,90
+//            console.log(this.progress); // => 30,90
         }
     }
 </script>

@@ -54,7 +54,6 @@
 
 <script>
 
-    import { mapState } from 'vuex';
     import cTitle from '@/components/Title';
 
     export default {
@@ -68,6 +67,10 @@
                 currentPage4: 4
             }
         },
+        mounted () {
+//            this.$store.commit('message', '欢迎使用 vue！');
+            this.getContent();
+        },
         methods: {
             async getContent () {
                 this.$ajax.get('hello?ID=12345', null, r => {
@@ -80,10 +83,6 @@
             handleCurrentChange(val) {
                 console.log(`当前页: ${val}`);
             }
-        },
-        mounted () {
-            this.$store.commit('message', '欢迎使用 vue！');
-            this.getContent();
         },
         components: {
             cTitle

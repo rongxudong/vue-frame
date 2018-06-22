@@ -1,50 +1,61 @@
 <template>
-    <el-row class="tac">
-        <el-col :span="24">
-            <el-menu
-                    class="el-menu-vertical-demo"
-                    router
-                    unique-opened
-                    @open="handleOpen"
-                    @close="handleClose"
-                    background-color="#545c64"
-                    text-color="#fff"
-                    active-text-color="#ffd04b">
-
-                <el-submenu v-for="item in menu" :index="item.id" :key="item.id">
-                    <template slot="title">
-                        <span v-text="item.name"></span>
-                    </template>
-                    <el-menu-item-group class="over-hide" v-for="sub in item.sub" :key="sub.componentName">
-                        <el-menu-item :index="sub.componentName" v-text="sub.name">
-                        </el-menu-item>
-                    </el-menu-item-group>
-                </el-submenu>
-            </el-menu>
-            <div>
-                <i class="iconfont icon-eye"></i>
-                <router-link to="/FormRadio/1234">FormRadio</router-link>
-                <router-link to="/Hello">Hello</router-link>
-            </div>
-        </el-col>
-    </el-row>
+    <el-menu
+            class="el-menu-vertical-demo"
+            :default-active="$route.path"
+            router
+            unique-opened
+            @open="handleOpen"
+            @close="handleClose"
+            @select="selectItems"
+            background-color="#2c323e"
+            text-color="#afb8c1"
+            active-text-color="#2fa8fd">
+        <el-menu-item index="/">
+            <i class="iconfont icon-shouye"></i>
+            <span slot="title">总览</span>
+        </el-menu-item>
+        <el-submenu v-for="item in menu" :index="item.id" :key="item.id">
+            <template slot="title">
+                <i class="iconfont" :class="item.icon"></i>
+                <span v-text="item.name"></span>
+            </template>
+            <el-menu-item-group class="over-hide" v-for="sub in item.sub" :key="sub.route" v-if="item.sub">
+                <el-menu-item :index="sub.route" v-text="sub.name">
+                </el-menu-item>
+            </el-menu-item-group>
+        </el-submenu>
+        <!--<input type="text" onkeydown="this.onkeyup();" onkeyup="this.size=(this.value.length>4?this.value.length:4);" size="4" style="background-color: red;padding: 0 10px;">-->
+    </el-menu>
 </template>
-
-<style scoped>
-    .over-hide{
-        overflow: hidden;
-    }
-</style>
 
 <script>
     import menu from '@/config/menu-config'
-    import Icon from '../../node_modules/vue-icon-font/src/IconFont.vue'
 
     export default {
-        components: {Icon},
         data () {
             return {
                 menu: menu
+            }
+        },
+        created () {
+
+        },
+        computed: {
+            options () {
+                return this.$store.state.options;
+            }
+        },
+        mounted () {
+            const routePath = localStorage.getItem('currentRoutePath');
+            const routeName = localStorage.getItem('currentRouteName');
+            if (routePath !== '/') {
+                this.$store.commit('add_tabs', { route: '/', name: '总览' });
+                this.$store.commit('add_tabs', { route: routePath , name: routeName });
+                this.$store.commit('set_active_index', this.$route.path);
+            } else {
+                this.$store.commit('add_tabs', { route: '/', name: '总览' });
+                this.$store.commit('set_active_index', '/');
+                this.$router.push('/');
             }
         },
         methods: {
@@ -53,7 +64,18 @@
             },
             handleClose (key, keyPath) {
                 console.log(key, keyPath)
+            },
+            selectItems(index){
+                localStorage.setItem('currentRoutePath', index);
             }
         }
     }
 </script>
+
+<style lang="less" rel="stylesheet/less">
+    @import "../style/NavMenu";
+
+    .over-hide{
+        overflow: hidden;
+    }
+</style>

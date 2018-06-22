@@ -1,5 +1,5 @@
 <template>
-    <div style="position: relative;padding-top: 50px;">
+    <div>
         <el-form ref="form" :model="form" label-width="80px">
             <el-form-item label="活动名称">
                 <el-input v-model="form.name"></el-input>
@@ -44,7 +44,6 @@
                 <el-button>取消</el-button>
             </el-form-item>
         </el-form>
-        <div class="bgColor position">营业汇总</div>
     </div>
 </template>
 
@@ -66,9 +65,7 @@
             }
         },
         mounted() {
-            document.getElementsByClassName("bgColor")[0].style.cssText =
-                "width: 80px; height: " +
-                (this.height + 46) + "px;z-index: -1; background-color: red";
+
         },
         beforeRouteLeave(to, from, next) {
             // 设置下一个路由的 meta
@@ -88,13 +85,4 @@
 </script>
 
 <style>
-    .position {
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: 100;
-        padding: 10px;
-        color: #000;
-        background-color: #cccccc;
-    }
 </style>

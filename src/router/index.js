@@ -9,20 +9,20 @@ import Router from 'vue-router'
 // import IndexBanner from '@/pages/IndexBanner'
 // import Hello from '@/pages/Hello'
 
-// const IndexBanner = r => require.ensure([], () => r(require('@/pages/IndexBanner.vue')), 'chunkname1')
-// const IndexContainer = r => require.ensure([], () => r(require('@/pages/IndexContainer.vue')), 'chunkname1')
-// const IndexLayout = r => require.ensure([], () => r(require('@/pages/IndexLayout.vue')), 'chunkname2')
-// const FormCheckbox = r => require.ensure([], () => r(require('@/pages/FormCheckbox.vue')), 'chunkname2')
-// const FormRadio = r => require.ensure([], () => r(require('@/pages/FormRadio.vue')), 'chunkname3')
-// const Hello = r => require.ensure([], () => r(require('@/pages/Hello.vue')), 'chunkname3')
+// const IndexBanner = r => require.ensure([], () => r(require('@/pages/RealName.vue')), 'chunkname1')
+// const IndexContainer = r => require.ensure([], () => r(require('@/pages/CreditApplication.vue')), 'chunkname1')
+// const IndexLayout = r => require.ensure([], () => r(require('@/pages/Agreement.vue')), 'chunkname2')
+// const FormCheckbox = r => require.ensure([], () => r(require('@/pages/QuotaApplicationForm.vue')), 'chunkname2')
+// const FormRadio = r => require.ensure([], () => r(require('@/pages/Investigate.vue')), 'chunkname3')
+// const Hello = r => require.ensure([], () => r(require('@/pages/CustomerPool.vue')), 'chunkname3')
 
-const Basic = () => import(/* webpackChunkName: "chunkname1" */ '@/pages/Basic.vue')
-const IndexBanner = () => import(/* webpackChunkName: "chunkname1" */ '@/pages/IndexBanner.vue')
-const IndexContainer = () => import(/* webpackChunkName: "chunkname1" */ '@/pages/IndexContainer.vue')
-const IndexLayout = () => import(/* webpackChunkName: "chunkname2" */ '@/pages/IndexLayout.vue')
-const FormCheckbox = () => import(/* webpackChunkName: "chunkname2" */ '@/pages/FormCheckbox.vue')
-const FormRadio = () => import(/* webpackChunkName: "chunkname3" */ '@/pages/FormRadio.vue')
-const Hello = () => import(/* webpackChunkName: "chunkname3" */ '@/pages/Hello.vue')
+const Home = () => import(/* webpackChunkName: "chunkname1" */ '@/pages/Home.vue')
+const RealName = () => import(/* webpackChunkName: "chunkname1" */ '@/pages/RealName.vue')
+const CreditApplication = () => import(/* webpackChunkName: "chunkname1" */ '@/pages/CreditApplication.vue')
+const Agreement = () => import(/* webpackChunkName: "chunkname2" */ '@/pages/Agreement.vue')
+const QuotaApplicationForm = () => import(/* webpackChunkName: "chunkname2" */ '@/pages/QuotaApplicationForm.vue')
+const Investigate = () => import(/* webpackChunkName: "chunkname3" */ '@/pages/Investigate.vue')
+const CustomerPool = () => import(/* webpackChunkName: "chunkname3" */ '@/pages/CustomerPool.vue')
 
 Vue.use(Router)
 
@@ -35,43 +35,43 @@ export default new Router({
         {
             path: '/',
             name: '总览',
-            component: Basic,
+            component: Home,
             meta: {
                 keepAlive: true // 需要被缓存
             }
         },
         {
-            path: '/IndexLayout',
+            path: '/Agreement',
             name: '签署协议',
-            component: IndexLayout
+            component: Agreement
         },
         {
-            path: '/IndexContainer',
+            path: '/CreditApplication',
             name: '授信申请',
-            component: IndexContainer
+            component: CreditApplication
         },
         {
-            path: '/FormCheckbox',
+            path: '/QuotaApplicationForm',
             name: '授信额度申请表',
-            component: FormCheckbox
+            component: QuotaApplicationForm
         },
         {
-            path: '/FormRadio',
+            path: '/Investigate',
             name: '尽职调查',
-            component: FormRadio
+            component: Investigate
         },
         {
-            path: '/IndexBanner',
+            path: '/RealName',
             name: '实名认证',
-            component: IndexBanner,
+            component: RealName,
             meta: {
                 keepAlive: true // 需要被缓存
             }
         },
         {
-            path: '/Hello',
+            path: '/CustomerPool',
             name: '客户池',
-            component: Hello,
+            component: CustomerPool,
         }
     ]
 })

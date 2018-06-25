@@ -1,10 +1,4 @@
 module.exports = [
-    // {
-    //     name: '首页',
-    //     id: '10000',
-    //     icon: 'icon-shouye',
-    //     sub: []
-    // },
     {
         name: '授信管理',
         id: '20000',
@@ -13,40 +7,29 @@ module.exports = [
             {
                 id: '20001',
                 name: '签署协议',
-                componentName: 'IndexLayout',
-                route: '/IndexLayout'
+                componentName: 'Agreement',
+                route: '/Agreement'
             },
             {
                 id: '20002',
                 name: '授信申请',
-                componentName: 'IndexContainer',
-                route: '/IndexContainer'
+                componentName: 'CreditApplication',
+                route: '/CreditApplication'
             },
             {
                 id: '20003',
                 name: '授信额度申请表',
-                componentName: 'FormCheckbox',
-                route: '/FormCheckbox'
+                componentName: 'QuotaApplicationForm',
+                route: '/QuotaApplicationForm'
             },
             {
                 id: '20004',
                 name: '尽职调查',
-                componentName: 'FormRadio',
-                route: '/FormRadio'
+                componentName: 'Investigate',
+                route: '/Investigate'
             }
         ]
     },
-    // {
-    //     name: 'Form',
-    //     id: '3',
-    //     sub: [
-    //         {
-    //             id: '8',
-    //             name: 'Checkbox 多选框',
-    //             componentName: 'FormCheckbox'
-    //         }
-    //     ]
-    // },
     {
         name: '客户信息',
         id: '40000',
@@ -55,14 +38,14 @@ module.exports = [
             {
                 id: '40001',
                 name: '实名认证',
-                componentName: 'IndexBanner',
-                route: '/IndexBanner'
+                componentName: 'RealName',
+                route: '/RealName'
             },
             {
                 id: '40002',
                 name: '客户池',
-                componentName: 'Hello',
-                route: '/Hello'
+                componentName: 'CustomerPool',
+                route: '/CustomerPool'
             }
         ]
     }

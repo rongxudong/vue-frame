@@ -11,7 +11,7 @@ const options = {
     state: {
         message: '',
         options: [],
-        activeIndex: '/Basic',
+        activeIndex: '/Home',
     },
 
     // 操作

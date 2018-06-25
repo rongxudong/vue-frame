@@ -88,7 +88,7 @@
     .icon-xiaoxi:before ,
     .icon-yonghu:before {
         font-size: 20px;
-        color: #bcc3c7;
+        color: @minor-col;
         cursor: pointer;
     }
 </style>

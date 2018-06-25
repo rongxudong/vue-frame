@@ -73,9 +73,43 @@
 </script>
 
 <style lang="less" rel="stylesheet/less">
-    @import "../style/NavMenu";
+    @import "../assets/css/_variable";
 
     .over-hide{
         overflow: hidden;
+    }
+    .el-menu-vertical-demo {
+        height: 100%;
+        min-height: calc(100vh - 60px);
+    }
+    .el-menu .iconfont {
+        margin-right: 20px;
+        color: #afb8c1;
+    }
+    .el-menu-item-group__title {
+        padding: 0;
+    }
+    .el-submenu .el-menu-item {
+        height: 36px;
+        padding-left: 60px!important;
+        padding-right: 20px!important;
+        line-height: 36px;
+        background-color: #232832!important;
+    }
+    .is-opened .el-submenu__title {
+        background-color: #232832!important;
+    }
+    .is-opened .el-submenu__title:before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 1;
+        width: 3px;
+        height: 100%;
+        background-color: @base;
+    }
+    .is-opened i {
+        color: @base!important;
     }
 </style>

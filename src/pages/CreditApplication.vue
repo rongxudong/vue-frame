@@ -50,9 +50,8 @@
     }
 </script>
 
-<style>
+<style lang="less" rel="stylesheet/less">
     @import "../assets/css/_variable.less";
-    @import "../assets/css/_common.css";
 
     .source {
         padding: 0;

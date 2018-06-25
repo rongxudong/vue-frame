@@ -1,0 +1,92 @@
+@import "_variable";
+@import "_mixin";
+
+* {
+    .box-sizing(border-box);
+    -webkit-text-size-adjust:auto !important;
+}
+
+html{
+    -webkit-text-size-adjust:none;
+}
+.mt15 {
+    margin-top: 15px;
+}
+//common
+.bg-style {
+    background-color: #fff;
+    .common_box_shadow(0 2px 4px rgba(7, 17, 27, .15));
+}
+
+
+//Home.vue
+.el-tabs--card>.el-tabs__header {
+    border-bottom: none;
+}
+
+//RealName.vue
+
+.RealName-main .el-upload--picture-card,
+.personalData-main .el-upload--picture-card ,
+.password-main .el-upload--picture-card {
+    width: 100px;
+    height: 100px;
+    line-height: 100px;
+}
+.el-upload--picture-card i {
+    color: @general-col;
+}
+
+.basic,
+.company {
+    width: 100%;
+    .title {
+        position: relative;
+        padding: 10px 20px;
+        line-height: 24px;
+        color: @main-col;
+        border-bottom: 1px dashed #cccccc;
+        &:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 10px;
+            z-index: 1;
+            width: 6px;
+            height: 24px;
+            background-color: @base;
+        }
+    }
+    .basic-form {
+        padding: 30px 0 0 130px;
+        .input-item {
+            width: 100%;
+            label {
+                display: inline-block;
+                width: 136px;
+                text-align: left;
+                color: @main-col;
+                font-size: 16px;
+            }
+            .input-style {
+                display: inline-block;
+                width: 300px;
+                height: 42px;
+                margin-bottom: 25px;
+                padding: 0 12px;
+                line-height: 42px;
+                font-size: 14px;
+                border: 1px solid @minor-col;
+                .placeholder(@minor-col);
+                .common_radius(3px);
+            }
+            span {
+                display: inline-block;
+                margin-bottom: 15px;
+            }
+            .special {
+                width: calc(100% - 141px);
+            }
+        }
+    }
+}

@@ -75,7 +75,6 @@
 <style lang="less" rel="stylesheet/less">
     @import "../assets/css/_variable";
     @import "../assets/css/_mixin";
-    @import "../assets/css/_common.css";
 
     #xdd {
         .text_overflow;

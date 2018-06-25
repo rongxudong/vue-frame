@@ -1,6 +1,297 @@
-.text_overflow {
+//hover变浅颜色
+.lighten-hover(@color){
+    background-color: lighten(@color, 10%);
+}
+
+//hover加深颜色
+.darken-hover(@color){
+    background-color: darken(@color, 10%);
+}
+
+//clr-hover加深颜色
+.darken-clr-hover(@color){
+    color: darken(@color, 10%);
+}
+
+//属性集合(input的placeholder的文本颜色)
+.placeholder(@color) {
+    &::-webkit-input-placeholder {
+        color: @color;
+    }
+    &:-moz-placeholder {
+        color: @color;
+    }
+    &::-moz-placeholder {
+        color: @color;
+    }
+    &:-ms-input-placeholder {
+        color: @color;
+    }
+}
+
+// Animations
+.animation(@animation) {
+    animation: @animation;
+    -o-animation: @animation;
+    -webkit-animation: @animation;
+}
+
+// Opacity
+.opacity(@opacity) {
+    opacity: @opacity;
+    // IE8 filter
+    @opacity-ie: (@opacity * 100);
+    filter: ~"alpha(opacity=@{opacity-ie})";
+}
+
+// User select
+// For selecting text on the page
+
+.user-select(@select) {
+    user-select: @select;
+    -ms-user-select: @select;
+    -moz-user-select: @select;
+    -khtml-user-select: @select;
+    -webkit-user-select: @select;
+    -webkit-touch-callout: @select;
+}
+
+//属性集合(transition的动态过渡)
+.transition (@transition) {
+    transition: @arguments;
+    -o-transition: @arguments;
+    -ms-transition: @arguments;
+    -moz-transition: @arguments;
+    -webkit-transition: @arguments;
+}
+.transition-property(@transition-property) {
+    -webkit-transition-property: @transition-property;
+    transition-property: @transition-property;
+}
+.transition-delay(@transition-delay) {
+    -webkit-transition-delay: @transition-delay;
+    transition-delay: @transition-delay;
+}
+.transition-duration(@transition-duration) {
+    -webkit-transition-duration: @transition-duration;
+    transition-duration: @transition-duration;
+}
+.transition-timing-function(@timing-function) {
+    -webkit-transition-timing-function: @timing-function;
+    transition-timing-function: @timing-function;
+}
+.transition-transform(@transition) {
+    -webkit-transition: -webkit-transform @transition;
+    -moz-transition: -moz-transform @transition;
+    -o-transition: -o-transform @transition;
+    transition: transform @transition;
+}
+
+// Transformations
+.scale(@ratio) {
+    transform: scale(@ratio);
+    -o-transform: scale(@ratio);
+    -ms-transform: scale(@ratio); // IE9 only
+    -moz-transform: scale(@ratio);
+    -webkit-transform: scale(@ratio);
+}
+.scale(@ratioX; @ratioY) {
+    transform: scale(@ratioX, @ratioY);
+    -o-transform: scale(@ratioX, @ratioY);
+    -ms-transform: scale(@ratioX, @ratioY); // IE9 only
+    -moz-transform: scale(@ratioX, @ratioY);
+    -webkit-transform: scale(@ratioX, @ratioY);
+}
+.rotate(@degrees) {
+    -webkit-transform: rotate(@degrees);
+    -moz-transform: rotate(@degrees);
+    -ms-transform: rotate(@degrees); // IE9 only
+    -o-transform: rotate(@degrees);
+    transform: rotate(@degrees);
+}
+.rotateX(@degrees) {
+    -webkit-transform: rotateX(@degrees);
+    -ms-transform: rotateX(@degrees); // IE9 only
+    -o-transform: rotateX(@degrees);
+    transform: rotateX(@degrees);
+}
+.rotateY(@degrees) {
+    -webkit-transform: rotateY(@degrees);
+    -ms-transform: rotateY(@degrees); // IE9 only
+    -o-transform: rotateY(@degrees);
+    transform: rotateY(@degrees);
+}
+.perspective(@perspective) {
+    -webkit-perspective: @perspective;
+    -moz-perspective: @perspective;
+    perspective: @perspective;
+}
+.perspective-origin(@perspective) {
+    -webkit-perspective-origin: @perspective;
+    -moz-perspective-origin: @perspective;
+    perspective-origin: @perspective;
+}
+.transform-origin(@origin) {
+    -webkit-transform-origin: @origin;
+    -moz-transform-origin: @origin;
+    -ms-transform-origin: @origin; // IE9 only
+    transform-origin: @origin;
+}
+
+//属性集合(radius)
+.common_radius (@radius) {
+    border-radius: @radius;
+    -o-border-radius: @radius;
+    -ms-border-radius: @radius;
+    -moz-border-radius: @radius;
+    -webkit-border-radius: @radius;
+}
+
+//属性集合(box-shadow)
+.common_box_shadow (@arguments) {
+    box-shadow: @arguments;
+    -o-box-shadow: @arguments;
+    -ms-box-shadow: @arguments;
+    -moz-box-shadow: @arguments;
+    -webkit-box-shadow: @arguments;
+}
+
+// Single side border-radius
+.border-top-radius(@radius) {
+    border-top-right-radius: @radius;
+    border-top-left-radius: @radius;
+}
+.border-right-radius(@radius) {
+    border-bottom-right-radius: @radius;
+    border-top-right-radius: @radius;
+}
+.border-bottom-radius(@radius) {
+    border-bottom-right-radius: @radius;
+    border-bottom-left-radius: @radius;
+}
+.border-left-radius(@radius) {
+    border-bottom-left-radius: @radius;
+    border-top-left-radius: @radius;
+}
+
+//属性集合(css弹性-水平两端对齐)
+.justify_content{
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+}
+
+//属性集合(css弹性-水平两端对齐)
+.justify_content_around{
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    justify-content: space-around;
+}
+
+//属性集合(css弹性-水平两端居中)
+.justify_content_center{
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+//属性集合(css弹性-上下居中)
+.align_items{
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+.align_content{
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -ms-flex-line-pack: center;
+    align-content: center;
+}
+.align-content-around {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    align-content: space-around;
+}
+.align-content-between {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    align-content: space-between;
+}
+
+//属性集合(css弹性-水平垂直居中)
+.horizontal_center{
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+//属性集合(图片100%填充)
+.object_fit_img {
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
+}
+.box-sizing (@box) {
+    box-sizing: @box;
+    -moz-box-sizing: @box; /* Firefox */
+    -webkit-box-sizing: @box; /* Safari */
+}
+//属性集合(一行：文本有溢出时显示css省略号)
+.text_overflow{
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
 }
 
+//属性集合(多行：文本有溢出时显示css省略号)
+.text_overflow (@rows) {
+    overflow: hidden;
+    display: -moz-box;
+    display: -webkit-box;
+    -webkit-line-clamp: @rows;
+    word-break: break-all;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+}
+
+//属性集合(文本两端对齐)
+.text_justify{
+    text-align: justify;
+    text-justify: inter-ideograph;
+}

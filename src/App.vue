@@ -116,11 +116,12 @@
 
 <style lang="less" rel="stylesheet/less">
     /*@import "assets/css/_variable";*/
-    /*@import "../node_modules/bootstrap/less/mixins";*/
+    @import "assets/css/_mixin";
+    @import "assets/css/_common";
     .el-header {
         line-height: 60px;
         background-color: #fff;
-        box-shadow: 0 2px 4px rgba(7, 17, 27, .15);
+        .common_box_shadow(0 2px 4px rgba(7, 17, 27, .15));
     }
     .el-main {
         margin-top: 5px;
@@ -138,11 +139,6 @@
     }
     .el-main .el-tabs__content {
         background-color: #fff;
-        box-shadow: 0 2px 4px rgba(7, 17, 27, .15);
-    }
-    .app-wrap {
-        padding: 20px;
-        background-color: #fff;
-        box-shadow: 0 2px 4px rgba(7, 17, 27, .15);
+        .common_box_shadow(0 2px 4px rgba(7, 17, 27, .15));
     }
 </style>

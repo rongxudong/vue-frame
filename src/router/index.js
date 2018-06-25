@@ -17,12 +17,15 @@ import Router from 'vue-router'
 // const Hello = r => require.ensure([], () => r(require('@/pages/CustomerPool.vue')), 'chunkname3')
 
 const Home = () => import(/* webpackChunkName: "chunkname1" */ '@/pages/Home.vue')
-const RealName = () => import(/* webpackChunkName: "chunkname1" */ '@/pages/RealName.vue')
 const CreditApplication = () => import(/* webpackChunkName: "chunkname1" */ '@/pages/CreditApplication.vue')
 const Agreement = () => import(/* webpackChunkName: "chunkname2" */ '@/pages/Agreement.vue')
 const QuotaApplicationForm = () => import(/* webpackChunkName: "chunkname2" */ '@/pages/QuotaApplicationForm.vue')
 const Investigate = () => import(/* webpackChunkName: "chunkname3" */ '@/pages/Investigate.vue')
 const CustomerPool = () => import(/* webpackChunkName: "chunkname3" */ '@/pages/CustomerPool.vue')
+
+const RealName = () => import(/* webpackChunkName: "chunkname1" */ '@/pages/personal/RealName.vue')
+const personalData = () => import(/* webpackChunkName: "chunkname1" */ '@/pages/personal/personalData.vue')
+const password = () => import(/* webpackChunkName: "chunkname1" */ '@/pages/personal/password.vue')
 
 Vue.use(Router)
 
@@ -67,6 +70,16 @@ export default new Router({
             meta: {
                 keepAlive: true // 需要被缓存
             }
+        },
+        {
+            path: '/personalData',
+            name: '个人资料',
+            component: personalData
+        },
+        {
+            path: '/password',
+            name: '修改密码',
+            component: password
         },
         {
             path: '/CustomerPool',

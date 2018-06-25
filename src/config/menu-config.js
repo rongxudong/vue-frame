@@ -43,6 +43,18 @@ module.exports = [
             },
             {
                 id: '40002',
+                name: '个人资料',
+                componentName: 'personalData',
+                route: '/personalData'
+            },
+            {
+                id: '40003',
+                name: '修改密码',
+                componentName: 'password',
+                route: '/password'
+            },
+            {
+                id: '40004',
                 name: '客户池',
                 componentName: 'CustomerPool',
                 route: '/CustomerPool'

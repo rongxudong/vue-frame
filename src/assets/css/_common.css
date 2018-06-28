@@ -8,6 +8,22 @@
   -ms-flex-pack: justify;
   justify-content: space-between;
 }
+.flex_start {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  justify-content: flex-start;
+}
+.flex_end {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  justify-content: flex-end;
+}
 .justify_content_around {
   display: -webkit-box;
   display: -moz-box;
@@ -100,6 +116,21 @@
 html {
   -webkit-text-size-adjust: none;
 }
+html,
+body {
+  font: 0.14rem/1 "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei", "Hiragino Sans GB", "Heiti SC", "WenQuanYi Micro Hei", sans-serif;
+}
+button {
+  cursor: pointer;
+}
+button:hover,
+button:active,
+button:focus {
+  outline: none!important;
+}
+.text-center {
+  text-align: center!important;
+}
 .mt15 {
   margin-top: 15px;
 }
@@ -113,6 +144,37 @@ html {
 }
 .el-tabs--card > .el-tabs__header {
   border-bottom: none;
+}
+.el-tabs--card > .el-tabs__header .el-tabs__nav {
+  border: none;
+}
+.el-tabs__item.is-active {
+  height: 40px;
+  line-height: 40px;
+  vertical-align: top;
+  color: #000!important;
+  background-color: #ffffff!important;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.el-tabs__item {
+  margin-right: 8px;
+  height: 34px;
+  line-height: 34px;
+  color: #fff;
+  background-color: #b6c2ca !important;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  box-shadow: 0 2px 4px rgba(7, 17, 27, 0.15);
+  -o-box-shadow: 0 2px 4px rgba(7, 17, 27, 0.15);
+  -ms-box-shadow: 0 2px 4px rgba(7, 17, 27, 0.15);
+  -moz-box-shadow: 0 2px 4px rgba(7, 17, 27, 0.15);
+  -webkit-box-shadow: 0 2px 4px rgba(7, 17, 27, 0.15);
+}
+.el-tabs__item:hover {
+  color: #000!important;
 }
 .RealName-main .el-upload--picture-card,
 .personalData-main .el-upload--picture-card,
@@ -131,8 +193,8 @@ html {
 .basic .title,
 .company .title {
   position: relative;
-  padding: 10px 20px;
-  line-height: 24px;
+  padding: .1rem .2rem;
+  line-height: .24rem;
   color: #303133;
   border-bottom: 1px dashed #cccccc;
 }
@@ -141,15 +203,15 @@ html {
   content: '';
   position: absolute;
   left: 0;
-  top: 10px;
+  top: .1rem;
   z-index: 1;
-  width: 6px;
-  height: 24px;
+  width: .06rem;
+  height: .24rem;
   background-color: #2fa8fd;
 }
 .basic .basic-form,
 .company .basic-form {
-  padding: 30px 0 0 130px;
+  padding: .3rem 0 0 1.3rem;
 }
 .basic .basic-form .input-item,
 .company .basic-form .input-item {
@@ -158,20 +220,20 @@ html {
 .basic .basic-form .input-item label,
 .company .basic-form .input-item label {
   display: inline-block;
-  width: 136px;
+  width: 1.36rem;
   text-align: left;
   color: #303133;
-  font-size: 16px;
+  font-size: .16rem;
 }
 .basic .basic-form .input-item .input-style,
 .company .basic-form .input-item .input-style {
   display: inline-block;
-  width: 300px;
-  height: 42px;
-  margin-bottom: 25px;
-  padding: 0 12px;
-  line-height: 42px;
-  font-size: 14px;
+  width: 3rem;
+  height: .42rem;
+  margin-bottom: .25rem;
+  padding: 0 .12rem;
+  line-height: .42rem;
+  font-size: .14rem;
   border: 1px solid #909399;
   border-radius: 3px;
   -o-border-radius: 3px;
@@ -198,9 +260,9 @@ html {
 .basic .basic-form .input-item span,
 .company .basic-form .input-item span {
   display: inline-block;
-  margin-bottom: 15px;
+  margin-bottom: .15rem;
 }
 .basic .basic-form .input-item .special,
 .company .basic-form .input-item .special {
-  width: calc(-41%);
+  width: calc(98.59%);
 }

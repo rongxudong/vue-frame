@@ -11,7 +11,7 @@
             text-color="#afb8c1"
             active-text-color="#2fa8fd">
         <el-menu-item index="/">
-            <i class="iconfont icon-shouye"></i>
+            <i class="iconfont icon-shouye1"></i>
             <span slot="title">总览</span>
         </el-menu-item>
         <el-submenu v-for="item in menu" :index="item.id" :key="item.id">
@@ -83,6 +83,7 @@
         min-height: calc(100vh - 60px);
     }
     .el-menu .iconfont {
+        font-size: .18rem;
         margin-right: 20px;
         color: #afb8c1;
     }

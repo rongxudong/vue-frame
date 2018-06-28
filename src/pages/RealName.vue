@@ -150,8 +150,8 @@
 </script>
 
 <style scoped lang="less" rel="stylesheet/less">
-    @import "../../assets/css/_variable";
-    @import "../../assets/css/_mixin";
+    @import "../assets/css/_variable";
+    @import "../assets/css/_mixin";
 
     .RealName-main {
         padding: 20px 75px 65px;
@@ -174,7 +174,6 @@
         .common_radius(3px);
         font-size: 16px;
         color: #fff;
-        cursor: pointer;
         &:hover {
             .lighten-hover(@base);
         }

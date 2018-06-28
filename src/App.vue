@@ -124,7 +124,8 @@
         .common_box_shadow(0 2px 4px rgba(7, 17, 27, .15));
     }
     .el-main {
-        margin-top: 5px;
+        margin-top: .05rem;
+        padding: .2rem .35rem;
         background-color: #f7f5fb;
     }
     .el-main .el-tabs__header {

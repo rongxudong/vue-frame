@@ -2,7 +2,8 @@
 
 module.exports = {
     header: {
-        name: "Zhejiang Avenue Wind Control system"
+        name: "Avenue group risk control system",
+        versions: 'v1.0'
     },
     personal: {
         basicInformation: "Basic information",

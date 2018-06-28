@@ -8,6 +8,22 @@
   -ms-flex-pack: justify;
   justify-content: space-between;
 }
+.flex_start {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  justify-content: flex-start;
+}
+.flex_end {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  justify-content: flex-end;
+}
 .justify_content_around {
   display: -webkit-box;
   display: -moz-box;

@@ -32,6 +32,7 @@ function filterNull (o) {
 axios.interceptors.request.use(config=> {
     // 配置config
     config.headers.Accept = 'application/json';
+    config.headers.Token = 'a4a78681d1e771a0966ae22a79b13390';
     // config.headers.System = 'vue';
         // let token = Vue.localStorage.get('token');
         // if(token){
@@ -160,10 +161,13 @@ function apiAxios (method, url, params, success, failure) {
     })
     // then时进行response数据处理
     .then(function (res) {
-        if (res.data.success === true) {
-            if (success) {
-                success(res.data)
-            }
+        // if (res.data.success === true) {
+        //     if (success) {
+        //         success(res.data)
+        //     }
+        // }
+        if (success) {
+            success(res.data)
         }
     })
 }

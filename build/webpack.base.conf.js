@@ -1,4 +1,5 @@
 'use strict'
+const webpack = require("webpack")
 const path = require('path')
 const utils = require('./utils')
 const config = require('../config')
@@ -34,6 +35,13 @@ module.exports = {
             ? config.build.assetsPublicPath
             : config.dev.assetsPublicPath
     },
+    plugins: [
+        new webpack.ProvidePlugin({
+            $:"jquery",
+            jQuery:"jquery",
+            "windows.jQuery":"jquery"
+        })
+    ],
     resolve: {
         // 自动解析确定的拓展名,使导入模块时不带拓展名
         extensions: ['.js', '.vue', '.json'],

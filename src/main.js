@@ -11,6 +11,7 @@ import enLocale from 'element-ui/lib/locale/lang/en';
 import zhLocale from 'element-ui/lib/locale/lang/zh-CN';
 import Moment from 'moment';
 import 'babel-polyfill';
+import $ from "jquery";
 
 // Vuex 依赖 Promise,如果你支持的浏览器并没有实现 Promise (比如 IE),那么你可以使用一个 polyfill 的库，例如 es6-promise。
 import 'es6-promise/auto';
@@ -23,6 +24,7 @@ import './assets/css/_reset.css';
 import '../static/iconfont/iconfont.css';
 
 // 引用js文件(自己的)
+import Rem from './assets/js/rem'
 import ajax from './api/base-ajax';
 import LangStorage from './assets/js/lang/local_lang';
 import MyPlugin from './Global';

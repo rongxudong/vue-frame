@@ -2,7 +2,8 @@
 
 module.exports = {
     header: {
-        name: "浙江大道风控系统"
+        name: "大道集团风控系统后台",
+        versions: 'v1.0'
     },
     personal: {
         basicInformation: "基本信息",

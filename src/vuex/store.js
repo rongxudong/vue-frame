@@ -12,6 +12,7 @@ const options = {
         message: '',
         options: [],
         activeIndex: '/Home',
+        domain: 'http://192.168.50.18:8081'
     },
 
     // 操作

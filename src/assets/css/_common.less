@@ -5,9 +5,23 @@
     .box-sizing(border-box);
     -webkit-text-size-adjust:auto !important;
 }
-
 html{
     -webkit-text-size-adjust:none;
+}
+html,
+body {
+    font: .14rem/1 "Helvetica Neue",Helvetica,Arial,"Microsoft Yahei","Hiragino Sans GB","Heiti SC","WenQuanYi Micro Hei",sans-serif;
+}
+button {
+    cursor: pointer;
+    &:hover,
+    &:active,
+    &:focus{
+        outline: none!important;
+    }
+}
+.text-center {
+    text-align: center!important;
 }
 .mt15 {
     margin-top: 15px;
@@ -22,6 +36,30 @@ html{
 //Home.vue
 .el-tabs--card>.el-tabs__header {
     border-bottom: none;
+    .el-tabs__nav {
+        border: none;
+    }
+}
+.el-tabs__item.is-active {
+    height: 40px;
+    line-height: 40px;
+    vertical-align: top;
+    color: #000!important;
+    background-color: #ffffff!important;
+    .border-bottom-radius(0);
+}
+.el-tabs__item {
+    margin-right: 8px;
+    height: 34px;
+    line-height: 34px;
+    color: #fff;
+    background-color: RGBA(182, 194, 202, 1)!important;
+    .border-top-radius(5px);
+    .border-bottom-radius(5px);
+    .common_box_shadow(0 2px 4px rgba(7, 17, 27, .15));
+    &:hover {
+        color: #000!important;
+    }
 }
 
 //RealName.vue
@@ -42,50 +80,50 @@ html{
     width: 100%;
     .title {
         position: relative;
-        padding: 10px 20px;
-        line-height: 24px;
+        padding: .1rem .2rem;
+        line-height: .24rem;
         color: @main-col;
         border-bottom: 1px dashed #cccccc;
         &:before {
             content: '';
             position: absolute;
             left: 0;
-            top: 10px;
+            top: .1rem;
             z-index: 1;
-            width: 6px;
-            height: 24px;
+            width: .06rem;
+            height: .24rem;
             background-color: @base;
         }
     }
     .basic-form {
-        padding: 30px 0 0 130px;
+        padding: .3rem 0 0 1.3rem;
         .input-item {
             width: 100%;
             label {
                 display: inline-block;
-                width: 136px;
+                width: 1.36rem;
                 text-align: left;
                 color: @main-col;
-                font-size: 16px;
+                font-size: .16rem;
             }
             .input-style {
                 display: inline-block;
-                width: 300px;
-                height: 42px;
-                margin-bottom: 25px;
-                padding: 0 12px;
-                line-height: 42px;
-                font-size: 14px;
+                width: 3rem;
+                height: .42rem;
+                margin-bottom: .25rem;
+                padding: 0 .12rem;
+                line-height: .42rem;
+                font-size: .14rem;
                 border: 1px solid @minor-col;
                 .placeholder(@minor-col);
                 .common_radius(3px);
             }
             span {
                 display: inline-block;
-                margin-bottom: 15px;
+                margin-bottom: .15rem;
             }
             .special {
-                width: calc(100% - 141px);
+                width: calc(100% - 1.41rem);
             }
         }
     }

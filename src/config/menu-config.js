@@ -2,7 +2,7 @@ module.exports = [
     {
         name: '授信管理',
         id: '20000',
-        icon: 'icon-jiaoyiguanli',
+        icon: 'icon-anquan',
         sub: [
             {
                 id: '20001',
@@ -27,31 +27,25 @@ module.exports = [
                 name: '尽职调查',
                 componentName: 'Investigate',
                 route: '/Investigate'
+            },
+            {
+                id: '20005',
+                name: '客户申请',
+                componentName: 'customerApplication',
+                route: '/customerApplication'
             }
         ]
     },
     {
         name: '客户信息',
         id: '40000',
-        icon: 'icon-rongzixiangmu00',
+        icon: 'icon-yonghuming',
         sub: [
             {
                 id: '40001',
                 name: '实名认证',
                 componentName: 'RealName',
                 route: '/RealName'
-            },
-            {
-                id: '40002',
-                name: '个人资料',
-                componentName: 'personalData',
-                route: '/personalData'
-            },
-            {
-                id: '40003',
-                name: '修改密码',
-                componentName: 'password',
-                route: '/password'
             },
             {
                 id: '40004',

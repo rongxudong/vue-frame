@@ -23,9 +23,8 @@ const QuotaApplicationForm = () => import(/* webpackChunkName: "chunkname2" */ '
 const Investigate = () => import(/* webpackChunkName: "chunkname3" */ '@/pages/Investigate.vue')
 const CustomerPool = () => import(/* webpackChunkName: "chunkname3" */ '@/pages/CustomerPool.vue')
 
-const RealName = () => import(/* webpackChunkName: "chunkname1" */ '@/pages/personal/RealName.vue')
-const personalData = () => import(/* webpackChunkName: "chunkname1" */ '@/pages/personal/personalData.vue')
-const password = () => import(/* webpackChunkName: "chunkname1" */ '@/pages/personal/password.vue')
+const customerApplication = () => import(/* webpackChunkName: "chunkname1" */ '@/pages/customerApplication.vue')
+const RealName = () => import(/* webpackChunkName: "chunkname1" */ '@/pages/RealName.vue')
 
 Vue.use(Router)
 
@@ -64,22 +63,20 @@ export default new Router({
             component: Investigate
         },
         {
+            path: '/customerApplication',
+            name: '客户申请',
+            component: customerApplication,
+            meta: {
+                keepAlive: true // 需要被缓存
+            }
+        },
+        {
             path: '/RealName',
             name: '实名认证',
             component: RealName,
             meta: {
                 keepAlive: true // 需要被缓存
             }
-        },
-        {
-            path: '/personalData',
-            name: '个人资料',
-            component: personalData
-        },
-        {
-            path: '/password',
-            name: '修改密码',
-            component: password
         },
         {
             path: '/CustomerPool',

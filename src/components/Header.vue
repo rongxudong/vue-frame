@@ -6,12 +6,18 @@
                 <span class="sys-versions">{{ $t('header.versions') }}</span>
             </div>
         </el-col>
-        <!--<el-col :span="6"><div class="grid-content bg-purple-light"></div></el-col>-->
         <el-col :span="4">
             <ul class="grid-content bg-purple flex_end">
-                <li class="header-code align_items">
-                    <i class="iconfont icon-erweima"></i>
-                </li>
+                <el-dropdown placement="bottom">
+                    <li class="header-code align_items">
+                        <i class="iconfont icon-erweima"></i>
+                    </li>
+                    <el-dropdown-menu slot="dropdown">
+                        <el-dropdown-item>
+                            <img class="codeImg" :src="codeImg"/>
+                        </el-dropdown-item>
+                    </el-dropdown-menu>
+                </el-dropdown>
                 <li class="header-message align_items">
                     <i class="iconfont icon-xiaoxi1"></i>
                     <em class="small-icon"></em>
@@ -22,18 +28,10 @@
                 </li>
                 <li class="head-language align_items">
                     <div class="select">
-                        <span :class="{'isActive': value === item.value}" v-for="item in options" @click="selectLanguage(item.value)">{{item.label}}</span>
-                        <!--<span>EN</span>-->
+                        <span :class="{'isActive': value === item.value}" v-for="item in options"
+                              @click="selectLanguage(item.value)">{{item.label}}</span>
                     </div>
                 </li>
-                <!--<el-select v-model="value" placeholder="请选择" value="切换语言">-->
-                    <!--<el-option-->
-                            <!--v-for="item in options"-->
-                            <!--:key="item.value"-->
-                            <!--:label="item.label"-->
-                            <!--:value="item.value">-->
-                    <!--</el-option>-->
-                <!--</el-select>-->
             </ul>
         </el-col>
     </el-row>
@@ -55,7 +53,8 @@
                         label: 'EN'
                     }
                 ],
-                value: this.$i18n.locale
+                value: this.$i18n.locale,
+                codeImg: require('../assets/img/RealName/real-fail.png')
             };
         },
         watch: {
@@ -136,6 +135,12 @@
             height: 16px;
             background-color: @less-col;
         }
+    }
+    .codeImg {
+        width: 1.5rem;
+        min-width: 100px;
+        height: 1.5rem;
+        min-height: 100px;
     }
     .header-message {
         position: relative;

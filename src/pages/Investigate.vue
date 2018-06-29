@@ -1,16 +1,9 @@
 <template>
-    <div class="post">
-        <div class="loading" v-if="loading">
-            Loading...
-        </div>
-
-        <div v-if="error" class="error">
-            {{ error }}
-        </div>
-
-        <div v-if="post" class="content">
-            <h2>{{ post.title }}</h2>
-            <p>{{ post.body }}</p>
+    <div class="bg-style">
+        <div class="investigate-main">
+            <div class="basic">
+                <div class="title">尽职调查-1</div>
+            </div>
         </div>
     </div>
 </template>
@@ -34,8 +27,8 @@
         },
         methods: {
             fetchData () {
-                this.error = this.post = null
-                this.loading = true
+//                this.error = this.post = null
+//                this.loading = true
                 // replace getPost with your data fetching util / API wrapper
 //                this.$ajax.post(this.$route.params.id, (err, post) => {
 //                    this.loading = false
@@ -49,3 +42,8 @@
         }
     }
 </script>
+<style scoped lang="less" rel="stylesheet/less">
+    .investigate-main {
+        padding: .1rem .75rem;
+    }
+</style>

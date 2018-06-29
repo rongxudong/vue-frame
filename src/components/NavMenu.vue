@@ -83,7 +83,7 @@
         min-height: calc(100vh - 60px);
     }
     .el-menu .iconfont {
-        font-size: .18rem;
+        font-size: 16px;
         margin-right: 20px;
         color: #afb8c1;
     }

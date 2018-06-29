@@ -142,6 +142,10 @@ button:focus {
   -moz-box-shadow: 0 2px 4px rgba(7, 17, 27, 0.15);
   -webkit-box-shadow: 0 2px 4px rgba(7, 17, 27, 0.15);
 }
+.header .el-dropdown-menu__item:focus,
+.el-dropdown-menu__item:not(.is-disabled):hover {
+  background-color: transparent;
+}
 .el-tabs--card > .el-tabs__header {
   border-bottom: none;
 }
@@ -179,9 +183,9 @@ button:focus {
 .RealName-main .el-upload--picture-card,
 .personalData-main .el-upload--picture-card,
 .password-main .el-upload--picture-card {
-  width: 100px;
-  height: 100px;
-  line-height: 100px;
+  width: 1rem;
+  height: 1rem;
+  line-height: 1.2rem;
 }
 .el-upload--picture-card i {
   color: #606266;
@@ -211,30 +215,41 @@ button:focus {
 }
 .basic .basic-form,
 .company .basic-form {
-  padding: .3rem 0 0 1.3rem;
+  padding: .25rem 0 0 1.25rem;
 }
 .basic .basic-form .input-item,
-.company .basic-form .input-item {
+.company .basic-form .input-item,
+.basic .basic-form .upload-flex,
+.company .basic-form .upload-flex {
   width: 100%;
+  margin-bottom: .25rem;
 }
 .basic .basic-form .input-item label,
-.company .basic-form .input-item label {
+.company .basic-form .input-item label,
+.basic .basic-form .upload-flex label,
+.company .basic-form .upload-flex label {
   display: inline-block;
-  width: 1.36rem;
+  width: 20%;
+  max-width: 135px;
+  min-width: 135px;
   text-align: left;
   color: #303133;
-  font-size: .16rem;
+  font-size: 16px;
+  line-height: 1.2;
 }
 .basic .basic-form .input-item .input-style,
-.company .basic-form .input-item .input-style {
+.company .basic-form .input-item .input-style,
+.basic .basic-form .upload-flex .input-style,
+.company .basic-form .upload-flex .input-style {
   display: inline-block;
-  width: 3rem;
-  height: .42rem;
-  margin-bottom: .25rem;
+  width: 80%;
+  max-width: 300px;
+  min-width: 300px;
+  height: 42px;
   padding: 0 .12rem;
-  line-height: .42rem;
+  line-height: 42px;
   font-size: .14rem;
-  border: 1px solid #909399;
+  border: 1px solid #c0ccda;
   border-radius: 3px;
   -o-border-radius: 3px;
   -ms-border-radius: 3px;
@@ -242,27 +257,58 @@ button:focus {
   -webkit-border-radius: 3px;
 }
 .basic .basic-form .input-item .input-style::-webkit-input-placeholder,
-.company .basic-form .input-item .input-style::-webkit-input-placeholder {
+.company .basic-form .input-item .input-style::-webkit-input-placeholder,
+.basic .basic-form .upload-flex .input-style::-webkit-input-placeholder,
+.company .basic-form .upload-flex .input-style::-webkit-input-placeholder {
   color: #909399;
 }
 .basic .basic-form .input-item .input-style:-moz-placeholder,
-.company .basic-form .input-item .input-style:-moz-placeholder {
+.company .basic-form .input-item .input-style:-moz-placeholder,
+.basic .basic-form .upload-flex .input-style:-moz-placeholder,
+.company .basic-form .upload-flex .input-style:-moz-placeholder {
   color: #909399;
 }
 .basic .basic-form .input-item .input-style::-moz-placeholder,
-.company .basic-form .input-item .input-style::-moz-placeholder {
+.company .basic-form .input-item .input-style::-moz-placeholder,
+.basic .basic-form .upload-flex .input-style::-moz-placeholder,
+.company .basic-form .upload-flex .input-style::-moz-placeholder {
   color: #909399;
 }
 .basic .basic-form .input-item .input-style:-ms-input-placeholder,
-.company .basic-form .input-item .input-style:-ms-input-placeholder {
+.company .basic-form .input-item .input-style:-ms-input-placeholder,
+.basic .basic-form .upload-flex .input-style:-ms-input-placeholder,
+.company .basic-form .upload-flex .input-style:-ms-input-placeholder {
   color: #909399;
 }
 .basic .basic-form .input-item span,
-.company .basic-form .input-item span {
+.company .basic-form .input-item span,
+.basic .basic-form .upload-flex span,
+.company .basic-form .upload-flex span {
   display: inline-block;
-  margin-bottom: .15rem;
 }
 .basic .basic-form .input-item .special,
-.company .basic-form .input-item .special {
-  width: calc(98.59%);
+.company .basic-form .input-item .special,
+.basic .basic-form .upload-flex .special,
+.company .basic-form .upload-flex .special {
+  max-width: none;
+}
+.basic .basic-form .input-item,
+.company .basic-form .input-item {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+.basic .basic-form .upload-flex,
+.company .basic-form .upload-flex {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  justify-content: flex-start;
 }

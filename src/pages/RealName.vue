@@ -29,7 +29,10 @@
                         <span>
                             <my-upload
                                     ref="upload"
-                                    :name="item.name"
+                                    :headers="myHeaders"
+                                    :action="action"
+                                    :data="{ parm: idx + 1 }"
+                                    name="file"
                                     :uploadId="item.key"
                                     :onChange="handleChange"
                                     :onSuccess="handleAvatarSuccess"
@@ -37,81 +40,39 @@
                             ></my-upload>
                         </span>
                     </div>
-
-                    <!--<div class="upload-flex">-->
-                        <!--<label>{{ $t('personal.idPicFront') }}</label>-->
-                        <!--<span>-->
-                            <!--<el-upload-->
-                                    <!--ref='upload'-->
-                                    <!--class="avatar-uploader"-->
-                                    <!--action="#"-->
-                                    <!--:on-change="handleChange"-->
-                                    <!--:auto-upload="false"-->
-                                    <!--:show-file-list="false"-->
-                                    <!--:on-success="handleAvatarSuccess"-->
-                                    <!--:before-upload="beforeAvatarUpload">-->
-                                <!--<img v-if="array['idPicFront']" :src="array['idPicFront']" class="avatar">-->
-                                <!--<i v-else="!array['idPicFront']" class="el-icon-plus avatar-uploader-icon"></i>-->
-                            <!--</el-upload>-->
-                        <!--</span>-->
-                    <!--</div>-->
-                    <!--<div class="upload-flex">-->
-                        <!--<label>{{ $t('personal.idPicBehind') }}</label>-->
-                        <!--<span>-->
-                            <!--<el-upload-->
-                                    <!--class="avatar-uploader"-->
-                                    <!--action="#"-->
-                                    <!--:auto-upload="false"-->
-                                    <!--:show-file-list="false"-->
-                                    <!--:on-success="handleAvatarSuccess"-->
-                                    <!--:before-upload="beforeAvatarUpload">-->
-                                <!--<img v-if="array['idPicBehind']" :src="array['idPicBehind']" class="avatar">-->
-                                <!--<i v-else="!array['idPicBehind']" class="el-icon-plus avatar-uploader-icon"></i>-->
-                            <!--</el-upload>-->
-                        <!--</span>-->
-                    <!--</div>-->
-                    <!--<div class="upload-flex">-->
-                        <!--<label>{{ $t('personal.idPicHand') }}</label>-->
-                        <!--<span>-->
-                            <!--<el-upload-->
-                                    <!--class="avatar-uploader"-->
-                                    <!--action="#"-->
-                                    <!--:auto-upload="false"-->
-                                    <!--:show-file-list="false"-->
-                                    <!--:on-success="handleAvatarSuccess"-->
-                                    <!--:before-upload="beforeAvatarUpload">-->
-                                <!--<img v-if="array['idPicHand']" :src="array['idPicHand']" class="avatar">-->
-                                <!--<i v-else="!array['idPicHand']" class="el-icon-plus avatar-uploader-icon"></i>-->
-                            <!--</el-upload>-->
-                        <!--</span>-->
-                    <!--</div>-->
                 </div>
             </div>
             <div class="company">
                 <div class="title">{{ $t('personal.enterpriseInformation') }}</div>
                 <div class="basic-form">
-                    <div class="upload-flex" v-for="(item,idx) in uploadList" :key="idx" v-show="idx == 3">
+                    <div class="upload-flex" v-for="(item, idx) in uploadList" :key="idx" v-show="idx == 3">
                         <!--<label>{{ $t('personal.businessLicense') }}</label>-->
                         <label>图片-{{idx}}</label>
                         <span>
-                            <!--<el-upload-->
-                                    <!--class="avatar-uploader"-->
-                                    <!--action="#"-->
-                                    <!--:auto-upload="false"-->
-                                    <!--:show-file-list="false"-->
-                                    <!--:on-success="handleAvatarSuccess"-->
-                                    <!--:before-upload="beforeAvatarUpload">-->
-                                <!--<img v-if="array['businessLicense']" :src="array['businessLicense']" class="avatar">-->
-                                <!--<i v-else="!array['businessLicense']" class="el-icon-plus avatar-uploader-icon"></i>-->
-                            <!--</el-upload>-->
                             <my-upload
                                     ref="upload"
-                                    :name="item.name"
+                                    :headers="myHeaders"
+                                    :action="action"
+                                    :data="{ parm: 4 }"
+                                    name="file"
                                     :uploadId="item.key"
                                     :onChange="handleChange"
                                     :onSuccess="handleAvatarSuccess"
                                     :beforeUpload="beforeAvatarUpload"
                             ></my-upload>
+                            <!--<el-upload-->
+                                    <!--class="avatar-uploader"-->
+                                    <!--:headers="myHeaders"-->
+                                    <!--name="file"-->
+                                    <!--:data="{ parm: 4 }"-->
+                                    <!--:action="action"-->
+                                    <!--:on-change="handleChange"-->
+                                    <!--:show-file-list="false"-->
+                                    <!--:on-success="handleAvatarSuccess"-->
+                                    <!--:before-upload="beforeAvatarUpload">-->
+                                <!--<img v-if="imageUrl" :src="imageUrl" class="avatar">-->
+                                <!--<i v-else="!imageUrl" class="el-icon-plus avatar-uploader-icon"></i>-->
+                            <!--</el-upload>-->
                         </span>
                     </div>
                     <div class="input-item">
@@ -146,7 +107,9 @@
                 :before-close="handleClose">
                 <span class="horizontal_center">
                     <i class="iconfont icon-gouxuan"></i>
-                    <span style="margin-left: 15px;">{{ $t('personal.paragraphOne') }}<br>{{ $t('personal.paragraphTwo') }}<em class="imp">1-2</em>{{ $t('personal.paragraphThree') }}</span>
+                    <span style="margin-left: 15px;">{{ $t('personal.paragraphOne') }}<br>{{ $t('personal.paragraphTwo') }}
+                        <em class="imp">1-2</em>{{ $t('personal.paragraphThree') }}
+                    </span>
                 </span>
                 <span slot="footer" class="dialog-footer">
                     <el-button @click="dialog = false">{{ $t('personal.cancel') }}</el-button>
@@ -171,40 +134,40 @@
                 dialogVisible: false,
                 dialog: false,
                 array: {
-                    name: '',
-                    idCard: '',
+                    name: null,
+                    idCard: null,
                     idPicFrontFile: null,
                     idPicBehindFile: null,
                     idPicHandFile: null,
                     businessLicenseFile: null,
-                    companyName: '',
-                    legalPerson: '',
-                    legalPersonIdCard: '',
-                    address: '',
+                    companyName: null,
+                    legalPerson: null,
+                    legalPersonIdCard: null,
+                    address: null,
                     auditFlag: '3',
                 },
                 uploadList: [
                     {
                         key: 'idPicFrontFile',
-                        label:"{{ $t('personal.idPicFront') }}",
-                        name: 'idPicFrontFile'
+                        label:"{{ $t('personal.idPicFront') }}"
                     },
                     {
                         key: 'idPicBehindFile',
-                        label:"{{ $t('personal.idPicBehind') }}",
-                        name: 'idPicBehindFile'
+                        label:"{{ $t('personal.idPicBehind') }}"
                     },
                     {
                         key: 'idPicHandFile',
-                        label:"{{ $t('personal.idPicHand') }}",
-                        name: 'idPicHandFile'
+                        label:"{{ $t('personal.idPicHand') }}"
                     },
                     {
                         key: 'businessLicenseFile',
-                        label:"{{ $t('personal.businessLicense') }}",
-                        name: 'businessLicenseFile'
+                        label:"{{ $t('personal.businessLicense') }}"
                     }
-                ]
+                ],
+                myHeaders: {
+                    token: "fe621e16a71d65e6bed7a6789d4c4688"
+                },
+                action: this.$store.state.domain + "/api/bussinessAccount/yqq/uploadPic"
             }
         },
         methods: {
@@ -214,13 +177,10 @@
                 this.array[ele] = file;
 //                this.imageUrl = file.url;
             },
-            handleAvatarSuccess(res, file, ele) {
-                console.log(ele);
+            handleAvatarSuccess(res, file, fileList, ele) {
                 this.imageUrl = URL.createObjectURL(file.raw);
             },
             beforeAvatarUpload(file, ele) {
-                console.log(file);
-                console.log(ele);
                 const isJPG = file.type === 'image/jpeg';
                 const isLt2M = file.size / 1024 / 1024 < 2;
 
@@ -235,10 +195,8 @@
             onSubmit() {
                 const SaveUserIdentityUrl = this.$store.state.domain + '/api/bussinessAccount/yqq/userIdentity';
                 this.$ajax.post(SaveUserIdentityUrl, this.array, res => {
-                    console.log(res)
+                    console.log(res);
                 })
-                console.log(this.array)
-//                this.dialog = true;
             },
             handleClose(done) {
                 this.dialog = false;
@@ -282,7 +240,6 @@
                 }
             }
         }
-        .icon-gouxuan
 
         em.imp {
             margin: 0 3px;

@@ -1,10 +1,10 @@
 <template>
     <el-upload
             class="avatar-uploader"
-            action="#"
-            :name="inputName"
+            :headers="Headers"
+            :action="Action"
+            :data="params"
             :on-change="handleChange"
-            :auto-upload="false"
             :accept="accept"
             :show-file-list="false"
             :on-success="handleAvatarSuccess"
@@ -18,20 +18,26 @@
     export default {
         name: 'MyUpload',
         props:{
-            name: null,
-            uploadId: null, //接收到的自定义的参数
+//            name: null,
+            headers: null,
+            uploadId: null, //接收到的自定义的参数,
+            data: null,
             onChange: Function,
             onSuccess: Function,
             beforeUpload: Function,
             accept:{
                 type: String,
                 default: '.jpg,.png,.jpeg,.jpeg2000,gif'
-            }
+            },
+            action: null
         },
         data () {
             return {
                 imageUrl: '',
-                inputName: this.name
+//                inputName: this.name,
+                Action: this.action,
+                Headers: this.headers,
+                params: this.data
             }
         },
         methods:{

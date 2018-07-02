@@ -210,6 +210,8 @@
                                 :on-change="handleChange"
                                 :onError="uploadError"
                                 :onSuccess="uploadSuccess"
+                                :on-remove="handleRemove"
+                                :before-remove="beforeRemove"
                                 :file-list="fileList">
                             <el-button size="small" type="primary">点击上传</el-button>
                             <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
@@ -485,7 +487,7 @@
                     orderId: 1
                 },
                 myHeaders: {
-                    token: "a4a78681d1e771a0966ae22a79b13390"
+                    token: "b98578419cd420951a2e724f915f1dbb"
                 },
                 array: {
                     orderId: 1,
@@ -530,23 +532,65 @@
             }
         },
         methods: {
+            // 选择申请的额度范围
             selectRange (module) {
                 this.array['quotaRange'] = module;
             },
+            // 文件列表移除文件时的钩子
+            handleRemove(file, fileList) {
+                console.log(file, fileList);
+            },
+            // 监听文件状态改变
             handleChange(file, fileList) {
+                console.log(this.array);
+                console.log(file);
 //                this.fileList = fileList.slice(-10);
             },
+            // 删除文件之前的钩子
+            beforeRemove(file, fileList) {
+//                return this.$confirm(`确定移除 ${ file.fileName }？`);
+                this.$confirm(`确定移除 ${ file.fileName }?`, '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    this.asyncReq(file,fileList) // 在这里真正的处理图片列表
+                }).catch(() => {
+                    this.$message({
+                        type: 'info',
+                        message: '已取消删除'
+                    });
+                });
+                return false; // 这是重点,不管上面的操作结果如何都返回false
+            },
+            asyncReq (file,fileList) {
+                // 处理图片列表
+                // 远请求服务器如果成功则把fileList中要删除的file移除即可
+            },
+            // 保存
             saveBtn () {
                 const SaveGtcpUrl = this.$store.state.domain + '/api/bussiness/account/order/saveGtcp?orderId=';
                 this.$ajax.post( SaveGtcpUrl + this.array['orderId'], this.array, res => {
                     console.log(res)
-//                    this.array = res.data;
                 })
             },
+            // 提交
             submitBtn () {
-                const  SubmitGtcpUrl = this.$store.state.domain + '/api/bussiness/account/order/submitGtcp?orderId=';
+                const SubmitGtcpUrl = this.$store.state.domain + '/api/bussiness/account/order/submitGtcp?orderId=';
                 this.$ajax.post( SubmitGtcpUrl + this.array['orderId'], this.array, res => {
                     this.array = res.data;
+                })
+            },
+            // 获取之前保存的信息
+            getGtcpDetail () {
+                const getGtcpDetailUrl = this.$store.state.domain + '/api/bussiness/account/order/getGtcpDetail/';
+                this.$ajax.get(getGtcpDetailUrl + this.array['orderId'], null, res => {
+                    console.log(res.data.files)
+                    this.array = res.data;
+                    this.fileList = res.data.files;
+                    if(!res.data.quotaRange) {
+                        this.array['quotaRange'] = '1';
+                    }
                 })
             },
             // 上传成功后的回调
@@ -554,6 +598,7 @@
                 console.log('文件', file)
                 console.log('上传文件', response)
                 this.fileList = response.data.files;
+                console.log(this.fileList)
             },
             // 上传错误
             uploadError (response, file, fileList) {
@@ -564,7 +609,7 @@
             }
         },
         created　() {
-            this.saveBtn();
+            this.getGtcpDetail();
         }
     }
 </script>
@@ -574,7 +619,7 @@
     @import "../assets/css/_mixin";
 
     .application-main {
-        padding: 30px 75px 60px;
+        padding: 0 20px 60px;
         ul.select-range {
             padding: 30px 0;
             li.item {

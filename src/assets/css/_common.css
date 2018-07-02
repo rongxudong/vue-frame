@@ -197,9 +197,10 @@ button:focus {
 .basic .title,
 .company .title {
   position: relative;
-  padding: .1rem .2rem;
-  line-height: .24rem;
+  padding: 20px 20px 20px 17px;
+  line-height: 1;
   color: #303133;
+  font-size: 14px;
   border-bottom: 1px dashed #cccccc;
 }
 .basic .title:before,
@@ -207,11 +208,16 @@ button:focus {
   content: '';
   position: absolute;
   left: 0;
-  top: .1rem;
+  top: 19px;
   z-index: 1;
-  width: .06rem;
-  height: .24rem;
+  width: 4px;
+  height: 16px;
   background-color: #2fa8fd;
+  border-radius: 2px;
+  -o-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
 }
 .basic .basic-form,
 .company .basic-form {
@@ -311,4 +317,32 @@ button:focus {
   display: -webkit-flex;
   display: flex;
   justify-content: flex-start;
+}
+.basic .basic-form .upload-flex .avatar-uploader .el-upload,
+.company .basic-form .upload-flex .avatar-uploader .el-upload {
+  border: 1px dashed #d9d9d9;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.basic .basic-form .upload-flex .avatar-uploader .el-upload:hover,
+.company .basic-form .upload-flex .avatar-uploader .el-upload:hover {
+  border-color: #409EFF;
+}
+.basic .basic-form .upload-flex .avatar-uploader-icon,
+.company .basic-form .upload-flex .avatar-uploader-icon {
+  font-size: 28px;
+  color: #8c939d;
+  width: 100px;
+  height: 100px;
+  line-height: 100px;
+  text-align: center;
+  font-weight: bold;
+}
+.basic .basic-form .upload-flex .avatar,
+.company .basic-form .upload-flex .avatar {
+  width: 100px;
+  height: 100px;
+  display: block;
 }

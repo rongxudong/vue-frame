@@ -32,7 +32,7 @@ function filterNull (o) {
 axios.interceptors.request.use(config=> {
     // 配置config
     config.headers.Accept = 'application/json';
-    config.headers.Token = 'a4a78681d1e771a0966ae22a79b13390';
+    config.headers.Token = 'eff2969bbd0c778f4ddf8326d1a30855';
     // config.headers.System = 'vue';
         // let token = Vue.localStorage.get('token');
         // if(token){

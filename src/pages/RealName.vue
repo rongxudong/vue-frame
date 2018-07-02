@@ -1,6 +1,6 @@
 <template>
     <div class="bg-style">
-        <form class="RealName-main">
+        <div class="RealName-main">
             <div class="real-fail-wrap flex_start align_items" v-show="array['auditFlag'] == '3'">
                 <img src="../assets/img/RealName/real-fail.png"/>
                 <div class="fail-text">
@@ -16,96 +16,123 @@
                 <div class="basic-form">
                     <div class="input-item">
                         <label>{{ $t('personal.name') }}</label>
-                        <input v-model="array['name']" type="text" class="input-style" name="name" :placeholder="$t('personal.placeholder')"/>
+                        <input v-model="array['name']" type="text" class="input-style" name="name"
+                               :placeholder="$t('personal.placeholder')" autocomplete="off"/>
                     </div>
                     <div class="input-item">
                         <label>{{ $t('personal.idCard') }}</label>
-                        <input v-model="array['idCard']" type="text" class="input-style" name="idCard" :placeholder="$t('personal.placeholder')"/>
+                        <input v-model="array['idCard']" type="text" class="input-style" name="idCard"
+                               :placeholder="$t('personal.placeholder')" autocomplete="off"/>
                     </div>
-                    <div class="upload-flex">
-                        <label>{{ $t('personal.idPicFront') }}</label>
+                    <div class="upload-flex" v-for="(item,idx) in uploadList" :key="idx" v-show="idx != 3">
+                        <label>图片-{{idx}}</label>
                         <span>
-                            <el-upload
-                                    action="https://jsonplaceholder.typicode.com/posts/"
-                                    list-type="picture-card"
-                                    :auto-upload="false"
-                                    :on-preview="handlePictureCardPreview"
-                                    :on-remove="handleRemove">
-                            <i class="el-icon-plus"></i>
-                            </el-upload>
-                            <el-dialog :visible.sync="dialogVisible">
-                                <img width="100%" :src="dialogImageUrl" alt="">
-                            </el-dialog>
+                            <my-upload
+                                    ref="upload"
+                                    :name="item.name"
+                                    :uploadId="item.key"
+                                    :onChange="handleChange"
+                                    :onSuccess="handleAvatarSuccess"
+                                    :beforeUpload="beforeAvatarUpload"
+                            ></my-upload>
                         </span>
                     </div>
-                    <div class="upload-flex">
-                        <label>{{ $t('personal.idPicBehind') }}</label>
-                        <span>
-                            <el-upload
-                                    action="https://jsonplaceholder.typicode.com/posts/"
-                                    list-type="picture-card"
-                                    :auto-upload="false"
-                                    :on-preview="handlePictureCardPreview"
-                                    :on-remove="handleRemove">
-                            <i class="el-icon-plus"></i>
-                            </el-upload>
-                            <el-dialog :visible.sync="dialogVisible">
-                                <img width="100%" :src="dialogImageUrl" alt="">
-                            </el-dialog>
-                        </span>
-                    </div>
-                    <div class="upload-flex">
-                        <label>{{ $t('personal.idPicHand') }}</label>
-                        <span>
-                            <el-upload
-                                    action="https://jsonplaceholder.typicode.com/posts/"
-                                    list-type="picture-card"
-                                    :auto-upload="false"
-                                    :on-preview="handlePictureCardPreview"
-                                    :on-remove="handleRemove">
-                            <i class="el-icon-plus"></i>
-                            </el-upload>
-                            <el-dialog :visible.sync="dialogVisible">
-                                <img width="100%" :src="dialogImageUrl" alt="">
-                            </el-dialog>
-                        </span>
-                    </div>
+
+                    <!--<div class="upload-flex">-->
+                        <!--<label>{{ $t('personal.idPicFront') }}</label>-->
+                        <!--<span>-->
+                            <!--<el-upload-->
+                                    <!--ref='upload'-->
+                                    <!--class="avatar-uploader"-->
+                                    <!--action="#"-->
+                                    <!--:on-change="handleChange"-->
+                                    <!--:auto-upload="false"-->
+                                    <!--:show-file-list="false"-->
+                                    <!--:on-success="handleAvatarSuccess"-->
+                                    <!--:before-upload="beforeAvatarUpload">-->
+                                <!--<img v-if="array['idPicFront']" :src="array['idPicFront']" class="avatar">-->
+                                <!--<i v-else="!array['idPicFront']" class="el-icon-plus avatar-uploader-icon"></i>-->
+                            <!--</el-upload>-->
+                        <!--</span>-->
+                    <!--</div>-->
+                    <!--<div class="upload-flex">-->
+                        <!--<label>{{ $t('personal.idPicBehind') }}</label>-->
+                        <!--<span>-->
+                            <!--<el-upload-->
+                                    <!--class="avatar-uploader"-->
+                                    <!--action="#"-->
+                                    <!--:auto-upload="false"-->
+                                    <!--:show-file-list="false"-->
+                                    <!--:on-success="handleAvatarSuccess"-->
+                                    <!--:before-upload="beforeAvatarUpload">-->
+                                <!--<img v-if="array['idPicBehind']" :src="array['idPicBehind']" class="avatar">-->
+                                <!--<i v-else="!array['idPicBehind']" class="el-icon-plus avatar-uploader-icon"></i>-->
+                            <!--</el-upload>-->
+                        <!--</span>-->
+                    <!--</div>-->
+                    <!--<div class="upload-flex">-->
+                        <!--<label>{{ $t('personal.idPicHand') }}</label>-->
+                        <!--<span>-->
+                            <!--<el-upload-->
+                                    <!--class="avatar-uploader"-->
+                                    <!--action="#"-->
+                                    <!--:auto-upload="false"-->
+                                    <!--:show-file-list="false"-->
+                                    <!--:on-success="handleAvatarSuccess"-->
+                                    <!--:before-upload="beforeAvatarUpload">-->
+                                <!--<img v-if="array['idPicHand']" :src="array['idPicHand']" class="avatar">-->
+                                <!--<i v-else="!array['idPicHand']" class="el-icon-plus avatar-uploader-icon"></i>-->
+                            <!--</el-upload>-->
+                        <!--</span>-->
+                    <!--</div>-->
                 </div>
             </div>
             <div class="company">
                 <div class="title">{{ $t('personal.enterpriseInformation') }}</div>
                 <div class="basic-form">
-                    <div class="upload-flex">
-                        <label>{{ $t('personal.businessLicense') }}</label>
+                    <div class="upload-flex" v-for="(item,idx) in uploadList" :key="idx" v-show="idx == 3">
+                        <!--<label>{{ $t('personal.businessLicense') }}</label>-->
+                        <label>图片-{{idx}}</label>
                         <span>
-                            <el-upload
-                                    action="https://jsonplaceholder.typicode.com/posts/"
-                                    list-type="picture-card"
-                                    :auto-upload="false"
-                                    :on-preview="handlePictureCardPreview"
-                                    :on-remove="handleRemove">
-                            <i class="el-icon-plus"></i>
-                            </el-upload>
-                            <el-dialog :visible.sync="dialogVisible">
-                                <img width="100%" :src="dialogImageUrl" alt="">
-                            </el-dialog>
+                            <!--<el-upload-->
+                                    <!--class="avatar-uploader"-->
+                                    <!--action="#"-->
+                                    <!--:auto-upload="false"-->
+                                    <!--:show-file-list="false"-->
+                                    <!--:on-success="handleAvatarSuccess"-->
+                                    <!--:before-upload="beforeAvatarUpload">-->
+                                <!--<img v-if="array['businessLicense']" :src="array['businessLicense']" class="avatar">-->
+                                <!--<i v-else="!array['businessLicense']" class="el-icon-plus avatar-uploader-icon"></i>-->
+                            <!--</el-upload>-->
+                            <my-upload
+                                    ref="upload"
+                                    :name="item.name"
+                                    :uploadId="item.key"
+                                    :onChange="handleChange"
+                                    :onSuccess="handleAvatarSuccess"
+                                    :beforeUpload="beforeAvatarUpload"
+                            ></my-upload>
                         </span>
                     </div>
                     <div class="input-item">
                         <label>{{ $t('personal.companyName') }}</label>
-                        <input v-model="array['companyName']" type="text" class="input-style" name="companyName" :placeholder="$t('personal.placeholder')"/>
+                        <input v-model="array['companyName']" type="text" class="input-style" name="companyName"
+                               :placeholder="$t('personal.placeholder')" autocomplete="off"/>
                     </div>
                     <div class="input-item">
                         <label>{{ $t('personal.legalPerson') }}</label>
-                        <input v-model="array['legalPerson']" type="text" class="input-style" name="legalPerson" :placeholder="$t('personal.placeholder')"/>
+                        <input v-model="array['legalPerson']" type="text" class="input-style" name="legalPerson"
+                               :placeholder="$t('personal.placeholder')" autocomplete="off"/>
                     </div>
                     <div class="input-item">
                         <label>{{ $t('personal.legalPersonIdCard') }}</label>
-                        <input v-model="array['legalPersonIdCard']" type="text" class="input-style" name="legalPersonIdCard" :placeholder="$t('personal.placeholder')"/>
+                        <input v-model="array['legalPersonIdCard']" type="text" class="input-style" name="legalPersonIdCard"
+                               :placeholder="$t('personal.placeholder')" autocomplete="off"/>
                     </div>
                     <div class="input-item">
                         <label>{{ $t('personal.address') }}</label>
-                        <input v-model="array['address']" type="text" class="input-style special" name="address" :placeholder="$t('personal.placeholder')"/>
+                        <input v-model="array['address']" type="text" class="input-style special" name="address"
+                               :placeholder="$t('personal.placeholder')" autocomplete="off"/>
                     </div>
                 </div>
             </div>
@@ -130,11 +157,13 @@
                 <img src="../assets/img/RealName/real-audit-success.png" v-show="array['auditFlag'] == '1'"/>
                 <img src="../assets/img/RealName/real-in-review.png" v-show="array['auditFlag'] == '4'"/>
             </div>
-        </form>
+        </div>
     </div>
 </template>
 
 <script>
+    import MyUpload from '@/components/MyUpload'
+
     export default {
         data () {
             return {
@@ -144,28 +173,72 @@
                 array: {
                     name: '',
                     idCard: '',
-                    idPicFront: '',
-                    idPicBehind: '',
-                    idPicHand: '',
-                    businessLicense: '',
+                    idPicFrontFile: null,
+                    idPicBehindFile: null,
+                    idPicHandFile: null,
+                    businessLicenseFile: null,
                     companyName: '',
                     legalPerson: '',
                     legalPersonIdCard: '',
                     address: '',
                     auditFlag: '3',
-                }
+                },
+                uploadList: [
+                    {
+                        key: 'idPicFrontFile',
+                        label:"{{ $t('personal.idPicFront') }}",
+                        name: 'idPicFrontFile'
+                    },
+                    {
+                        key: 'idPicBehindFile',
+                        label:"{{ $t('personal.idPicBehind') }}",
+                        name: 'idPicBehindFile'
+                    },
+                    {
+                        key: 'idPicHandFile',
+                        label:"{{ $t('personal.idPicHand') }}",
+                        name: 'idPicHandFile'
+                    },
+                    {
+                        key: 'businessLicenseFile',
+                        label:"{{ $t('personal.businessLicense') }}",
+                        name: 'businessLicenseFile'
+                    }
+                ]
             }
         },
         methods: {
-            handleRemove(file, fileList) {
-                console.log(file, fileList);
+            handleChange(file, fileList, ele) {
+//                this.$refs.upload.clearFiles();
+//                this.$refs.upload.uploadFiles.push(file);
+                this.array[ele] = file;
+//                this.imageUrl = file.url;
             },
-            handlePictureCardPreview(file) {
-                this.dialogImageUrl = file.url;
-                this.dialogVisible = true;
+            handleAvatarSuccess(res, file, ele) {
+                console.log(ele);
+                this.imageUrl = URL.createObjectURL(file.raw);
+            },
+            beforeAvatarUpload(file, ele) {
+                console.log(file);
+                console.log(ele);
+                const isJPG = file.type === 'image/jpeg';
+                const isLt2M = file.size / 1024 / 1024 < 2;
+
+                if (!isJPG) {
+                    this.$message.error('上传头像图片只能是 JPG 格式!');
+                }
+                if (!isLt2M) {
+                    this.$message.error('上传头像图片大小不能超过 2MB!');
+                }
+                return isJPG && isLt2M;
             },
             onSubmit() {
-                this.dialog = true;
+                const SaveUserIdentityUrl = this.$store.state.domain + '/api/bussinessAccount/yqq/userIdentity';
+                this.$ajax.post(SaveUserIdentityUrl, this.array, res => {
+                    console.log(res)
+                })
+                console.log(this.array)
+//                this.dialog = true;
             },
             handleClose(done) {
                 this.dialog = false;
@@ -175,7 +248,7 @@
 
         },
         components: {
-
+            'my-upload': MyUpload
         }
     }
 </script>
@@ -209,10 +282,8 @@
                 }
             }
         }
-        .icon-gouxuan {
-            font-size: 48px;
-            color: @Success;
-        }
+        .icon-gouxuan
+
         em.imp {
             margin: 0 3px;
             color: @Danger;

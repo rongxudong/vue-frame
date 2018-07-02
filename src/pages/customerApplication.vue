@@ -551,6 +551,7 @@
             },
             // 上传成功后的回调
             uploadSuccess (response, file, fileList) {
+                console.log('文件', file)
                 console.log('上传文件', response)
                 this.fileList = response.data.files;
             },

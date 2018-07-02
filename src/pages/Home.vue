@@ -5,16 +5,13 @@
                 <div class="title">
                     <span>{{UseStep.title}}</span>
                 </div>
-                <div class="left-wrapper flex_start" style="padding-left: .4rem;">
+                <div class="left-wrapper flex_start" style="padding-left: .18rem;">
                     <div v-for="(item, index) in UseStep.step" :key="index" class="flex_start">
                         <div class="step">
-                            <div class="step-icon-wrap">
+                            <div class="step-icon-wrap horizontal_center">
                                 <img :src="item.url"/>
                             </div>
                             <p>{{item.name}}</p>
-                        </div>
-                        <div class="horizontal_center" style="width: .9rem; height: 1rem;" v-show="item.name != '反馈结果'">
-                            <img src="../assets/img/Home/step-line.png"/>
                         </div>
                     </div>
                 </div>
@@ -72,11 +69,11 @@
                     title: '使用流程查看',
                     step: [
                         {
-                            name: '实名认证',
+                            name: '尽职调查',
                             url: require('../assets/img/Home/step1.png')
                         },
                         {
-                            name: '签署协议',
+                            name: 'GTR评估',
                             url: require('../assets/img/Home/step2.png')
                         },
                         {
@@ -84,7 +81,7 @@
                             url: require('../assets/img/Home/step3.png')
                         },
                         {
-                            name: '反馈结果',
+                            name: '商账管理',
                             url: require('../assets/img/Home/step4.png')
                         }
                     ]
@@ -203,16 +200,26 @@
             }
             .left-wrapper {
                 width: 100%;
-                padding: .5rem 0;
+                padding: .32rem 0 .48rem;
                 border-bottom: 1px solid RGBA(182, 194, 202, .4);
                 .step {
+                    margin-right: 1rem;
                     text-align: center;
                 }
                 .step-icon-wrap {
-                    width: 1rem;
-                    height: 1rem;
+                    width: 1.34rem;
+                    min-width: 100px;
+                    height: 1.34rem;
+                    min-height: 100px;
+                    text-align: center;
+                    background:rgba(241,240,245,1);
+                    .common_radius(50%);
                     img {
-                        width: 100%;
+                        display: inline-block;
+                        width: .8rem;
+                        min-width: 60px;
+                        height: .8rem;
+                        min-height: 60px;
                     }
                 }
                 p {
@@ -344,6 +351,7 @@
                 font-size: 12px;
                 &:hover {
                     text-decoration: none;
+                    color: @base;
                 }
             }
         }

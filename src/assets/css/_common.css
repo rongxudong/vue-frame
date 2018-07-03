@@ -223,15 +223,16 @@ button:focus {
 .company .basic-form {
   padding: .25rem 0 0 1.25rem;
 }
-.basic .basic-form .input-item,
-.company .basic-form .input-item,
+.basic .basic-form .input-width,
+.company .basic-form .input-width {
+  max-width: 300px;
+  min-width: 250px;
+}
 .basic .basic-form .upload-flex,
 .company .basic-form .upload-flex {
   width: 100%;
   margin-bottom: .25rem;
 }
-.basic .basic-form .input-item label,
-.company .basic-form .input-item label,
 .basic .basic-form .upload-flex label,
 .company .basic-form .upload-flex label {
   display: inline-block;
@@ -239,75 +240,17 @@ button:focus {
   max-width: 135px;
   min-width: 135px;
   text-align: left;
-  color: #303133;
-  font-size: 16px;
+  color: #606266;
+  font-size: 14px;
   line-height: 1.2;
 }
-.basic .basic-form .input-item .input-style,
-.company .basic-form .input-item .input-style,
-.basic .basic-form .upload-flex .input-style,
-.company .basic-form .upload-flex .input-style {
-  display: inline-block;
-  width: 80%;
-  max-width: 300px;
-  min-width: 300px;
-  height: 42px;
-  padding: 0 .12rem;
-  line-height: 42px;
-  font-size: .14rem;
-  border: 1px solid #c0ccda;
-  border-radius: 3px;
-  -o-border-radius: 3px;
-  -ms-border-radius: 3px;
-  -moz-border-radius: 3px;
-  -webkit-border-radius: 3px;
-}
-.basic .basic-form .input-item .input-style::-webkit-input-placeholder,
-.company .basic-form .input-item .input-style::-webkit-input-placeholder,
-.basic .basic-form .upload-flex .input-style::-webkit-input-placeholder,
-.company .basic-form .upload-flex .input-style::-webkit-input-placeholder {
-  color: #909399;
-}
-.basic .basic-form .input-item .input-style:-moz-placeholder,
-.company .basic-form .input-item .input-style:-moz-placeholder,
-.basic .basic-form .upload-flex .input-style:-moz-placeholder,
-.company .basic-form .upload-flex .input-style:-moz-placeholder {
-  color: #909399;
-}
-.basic .basic-form .input-item .input-style::-moz-placeholder,
-.company .basic-form .input-item .input-style::-moz-placeholder,
-.basic .basic-form .upload-flex .input-style::-moz-placeholder,
-.company .basic-form .upload-flex .input-style::-moz-placeholder {
-  color: #909399;
-}
-.basic .basic-form .input-item .input-style:-ms-input-placeholder,
-.company .basic-form .input-item .input-style:-ms-input-placeholder,
-.basic .basic-form .upload-flex .input-style:-ms-input-placeholder,
-.company .basic-form .upload-flex .input-style:-ms-input-placeholder {
-  color: #909399;
-}
-.basic .basic-form .input-item span,
-.company .basic-form .input-item span,
 .basic .basic-form .upload-flex span,
 .company .basic-form .upload-flex span {
   display: inline-block;
 }
-.basic .basic-form .input-item .special,
-.company .basic-form .input-item .special,
 .basic .basic-form .upload-flex .special,
 .company .basic-form .upload-flex .special {
   max-width: none;
-}
-.basic .basic-form .input-item,
-.company .basic-form .input-item {
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
 }
 .basic .basic-form .upload-flex,
 .company .basic-form .upload-flex {
@@ -317,6 +260,12 @@ button:focus {
   display: -webkit-flex;
   display: flex;
   justify-content: flex-start;
+}
+.basic .basic-form .upload-flex .el-form-item__content,
+.company .basic-form .upload-flex .el-form-item__content {
+  width: 100%;
+  margin-left: 0!important;
+  line-height: 0;
 }
 .basic .basic-form .upload-flex .avatar-uploader .el-upload,
 .company .basic-form .upload-flex .avatar-uploader .el-upload {

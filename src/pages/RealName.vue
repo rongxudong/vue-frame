@@ -1,7 +1,7 @@
 <template>
     <div class="bg-style">
-        <div class="RealName-main">
-            <div class="real-fail-wrap flex_start align_items" v-show="array['auditFlag'] == '3'">
+        <el-form class="RealName-main" status-icon :model="ruleForm" :rules="rules" ref="ruleForm" label-width="135px" label-position="left">
+            <div class="real-fail-wrap flex_start align_items" v-show="auditFlag == '3'">
                 <img src="../assets/img/RealName/real-fail.png"/>
                 <div class="fail-text">
                     <h1>抱歉，您的实名认证审核未通过，请修改后重新提交！</h1>
@@ -14,91 +14,94 @@
             <div class="basic">
                 <div class="title">{{ $t('personal.basicInformation') }}</div>
                 <div class="basic-form">
-                    <div class="input-item">
-                        <label>{{ $t('personal.name') }}</label>
-                        <input v-model="array['name']" type="text" class="input-style" name="name"
-                               :placeholder="$t('personal.placeholder')" autocomplete="off"/>
-                    </div>
-                    <div class="input-item">
-                        <label>{{ $t('personal.idCard') }}</label>
-                        <input v-model="array['idCard']" type="text" class="input-style" name="idCard"
-                               :placeholder="$t('personal.placeholder')" autocomplete="off"/>
-                    </div>
-                    <div class="upload-flex" v-for="(item,idx) in uploadList" :key="idx" v-show="idx != 3">
-                        <label>图片-{{idx}}</label>
-                        <span>
-                            <my-upload
-                                    ref="upload"
-                                    :headers="myHeaders"
-                                    :action="action"
-                                    :data="{ parm: idx + 1 }"
-                                    name="file"
-                                    :uploadId="item.key"
-                                    :onChange="handleChange"
-                                    :onSuccess="handleAvatarSuccess"
-                                    :beforeUpload="beforeAvatarUpload"
-                            ></my-upload>
-                        </span>
-                    </div>
+                    <el-form-item :label="$t('personal.name')" prop="name">
+                        <el-input v-model="ruleForm.name" class="input-width" type="text"
+                                  :placeholder="$t('personal.placeholder')" auto-complete="off"></el-input>
+                    </el-form-item>
+                    <el-form-item :label="$t('personal.idCard')" prop="idCard">
+                        <el-input v-model="ruleForm.idCard" class="input-width" type="text"
+                                  :placeholder="$t('personal.placeholder')" auto-complete="off"></el-input>
+                    </el-form-item>
+
+                    <el-form-item :label="$t('personal.idPicFront')" prop="idPicFront" class="upload-flex">
+                        <my-upload
+                                ref="upload"
+                                :headers="myHeaders"
+                                :action="action"
+                                :data="{ parm: 1 }"
+                                :name="nameType"
+                                :uploadId="uploadList[0].key"
+                                :onChange="handleChange"
+                                :onSuccess="handleAvatarSuccess"
+                                :beforeUpload="beforeAvatarUpload"
+                        ></my-upload>
+                    </el-form-item>
+
+                    <el-form-item :label="$t('personal.idPicBehind')" prop="idPicBehind" class="upload-flex">
+                        <my-upload
+                                ref="upload"
+                                :headers="myHeaders"
+                                :action="action"
+                                :data="{ parm: 2 }"
+                                :name="nameType"
+                                :uploadId="uploadList[1].key"
+                                :onChange="handleChange"
+                                :onSuccess="handleAvatarSuccess"
+                                :beforeUpload="beforeAvatarUpload"
+                        ></my-upload>
+                    </el-form-item>
+
+                    <el-form-item :label="$t('personal.idPicHand')" prop="idPicHand" class="upload-flex">
+                        <my-upload
+                                ref="upload"
+                                :headers="myHeaders"
+                                :action="action"
+                                :data="{ parm: 3 }"
+                                :name="nameType"
+                                :uploadId="uploadList[2].key"
+                                :onChange="handleChange"
+                                :onSuccess="handleAvatarSuccess"
+                                :beforeUpload="beforeAvatarUpload"
+                        ></my-upload>
+                    </el-form-item>
                 </div>
             </div>
             <div class="company">
                 <div class="title">{{ $t('personal.enterpriseInformation') }}</div>
                 <div class="basic-form">
-                    <div class="upload-flex" v-for="(item, idx) in uploadList" :key="idx" v-show="idx == 3">
-                        <!--<label>{{ $t('personal.businessLicense') }}</label>-->
-                        <label>图片-{{idx}}</label>
-                        <span>
-                            <my-upload
-                                    ref="upload"
-                                    :headers="myHeaders"
-                                    :action="action"
-                                    :data="{ parm: 4 }"
-                                    name="file"
-                                    :uploadId="item.key"
-                                    :onChange="handleChange"
-                                    :onSuccess="handleAvatarSuccess"
-                                    :beforeUpload="beforeAvatarUpload"
-                            ></my-upload>
-                            <!--<el-upload-->
-                                    <!--class="avatar-uploader"-->
-                                    <!--:headers="myHeaders"-->
-                                    <!--name="file"-->
-                                    <!--:data="{ parm: 4 }"-->
-                                    <!--:action="action"-->
-                                    <!--:on-change="handleChange"-->
-                                    <!--:show-file-list="false"-->
-                                    <!--:on-success="handleAvatarSuccess"-->
-                                    <!--:before-upload="beforeAvatarUpload">-->
-                                <!--<img v-if="imageUrl" :src="imageUrl" class="avatar">-->
-                                <!--<i v-else="!imageUrl" class="el-icon-plus avatar-uploader-icon"></i>-->
-                            <!--</el-upload>-->
-                        </span>
-                    </div>
-                    <div class="input-item">
-                        <label>{{ $t('personal.companyName') }}</label>
-                        <input v-model="array['companyName']" type="text" class="input-style" name="companyName"
-                               :placeholder="$t('personal.placeholder')" autocomplete="off"/>
-                    </div>
-                    <div class="input-item">
-                        <label>{{ $t('personal.legalPerson') }}</label>
-                        <input v-model="array['legalPerson']" type="text" class="input-style" name="legalPerson"
-                               :placeholder="$t('personal.placeholder')" autocomplete="off"/>
-                    </div>
-                    <div class="input-item">
-                        <label>{{ $t('personal.legalPersonIdCard') }}</label>
-                        <input v-model="array['legalPersonIdCard']" type="text" class="input-style" name="legalPersonIdCard"
-                               :placeholder="$t('personal.placeholder')" autocomplete="off"/>
-                    </div>
-                    <div class="input-item">
-                        <label>{{ $t('personal.address') }}</label>
-                        <input v-model="array['address']" type="text" class="input-style special" name="address"
-                               :placeholder="$t('personal.placeholder')" autocomplete="off"/>
-                    </div>
+                    <el-form-item :label="$t('personal.businessLicense')" prop="businessLicense" class="upload-flex">
+                        <my-upload
+                                ref="upload"
+                                :headers="myHeaders"
+                                :action="action"
+                                :data="{ parm: 4 }"
+                                :name="nameType"
+                                :uploadId="uploadList[3].key"
+                                :onChange="handleChange"
+                                :onSuccess="handleAvatarSuccess"
+                                :beforeUpload="beforeAvatarUpload"
+                        ></my-upload>
+                    </el-form-item>
+                    <el-form-item :label="$t('personal.companyName')" prop="companyName">
+                        <el-input v-model="ruleForm.companyName" class="input-width" type="text"
+                                  :placeholder="$t('personal.placeholder')" auto-complete="off"></el-input>
+                    </el-form-item>
+                    <el-form-item :label="$t('personal.legalPerson')" prop="legalPerson">
+                        <el-input v-model="ruleForm.legalPerson" class="input-width" type="text"
+                                  :placeholder="$t('personal.placeholder')" auto-complete="off"></el-input>
+                    </el-form-item>
+                    <el-form-item :label="$t('personal.legalPersonIdCard')" prop="legalPersonIdCard">
+                        <el-input v-model="ruleForm.legalPersonIdCard" class="input-width" type="text"
+                                  :placeholder="$t('personal.placeholder')" auto-complete="off"></el-input>
+                    </el-form-item>
+                    <el-form-item :label="$t('personal.address')" prop="address">
+                        <el-input v-model="ruleForm.address" type="text"
+                                  :placeholder="$t('personal.placeholder')" auto-complete="off"></el-input>
+                    </el-form-item>
                 </div>
             </div>
-            <div style="text-align: center; margin-top: 45px;">
-                <button class="submit-btn" @click="onSubmit()">{{ $t('personal.submitCheck') }}</button>
+            <div class="text-center" style="margin-top: 45px;">
+                <button type="button" class="submit-btn" @click="submitForm('ruleForm')">{{ $t('personal.submitCheck') }}</button>
             </div>
             <el-dialog
                 :title="$t('personal.tips')"
@@ -117,10 +120,10 @@
                 </span>
             </el-dialog>
             <div class="real-icon">
-                <img src="../assets/img/RealName/real-audit-success.png" v-show="array['auditFlag'] == '1'"/>
-                <img src="../assets/img/RealName/real-in-review.png" v-show="array['auditFlag'] == '4'"/>
+                <img src="../assets/img/RealName/real-audit-success.png" v-show="auditFlag == '1'"/>
+                <img src="../assets/img/RealName/real-in-review.png" v-show="auditFlag == '4'"/>
             </div>
-        </div>
+        </el-form>
     </div>
 </template>
 
@@ -130,52 +133,74 @@
     export default {
         data () {
             return {
-                dialogImageUrl: '',
                 dialogVisible: false,
                 dialog: false,
-                array: {
-                    name: null,
-                    idCard: null,
-                    idPicFrontFile: null,
-                    idPicBehindFile: null,
-                    idPicHandFile: null,
-                    businessLicenseFile: null,
-                    companyName: null,
-                    legalPerson: null,
-                    legalPersonIdCard: null,
-                    address: null,
-                    auditFlag: '3',
-                },
+                auditFlag: '3',
                 uploadList: [
                     {
-                        key: 'idPicFrontFile',
-                        label:"{{ $t('personal.idPicFront') }}"
+                        key: 'idPicFrontFile'
                     },
                     {
-                        key: 'idPicBehindFile',
-                        label:"{{ $t('personal.idPicBehind') }}"
+                        key: 'idPicBehindFile'
                     },
                     {
-                        key: 'idPicHandFile',
-                        label:"{{ $t('personal.idPicHand') }}"
+                        key: 'idPicHandFile'
                     },
                     {
-                        key: 'businessLicenseFile',
-                        label:"{{ $t('personal.businessLicense') }}"
+                        key: 'businessLicenseFile'
                     }
                 ],
                 myHeaders: {
-                    token: "fe621e16a71d65e6bed7a6789d4c4688"
+                    token: "ad02ef56ab2935d9f8e338dde0916dfb"
                 },
-                action: this.$store.state.domain + "/api/bussinessAccount/yqq/uploadPic"
+                action: this.$store.state.domain + "/api/bussinessAccount/yqq/uploadPic",
+                nameType: 'file',
+                ruleForm: {
+                    name: null,
+                    idCard: null,
+                    companyName: null,
+                    legalPerson: null,
+                    legalPersonIdCard: null,
+                    address: null
+                },
+                rules: {
+                    name: [
+                        { required: true, message: '请输入姓名', trigger: 'blur' },
+                        { min: 2, max: 16, message: '长度在 2 到 16 个字符', trigger: 'blur' }
+                    ],
+                    idCard: [
+                        { required: true, message: '请输入有效证件号码', trigger: 'blur' },
+//                        {
+//                            validator: function (rule, value, callback) {
+//                                let cP = /^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/;
+//                                if (!cP.test(value)) {
+//                                    callback(new Error('身份证号码格式不正确！'))
+//                                } else {
+//                                    callback();
+//                                }
+//                            }, trigger: 'blur'
+//                        }
+                    ],
+                    companyName: [
+                        { required: true, message: '请输入公司全称', trigger: 'blur' }
+                    ],
+                    legalPerson: [
+                        { required: true, message: '请输入法定代表人', trigger: 'blur' }
+                    ],
+                    legalPersonIdCard: [
+                        { required: true, message: '请输入法人证件号', trigger: 'blur' }
+                    ],
+                    address: [
+                        { required: true, message: '请输入住所地', trigger: 'blur' }
+                    ]
+                }
             }
         },
         methods: {
             handleChange(file, fileList, ele) {
 //                this.$refs.upload.clearFiles();
 //                this.$refs.upload.uploadFiles.push(file);
-                this.array[ele] = file;
-//                this.imageUrl = file.url;
+                this.ruleForm[ele] = file;
             },
             handleAvatarSuccess(res, file, fileList, ele) {
                 this.imageUrl = URL.createObjectURL(file.raw);
@@ -192,11 +217,21 @@
                 }
                 return isJPG && isLt2M;
             },
-            onSubmit() {
-                const SaveUserIdentityUrl = this.$store.state.domain + '/api/bussinessAccount/yqq/userIdentity';
-                this.$ajax.post(SaveUserIdentityUrl, this.array, res => {
-                    console.log(res);
-                })
+            submitForm(formName) {
+                this.$refs[formName].validate((valid) => {
+                    if (valid) {
+                        const SaveUserIdentityUrl = this.$store.state.domain + '/api/bussinessAccount/yqq/userIdentity';
+                        this.$ajax.post( SaveUserIdentityUrl, this.ruleForm, res => {
+                            console.log(res);
+                        })
+//                        this.$ajax.post( SaveUserIdentityUrl + '?name=' + this.ruleForm['name'], null, res => {
+//                            console.log(res);
+//                        })
+                    } else {
+                        console.log('error submit!!');
+                        return false;
+                    }
+                });
             },
             handleClose(done) {
                 this.dialog = false;
@@ -230,13 +265,14 @@
                 margin-left: .2rem;
                 h1 {
                     font-size: 16px;
+                    line-height: 22px;
                     font-family: 'MicrosoftYaHei-Bold';
                     color: rgba(196,132,26,1);
-                    margin: 20px 0 8px;
+                    margin: 17px 0 5px;
                 }
                 .flex_start span {
-                    font-size: .13rem;
-                    line-height: .32rem;
+                    font-size: 13px;
+                    line-height: 21px;
                 }
             }
         }

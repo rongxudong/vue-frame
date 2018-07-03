@@ -8,17 +8,17 @@ module.exports = {
     personal: {
         basicInformation: "基本信息",
         name: "姓名",
-        idCard: "身份证号码",
-        idPicFront: "身份证正面照片",
-        idPicBehind: "身份证反面照片",
-        idPicHand: "手持身份证照片",
+        idCard: "有效证件号码",
+        idPicFront: "证件正面照片",
+        idPicBehind: "证件反面照片",
+        idPicHand: "手持证件照片",
         placeholder: "请输入",
 
         enterpriseInformation: "企业信息",
         businessLicense: "营业执照",
         companyName: "公司全称",
         legalPerson: "法定代表人",
-        legalPersonIdCard: "法人身份证号",
+        legalPersonIdCard: "法人证件号",
         address: "住所地",
         submitCheck: "提交审核",
 

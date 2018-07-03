@@ -4,6 +4,7 @@
             :headers="Headers"
             :action="Action"
             :data="params"
+            :name="inputName"
             :on-change="handleChange"
             :accept="accept"
             :show-file-list="false"
@@ -18,7 +19,7 @@
     export default {
         name: 'MyUpload',
         props:{
-//            name: null,
+            name: null,
             headers: null,
             uploadId: null, //接收到的自定义的参数,
             data: null,
@@ -34,7 +35,7 @@
         data () {
             return {
                 imageUrl: '',
-//                inputName: this.name,
+                inputName: this.name,
                 Action: this.action,
                 Headers: this.headers,
                 params: this.data

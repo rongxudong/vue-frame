@@ -3,7 +3,7 @@ import { Message } from 'element-ui';
 import axios from 'axios';
 
 // 配置API接口地址
-// let root = 'https://cnodejs.org/api/v1'
+// let root = 'https://cnodejs.org/api/v1',
 let root = '/api',
     cancel ,
     promiseArr = {};
@@ -32,7 +32,7 @@ function filterNull (o) {
 axios.interceptors.request.use(config=> {
     // 配置config
     config.headers.Accept = 'application/json';
-    // config.headers.Token = '57784a7ec10d9efb9164b99570baa24a';
+    config.headers.token = 'ad02ef56ab2935d9f8e338dde0916dfb';
 
     // config.headers.System = 'vue';
         // let token = Vue.localStorage.get('token');
@@ -140,7 +140,7 @@ function apiAxios (method, url, params, success, failure) {
         // 请求的url,例如url: '/user/12345'
         url: url,
         // 相对路径：域名
-        baseURL: root,
+        // baseURL: root,
         // 要发送的自定义标头
         headers: {'X-Requested-With': 'XMLHttpRequest'},
         // 请求所要发送的数据,例如data: {firstName: 'Fred',lastName: 'Flintstone'}
@@ -148,7 +148,7 @@ function apiAxios (method, url, params, success, failure) {
         // 随请求一起发送的URL参数,例如params: {ID: 12345}
         params: method === 'GET' || method === 'DELETE' ? params : null,
         // 指定请求超时前的毫秒数,如果请求花费的时间超过“timeout”，则请求将被中止
-        timeout: 1000,
+        timeout: 5000,
         // 表示是否存在跨站点访问控制请求
         withCredentials: false,
         // 表示服务器将使用的数据类型,选项“arrayBuffer”、“blob”、“document”、“json”、“text”、“stream;默认为JSON
@@ -167,9 +167,9 @@ function apiAxios (method, url, params, success, failure) {
         //         success(res.data)
         //     }
         // }
-        if (success) {
-            success(res.data)
-        }
+        // if (success) {
+        //     success(res.data)
+        // }
     })
 }
 

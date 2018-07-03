@@ -12,7 +12,8 @@ const options = {
         message: '',
         options: [],
         activeIndex: '/Home',
-        domain: 'http://192.168.50.18:8081'
+        //http://account.dev.financegt.com   http://192.168.50.18:8081
+        domain: 'http://account.dev.financegt.com'
     },
 
     // 操作

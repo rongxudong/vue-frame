@@ -8,7 +8,7 @@ module.exports = {
     personal: {
         basicInformation: "Basic information",
         name: "Name",
-        idCard: "Passport number",
+        idCard: "ID number",
         idPicFront: "Card front photo",
         idPicBehind: "Card reverse photo",
         idPicHand: "Handheld photo",

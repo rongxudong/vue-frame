@@ -23,7 +23,7 @@
                     <em class="small-icon"></em>
                 </li>
                 <li class="header-logo align_items">
-                    <img src="../assets/img/banner_2.png"/>
+                    <img src="../assets/img/Home/step1.png"/>
                     <i class="iconfont icon-yonghu"></i>
                 </li>
                 <li class="head-language align_items">

@@ -13,7 +13,7 @@ const options = {
         options: [],
         activeIndex: '/Home',
         //http://account.dev.financegt.com   http://192.168.50.18:8081
-        domain: 'http://account.dev.financegt.com'
+        domain: 'http://192.168.50.18:8081'
     },
 
     // 操作

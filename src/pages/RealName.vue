@@ -23,64 +23,100 @@
                                   :placeholder="$t('personal.placeholder')" auto-complete="off"></el-input>
                     </el-form-item>
 
-                    <el-form-item :label="$t('personal.idPicFront')" prop="idPicFront" class="upload-flex">
-                        <my-upload
+                    <el-form-item :label="$t('personal.idPicFront')" prop="idPicFront" class="upload-flex" ref="idPicFront">
+                        <!--<my-upload-->
+                                <!--ref="upload"-->
+                                <!--:headers="myHeaders"-->
+                                <!--:action="action"-->
+                                <!--:data="{ parm: 1 }"-->
+                                <!--:name="nameType"-->
+                                <!--:uploadId="uploadList[0].key"-->
+                                <!--:onChange="handleChange"-->
+                                <!--:onSuccess="handleAvatarSuccess"-->
+                                <!--:beforeUpload="beforeAvatarUpload"-->
+                        <!--&gt;</my-upload>-->
+
+                        <el-upload
                                 ref="upload"
+                                class="avatar-uploader"
                                 :headers="myHeaders"
                                 :action="action"
                                 :data="{ parm: 1 }"
                                 :name="nameType"
-                                :uploadId="uploadList[0].key"
-                                :onChange="handleChange"
-                                :onSuccess="handleAvatarSuccess"
-                                :beforeUpload="beforeAvatarUpload"
-                        ></my-upload>
+                                :on-change="handleChange"
+                                :show-file-list="false"
+                                :on-success="idPicFrontFileSuccess"
+                                :before-upload="beforeAvatarUpload">
+                            <img v-if="ruleForm.idPicFront" :src="ruleForm.idPicFront" class="avatar">
+                            <i v-else="!ruleForm.idPicFront" class="el-icon-plus avatar-uploader-icon"></i>
+                        </el-upload>
                     </el-form-item>
 
-                    <el-form-item :label="$t('personal.idPicBehind')" prop="idPicBehind" class="upload-flex">
-                        <my-upload
+                    <el-form-item :label="$t('personal.idPicBehind')" prop="idPicBehind" class="upload-flex" ref="idPicBehind">
+                        <el-upload
                                 ref="upload"
+                                class="avatar-uploader"
                                 :headers="myHeaders"
                                 :action="action"
                                 :data="{ parm: 2 }"
                                 :name="nameType"
-                                :uploadId="uploadList[1].key"
-                                :onChange="handleChange"
-                                :onSuccess="handleAvatarSuccess"
-                                :beforeUpload="beforeAvatarUpload"
-                        ></my-upload>
+                                :on-change="handleChange"
+                                :show-file-list="false"
+                                :on-success="idPicBehindFileSuccess"
+                                :before-upload="beforeAvatarUpload">
+                            <img v-if="ruleForm.idPicBehind" :src="ruleForm.idPicBehind" class="avatar">
+                            <i v-else="!ruleForm.idPicBehind" class="el-icon-plus avatar-uploader-icon"></i>
+                        </el-upload>
                     </el-form-item>
 
-                    <el-form-item :label="$t('personal.idPicHand')" prop="idPicHand" class="upload-flex">
-                        <my-upload
+                    <el-form-item :label="$t('personal.idPicHand')" prop="idPicHand" class="upload-flex" ref="idPicHand">
+                        <el-upload
                                 ref="upload"
+                                class="avatar-uploader"
                                 :headers="myHeaders"
                                 :action="action"
                                 :data="{ parm: 3 }"
                                 :name="nameType"
-                                :uploadId="uploadList[2].key"
-                                :onChange="handleChange"
-                                :onSuccess="handleAvatarSuccess"
-                                :beforeUpload="beforeAvatarUpload"
-                        ></my-upload>
+                                :on-change="handleChange"
+                                :show-file-list="false"
+                                :on-success="idPicHandFileSuccess"
+                                :before-upload="beforeAvatarUpload">
+                            <img v-if="ruleForm.idPicHand" :src="ruleForm.idPicHand" class="avatar">
+                            <i v-else="!ruleForm.idPicHand" class="el-icon-plus avatar-uploader-icon"></i>
+                        </el-upload>
+
+                        <!--<my-upload-->
+                                <!--ref="upload"-->
+                                <!--:headers="myHeaders"-->
+                                <!--:action="action"-->
+                                <!--:data="{ parm: 3 }"-->
+                                <!--:name="nameType"-->
+                                <!--:uploadId="uploadList[2].key"-->
+                                <!--:onChange="handleChange"-->
+                                <!--:onSuccess="handleAvatarSuccess"-->
+                                <!--:beforeUpload="beforeAvatarUpload"-->
+                        <!--&gt;</my-upload>-->
                     </el-form-item>
                 </div>
             </div>
             <div class="company">
                 <div class="title">{{ $t('personal.enterpriseInformation') }}</div>
                 <div class="basic-form">
-                    <el-form-item :label="$t('personal.businessLicense')" prop="businessLicense" class="upload-flex">
-                        <my-upload
+                    <el-form-item :label="$t('personal.businessLicense')" prop="businessLicense" class="upload-flex" ref="businessLicense">
+                        <el-upload
                                 ref="upload"
+                                class="avatar-uploader"
                                 :headers="myHeaders"
                                 :action="action"
                                 :data="{ parm: 4 }"
                                 :name="nameType"
-                                :uploadId="uploadList[3].key"
-                                :onChange="handleChange"
-                                :onSuccess="handleAvatarSuccess"
-                                :beforeUpload="beforeAvatarUpload"
-                        ></my-upload>
+                                :on-change="handleChange"
+                                :show-file-list="false"
+                                :on-success="businessLicenseFileSuccess"
+                                :before-upload="beforeAvatarUpload">
+                            <img v-if="ruleForm.businessLicense" :src="ruleForm.businessLicense" class="avatar">
+                            <i v-else="!ruleForm.businessLicense" class="el-icon-plus avatar-uploader-icon"></i>
+                        </el-upload>
                     </el-form-item>
                     <el-form-item :label="$t('personal.companyName')" prop="companyName">
                         <el-input v-model="ruleForm.companyName" class="input-width" type="text"
@@ -136,22 +172,8 @@
                 dialogVisible: false,
                 dialog: false,
                 auditFlag: '3',
-                uploadList: [
-                    {
-                        key: 'idPicFrontFile'
-                    },
-                    {
-                        key: 'idPicBehindFile'
-                    },
-                    {
-                        key: 'idPicHandFile'
-                    },
-                    {
-                        key: 'businessLicenseFile'
-                    }
-                ],
                 myHeaders: {
-                    token: "ad02ef56ab2935d9f8e338dde0916dfb"
+                    token: "a9ff3905186d7b154c3f624862569551"
                 },
                 action: this.$store.state.domain + "/api/bussinessAccount/yqq/uploadPic",
                 nameType: 'file',
@@ -161,7 +183,11 @@
                     companyName: null,
                     legalPerson: null,
                     legalPersonIdCard: null,
-                    address: null
+                    address: null,
+                    idPicFront: null,
+                    idPicBehind: null,
+                    idPicHand: null,
+                    businessLicense: null
                 },
                 rules: {
                     name: [
@@ -181,6 +207,18 @@
 //                            }, trigger: 'blur'
 //                        }
                     ],
+                    idPicFront: [
+                        { required: true, message: '请输入证件正面照片', trigger: 'blur' }
+                    ],
+                    idPicBehind: [
+                        { required: true, message: '请输入证件反面照片', trigger: 'blur' }
+                    ],
+                    idPicHand: [
+                        { required: true, message: '请输入手持证件照片', trigger: 'blur' }
+                    ],
+                    businessLicense: [
+                        { required: true, message: '请输入营业执照', trigger: 'blur' }
+                    ],
                     companyName: [
                         { required: true, message: '请输入公司全称', trigger: 'blur' }
                     ],
@@ -197,51 +235,70 @@
             }
         },
         methods: {
-            handleChange(file, fileList, ele) {
+            handleChange(file, fileList) {
 //                this.$refs.upload.clearFiles();
 //                this.$refs.upload.uploadFiles.push(file);
-                this.ruleForm[ele] = file;
+//                this.ruleForm[ele] = file;
             },
-            handleAvatarSuccess(res, file, fileList, ele) {
-                this.imageUrl = URL.createObjectURL(file.raw);
+            idPicFrontFileSuccess(res, file, fileList) {
+                this.ruleForm.idPicFront = URL.createObjectURL(file.raw);
+                this.$refs.idPicFront.clearValidate();
+            },
+            idPicBehindFileSuccess(res, file, fileList) {
+                this.ruleForm.idPicBehind = URL.createObjectURL(file.raw);
+                this.$refs.idPicBehind.clearValidate();
+            },
+            idPicHandFileSuccess(res, file, fileList) {
+                this.ruleForm.idPicHand = URL.createObjectURL(file.raw);
+                this.$refs.idPicHand.clearValidate();
+            },
+            businessLicenseFileSuccess(res, file, fileList) {
+                this.ruleForm.businessLicense = URL.createObjectURL(file.raw);
+                this.$refs.businessLicense.clearValidate();
             },
             beforeAvatarUpload(file, ele) {
                 const isJPG = file.type === 'image/jpeg';
+                const isGIF = file.type === 'image/gif';
+                const isPNG = file.type === 'image/png';
+                const isBMP = file.type === 'image/bmp';
+
                 const isLt2M = file.size / 1024 / 1024 < 2;
 
-                if (!isJPG) {
-                    this.$message.error('上传头像图片只能是 JPG 格式!');
+                if (!isJPG && !isGIF && !isPNG && !isBMP) {
+                    this.$message.error('上传图片必须是JPG/GIF/PNG/BMP 格式!');
                 }
                 if (!isLt2M) {
                     this.$message.error('上传头像图片大小不能超过 2MB!');
                 }
-                return isJPG && isLt2M;
+                return (isJPG || isBMP || isGIF || isPNG) && isLt2M;
             },
             submitForm(formName) {
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-                        const SaveUserIdentityUrl = this.$store.state.domain + '/api/bussinessAccount/yqq/userIdentity';
-                        this.$ajax.post( SaveUserIdentityUrl, this.ruleForm, res => {
+                        this.$ajax.post( '/api/bussinessAccount/yqq/userIdentity', this.ruleForm, res => {
                             console.log(res);
+                            this.$message({
+                                type: 'info',
+                                message: res.data.message
+                            });
                         })
-//                        this.$ajax.post( SaveUserIdentityUrl + '?name=' + this.ruleForm['name'], null, res => {
-//                            console.log(res);
-//                        })
                     } else {
                         console.log('error submit!!');
                         return false;
                     }
                 });
             },
+            findUserIdentityStatus () {
+                this.$ajax.get('/api/bussinessAccount/yqq/findUserIdentityStatus', null, res => {
+                    console.log(res);
+                })
+            },
             handleClose(done) {
                 this.dialog = false;
             }
         },
         created () {
-
-        },
-        components: {
-            'my-upload': MyUpload
+            this.findUserIdentityStatus();
         }
     }
 </script>

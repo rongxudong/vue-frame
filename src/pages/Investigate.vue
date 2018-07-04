@@ -1,12 +1,12 @@
 <template>
     <div class="bg-style">
         <div class="investigate-main">
-            <div class="add-serve">
-                <em>您可重新创建一个新的尽职调查服务，需重新签署协议，详细情况请联系融资顾问</em>
-                <span>创建新服务</span>
-            </div>
+            <!--<div class="add-serve">-->
+                <!--<em>您可重新创建一个新的尽职调查服务，需重新签署协议，详细情况请联系融资顾问</em>-->
+                <!--<span>创建新服务</span>-->
+            <!--</div>-->
             <div class="basic">
-                <div class="title">尽职调查-1</div>
+                <div class="title process-title">尽职调查服务流程</div>
                 <ul class="content flex_start">
                     <li v-for="(item, idx) in content" :key="idx" class="flex_start">
                         <div class="step-item">
@@ -15,10 +15,9 @@
                             </div>
                             <div class="txt">
                                 <p class="text-center">{{item.title}}</p>
-                                <button>{{item.buttonTxt}}</button>
                             </div>
                         </div>
-                        <div class="arrow-right-icon" v-if="idx != 4"></div>
+                        <div class="arrow-right-icon" v-if="idx != 3"></div>
                     </li>
                 </ul>
             </div>
@@ -34,33 +33,23 @@
                 error: null,
                 content: [
                     {
-                        title: '认证成功',
-                        imgUrl: require('../assets/img/investigate/research-step1.png'),
-                        buttonTxt: '实名认证',
+                        title: '签署协议',
+                        imgUrl: require('../assets/img/investigate/step1.png'),
                         toUrl: ''
                     },
                     {
-                        title: '发起尽职调查服务',
-                        imgUrl: require('../assets/img/investigate/research-step2.png'),
-                        buttonTxt: '请耐心等待',
+                        title: '填写申请表',
+                        imgUrl: require('../assets/img/investigate/step2.png'),
                         toUrl: ''
                     },
                     {
-                        title: '协议未签署',
-                        imgUrl: require('../assets/img/investigate/research-step3.png'),
-                        buttonTxt: '签署协议',
+                        title: '金额支付',
+                        imgUrl: require('../assets/img/investigate/step3.png'),
                         toUrl: ''
                     },
                     {
-                        title: '申请未填写',
-                        imgUrl: require('../assets/img/investigate/research-step4.png'),
-                        buttonTxt: '填写申请',
-                        toUrl: ''
-                    },
-                    {
-                        title: '结果未反馈',
-                        imgUrl: require('../assets/img/investigate/research-step5.png'),
-                        buttonTxt: '查看',
+                        title: '结果反馈',
+                        imgUrl: require('../assets/img/investigate/step4.png'),
                         toUrl: ''
                     }
                 ]
@@ -100,6 +89,12 @@
         position: relative;
         min-height: calc(100vh - .45rem - 100px);
         padding: 0 20px 20px;
+        .process-title {
+            font-size: 16px;
+            font-family: MicrosoftYaHei-Bold;
+            color: rgba(88,102,110,1);
+            font-weight: bold;
+        }
         .add-serve {
             position: absolute;
             top: 10px;
@@ -135,13 +130,13 @@
                         min-width: 100px;
                         height: 1.48rem;
                         min-height: 100px;
-                        background-color: RGBA(241, 240, 245, 1);
+                        background-color: RGBA(54, 170, 236, 1);
                         .common_radius(50%);
                         img {
                             width: .8rem;
-                            min-width: 54px;
+                            min-width: 60px;
                             height: .8rem;
-                            min-height: 54px;
+                            min-height: 60px;
                         }
                     }
                     .txt {
@@ -150,19 +145,6 @@
                         p {
                             color: RGBA(102, 102, 102, 1);
                             padding: .19rem 0 .13rem;
-                        }
-                        button {
-                            display: inline-block;
-                            padding: 8px 15px;
-                            color: RGBA(153, 153, 153, 1);
-                            border: 1px solid RGBA(153, 153, 153, 1);
-                            font-size: 13px;
-                            background-color: transparent;
-                            .common_radius(16px);
-                            &:hover {
-                                border: 1px solid @base;
-                                color: @base;
-                            }
                         }
                     }
                 }

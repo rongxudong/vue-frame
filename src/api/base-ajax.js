@@ -3,8 +3,8 @@ import { Message } from 'element-ui';
 import axios from 'axios';
 
 // 配置API接口地址
-// let root = 'https://cnodejs.org/api/v1',
-let root = '/api',
+let root = 'http://192.168.50.18:8081',
+// let root = '',
     cancel ,
     promiseArr = {};
 // 自定义判断元素类型JS
@@ -32,7 +32,7 @@ function filterNull (o) {
 axios.interceptors.request.use(config=> {
     // 配置config
     config.headers.Accept = 'application/json';
-    config.headers.token = 'ad02ef56ab2935d9f8e338dde0916dfb';
+    config.headers.token = 'a9ff3905186d7b154c3f624862569551';
 
     // config.headers.System = 'vue';
         // let token = Vue.localStorage.get('token');
@@ -140,7 +140,7 @@ function apiAxios (method, url, params, success, failure) {
         // 请求的url,例如url: '/user/12345'
         url: url,
         // 相对路径：域名
-        // baseURL: root,
+        baseURL: root,
         // 要发送的自定义标头
         headers: {'X-Requested-With': 'XMLHttpRequest'},
         // 请求所要发送的数据,例如data: {firstName: 'Fred',lastName: 'Flintstone'}
@@ -167,9 +167,9 @@ function apiAxios (method, url, params, success, failure) {
         //         success(res.data)
         //     }
         // }
-        // if (success) {
-        //     success(res.data)
-        // }
+        if (success) {
+            success(res)
+        }
     })
 }
 

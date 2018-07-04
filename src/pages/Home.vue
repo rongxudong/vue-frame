@@ -92,13 +92,13 @@
         },
         methods: {
             getResList () {
-                this.$ajax.get('HomeRes', null, r => {
-                    this.DataResList = r.data.resList;
+                this.$ajax.get('/api/HomeRes', null, r => {
+                    this.DataResList = r.data.data.resList;
                 })
             },
             getMessageList () {
-                this.$ajax.get('HomeRes', null, r => {
-                    this.DataMessageList = r.data.messageList;
+                this.$ajax.get('/api/HomeRes', null, r => {
+                    this.DataMessageList = r.data.data.messageList;
                 })
             },
             onLook () {

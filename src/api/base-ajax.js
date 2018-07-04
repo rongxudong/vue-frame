@@ -2,7 +2,7 @@ import { Message } from 'element-ui';
 // 引用axios
 import axios from 'axios';
 
-// 配置API接口地址
+// 配置API接口地址 (http://account.dev.financegt.com  http://192.168.50.18:8081)
 let root = 'http://192.168.50.18:8081',
 // let root = '',
     cancel ,

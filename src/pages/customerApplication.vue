@@ -22,12 +22,32 @@
                 <div class="input-block" v-for="(inputItem, index) in fullImporter" :key="index" v-if="array['quotaRange'] == '1'">
                     <div v-if="inputItem.sub != ''">
                         <ul class="block-top">
-                            <li v-for="children in inputItem.sub" :key="children.text" :index="children.text">{{children.text}}</li>
+                            <li v-for="children in inputItem.sub" :key="children.text">{{children.text}}</li>
                         </ul>
                         <ul class="block-bottom">
                             <li v-for="(children, $index) in inputItem.sub" :key="$index">
-                                <input v-model="array[children.name]" :index="children.text" :name="children.name"
-                                       class="formInput" type="text" placeholder="请填写" autocomplete="off"/>
+                                <div v-if="children.name == 'iiCompanyName'" class="select-suffix">
+                                    <input v-model="array['iiCompanyName']" name="iiCompanyName" class="formInput" type="text"
+                                           :placeholder="$t('personal.placeholder')" autocomplete="off"/>
+                                    <el-select
+                                            class="suffix"
+                                            v-model="value"
+                                            filterable
+                                            remote
+                                            reserve-keyword
+                                            placeholder="后缀名"
+                                            :remote-method="remoteMethod"
+                                            :loading="loading">
+                                        <el-option
+                                                v-for="item in options"
+                                                :key="item.value"
+                                                :label="item.label"
+                                                :value="item.value">
+                                        </el-option>
+                                    </el-select>
+                                </div>
+                                <input v-else v-model="array[children.name]" :name="children.name"
+                                       class="formInput" type="text" :placeholder="$t('personal.placeholder')" autocomplete="off"/>
                             </li>
                         </ul>
                     </div>
@@ -39,7 +59,8 @@
                         </ul>
                         <ul class="block-bottom">
                             <li>
-                                <input v-model="array['iiProducts']" name="iiProducts" class="formInput" type="text" placeholder="请填写" autocomplete="off"/>
+                                <input v-model="array['iiProducts']" name="iiProducts" class="formInput" type="text"
+                                       :placeholder="$t('personal.placeholder')" autocomplete="off"/>
                             </li>
                             <li class="creditInput horizontal_center">
                                 <el-radio-group v-model="array['iiCreditTermsRequest']">
@@ -49,11 +70,11 @@
                                     <el-radio :label="null">Others</el-radio>
                                 </el-radio-group>
                                 <input v-show="array['iiCreditTermsRequest'] == null" v-model="array['iiCreditTermsRequest']" name="iiCreditTermsRequest"
-                                       class="formInput" type="text" placeholder="请填写" autocomplete="off" style="width: 96px;margin-left: 20px;"/>
+                                       class="formInput" type="text" :placeholder="$t('personal.placeholder')" autocomplete="off" style="width: 96px;margin-left: 20px;"/>
                             </li>
                             <li>
                                 <input v-model="array['iiTotalCreditLineRequired']" name="iiTotalCreditLineRequired" class="formInput"
-                                       type="text" placeholder="请填写" autocomplete="off"/>
+                                       type="text" :placeholder="$t('personal.placeholder')" autocomplete="off"/>
                             </li>
                         </ul>
                     </div>
@@ -62,12 +83,12 @@
                 <div class="input-block" v-for="inputItem in noFullImporter" :key="inputItem.id" v-if="array['quotaRange'] == '2'">
                     <div v-if="inputItem.sub != ''">
                         <ul class="block-top">
-                            <li v-for="children in inputItem.sub" :key="children.text" :index="children.text">{{children.text}}</li>
+                            <li v-for="children in inputItem.sub" :key="children.text">{{children.text}}</li>
                         </ul>
                         <ul class="block-bottom">
                             <li v-for="children in inputItem.sub" :key="children.text">
-                                <input v-model="array[children.name]" :index="children.text" :name="children.name" class="formInput"
-                                       type="text" placeholder="请填写"
+                                <input v-model="array[children.name]" :name="children.name" class="formInput"
+                                       type="text" :placeholder="$t('personal.placeholder')"
                                        autocomplete="off" v-if="children.name !== 'iiTotalCreditLimitRequest'"/>
                                 <div v-else>
                                     <el-radio v-model="array['iiTotalCreditLimitRequest']" label="1" border>$100,000</el-radio>
@@ -84,7 +105,7 @@
                         </ul>
                         <ul class="block-bottom">
                             <li>
-                                <input v-model="array['iiPhoneNo']" name="iiPhoneNo" class="formInput" type="text" placeholder="请填写"
+                                <input v-model="array['iiPhoneNo']" name="iiPhoneNo" class="formInput" type="text" :placeholder="$t('personal.placeholder')"
                                        autocomplete="off"/>
                             </li>
                             <li class="creditInput horizontal_center">
@@ -93,12 +114,12 @@
                                     <el-radio :label="90">90days</el-radio>
                                     <el-radio :label="null">Others</el-radio>
                                 </el-radio-group>
-                                <input v-show="array['iiCreditTermsRequest'] == null" v-model="array['iiCreditTermsRequest']" name="iiCreditTermsRequest"
-                                       class="formInput" type="text" placeholder="请填写" autocomplete="off" style="width: 96px;margin-left: 20px;"/>
+                                <input v-show="array['iiCreditTermsRequest'] == null" v-model="array['iiCreditTermsRequest']"
+                                       name="iiCreditTermsRequest" class="formInput" type="text" :placeholder="$t('personal.placeholder')" autocomplete="off" style="width: 96px;margin-left: 20px;"/>
                             </li>
                             <li>
                                 <input v-model="array['iiContactPerson']" name="iiContactPerson" class="formInput" type="text"
-                                       placeholder="请填写" autocomplete="off"/>
+                                       :placeholder="$t('personal.placeholder')" autocomplete="off"/>
                             </li>
                         </ul>
                     </div>
@@ -109,11 +130,12 @@
                 <div class="input-block" v-for="inputItem in fullSupplier" :key="inputItem.id" v-if="array['quotaRange'] == '1'">
                     <div v-if="inputItem.sub != ''">
                         <ul class="block-top">
-                            <li v-for="children in inputItem.sub" :key="children.text" :index="children.text">{{children.text}}</li>
+                            <li v-for="children in inputItem.sub" :key="children.text">{{children.text}}</li>
                         </ul>
                         <ul class="block-bottom">
                             <li v-for="children in inputItem.sub" :key="children.text">
-                                <input v-model="array[children.name]" :index="children.text" :name="children.name" class="formInput" type="text" placeholder="请填写" autocomplete="off"/>
+                                <input v-model="array[children.name]" :name="children.name" class="formInput"
+                                       type="text" :placeholder="$t('personal.placeholder')" autocomplete="off"/>
                             </li>
                         </ul>
                     </div>
@@ -123,7 +145,8 @@
                         </ul>
                         <ul class="block-bottom">
                             <li>
-                                <input v-model="array['siDurationOfCooperation']" name="siDurationOfCooperation" class="formInput" type="text" placeholder="请填写" autocomplete="off"/>
+                                <input v-model="array['siDurationOfCooperation']" name="siDurationOfCooperation"
+                                       class="formInput" type="text" :placeholder="$t('personal.placeholder')" autocomplete="off"/>
                             </li>
                         </ul>
                         <ul class="block-top" style="border-top: 1px solid #cccccc;border-bottom: none;">
@@ -134,11 +157,12 @@
                 <!--供应商(10万以下)列表信息-->
                 <div class="input-block" v-for="inputItem in noFullSupplier" :key="inputItem.id" v-if="array['quotaRange'] == '2'">
                     <ul class="block-top">
-                        <li v-for="children in inputItem.sub" :key="children.text" :index="children.text">{{children.text}}</li>
+                        <li v-for="children in inputItem.sub" :key="children.text">{{children.text}}</li>
                     </ul>
                     <ul class="block-bottom">
                         <li v-for="children in inputItem.sub" :key="children.text">
-                            <input  v-model="array[children.name]" :index="children.text" :name="children.name" class="formInput" type="text" placeholder="请填写" autocomplete="off"/>
+                            <input  v-model="array[children.name]" :name="children.name" class="formInput" type="text"
+                                    :placeholder="$t('personal.placeholder')" autocomplete="off"/>
                         </li>
                     </ul>
                 </div>
@@ -150,7 +174,8 @@
                     </ul>
                     <ul class="block-bottom">
                         <li v-for="children in inputItem.sub" :key="children.text">
-                            <input  v-model="array[children.name]" :index="children.text" :name="children.name" class="formInput" type="text" placeholder="请填写" autocomplete="off"/>
+                            <input  v-model="array[children.name]" :name="children.name" class="formInput" type="text"
+                                    :placeholder="$t('personal.placeholder')" autocomplete="off"/>
                         </li>
                     </ul>
                 </div>
@@ -231,6 +256,29 @@
     export default {
         data () {
             return {
+                options: [],
+                value: [],
+                list: [],
+                loading: false,
+                states: [
+                    "CO", "LTD", "CO.,LTD",
+                    "Inc", "Corp.", "BV",
+                    "NV", "Delaware", "Florida",
+                    "Georgia", "Hawaii", "Idaho", "Illinois",
+                    "Indiana", "Iowa", "Kansas", "Kentucky",
+                    "Louisiana", "Maine", "Maryland",
+                    "Massachusetts", "Michigan", "Minnesota",
+                    "Mississippi", "Missouri", "Montana",
+                    "Nebraska", "Nevada", "New Hampshire",
+                    "New Jersey", "New Mexico", "New York",
+                    "North Carolina", "North Dakota", "Ohio",
+                    "Oklahoma", "Oregon", "Pennsylvania",
+                    "Rhode Island", "South Carolina",
+                    "South Dakota", "Tennessee", "Texas",
+                    "Utah", "Vermont", "Virginia",
+                    "Washington", "West Virginia", "Wisconsin",
+                    "Wyoming"
+                ],
                 fullImporter: [
                     {
                         id: 1,
@@ -487,51 +535,70 @@
                     orderId: 1
                 },
                 myHeaders: {
-                    token: "b98578419cd420951a2e724f915f1dbb"
+                    token: "a9ff3905186d7b154c3f624862569551"
                 },
                 array: {
                     orderId: 1,
-                    quotaRange: '1',
-                    iiCompanyName: '1',
-                    iiUsedCompanyName: '1',
-                    iiRegisteredAddress: '1',
-                    iiPrincipal: '1',
-                    iiPassportNo: '1',
-                    iiTaxNo: '1',
-                    iiRegistrationNo: '1',
-                    iiContactPerson: '1',
-                    iiPhoneNo: '1',
-                    iiEmailAddress: '1',
-                    iiPurchaseVolume: 1050.00,
-                    iiSaleVolume: 2000.00,
-                    iiProducts: '1',
+                    quotaRange: null,
+                    iiCompanyName: null,
+                    iiUsedCompanyName: null,
+                    iiRegisteredAddress: null,
+                    iiPrincipal: null,
+                    iiPassportNo: null,
+                    iiTaxNo: null,
+                    iiRegistrationNo: null,
+                    iiContactPerson: null,
+                    iiPhoneNo: null,
+                    iiEmailAddress: null,
+                    iiPurchaseVolume: null,
+                    iiSaleVolume: null,
+                    iiProducts: null,
                     iiCreditTermsRequest: null,
-                    iiTotalCreditLineRequired: 8888,
-                    iiQuantityOfSuppliers: 8,
-                    iiMajorLocationOfSuppliers: '1',
-                    iiMainImportedGoods: '1',
-                    iiTotalCreditLimitRequest: '1',
-                    siCreditLineRequired: 2333,
-                    siCompanyName: '1',
-                    siOrganizationCode: '1',
-                    siRegisteredAddress: '1',
-                    siContactPerson: '1',
-                    siPhoneNo: '1',
-                    siEmailAddress: '1',
-                    siAmountOfAnnualPurchases: 66,
-                    siAmountOfLatestOrder: 9,
-                    siProductsPurchased: 10000,
-                    siPaymentTerms: '1',
-                    siCreditTerm: '1',
-                    siDurationOfCooperation: '1',
-                    piName: '1',
-                    piCompanyName: '1',
-                    piPosition: '1',
-                    piPhoneNo: '1'
+                    iiTotalCreditLineRequired: null,
+                    iiQuantityOfSuppliers: null,
+                    iiMajorLocationOfSuppliers: null,
+                    iiMainImportedGoods: null,
+                    iiTotalCreditLimitRequest: null,
+                    siCreditLineRequired: null,
+                    siCompanyName: null,
+                    siOrganizationCode: null,
+                    siRegisteredAddress: null,
+                    siContactPerson: null,
+                    siPhoneNo: null,
+                    siEmailAddress: null,
+                    siAmountOfAnnualPurchases: null,
+                    siAmountOfLatestOrder: null,
+                    siProductsPurchased: null,
+                    siPaymentTerms: null,
+                    siCreditTerm: null,
+                    siDurationOfCooperation: null,
+                    piName: null,
+                    piCompanyName: null,
+                    piPosition: null,
+                    piPhoneNo: null
                 }
             }
         },
+        mounted() {
+            this.list = this.states.map(item => {
+                return { value: item, label: item };
+            });
+        },
         methods: {
+            remoteMethod(query) {
+                if (query !== '') {
+                    this.loading = true;
+                    setTimeout(() => {
+                        this.loading = false;
+                        this.options = this.list.filter(item => {
+                            return item.label.toLowerCase()
+                                .indexOf(query.toLowerCase()) > -1;
+                        });
+                    }, 200);
+                } else {
+                    this.options4 = [];
+                }
+            },
             // 选择申请的额度范围
             selectRange (module) {
                 this.array['quotaRange'] = module;
@@ -548,7 +615,6 @@
             },
             // 删除文件之前的钩子
             beforeRemove(file, fileList) {
-//                return this.$confirm(`确定移除 ${ file.fileName }？`);
                 this.$confirm(`确定移除 ${ file.fileName }?`, '提示', {
                     confirmButtonText: '确定',
                     cancelButtonText: '取消',
@@ -569,24 +635,22 @@
             },
             // 保存
             saveBtn () {
-                const SaveGtcpUrl = this.$store.state.domain + '/api/bussiness/account/order/saveGtcp?orderId=';
-                this.$ajax.post( SaveGtcpUrl + this.array['orderId'], this.array, res => {
+                this.$ajax.post( '/api/bussiness/account/order/saveGtcp?orderId=' + this.array['orderId'], this.array, res => {
                     console.log(res)
                 })
             },
             // 提交
             submitBtn () {
-                const SubmitGtcpUrl = this.$store.state.domain + '/api/bussiness/account/order/submitGtcp?orderId=';
-                this.$ajax.post( SubmitGtcpUrl + this.array['orderId'], this.array, res => {
+                this.$ajax.post( '/api/bussiness/account/order/submitGtcp?orderId=' + this.array['orderId'], this.array, res => {
                     this.array = res.data;
                 })
             },
             // 获取之前保存的信息
             getGtcpDetail () {
-                const getGtcpDetailUrl = this.$store.state.domain + '/api/bussiness/account/order/getGtcpDetail/';
-                this.$ajax.get(getGtcpDetailUrl + this.array['orderId'], null, res => {
-                    console.log(res.data.files)
-                    this.array = res.data;
+                this.$ajax.get('/api/bussiness/account/order/getGtcpDetail/' + this.array['orderId'], null, res => {
+                    console.log(res.data)
+                    console.log(res.data.quotaRange)
+                    this.array = res.data.data;
                     this.fileList = res.data.files;
                     if(!res.data.quotaRange) {
                         this.array['quotaRange'] = '1';
@@ -692,7 +756,15 @@
                     text-align: left;
                 }
                 li.creditInput {
-                    width: calc(48.7%);
+                    width: 48.7%;
+                }
+                .select-suffix {
+                    position: relative;
+                    border: 1px solid rgba(153, 153, 153, 1);
+                    input {
+                        padding-right: 120px;
+                        border: none;
+                    }
                 }
             }
             ul.block-top {
@@ -711,6 +783,7 @@
                 padding-left: 10px;
                 font-size: 14px;
                 .placeholder(@minor-col);
+                border: 1px solid rgba(153, 153, 153, 1);
             }
         }
         .upload-wrap {
@@ -738,6 +811,7 @@
             height: 40px;
             margin: 50px 20px 0;
             color: #fff;
+            font-size: 14px;
             border: none;
             .common_radius(3px);
         }

@@ -1,7 +1,7 @@
 <template>
     <div class="bg-style">
         <el-form class="RealName-main" status-icon :model="ruleForm" :rules="rules" ref="ruleForm" label-width="135px" label-position="left">
-            <div class="real-fail-wrap flex_start align_items" v-show="auditFlag == '3'">
+            <div class="real-fail-wrap flex_start align_items" v-show="ruleForm['auditFlag'] == '3'">
                 <img src="../assets/img/RealName/real-fail.png"/>
                 <div class="fail-text">
                     <h1>抱歉，您的实名认证审核未通过，请修改后重新提交！</h1>
@@ -16,29 +16,17 @@
                 <div class="basic-form">
                     <el-form-item :label="$t('personal.name')" prop="name">
                         <el-input v-model="ruleForm.name" class="input-width" type="text"
-                                  :placeholder="$t('personal.placeholder')" auto-complete="off"></el-input>
+                                  :placeholder="$t('personal.placeholder')" auto-complete="off" :disabled="isEdit"></el-input>
                     </el-form-item>
                     <el-form-item :label="$t('personal.idCard')" prop="idCard">
                         <el-input v-model="ruleForm.idCard" class="input-width" type="text"
-                                  :placeholder="$t('personal.placeholder')" auto-complete="off"></el-input>
+                                  :placeholder="$t('personal.placeholder')" auto-complete="off" :disabled="isEdit"></el-input>
                     </el-form-item>
-
                     <el-form-item :label="$t('personal.idPicFront')" prop="idPicFront" class="upload-flex" ref="idPicFront">
-                        <!--<my-upload-->
-                                <!--ref="upload"-->
-                                <!--:headers="myHeaders"-->
-                                <!--:action="action"-->
-                                <!--:data="{ parm: 1 }"-->
-                                <!--:name="nameType"-->
-                                <!--:uploadId="uploadList[0].key"-->
-                                <!--:onChange="handleChange"-->
-                                <!--:onSuccess="handleAvatarSuccess"-->
-                                <!--:beforeUpload="beforeAvatarUpload"-->
-                        <!--&gt;</my-upload>-->
-
                         <el-upload
                                 ref="upload"
                                 class="avatar-uploader"
+                                :disabled="isEdit"
                                 :headers="myHeaders"
                                 :action="action"
                                 :data="{ parm: 1 }"
@@ -51,11 +39,11 @@
                             <i v-else="!ruleForm.idPicFront" class="el-icon-plus avatar-uploader-icon"></i>
                         </el-upload>
                     </el-form-item>
-
                     <el-form-item :label="$t('personal.idPicBehind')" prop="idPicBehind" class="upload-flex" ref="idPicBehind">
                         <el-upload
                                 ref="upload"
                                 class="avatar-uploader"
+                                :disabled="isEdit"
                                 :headers="myHeaders"
                                 :action="action"
                                 :data="{ parm: 2 }"
@@ -68,11 +56,11 @@
                             <i v-else="!ruleForm.idPicBehind" class="el-icon-plus avatar-uploader-icon"></i>
                         </el-upload>
                     </el-form-item>
-
                     <el-form-item :label="$t('personal.idPicHand')" prop="idPicHand" class="upload-flex" ref="idPicHand">
                         <el-upload
                                 ref="upload"
                                 class="avatar-uploader"
+                                :disabled="isEdit"
                                 :headers="myHeaders"
                                 :action="action"
                                 :data="{ parm: 3 }"
@@ -84,18 +72,6 @@
                             <img v-if="ruleForm.idPicHand" :src="ruleForm.idPicHand" class="avatar">
                             <i v-else="!ruleForm.idPicHand" class="el-icon-plus avatar-uploader-icon"></i>
                         </el-upload>
-
-                        <!--<my-upload-->
-                                <!--ref="upload"-->
-                                <!--:headers="myHeaders"-->
-                                <!--:action="action"-->
-                                <!--:data="{ parm: 3 }"-->
-                                <!--:name="nameType"-->
-                                <!--:uploadId="uploadList[2].key"-->
-                                <!--:onChange="handleChange"-->
-                                <!--:onSuccess="handleAvatarSuccess"-->
-                                <!--:beforeUpload="beforeAvatarUpload"-->
-                        <!--&gt;</my-upload>-->
                     </el-form-item>
                 </div>
             </div>
@@ -106,6 +82,7 @@
                         <el-upload
                                 ref="upload"
                                 class="avatar-uploader"
+                                :disabled="isEdit"
                                 :headers="myHeaders"
                                 :action="action"
                                 :data="{ parm: 4 }"
@@ -120,24 +97,24 @@
                     </el-form-item>
                     <el-form-item :label="$t('personal.companyName')" prop="companyName">
                         <el-input v-model="ruleForm.companyName" class="input-width" type="text"
-                                  :placeholder="$t('personal.placeholder')" auto-complete="off"></el-input>
+                                  :placeholder="$t('personal.placeholder')" auto-complete="off" :disabled="isEdit"></el-input>
                     </el-form-item>
                     <el-form-item :label="$t('personal.legalPerson')" prop="legalPerson">
                         <el-input v-model="ruleForm.legalPerson" class="input-width" type="text"
-                                  :placeholder="$t('personal.placeholder')" auto-complete="off"></el-input>
+                                  :placeholder="$t('personal.placeholder')" auto-complete="off" :disabled="isEdit"></el-input>
                     </el-form-item>
                     <el-form-item :label="$t('personal.legalPersonIdCard')" prop="legalPersonIdCard">
                         <el-input v-model="ruleForm.legalPersonIdCard" class="input-width" type="text"
-                                  :placeholder="$t('personal.placeholder')" auto-complete="off"></el-input>
+                                  :placeholder="$t('personal.placeholder')" auto-complete="off" :disabled="isEdit"></el-input>
                     </el-form-item>
                     <el-form-item :label="$t('personal.address')" prop="address">
                         <el-input v-model="ruleForm.address" type="text"
-                                  :placeholder="$t('personal.placeholder')" auto-complete="off"></el-input>
+                                  :placeholder="$t('personal.placeholder')" auto-complete="off" :disabled="isEdit"></el-input>
                     </el-form-item>
                 </div>
             </div>
             <div class="text-center" style="margin-top: 45px;">
-                <button type="button" class="submit-btn" @click="submitForm('ruleForm')">{{ $t('personal.submitCheck') }}</button>
+                <el-button type="primary" @click="submitForm('ruleForm')" :disabled="isEdit">{{ $t('personal.submitCheck') }}</el-button>
             </div>
             <el-dialog
                 :title="$t('personal.tips')"
@@ -156,8 +133,8 @@
                 </span>
             </el-dialog>
             <div class="real-icon">
-                <img src="../assets/img/RealName/real-audit-success.png" v-show="auditFlag == '1'"/>
-                <img src="../assets/img/RealName/real-in-review.png" v-show="auditFlag == '4'"/>
+                <img src="../assets/img/RealName/real-audit-success.png" v-show="ruleForm['auditFlag'] == '1'"/>
+                <img src="../assets/img/RealName/real-in-review.png" v-show="ruleForm['auditFlag'] == '4'"/>
             </div>
         </el-form>
     </div>
@@ -171,23 +148,33 @@
             return {
                 dialogVisible: false,
                 dialog: false,
-                auditFlag: '3',
+                isEdit: false,
                 myHeaders: {
                     token: "a9ff3905186d7b154c3f624862569551"
                 },
                 action: this.$store.state.domain + "/api/bussinessAccount/yqq/uploadPic",
                 nameType: 'file',
                 ruleForm: {
-                    name: null,
-                    idCard: null,
-                    companyName: null,
-                    legalPerson: null,
-                    legalPersonIdCard: null,
                     address: null,
+                    auditBy: null,
+                    auditDate: null,
+                    auditDesc: null,
+                    auditFlag: null,
+                    businessLicense: null,
+                    companyName: null,
+                    createdBy: null,
+                    createdDate: null,
+                    deletedFlag: null,
+                    idCard: null,
                     idPicFront: null,
                     idPicBehind: null,
                     idPicHand: null,
-                    businessLicense: null
+                    lastUpdBy: null,
+                    lastUpdDate: null,
+                    legalPerson: null,
+                    legalPersonIdCard: null,
+                    moduleAudit: null,
+                    name: null
                 },
                 rules: {
                     name: [
@@ -272,6 +259,7 @@
                 }
                 return (isJPG || isBMP || isGIF || isPNG) && isLt2M;
             },
+            // 用户提交实名认证信息
             submitForm(formName) {
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
@@ -288,9 +276,26 @@
                     }
                 });
             },
+            // 用户查询实名认证状态
             findUserIdentityStatus () {
                 this.$ajax.get('/api/bussinessAccount/yqq/findUserIdentityStatus', null, res => {
-                    console.log(res);
+                    this.ruleForm['auditFlag'] = res.data.data;
+                    if( this.ruleForm['auditFlag'] == '4' || this.ruleForm['auditFlag'] == '1') {
+                        this.isEdit = true;
+                    }
+                    else {
+                        this.isEdit = false;
+                    }
+                })
+            },
+            // 查询用户风控-实名认证信息
+            findUserIdentity () {
+                this.$ajax.get('/api/bussinessAccount/yqq/findUserIdentity', null, res => {
+                    this.ruleForm = res.data.data;
+                    this.ruleForm['businessLicense'] = this.$store.state.resUrl + res.data.data.businessLicense;
+                    this.ruleForm['idPicBehind'] = this.$store.state.resUrl + res.data.data.idPicBehind;
+                    this.ruleForm['idPicFront'] = this.$store.state.resUrl + res.data.data.idPicFront;
+                    this.ruleForm['idPicHand'] = this.$store.state.resUrl + res.data.data.idPicHand;
                 })
             },
             handleClose(done) {
@@ -299,6 +304,7 @@
         },
         created () {
             this.findUserIdentityStatus();
+            this.findUserIdentity();
         }
     }
 </script>
@@ -351,19 +357,6 @@
             img {
                 .object_fit_img;
             }
-        }
-    }
-    .submit-btn {
-        display: inline-block;
-        width: 140px;
-        height: 40px;
-        background-color: @base;
-        border: none;
-        .common_radius(3px);
-        font-size: 16px;
-        color: #fff;
-        &:hover {
-            .lighten-hover(@base);
         }
     }
 </style>

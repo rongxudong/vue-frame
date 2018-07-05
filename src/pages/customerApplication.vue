@@ -22,7 +22,7 @@
                 <div class="input-block" v-for="(inputItem, index) in fullImporter" :key="index" v-if="array['quotaRange'] == '1'">
                     <div v-if="inputItem.sub != ''">
                         <ul class="block-top">
-                            <li v-for="children in inputItem.sub" :key="children.text">{{children.text}}</li>
+                            <li v-for="(children, $index) in inputItem.sub" :key="$index">{{children.text}}</li>
                         </ul>
                         <ul class="block-bottom">
                             <li v-for="(children, $index) in inputItem.sub" :key="$index">
@@ -31,7 +31,7 @@
                                            :placeholder="$t('personal.placeholder')" autocomplete="off"/>
                                     <el-select
                                             class="suffix"
-                                            v-model="value"
+                                            v-model="array['iiCompanyNameSuffix']"
                                             filterable
                                             remote
                                             reserve-keyword
@@ -46,8 +46,8 @@
                                         </el-option>
                                     </el-select>
                                 </div>
-                                <input v-else v-model="array[children.name]" :name="children.name"
-                                       class="formInput" type="text" :placeholder="$t('personal.placeholder')" autocomplete="off"/>
+                                <input v-else v-model="array[children.name]" :name="children.name" class="formInput"
+                                       type="text" :placeholder="$t('personal.placeholder')" autocomplete="off"/>
                             </li>
                         </ul>
                     </div>
@@ -63,14 +63,15 @@
                                        :placeholder="$t('personal.placeholder')" autocomplete="off"/>
                             </li>
                             <li class="creditInput horizontal_center">
-                                <el-radio-group v-model="array['iiCreditTermsRequest']">
+                                <el-radio-group v-model="Others">
                                     <el-radio :label="90">90days</el-radio>
                                     <el-radio :label="120">120days</el-radio>
                                     <el-radio :label="150">150days</el-radio>
-                                    <el-radio :label="null">Others</el-radio>
+                                    <el-radio :label="0">Others</el-radio>
                                 </el-radio-group>
-                                <input v-show="array['iiCreditTermsRequest'] == null" v-model="array['iiCreditTermsRequest']" name="iiCreditTermsRequest"
-                                       class="formInput" type="text" :placeholder="$t('personal.placeholder')" autocomplete="off" style="width: 96px;margin-left: 20px;"/>
+                                <input v-if="Others != 90 && Others != 120 && Others != 150" v-on:change="change"
+                                       v-model="array['iiCreditTermsRequest']" name="iiCreditTermsRequest" class="formInput"
+                                       type="text" :placeholder="$t('personal.placeholder')" autocomplete="off" style="width: 96px;margin-left: 20px;"/>
                             </li>
                             <li>
                                 <input v-model="array['iiTotalCreditLineRequired']" name="iiTotalCreditLineRequired" class="formInput"
@@ -83,13 +84,32 @@
                 <div class="input-block" v-for="inputItem in noFullImporter" :key="inputItem.id" v-if="array['quotaRange'] == '2'">
                     <div v-if="inputItem.sub != ''">
                         <ul class="block-top">
-                            <li v-for="children in inputItem.sub" :key="children.text">{{children.text}}</li>
+                            <li v-for="(children, $index) in inputItem.sub" :key="$index">{{children.text}}</li>
                         </ul>
                         <ul class="block-bottom">
-                            <li v-for="children in inputItem.sub" :key="children.text">
-                                <input v-model="array[children.name]" :name="children.name" class="formInput"
-                                       type="text" :placeholder="$t('personal.placeholder')"
-                                       autocomplete="off" v-if="children.name !== 'iiTotalCreditLimitRequest'"/>
+                            <li v-for="(children, $index) in inputItem.sub" :key="$index">
+                                <div v-if="children.name == 'iiCompanyName'" class="select-suffix">
+                                    <input v-model="array['iiCompanyName']" name="iiCompanyName" class="formInput" type="text"
+                                           :placeholder="$t('personal.placeholder')" autocomplete="off"/>
+                                    <el-select
+                                            class="suffix"
+                                            v-model="array['iiCompanyNameSuffix']"
+                                            filterable
+                                            remote
+                                            reserve-keyword
+                                            placeholder="后缀名"
+                                            :remote-method="remoteMethod"
+                                            :loading="loading">
+                                        <el-option
+                                                v-for="item in options"
+                                                :key="item.value"
+                                                :label="item.label"
+                                                :value="item.value">
+                                        </el-option>
+                                    </el-select>
+                                </div>
+                                <input v-else-if="children.name !== 'iiTotalCreditLimitRequest'" v-model="array[children.name]" :name="children.name"
+                                       class="formInput" type="text" :placeholder="$t('personal.placeholder')" autocomplete="off"/>
                                 <div v-else>
                                     <el-radio v-model="array['iiTotalCreditLimitRequest']" label="1" border>$100,000</el-radio>
                                     <el-radio v-model="array['iiTotalCreditLimitRequest']" label="2" border>$50,000</el-radio>
@@ -233,8 +253,8 @@
                                 :headers="myHeaders"
                                 :data="upLoadData"
                                 :on-change="handleChange"
-                                :onError="uploadError"
-                                :onSuccess="uploadSuccess"
+                                :on-error="uploadError"
+                                :on-success="uploadSuccess"
                                 :on-remove="handleRemove"
                                 :before-remove="beforeRemove"
                                 :file-list="fileList">
@@ -257,27 +277,20 @@
         data () {
             return {
                 options: [],
-                value: [],
                 list: [],
                 loading: false,
+                Others: null,
                 states: [
-                    "CO", "LTD", "CO.,LTD",
-                    "Inc", "Corp.", "BV",
-                    "NV", "Delaware", "Florida",
-                    "Georgia", "Hawaii", "Idaho", "Illinois",
-                    "Indiana", "Iowa", "Kansas", "Kentucky",
-                    "Louisiana", "Maine", "Maryland",
-                    "Massachusetts", "Michigan", "Minnesota",
-                    "Mississippi", "Missouri", "Montana",
-                    "Nebraska", "Nevada", "New Hampshire",
-                    "New Jersey", "New Mexico", "New York",
-                    "North Carolina", "North Dakota", "Ohio",
-                    "Oklahoma", "Oregon", "Pennsylvania",
-                    "Rhode Island", "South Carolina",
-                    "South Dakota", "Tennessee", "Texas",
-                    "Utah", "Vermont", "Virginia",
-                    "Washington", "West Virginia", "Wisconsin",
-                    "Wyoming"
+                    "AB", "a.d.", "AG", "A.G", "APS",
+                    "A/S", "bd", "BHD", "BV", "B.V.",
+                    "CO", "CO.,LTD", "Corp.", "d.o.o.", "EIRL",
+                    "est", "FZC、FZCO", "FZE", "GmbH", "Inc",
+                    "JSC", "k.k.", "Lda", "LLC", "LLP",
+                    "LTD", "Ltda", "Mfy", "NV", "N.V.",
+                    "OJSC", "OY", "PLC", "Pte.", "Pte、PVT",
+                    "PT、TBK", "PTY", "SA", "S.A. de C.V.", "S.A.R.L.",
+                    "SDN BHD", "S.P.A.", "SP.Z.O.O", "SRL", "S.R.L.",
+                    "S.R.O", "S.R.O.", "TIC", "Y.K"
                 ],
                 fullImporter: [
                     {
@@ -535,12 +548,13 @@
                     orderId: 1
                 },
                 myHeaders: {
-                    token: "a9ff3905186d7b154c3f624862569551"
+                    token: "c78c3741ff32a72d68d978d43d9e3160"
                 },
                 array: {
                     orderId: 1,
-                    quotaRange: null,
+                    quotaRange: '1',
                     iiCompanyName: null,
+                    iiCompanyNameSuffix: null,
                     iiUsedCompanyName: null,
                     iiRegisteredAddress: null,
                     iiPrincipal: null,
@@ -596,8 +610,12 @@
                         });
                     }, 200);
                 } else {
-                    this.options4 = [];
+                    this.options = [];
                 }
+            },
+            // 获取iiCreditTermsRequest的变化
+            change(value) {
+                this.Others = 0;
             },
             // 选择申请的额度范围
             selectRange (module) {
@@ -609,13 +627,11 @@
             },
             // 监听文件状态改变
             handleChange(file, fileList) {
-                console.log(this.array);
                 console.log(file);
-//                this.fileList = fileList.slice(-10);
             },
             // 删除文件之前的钩子
             beforeRemove(file, fileList) {
-                this.$confirm(`确定移除 ${ file.fileName }?`, '提示', {
+                this.$confirm(`确定移除 ${ file.name }?`, '提示', {
                     confirmButtonText: '确定',
                     cancelButtonText: '取消',
                     type: 'warning'
@@ -629,31 +645,63 @@
                 });
                 return false; // 这是重点,不管上面的操作结果如何都返回false
             },
+            // 远请求服务器如果成功则把fileList中要删除的file移除即可
             asyncReq (file,fileList) {
-                // 处理图片列表
-                // 远请求服务器如果成功则把fileList中要删除的file移除即可
+                this.$ajax.post('/api/bussiness/account/order/deleteGtcpFile?fileId=' + file.id + '&orderId=' + this.array['orderId'], null, res => {
+                    this.fileList = this.File(res.data.data.files);
+                })
             },
             // 保存
             saveBtn () {
+                console.log(this.array);
                 this.$ajax.post( '/api/bussiness/account/order/saveGtcp?orderId=' + this.array['orderId'], this.array, res => {
-                    console.log(res)
+                    console.log(res.data)
+                    console.log(res.data.message)
                 })
             },
             // 提交
             submitBtn () {
+                console.log(this.array)
+                if( this.array.files ) {
+                    delete this.array.files
+                }
+                if( this.array.gtcpApplyPdf ) {
+                    delete this.array.gtcpApplyPdf
+                }
                 this.$ajax.post( '/api/bussiness/account/order/submitGtcp?orderId=' + this.array['orderId'], this.array, res => {
-                    this.array = res.data;
+                    this.$message({
+                        type: 'info',
+                        message: res.data.message
+                    });
                 })
             },
             // 获取之前保存的信息
             getGtcpDetail () {
                 this.$ajax.get('/api/bussiness/account/order/getGtcpDetail/' + this.array['orderId'], null, res => {
-                    console.log(res.data)
-                    console.log(res.data.quotaRange)
-                    this.array = res.data.data;
-                    this.fileList = res.data.files;
-                    if(!res.data.quotaRange) {
+                    let getDetail = res.data;
+                    if(!getDetail.data.quotaRange) {
                         this.array['quotaRange'] = '1';
+                    }
+                    this.fileList = this.File(getDetail.data.files);
+                    this.array = getDetail.data;
+
+                    let getLabelNum = this.array['iiCreditTermsRequest'];
+                    let getQuotaRange = this.array['quotaRange'];
+                    if( getQuotaRange == '1') {
+                        if( getLabelNum != 90 && getLabelNum != 120 && getLabelNum != 150 ) {
+                            this.Others = 0;
+                        }
+                        else {
+                            this.Others = getLabelNum;
+                        }
+                    }
+                    else {
+                        if( getLabelNum != 60 && getLabelNum != 90 ) {
+                            this.Others = 0;
+                        }
+                        else {
+                            this.Others = getLabelNum;
+                        }
                     }
                 })
             },
@@ -662,7 +710,6 @@
                 console.log('文件', file)
                 console.log('上传文件', response)
                 this.fileList = response.data.files;
-                console.log(this.fileList)
             },
             // 上传错误
             uploadError (response, file, fileList) {
@@ -670,6 +717,18 @@
                     showClose: true,
                     message: response.message
                 });
+            },
+            File (Array) {
+                let list = [];
+                Array.forEach(function (val,index,array) {
+                    let item = {
+                        'id': val.id,
+                        'name': val.fileName,
+                        'url': val.url
+                    }
+                    list.push(item);
+                })
+                return list;
             }
         },
         created　() {
@@ -762,7 +821,7 @@
                     position: relative;
                     border: 1px solid rgba(153, 153, 153, 1);
                     input {
-                        padding-right: 120px;
+                        padding-right: @width-pr;
                         border: none;
                     }
                 }

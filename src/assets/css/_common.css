@@ -295,10 +295,11 @@ button:focus {
   top: 1px;
   right: 1px;
   z-index: 1;
-  width: 120px;
+  width: 100px;
   border-left: 1px solid #999999;
 }
 .suffix .el-input__inner {
+  padding: 0 10px;
   height: 44px!important;
   line-height: 44px;
   border: none!important;

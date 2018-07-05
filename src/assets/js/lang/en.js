@@ -28,5 +28,8 @@ module.exports = {
         paragraphThree: "working days.",
         cancel: "cancel",
         ok: "ok"
+    },
+    customerApplication: {
+
     }
 };

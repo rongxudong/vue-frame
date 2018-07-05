@@ -28,5 +28,8 @@ module.exports = {
         paragraphThree: "个工作日。",
         cancel: "取 消",
         ok: "确 定"
+    },
+    customerApplication: {
+
     }
 };

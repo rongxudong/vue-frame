@@ -648,7 +648,7 @@
             // 远请求服务器如果成功则把fileList中要删除的file移除即可
             asyncReq (file,fileList) {
                 this.$ajax.post('/api/bussiness/account/order/deleteGtcpFile?fileId=' + file.id + '&orderId=' + this.array['orderId'], null, res => {
-                    this.fileList = this.File(res.data.data.files);
+                    this.fileList = this.File(res.data.files);
                 })
             },
             // 保存

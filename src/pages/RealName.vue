@@ -279,7 +279,7 @@
             // 用户查询实名认证状态
             findUserIdentityStatus () {
                 this.$ajax.get('/api/bussinessAccount/yqq/findUserIdentityStatus', null, res => {
-                    this.ruleForm['auditFlag'] = res.data.data;
+                    this.ruleForm['auditFlag'] = res.data;
                     if( this.ruleForm['auditFlag'] == '4' || this.ruleForm['auditFlag'] == '1') {
                         this.isEdit = true;
                     }
@@ -291,11 +291,11 @@
             // 查询用户风控-实名认证信息
             findUserIdentity () {
                 this.$ajax.get('/api/bussinessAccount/yqq/findUserIdentity', null, res => {
-                    this.ruleForm = res.data.data;
-                    this.ruleForm['businessLicense'] = this.$store.state.resUrl + res.data.data.businessLicense;
-                    this.ruleForm['idPicBehind'] = this.$store.state.resUrl + res.data.data.idPicBehind;
-                    this.ruleForm['idPicFront'] = this.$store.state.resUrl + res.data.data.idPicFront;
-                    this.ruleForm['idPicHand'] = this.$store.state.resUrl + res.data.data.idPicHand;
+                    this.ruleForm = res.data;
+                    this.ruleForm['businessLicense'] = this.$store.state.resUrl + res.data.businessLicense;
+                    this.ruleForm['idPicBehind'] = this.$store.state.resUrl + res.data.idPicBehind;
+                    this.ruleForm['idPicFront'] = this.$store.state.resUrl + res.data.idPicFront;
+                    this.ruleForm['idPicHand'] = this.$store.state.resUrl + res.data.idPicHand;
                 })
             },
             handleClose(done) {

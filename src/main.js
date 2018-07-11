@@ -36,9 +36,6 @@ import '../static/iconfont/iconfont';
 Vue.prototype.$ajax = ajax;
 Vue.prototype.moment = Moment;
 
-// moment选择对应的语言
-
-
 Vue.config.productionTip = false;
 Vue.use(Vuex);
 Vue.use(VueI18n);

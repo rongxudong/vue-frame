@@ -118,6 +118,37 @@
     /*@import "assets/css/_variable";*/
     @import "assets/css/_mixin";
     @import "assets/css/_common";
+
+    //Home.vue
+    .el-tabs--card>.el-tabs__header {
+        border-bottom: none;
+        .el-tabs__nav {
+            border: none;
+        }
+    }
+    .el-tabs__item.is-active {
+        height: 40px;
+        line-height: 40px;
+        vertical-align: top;
+        color: #000!important;
+        background-color: #ffffff!important;
+        .border-bottom-radius(0);
+    }
+    .el-tabs__item {
+        margin-right: 8px;
+        height: 34px;
+        line-height: 34px;
+        color: #fff;
+        background-color: RGBA(182, 194, 202, 1)!important;
+        .border-top-radius(5px);
+        .border-bottom-radius(5px);
+        .common_box_shadow(0 2px 4px rgba(7, 17, 27, .15));
+        &:hover {
+            color: #000!important;
+        }
+    }
+
+
     .el-header {
         line-height: 60px;
         background-color: #fff;

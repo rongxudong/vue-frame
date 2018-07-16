@@ -5,39 +5,53 @@ module.exports = [
         icon: 'icon-anquan',
         sub: [
             {
-                id: '20001',
-                name: '签署协议',
-                componentName: 'Agreement',
-                route: '/Agreement'
+                id: '20004',
+                name: '尽职调查',
+                componentName: 'Investigate',
+                route: '/Investigate?type=1'
+            },
+            {
+                id: '20006',
+                name: 'GTR评估',
+                componentName: 'Investigate',
+                route: '/Investigate?type=2'
             },
             {
                 id: '20002',
                 name: '授信申请',
-                componentName: 'CreditApplication',
-                route: '/CreditApplication'
-            },
-            {
-                id: '20003',
-                name: '授信额度申请表',
-                componentName: 'QuotaApplicationForm',
-                route: '/QuotaApplicationForm'
-            },
-            {
-                id: '20004',
-                name: '尽职调查',
                 componentName: 'Investigate',
-                route: '/Investigate'
+                route: '/Investigate?type=3'
             },
             {
-                id: '20005',
-                name: '客户申请',
-                componentName: 'customerApplication',
-                route: '/customerApplication'
-            }
+                id: '20007',
+                name: '商账管理',
+                componentName: 'Investigate',
+                route: '/Investigate?type=4'
+            },
+            // {
+            //     id: '20001',
+            //     name: '签署协议',
+            //     componentName: 'Agreement',
+            //     route: '/Agreement',
+            // },
+            //
+            // {
+            //     id: '20003',
+            //     name: '授信额度申请表',
+            //     componentName: 'QuotaApplicationForm',
+            //     route: '/QuotaApplicationForm'
+            // },
+            //
+            // {
+            //     id: '20005',
+            //     name: '客户申请',
+            //     componentName: 'customerApplication',
+            //     route: '/customerApplication'
+            // }
         ]
     },
     {
-        name: '客户信息',
+        name: '个人信息',
         id: '40000',
         icon: 'icon-yonghuming',
         sub: [
@@ -47,12 +61,12 @@ module.exports = [
                 componentName: 'RealName',
                 route: '/RealName'
             },
-            {
-                id: '40004',
-                name: '客户池',
-                componentName: 'CustomerPool',
-                route: '/CustomerPool'
-            }
+            // {
+            //     id: '40004',
+            //     name: '客户池',
+            //     componentName: 'CustomerPool',
+            //     route: '/CustomerPool'
+            // }
         ]
     }
 ]

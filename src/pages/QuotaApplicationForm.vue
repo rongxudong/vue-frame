@@ -23,6 +23,8 @@
         created () {
 //            const myFilter = this.formatDate;
 //            const myFilter = Vue.filter('format-date')
+            console.log(this.$route.params.id)
+
         },
         mounted () {
         }

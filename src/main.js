@@ -32,6 +32,7 @@ import MyPlugin from './Global';
 // 引用js文件(插件)
 import '../static/iconfont/iconfont';
 
+
 // 将方法绑定到全局
 Vue.prototype.$ajax = ajax;
 Vue.prototype.moment = Moment;

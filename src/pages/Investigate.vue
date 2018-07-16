@@ -2,7 +2,7 @@
     <div class="bg-style">
         <div class="investigate-main">
             <div class="basic">
-                <div class="title process-title line">尽职调查服务流程</div>
+                <div class="title process-title line">{{this.serviceTitle[this.serviceType]}}服务流程</div>
                 <ul class="content flex_start">
                     <li v-for="(item, idx) in content" :key="idx" class="flex_start">
                         <div class="step-item">
@@ -91,7 +91,7 @@
                 <div class="table-container flex_direction_column">
                     <div class="flex_direction_row container-head-bg">
                         <img class="image-search" src="../assets/img/investigate/tips.png" alt="搜索">
-                        <h1 class="text-head flex-1" style="margin-left: 0.12rem;">您可重新创建一个新的尽职调查服务，需重新签署协议，详细情况请联系融资顾问</h1>
+                        <h1 class="text-head flex-1" style="margin-left: 0.12rem;">您可重新创建一个新的{{this.serviceTitle[this.serviceType]}}服务，需重新签署协议，详细情况请联系融资顾问</h1>
                         <el-button type="primary" size="small" style="margin-right: 0.2rem" v-on:click="showDialog">创建新服务</el-button>
                     </div>
                     <el-table
@@ -133,7 +133,7 @@
                                     style="margin-left: 0.1rem"
                                     size="mini"
                                     type="primary"
-                                    @click="test(scope.$index, scope.row)">{{ scope.row.btnDesc}}</el-button>
+                                    @click="navRoute('签署协议', scope.row)">{{ scope.row.btnDesc}}</el-button>
                             </template>
                         </el-table-column>
                         <el-table-column
@@ -161,7 +161,7 @@
                                     style="margin-left: 0.1rem"
                                     size="mini"
                                     type="primary"
-                                    @click="test(scope.$index, scope.row)">{{ scope.row.applyStatusBtnDesc}}</el-button>
+                                    @click="navRoute('申请', scope.row)">{{ scope.row.applyStatusBtnDesc}}</el-button>
                             </template>
                         </el-table-column>
                         <el-table-column
@@ -184,7 +184,6 @@
                         </el-table-column>
                     </el-table>
                 </div>
-                <button type="button" v-on:click="test">跳转</button>
                 <div class="justify-content-center" style="width: 100%;margin-top: 0.2rem">
                     <el-pagination
                         @current-change="handleCurrentChange"
@@ -199,7 +198,6 @@
     </div>
 </template>
 <script>
-
 
     export default {
         data () {
@@ -256,18 +254,26 @@
                         }
                     },
                 },
+                serviceTitle:['占位','尽职调查','GTR评估','授信申请','商账管理'],
+                serviceType:1,
+
             }
         },
         created () {
-            this.fetchData()
+            this.serviceType = this.$route.query.type;
+            this.QueryOrderListModel.orderType = this.$route.query.type;
+            this.fetchData();
         },
         watch: {
-            '$route': 'fetchData'
+            $route(){
+                this.serviceType = this.$route.query.type;
+                this.QueryOrderListModel.orderType = this.$route.query.type;
+                this.fetchData();
+            },
         },
         methods: {
             fetchData () {
                 this.$ajax.post('/api/bussiness/account/order/getOrderList ', this.QueryOrderListModel, res => {
-                    console.log(res.data)
                     var arrayData = [];
                     if (res.data.list){
                         this.total = res.data.total;
@@ -283,21 +289,25 @@
                                 tableData.orderType_str = '商账管理';
                             }
 
-                            if (tableData.agreementStatus == 1){
-                                tableData.agreementStatus_str = '未编辑';
-                                tableData.btnVisible = false;
-                            }else if (tableData.agreementStatus == 2){
-                                tableData.agreementStatus_str = '未审核';
-                                tableData.btnVisible = true;
-                            }else if (tableData.agreementStatus == 3){
-                                tableData.agreementStatus_str = '未签署';
-                                tableData.btnVisible = true;
-                                tableData.btnDesc = '签署';
-                            }else if (tableData.agreementStatus == 4){
-                                tableData.agreementStatus_str = '已签署';
-                                tableData.btnVisible = true;
-                                tableData.btnDesc = '查看';
-                            }
+                            // if (tableData.agreementStatus == 1){
+                            //     tableData.agreementStatus_str = '未编辑';
+                            //     tableData.btnVisible = false;
+                            // }else if (tableData.agreementStatus == 2){
+                            //     tableData.agreementStatus_str = '未审核';
+                            //     tableData.btnVisible = true;
+                            // }else if (tableData.agreementStatus == 3){
+                            //     tableData.agreementStatus_str = '未签署';
+                            //     tableData.btnVisible = true;
+                            //     tableData.btnDesc = '签署';
+                            // }else if (tableData.agreementStatus == 4){
+                            //     tableData.agreementStatus_str = '已签署';
+                            //     tableData.btnVisible = true;
+                            //     tableData.btnDesc = '查看';
+                            // }
+
+                            tableData.agreementStatus_str = '未编辑';
+                            tableData.btnVisible = true;
+                            tableData.btnDesc = '查看';
 
                             if (tableData.payStatus == 1){
                                 tableData.payStatus_str = '已支付';
@@ -319,22 +329,23 @@
                                 tableData.applyStatus_str = '已通过';
                             }
 
-                            if (tableData.applyStatus  == 1){
-                                if (tableData.agreementStatus == 1 || tableData.agreementStatus == 2 || tableData.agreementStatus == 3){
-                                    tableData.applyStatusBtnVisible = false;
-                                } else {
-                                    tableData.applyStatusBtnVisible = true;
-                                    tableData.applyStatusBtnDesc = '填写';
-                                }
-                            } else {
+                            // if (tableData.applyStatus  == 1){
+                            //     if (tableData.agreementStatus == 1 || tableData.agreementStatus == 2 || tableData.agreementStatus == 3){
+                            //         tableData.applyStatusBtnVisible = false;
+                            //     } else {
+                            //         tableData.applyStatusBtnVisible = true;
+                            //         tableData.applyStatusBtnDesc = '填写';
+                            //     }
+                            // } else {
+                            //     tableData.applyStatusBtnVisible = true;
+                            //     tableData.applyStatusBtnDesc = '查看';
+                            // }
                                 tableData.applyStatusBtnVisible = true;
-                                tableData.applyStatusBtnDesc = '查看';
-                            }
+                                tableData.applyStatusBtnDesc = '填写';
                             arrayData.push(tableData)
                         }
                     }
                     this.tableData = arrayData;
-                    console.log(this.tableData[0].filesList[0].fileName)
                 })
 
             },
@@ -349,8 +360,7 @@
                     cancelButtonText: '取消',
                     type: 'info'
                 }).then(() => {
-
-                    this.$ajax.post('/api/bussiness/account/order/creatNewOrder?orderType=1',null,(res)=>{
+                    this.$ajax.post('/api/bussiness/account/order/creatNewOrder?orderType='+this.serviceType,null,(res)=>{
                         if (res.code == 0){
                             this.$message({
                                 type: 'info',
@@ -359,12 +369,44 @@
                             that.fetchData();
                         }else {
                             this.$message({
-                                type: error,
+                                type: 'error',
                                 message: res.message
                             });
                         }
                     })
                 });
+            },
+
+            navRoute(name,query){
+                if ('签署协议' == name){
+                    this.$router.push({
+                        name: name,
+                        query:query
+                    });
+                };
+                if ('申请' == name){
+                    if (query.applyStatusBtnDesc == '查看'){
+                        this.$router.push({
+                            name: '申请详情',
+                            query:query
+                        });
+                    }
+                    if (query.applyStatusBtnDesc == '填写'){
+                        this.$router.push({
+                            name: '客户申请',
+                            query:query
+                        });
+                    }
+
+
+                }
+
+            },
+
+            test(scope){``
+                // const obj = {name:'zhangsan',age:18};
+                // console.log(JSON.stringify(obj))
+
             },
         }
     }

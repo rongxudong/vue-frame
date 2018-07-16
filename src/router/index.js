@@ -22,6 +22,7 @@ const Agreement = () => import(/* webpackChunkName: "chunkname2" */ '@/pages/Agr
 const QuotaApplicationForm = () => import(/* webpackChunkName: "chunkname2" */ '@/pages/QuotaApplicationForm.vue')
 const Investigate = () => import(/* webpackChunkName: "chunkname3" */ '@/pages/Investigate.vue')
 const CustomerPool = () => import(/* webpackChunkName: "chunkname3" */ '@/pages/CustomerPool.vue')
+const ApplyDetail = () => import(/* webpackChunkName: "chunkname3" */ '@/pages/ApplyDetail.vue')
 
 const customerApplication = () => import(/* webpackChunkName: "chunkname1" */ '@/pages/customerApplication.vue')
 const RealName = () => import(/* webpackChunkName: "chunkname1" */ '@/pages/RealName.vue')
@@ -45,7 +46,10 @@ export default new Router({
         {
             path: '/Agreement',
             name: '签署协议',
-            component: Agreement
+            component: Agreement,
+            meta: {
+                keepAlive: true // 需要被缓存
+            }
         },
         {
             path: '/CreditApplication',
@@ -71,6 +75,11 @@ export default new Router({
             }
         },
         {
+            path: '/ApplyDetail',
+            name: '申请详情',
+            component: ApplyDetail,
+        },
+        {
             path: '/RealName',
             name: '实名认证',
             component: RealName,
@@ -82,6 +91,8 @@ export default new Router({
             path: '/CustomerPool',
             name: '客户池',
             component: CustomerPool,
-        }
+        },
+
+
     ]
 })

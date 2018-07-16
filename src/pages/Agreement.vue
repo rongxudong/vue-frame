@@ -1,82 +1,163 @@
 <template>
-    <div class="article_list">
-        <ul>
-            <li v-for="i in list" :key="i.id">发表于
-                <!--<time v-text="moment(i.create_at).fromNow()"></time>-->
-                <router-link :to="'/content/' + i.id">
-                    {{ i.title }}
-                </router-link>
-            </li>
-        </ul>
-        <router-link to="/IndexBanner">Go to IndexBanner</router-link>
-        <div id="container">
-            <div class="column-1">one</div>
-            <div class="column-2">two</div>
-            <div class="column-3">three</div>
-            <div class="column-4">four</div>
-            <div class="column-5">five</div>
-        </div>
+    <div>
+        <!--<button type="button" v-on:click="test">点击</button>-->
+        <el-tabs v-model="activeName" @tab-click="handleClick" style="margin-top: 0.1rem">
+            <el-tab-pane v-for="(item,index) in agreementList" :key="index" :label="item.agreementTitle" :name="item.nameId">
+                <div class="flex_direction_column" style="background-color: white">
+                    <div :id="item.selectId" class="pdfobject-container" style="height: 620px;border: 1px solid #666;"></div>
+                    <div class="flex_direction_column align_items-center" v-if="item.status == 3 ">
+                        <el-checkbox :id="item.checkId" style="margin-top: 0.25rem" v-model="checked[index]">同意以上协议
+                        </el-checkbox>
+                        <div style="margin-top: 0.25rem;margin-bottom: 0.3rem">
+                            <el-button type="primary" style="width: 120px" v-on:click="signAgreement(item.id)">签署</el-button>
+                        </div>
+                    </div>
+                    <div v-else class="justify_content_center">
+                        <div style="margin-top: 0.25rem;margin-bottom: 0.3rem">
+                            <el-button type="primary" style="width: 140px">已完成签署</el-button>
+                        </div>
+                    </div>
+                </div>
+            </el-tab-pane>
+        </el-tabs>
     </div>
+
 </template>
 
 <script>
-    let date = new Date();
-    let timer = date.getTime().toString();
+
+    import {PDFObject} from '../assets/js/pdfobject.js'
 
     export default {
-        data () {
+
+        data() {
             return {
-                list: []
+                activeName: '',
+                orderInfo: {},
+                agreementList: [],
+                checked: [],
+                currentPage:0,
+                isFirst:true
             }
         },
-        mounted () {
-            this.getData();
-        },
-        beforeRouteLeave(to, from, next) {
-            // 设置下一个路由的 meta
-            to.meta.keepAlive = false; // 让 A 不缓存，即刷新
-            next();
+        created() {
+            this.orderInfo = this.$route.query;
+            this.fetchData();
         },
         methods: {
-            getData () {
-//                console.log(11)
-//                this.$ajax.get('topics?timer=' + timer, null, r => {
-////                    console.log(r);
-//                    this.list = r;
-//                })
+            handleClick(tab, event) {
+                this.orderInfo = this.$route.query;
+                this.currentPage = tab.index;
+                this.preViewPDF(this.agreementList[tab.index].pdfFile);
+            },
+            preViewPDF(pdfPath) {
+                if (!PDFObject.supportsPDFs) {
+                    this.$message({
+                        type: 'error',
+                        message: '该浏览器无法支持pdf文件'
+                    })
+                } else {
+                    if (pdfPath) {
+                        PDFObject.embed(this.$store.state.resUrl + pdfPath, '#'+this.agreementList[this.currentPage].selectId);
+                    } else {
+                        this.$message({
+                            type: 'error',
+                            message: '文件出错'
+                        })
+                    }
+                }
+            },
+            fetchData() {
+                this.$ajax.post('/api/bussiness/account/order/getAgreementList?orderId=' + this.orderInfo.id, null, (res) => {
+                    console.log(res)
+                    if (res.code == 0) {
+
+                        this.agreementList = res.data;
+                        for (let i = 0; i < this.agreementList.length; i++) {
+                            this.agreementList[i].selectId = 'selectId'+i;
+                            this.agreementList[i].checkId = 'checkId'+i;
+                            this.agreementList[i].nameId = 'name'+i;
+                            this.checked[i] = false;
+                        }
+
+                        this.selectRecentTab();
+
+                    } else {
+                        this.$message({
+                            type: error,
+                            message: res.message
+                        })
+                    }
+                });
+            },
+            signAgreement(agreementId) {
+                if (this.checked[this.currentPage]) {
+                    console.log('123');
+                    this.$ajax.post('/api/bussiness/account/order/signAgreement?agreementId=' + agreementId, null,(res) => {
+                        if (res.code == 0) {
+                            this.$message({
+                                type: 'info',
+                                message: '签署成功'
+                            })
+                            for (let i = 0; i < res.data.length; i++) {
+                                console.log(this.agreementList[i].status);
+                                if (res.data[i].status == 3) {
+                                    this.fetchData();
+                                    return;
+                                }
+                            }
+                            console.log("123");
+                            //说明签署完了，回退到订单列表
+                            this.$router.back();
+
+                        } else {
+                            this.$message({
+                                type: 'error',
+                                message: res.message
+                            })
+                        }
+                    });
+                } else {
+                    this.$message({
+                        type: 'info',
+                        message: '请勾选协议'
+                    })
+                }
+            },
+            selectRecentTab(){
+                for (let i = 0; i < this.agreementList.length; i++) {
+                    if (this.agreementList[i].status == 3) {
+                        this.activeName = this.agreementList[i].nameId;
+                        setTimeout(()=>{
+                            this.handleClick({index:i})
+                            this.isFirst = false;
+                        },1000)
+                        return;
+                    }
+                }
+                //说明签署完了，就显示第一个
+                if (this.agreementList.length > 0) {
+                    this.activeName = this.agreementList[0].nameId;
+                    setTimeout(()=>{
+                        this.handleClick({index:0})
+                        this.isFirst = false;
+                    },1000)
+                }
+
             }
         }
     }
 </script>
 
-<style>
-    #container {
-        height: 200px;
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-        grid-auto-rows: 1fr 1fr 1fr;
-        grid-template-areas:"one one two three"
-        "four four two three"
-        "five five five three";
+<style scoped lang="less" rel="stylesheet/less">
+
+    @import "../assets/css/_variable";
+    @import "../assets/css/_mixin";
+
+    .test {
+
     }
-    .column-1{
-        grid-area:one;
-        background-color: #F8594C;
-    }
-    .column-2{
-        grid-area:two;
-        background-color: #FFA29B;
-    }
-    .column-3{
-        grid-area:three;
-        background-color: #318B98;
-    }
-    .column-4{
-        grid-area:four;
-        background-color: #E73123;
-    }
-    .column-5{
-        grid-area:five;
-        background-color: #ABE646;
-    }
+
+
 </style>
+

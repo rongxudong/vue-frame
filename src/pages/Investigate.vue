@@ -339,7 +339,7 @@
                             //     tableData.applyStatusBtnDesc = '查看';
                             // }
                                 tableData.applyStatusBtnVisible = true;
-                                tableData.applyStatusBtnDesc = '填写';
+                                tableData.applyStatusBtnDesc = '查看';
                             arrayData.push(tableData)
                         }
                     }

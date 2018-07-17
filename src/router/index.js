@@ -27,6 +27,9 @@ const ApplyDetail = () => import(/* webpackChunkName: "chunkname3" */ '@/pages/A
 const customerApplication = () => import(/* webpackChunkName: "chunkname1" */ '@/pages/customerApplication.vue')
 const RealName = () => import(/* webpackChunkName: "chunkname1" */ '@/pages/RealName.vue')
 
+const FileList = () => import(/* webpackChunkName: "chunkname1" */ '@/pages/FileList.vue')
+const MessageList = () => import(/* webpackChunkName: "chunkname1" */ '@/pages/MessageList.vue')
+
 Vue.use(Router)
 
 export default new Router({
@@ -92,7 +95,15 @@ export default new Router({
             name: '客户池',
             component: CustomerPool,
         },
-
-
+        {
+            path: '/FileList',
+            name: '消息列表',
+            component: FileList,
+        },
+        {
+            path: '/MessageList',
+            name: '公告列表',
+            component: MessageList,
+        }
     ]
 })

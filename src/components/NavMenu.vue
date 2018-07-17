@@ -24,7 +24,6 @@
                 </el-menu-item>
             </el-menu-item-group>
         </el-submenu>
-        <!--<input type="text" onkeydown="this.onkeyup();" onkeyup="this.size=(this.value.length>4?this.value.length:4);" size="4" style="background-color: red;padding: 0 10px;">-->
     </el-menu>
 </template>
 
@@ -48,10 +47,11 @@
         mounted () {
             const routePath = localStorage.getItem('currentRoutePath');
             const routeName = localStorage.getItem('currentRouteName');
-            if (routePath !== '/') {
+            if ( routePath !== '/' ) {
                 this.$store.commit('add_tabs', { route: '/', name: '总览' });
                 this.$store.commit('add_tabs', { route: routePath , name: routeName });
                 this.$store.commit('set_active_index', this.$route.path);
+                console.log(this.$route.path);
             } else {
                 this.$store.commit('add_tabs', { route: '/', name: '总览' });
                 this.$store.commit('set_active_index', '/');
@@ -60,12 +60,14 @@
         },
         methods: {
             handleOpen (key, keyPath) {
-                console.log(key, keyPath)
+//                console.log(key, keyPath)
             },
             handleClose (key, keyPath) {
-                console.log(key, keyPath)
+//                console.log(key, keyPath)
             },
-            selectItems(index){
+            selectItems(index, indexPath){
+                console.log(index)
+                console.log(indexPath)
                 localStorage.setItem('currentRoutePath', index);
             }
         }

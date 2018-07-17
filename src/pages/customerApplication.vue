@@ -1,6 +1,6 @@
 <template>
     <div class="bg-style">
-        <form class="application-main">
+        <div class="application-main">
             <div class="basic">
                 <div class="title">请选择您想申请的额度范围</div>
                 <ul class="select-range">
@@ -268,7 +268,7 @@
                 <button type="button" value="保存" class="save-btn" @click="saveBtn()">保 存</button>
                 <button type="button" value="提交" class="submit-btn" @click="submitBtn()">提 交</button>
             </div>
-        </form>
+        </div>
     </div>
 </template>
 
@@ -548,7 +548,7 @@
                     orderId: 1
                 },
                 myHeaders: {
-                    token: "c78c3741ff32a72d68d978d43d9e3160"
+                    token: "f4aba4499dd6fd155f477d65c5cafa3c"
                 },
                 array: {
                     orderId: 1,
@@ -648,20 +648,19 @@
             // 远请求服务器如果成功则把fileList中要删除的file移除即可
             asyncReq (file,fileList) {
                 this.$ajax.post('/api/bussiness/account/order/deleteGtcpFile?fileId=' + file.id + '&orderId=' + this.array['orderId'], null, res => {
-                    this.fileList = this.File(res.data.files);
+                    this.fileList = this.File(res.files);
+                    console.log(res.message)
                 })
             },
             // 保存
             saveBtn () {
-                console.log(this.array);
                 this.$ajax.post( '/api/bussiness/account/order/saveGtcp?orderId=' + this.array['orderId'], this.array, res => {
                     console.log(res.data)
-                    console.log(res.data.message)
+                    console.log(res.message)
                 })
             },
             // 提交
             submitBtn () {
-                console.log(this.array)
                 if( this.array.files ) {
                     delete this.array.files
                 }
@@ -671,37 +670,45 @@
                 this.$ajax.post( '/api/bussiness/account/order/submitGtcp?orderId=' + this.array['orderId'], this.array, res => {
                     this.$message({
                         type: 'info',
-                        message: res.data.message
+                        message: res.message
                     });
                 })
             },
             // 获取之前保存的信息
             getGtcpDetail () {
                 this.$ajax.get('/api/bussiness/account/order/getGtcpDetail/' + this.array['orderId'], null, res => {
-                    let getDetail = res.data;
-                    if(!getDetail.data.quotaRange) {
-                        this.array['quotaRange'] = '1';
-                    }
-                    this.fileList = this.File(getDetail.data.files);
-                    this.array = getDetail.data;
+                    if( res.code == 0 ) {
+                        let getDetail = res.data;
+                        if(!getDetail.quotaRange) {
+                            this.array['quotaRange'] = '1';
+                        }
+                        this.fileList = this.File(getDetail.files);
+                        this.array = getDetail;
 
-                    let getLabelNum = this.array['iiCreditTermsRequest'];
-                    let getQuotaRange = this.array['quotaRange'];
-                    if( getQuotaRange == '1') {
-                        if( getLabelNum != 90 && getLabelNum != 120 && getLabelNum != 150 ) {
-                            this.Others = 0;
+                        let getLabelNum = this.array['iiCreditTermsRequest'];
+                        let getQuotaRange = this.array['quotaRange'];
+                        if( getQuotaRange == '1') {
+                            if( getLabelNum != 90 && getLabelNum != 120 && getLabelNum != 150 ) {
+                                this.Others = 0;
+                            }
+                            else {
+                                this.Others = getLabelNum;
+                            }
                         }
                         else {
-                            this.Others = getLabelNum;
+                            if( getLabelNum != 60 && getLabelNum != 90 ) {
+                                this.Others = 0;
+                            }
+                            else {
+                                this.Others = getLabelNum;
+                            }
                         }
                     }
                     else {
-                        if( getLabelNum != 60 && getLabelNum != 90 ) {
-                            this.Others = 0;
-                        }
-                        else {
-                            this.Others = getLabelNum;
-                        }
+                        this.$message({
+                            type: 'error',
+                            message: res.message
+                        });
                     }
                 })
             },

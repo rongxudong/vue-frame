@@ -3,8 +3,8 @@ import { Message } from 'element-ui';
 import axios from 'axios';
 
 // 配置API接口地址 (http://account.dev.financegt.com  http://192.168.50.18:8081)
-let root = 'http://account.dev.financegt.com',
-// let root = 'http://192.168.50.18:8081',
+// let root = 'http://account.dev.financegt.com',
+let root = 'http://192.168.50.18:8081',
 // let root = '',
     cancel ,
     promiseArr = {};
@@ -33,7 +33,7 @@ function filterNull (o) {
 axios.interceptors.request.use(config=> {
     // 配置config
     config.headers.Accept = 'application/json';
-    config.headers.token = '08cbf7cb745cb20e910d5305bb0af861';
+    config.headers.token = 'f4aba4499dd6fd155f477d65c5cafa3c';
 
     // config.headers.System = 'vue';
         // let token = Vue.localStorage.get('token');

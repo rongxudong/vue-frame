@@ -37,35 +37,6 @@ button {
     background-color: transparent;
 }
 
-//Home.vue
-.el-tabs--card>.el-tabs__header {
-    border-bottom: none;
-    .el-tabs__nav {
-        border: none;
-    }
-}
-.el-tabs__item.is-active {
-    height: 40px;
-    line-height: 40px;
-    vertical-align: top;
-    color: #000!important;
-    background-color: #ffffff!important;
-    .border-bottom-radius(0);
-}
-.el-tabs__item {
-    margin-right: 8px;
-    height: 34px;
-    line-height: 34px;
-    color: #fff;
-    background-color: RGBA(182, 194, 202, 1)!important;
-    .border-top-radius(5px);
-    .border-bottom-radius(5px);
-    .common_box_shadow(0 2px 4px rgba(7, 17, 27, .15));
-    &:hover {
-        color: #000!important;
-    }
-}
-
 //RealName.vue
 
 .RealName-main .el-upload--picture-card,
@@ -98,7 +69,6 @@ button {
             width: 4px;
             height: 16px;
             background-color: @base;
-            //.common_radius(2px);
         }
     }
     .basic-form {
@@ -177,4 +147,10 @@ button {
         line-height: 44px;
         border: none!important;
     }
+}
+
+//investigate.vue
+.el-date-editor .el-range-separator {
+    width: 8%;
+    min-width: 26px;
 }

@@ -18,7 +18,7 @@
             </div>
             <div class="bottom">
                 <div class="title">
-                    <span>信息</span>
+                    <span>消息</span>
                     <a href="#">MORE &gt;&gt;</a>
                 </div>
                 <div class="msg-item align_items" v-for="(item, index) in DataMessageList" :key="item.index">
@@ -49,7 +49,7 @@
                                 { 'icon-wenjian':item.type == 4 }
                                 ]">
                         </i>
-                        {{item.title}}
+                        {{item.fileName}}
                     </div>
                     <div class="file-operate align_items flex_end">
                         <span class="operate look" @click="onLook()">查看</span>
@@ -92,13 +92,53 @@
         },
         methods: {
             getResList () {
-                this.$ajax.get('/api/HomeRes', null, r => {
-                    this.DataResList = r.data.data.resList;
+                let messageListModel = {
+                    pageNum: 1,
+                    pageSize: 15
+                }
+                this.$ajax.post('/api/bussiness/account/message/getFileList', messageListModel, res => {
+                    if( res.code == 0 ) {
+                        let fileExtension;
+                        res.data.forEach(function (item, index) {
+                            fileExtension = item.fileName.split('.').pop().toLowerCase();
+                            if( fileExtension == 'doc' || fileExtension == 'docx' ) {
+                                res.data[index].type = 1;
+                            }
+                            else if( fileExtension == 'png' || fileExtension == 'jpg' || fileExtension == 'jpeg' || fileExtension == 'gif') {
+                                res.data[index].type = 2;
+                            }
+                            else if( fileExtension == 'pdf' ) {
+                                res.data[index].type = 3;
+                            }
+                            else {
+                                res.data[index].type = 4;
+                            }
+                        })
+                        this.DataResList = res.data;
+                    }
+                    else {
+                        this.$message({
+                            type: 'error',
+                            message: res.message
+                        });
+                    }
                 })
             },
             getMessageList () {
-                this.$ajax.get('/api/HomeRes', null, r => {
-                    this.DataMessageList = r.data.data.messageList;
+                let params = {
+                    pageNum: 1,
+                    pageSize: 5
+                }
+                this.$ajax.post('/api/bussiness/account/message/getMessageList', params, res => {
+                    if( res.code == 0 ) {
+                        this.DataMessageList = res.data;
+                    }
+                    else {
+                        this.$message({
+                            type: 'error',
+                            message: res.message
+                        });
+                    }
                 })
             },
             onLook () {
@@ -249,8 +289,7 @@
                     .file-name {
                         float: left;
                         width: 70%;
-                        height: .44rem;
-                        min-height: 42px;
+                        height: 42px;
                         padding-left: .48rem;
                         line-height: 42px;
                     }
@@ -262,7 +301,7 @@
                     }
                     i {
                         position: absolute;
-                        top: .14rem;
+                        top: 10px;
                         left: .04rem;
                         width: 22px;
                         height: 22px;

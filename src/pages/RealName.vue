@@ -150,7 +150,7 @@
                 dialog: false,
                 isEdit: false,
                 myHeaders: {
-                    token: "a9ff3905186d7b154c3f624862569551"
+                    token: "f4aba4499dd6fd155f477d65c5cafa3c"
                 },
                 action: this.$store.state.domain + "/api/bussinessAccount/yqq/uploadPic",
                 nameType: 'file',
@@ -183,16 +183,6 @@
                     ],
                     idCard: [
                         { required: true, message: '请输入有效证件号码', trigger: 'blur' },
-//                        {
-//                            validator: function (rule, value, callback) {
-//                                let cP = /^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/;
-//                                if (!cP.test(value)) {
-//                                    callback(new Error('身份证号码格式不正确！'))
-//                                } else {
-//                                    callback();
-//                                }
-//                            }, trigger: 'blur'
-//                        }
                     ],
                     idPicFront: [
                         { required: true, message: '请输入证件正面照片', trigger: 'blur' }
@@ -264,10 +254,9 @@
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
                         this.$ajax.post( '/api/bussinessAccount/yqq/userIdentity', this.ruleForm, res => {
-                            console.log(res);
                             this.$message({
                                 type: 'info',
-                                message: res.data.message
+                                message: res.message
                             });
                         })
                     } else {
@@ -279,23 +268,39 @@
             // 用户查询实名认证状态
             findUserIdentityStatus () {
                 this.$ajax.get('/api/bussinessAccount/yqq/findUserIdentityStatus', null, res => {
-                    this.ruleForm['auditFlag'] = res.data;
-                    if( this.ruleForm['auditFlag'] == '4' || this.ruleForm['auditFlag'] == '1') {
-                        this.isEdit = true;
+                    if( res.code == 0) {
+                        this.ruleForm['auditFlag'] = res.data;
+                        if( this.ruleForm['auditFlag'] == '4' || this.ruleForm['auditFlag'] == '1') {
+                            this.isEdit = true;
+                        }
+                        else {
+                            this.isEdit = false;
+                        }
                     }
                     else {
-                        this.isEdit = false;
+                        this.$message({
+                            type: 'error',
+                            message: res.message
+                        });
                     }
                 })
             },
             // 查询用户风控-实名认证信息
             findUserIdentity () {
                 this.$ajax.get('/api/bussinessAccount/yqq/findUserIdentity', null, res => {
-                    this.ruleForm = res.data;
-                    this.ruleForm['businessLicense'] = this.$store.state.resUrl + res.data.businessLicense;
-                    this.ruleForm['idPicBehind'] = this.$store.state.resUrl + res.data.idPicBehind;
-                    this.ruleForm['idPicFront'] = this.$store.state.resUrl + res.data.idPicFront;
-                    this.ruleForm['idPicHand'] = this.$store.state.resUrl + res.data.idPicHand;
+                    if(res.code == 0){
+                        this.ruleForm = res.data;
+                        this.ruleForm['businessLicense'] = this.$store.state.resUrl + res.data.businessLicense;
+                        this.ruleForm['idPicBehind'] = this.$store.state.resUrl + res.data.idPicBehind;
+                        this.ruleForm['idPicFront'] = this.$store.state.resUrl + res.data.idPicFront;
+                        this.ruleForm['idPicHand'] = this.$store.state.resUrl + res.data.idPicHand;
+                    }
+                    else {
+                        this.$message({
+                            type: 'error',
+                            message: res.message
+                        });
+                    }
                 })
             },
             handleClose(done) {

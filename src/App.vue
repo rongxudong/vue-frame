@@ -10,6 +10,7 @@
                 </el-aside>
                 <el-main>
                     <el-tabs
+                            class="main-tab"
                             v-model="activeIndex"
                             type="card"
                             closable
@@ -126,7 +127,7 @@
             border: none;
         }
     }
-    .el-tabs__item.is-active {
+    .main-tab .el-tabs__item.is-active {
         height: 40px;
         line-height: 40px;
         vertical-align: top;
@@ -134,7 +135,7 @@
         background-color: #ffffff!important;
         .border-bottom-radius(0);
     }
-    .el-tabs__item {
+    .main-tab .el-tabs__item {
         margin-right: 8px;
         height: 34px;
         line-height: 34px;

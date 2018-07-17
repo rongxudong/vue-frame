@@ -48,7 +48,7 @@
                                 </el-input>
                             </div>
                             <div class="align_content">
-                                <h1 class="align-self-center text-head" style="margin-left: 0.25rem;;min-width: 80px">申请表状态:</h1>
+                                <h1 class="align-self-center text-head" style="margin-left: 0.25rem;min-width: 80px;">申请表状态:</h1>
                                 <el-select v-model="QueryOrderListModel.applyStatus" placeholder="请选择" style="margin-left: 0.25rem">
                                     <el-option
                                         v-for="item in applyStatus"
@@ -92,7 +92,7 @@
                     <div class="flex_direction_row container-head-bg">
                         <img class="image-search" src="../assets/img/investigate/tips.png" alt="搜索">
                         <h1 class="text-head flex-1" style="margin-left: 0.12rem;">您可重新创建一个新的{{this.serviceTitle[this.serviceType]}}服务，需重新签署协议，详细情况请联系融资顾问</h1>
-                        <el-button type="primary" size="small" style="margin-right: 0.2rem" v-on:click="showDialog">创建新服务</el-button>
+                        <el-button type="primary" size="small" style="margin-right: 0.2rem" @click="showDialog">创建新服务</el-button>
                     </div>
                     <el-table
                         border
@@ -150,7 +150,6 @@
                             width="130">
                         </el-table-column>
                         <el-table-column
-
                             align="center"
                             prop="date"
                             label="申请表操作"
@@ -201,7 +200,7 @@
 
     export default {
         data () {
-            var that = this;
+            let that = this;
             return {
                 loading: false,
                 post: null,
@@ -230,11 +229,10 @@
                 payStatus: [
                     {value: '1', label: '已付款'},
                     {value: '2', label: '未付款'}
-
                 ],
                 tableData: [],
                 data: '',
-                total:0,
+                total: 0,
                 QueryOrderListModel:{
                     orderType:1,
                     beginDate:'',
@@ -273,8 +271,8 @@
         },
         methods: {
             fetchData () {
-                this.$ajax.post('/api/bussiness/account/order/getOrderList ', this.QueryOrderListModel, res => {
-                    var arrayData = [];
+                this.$ajax.post('/api/bussiness/account/order/getOrderList', this.QueryOrderListModel, res => {
+                    const arrayData = [];
                     if (res.data.list){
                         this.total = res.data.total;
                         for (let i = 0;i < res.data.list.length;i++){
@@ -360,7 +358,7 @@
                     cancelButtonText: '取消',
                     type: 'info'
                 }).then(() => {
-                    this.$ajax.post('/api/bussiness/account/order/creatNewOrder?orderType='+this.serviceType,null,(res)=>{
+                    this.$ajax.post('/api/bussiness/account/order/creatNewOrder?orderType='+this.serviceType, null, (res)=>{
                         if (res.code == 0){
                             this.$message({
                                 type: 'info',
@@ -381,9 +379,9 @@
                 if ('签署协议' == name){
                     this.$router.push({
                         name: name,
-                        query:query
+                        query: query
                     });
-                };
+                }
                 if ('申请' == name){
                     if (query.applyStatusBtnDesc == '查看'){
                         this.$router.push({

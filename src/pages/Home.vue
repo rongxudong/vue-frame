@@ -26,7 +26,7 @@
                     <div class="msg-item-left">
                         <h1>{{item.title}}</h1>
                         <p class="text_overflow">{{item.content}}</p>
-                        <span>{{item.date}}</span>
+                        <span>{{item.creatime | filterTime('YYYY-MM-DD HH:mm')}}</span>
                     </div>
                     <div class="msg-item-right flex_end">
                         <button type="button" class="look-btn">查看详情</button>
@@ -52,7 +52,7 @@
                         {{item.fileName}}
                     </div>
                     <div class="file-operate align_items flex_end">
-                        <span class="operate look" @click="onLook()">查看</span>
+                        <span class="operate look" @click="onLook(item.url,item.fileName)">查看</span>
                         <span class="operate upLoad" @click="onDownload()">下载</span>
                     </div>
                 </div>
@@ -62,6 +62,8 @@
 </template>
 
 <script>
+    import moment from 'moment';
+
     export default {
         data() {
             return {
@@ -90,6 +92,12 @@
                 DataMessageList: []
             }
         },
+        filters: {
+            filterTime: function (value, formatString) {
+                formatString = formatString || 'YYYY-MM-DD HH:mm:ss';
+                return moment(value).format(formatString);
+            }
+        },
         methods: {
             getResList () {
                 let messageListModel = {
@@ -99,22 +107,22 @@
                 this.$ajax.post('/api/bussiness/account/message/getFileList', messageListModel, res => {
                     if( res.code == 0 ) {
                         let fileExtension;
-                        res.data.forEach(function (item, index) {
+                        res.data.filesList.forEach(function (item, index) {
                             fileExtension = item.fileName.split('.').pop().toLowerCase();
                             if( fileExtension == 'doc' || fileExtension == 'docx' ) {
-                                res.data[index].type = 1;
+                                res.data.filesList[index].type = 1;
                             }
                             else if( fileExtension == 'png' || fileExtension == 'jpg' || fileExtension == 'jpeg' || fileExtension == 'gif') {
-                                res.data[index].type = 2;
+                                res.data.filesList[index].type = 2;
                             }
                             else if( fileExtension == 'pdf' ) {
-                                res.data[index].type = 3;
+                                res.data.filesList[index].type = 3;
                             }
                             else {
-                                res.data[index].type = 4;
+                                res.data.filesList[index].type = 4;
                             }
                         })
-                        this.DataResList = res.data;
+                        this.DataResList = res.data.filesList;
                     }
                     else {
                         this.$message({
@@ -149,8 +157,8 @@
                 e.preventDefault();
                 this.$router.push({path:'/FileList'});
             },
-            onLook () {
-                window.open('https://www.baidu.com','_blank');
+            onLook (url, fileType) {
+                window.open(this.$store.state.resUrl + url,'_blank');
             },
             onDownload () {
                 alert('2')

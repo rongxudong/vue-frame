@@ -26,25 +26,28 @@
                 required: true
             },
             //总条目数
-            totalNum: {
+            total: {
                 type: Number,
                 required: true
-            }
+            },
+            sizeChange: Function,
+            currentChange: Function,
+            uploadId: null, //接收到的自定义的参数,
         },
         data () {
             return {
                 currentPage: 1,
                 pageSizesObj: this.pageSizes,
                 pageSizeNumber: this.pageSize,
-                totalNumber: this.totalNum,
+                totalNumber: this.total,
             }
         },
         methods: {
             handleSizeChange(val) {
-                console.log(`每页 ${val} 条`);
+                this.sizeChange(...arguments,this.uploadId)
             },
             handleCurrentChange(val) {
-                console.log(`当前页: ${val}`);
+                this.currentChange(...arguments,this.uploadId)
             }
         }
     }

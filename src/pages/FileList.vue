@@ -18,52 +18,73 @@
                         {{item.fileName}}
                     </div>
                     <div class="file-operate align_items flex_end">
-                        <span class="operate look" @click="onLook()">查看</span>
+                        <span class="operate look" @click="onLook(item.url,item.fileName)">查看</span>
                         <span class="operate upLoad" @click="onDownload()">下载</span>
                     </div>
                 </div>
             </div>
+            <div style="width: 100%;">
+
+            </div>
             <div class="page-wrap">
-                <pagination :pageSizes="[10, 20]" :pageSize="20" :totalNum="60"></pagination>
+                <pagination
+                        :page-sizes="pageSizes"
+                        :page-size="messageListModel['pageSize']"
+                        :total="totalNumber"
+                        :size-change="handleSizeChange"
+                        :current-change="handleCurrentChange"
+                >
+                </pagination>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-    import Pagination from '@/components/Pagination'
+    import pagination from '@/components/Pagination'
 
     export default {
         data () {
             return {
-                DataResList: []
+                DataResList: [],
+                pageSizes: [10, 20],
+                totalNumber: 0,
+                messageListModel: {
+                    pageNum: 1,
+                    pageSize: 10
+                }
             }
         },
         methods: {
+            handleSizeChange(val) {
+                console.log(val);
+            },
+            handleCurrentChange(val) {
+                console.log(val);
+                this.messageListModel['pageNum'] = val;
+            },
             getResList () {
-                let messageListModel = {
-                    pageNum: 1,
-                    pageSize: 15
-                }
-                this.$ajax.post('/api/bussiness/account/message/getFileList', messageListModel, res => {
+                this.$ajax.post('/api/bussiness/account/message/getFileList', this.messageListModel, res => {
                     if( res.code == 0 ) {
                         let fileExtension;
-                        res.data.forEach(function (item, index) {
+                        res.data.filesList.forEach(function (item, index) {
                             fileExtension = item.fileName.split('.').pop().toLowerCase();
                             if( fileExtension == 'doc' || fileExtension == 'docx' ) {
-                                res.data[index].type = 1;
+                                res.data.filesList[index].type = 1;
                             }
                             else if( fileExtension == 'png' || fileExtension == 'jpg' || fileExtension == 'jpeg' || fileExtension == 'gif') {
-                                res.data[index].type = 2;
+                                res.data.filesList[index].type = 2;
                             }
                             else if( fileExtension == 'pdf' ) {
-                                res.data[index].type = 3;
+                                res.data.filesList[index].type = 3;
                             }
                             else {
-                                res.data[index].type = 4;
+                                res.data.filesList[index].type = 4;
                             }
                         })
-                        this.DataResList = res.data;
+                        this.totalNumber = res.data.total;
+                        console.log(this.totalNumber);
+                        this.DataResList = res.data.filesList;
                     }
                     else {
                         this.$message({
@@ -72,13 +93,25 @@
                         });
                     }
                 })
+            },
+            onLook (url, fileType) {
+                window.open(this.$store.state.resUrl + url, '_blank');
+            },
+            onDownload () {
+
             }
+        },
+        mounted() {
+
         },
         created () {
             this.getResList();
         },
         components: {
-            'pagination': Pagination
+            pagination,
+        },
+        watch: {
+            messageListModel: 'getResList'
         }
     }
 </script>

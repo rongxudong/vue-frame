@@ -172,7 +172,19 @@
     @import "../assets/css/_variable";
     @import "../assets/css/_mixin";
 
-    @media (max-width: 1280px) {
+    //针对ipad/平板
+    @media (min-width: 768px) and (max-width: 1023px) {
+        .Home-main .left .left-wrapper {
+            .step-icon-wrap {
+                width: 1rem;
+                height: 1rem;
+            }
+            .step {
+                margin-right: .5rem;
+            }
+        }
+    }
+    @media (min-width: 1024px) and (max-width: 1279px) {
         .Home-main {
             display: block;
             .left {
@@ -184,6 +196,21 @@
                 width: 100%;
                 margin-top: 30px;
             }
+        }
+    }
+    @media (min-width: 1280px) and (max-width: 1365px) {
+        .Home-main .left .left-wrapper .step {
+            margin-right: .6rem;
+        }
+    }
+    @media (min-width: 1366px) and (max-width: 1439px) {
+        .Home-main .left .left-wrapper .step {
+            margin-right: .8rem;
+        }
+    }
+    @media (min-width: 1440px) and (max-width: 1679px) {
+        .Home-main .left .left-wrapper .step {
+            margin-right: .8rem;
         }
     }
 </style>

@@ -18,7 +18,9 @@
                     </div>
                 </div>
             </div>
-            <pagination></pagination>
+            <div class="page-wrap">
+                <pagination :pageSizes="[10, 20]" :pageSize="20" :totalNum="60"></pagination>
+            </div>
         </div>
     </div>
 </template>
@@ -29,11 +31,30 @@
     export default {
         data () {
             return {
-
+                DataMessageList: []
+            }
+        },
+        methods: {
+            getMessageList () {
+                let params = {
+                    pageNum: 1,
+                    pageSize: 5
+                }
+                this.$ajax.post('/api/bussiness/account/message/getMessageList', params, res => {
+                    if( res.code == 0 ) {
+                        this.DataMessageList = res.data;
+                    }
+                    else {
+                        this.$message({
+                            type: 'error',
+                            message: res.message
+                        });
+                    }
+                })
             }
         },
         created () {
-
+            this.getMessageList();
         },
         components: {
             'pagination': Pagination

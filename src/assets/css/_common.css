@@ -436,9 +436,7 @@ button:focus {
 }
 .Home-main .left .left-wrapper .step-icon-wrap {
   width: 1.34rem;
-  min-width: 100px;
   height: 1.34rem;
-  min-height: 100px;
   text-align: center;
   background: #f1f0f5;
   border-radius: 50%;
@@ -481,6 +479,7 @@ button:focus {
   width: 100%;
   cursor: pointer;
   color: #303133;
+  background-color: #ffffff;
   /*.icon-ELXs {*/
   /*background: url("../assets/img/Home/file-word.png") no-repeat center left;*/
   /*}*/
@@ -595,6 +594,11 @@ button:focus {
   text-decoration: none;
   color: #2fa8fd;
 }
+.Home-main .page-wrap {
+  width: 100%;
+  margin: .3rem 0 .2rem;
+  text-align: center;
+}
 .bg-style {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(7, 17, 27, 0.15);
@@ -645,21 +649,21 @@ button:focus {
 }
 @media (min-width: 1366px) and (max-width: 1439px) {
   html {
-    font-size: 500%!important;
+    font-size: 525%!important;
   }
 }
 @media (min-width: 1440px) and (max-width: 1679px) {
   html {
-    font-size: 500%!important;
+    font-size: 550%!important;
   }
 }
 @media (min-width: 1680px) and (max-width: 1919px) {
   html {
-    font-size: 500%!important;
+    font-size: 600%!important;
   }
 }
 @media (min-width: 1920px) {
   html {
-    font-size: 500%!important;
+    font-size: 625%!important;
   }
 }

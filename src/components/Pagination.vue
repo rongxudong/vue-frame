@@ -1,5 +1,6 @@
 <template>
     <el-pagination
+            class="page"
             background
             @size-change="handleSizeChange"
             @current-change="handleCurrentChange"
@@ -14,14 +15,17 @@
 <script>
     export default {
         props: {
+            //每页显示个数选择器的选项设置
             pageSizes: {
                 type: Array,
                 required: true
             },
+            //每页显示条目个数
             pageSize: {
                 type: Number,
                 required: true
             },
+            //总条目数
             totalNum: {
                 type: Number,
                 required: true
@@ -46,5 +50,8 @@
     }
 </script>
 
-<style>
+<style scoped lang="less" rel="stylesheet/less">
+    .page {
+        display: inline-block;
+    }
 </style>

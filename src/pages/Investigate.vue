@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-style">
+    <div class="bg-style" style="min-width: 880px">
         <div class="investigate-main">
             <div class="basic">
                 <div class="title process-title line">{{this.serviceTitle[this.serviceType]}}服务流程</div>
@@ -41,7 +41,7 @@
                             <div class="flex_direction_row">
                                 <h1 class="align-self-center text-head" style="margin-left: 0.25rem;min-width: 61px">调查对象:</h1>
                                 <el-input
-                                    style="margin-left: 0.25rem"
+                                    style="margin-left: 0.25rem;min-width: 2rem"
                                     placeholder="请输入内容"
                                     v-model="QueryOrderListModel.userCompanyName"
                                     clearable>
@@ -61,7 +61,7 @@
                         </div>
                         <div class="align_items-center" style="height: 50%;width: 100%">
                             <div class="flex_direction_row ">
-                                <h1 class="align-self-center text-head" style="margin-left: 0.25rem">支付状态:</h1>
+                                <h1 class="align-self-center text-head" style="margin-left: 0.25rem;min-width: 61px">支付状态:</h1>
                                 <el-select v-model="QueryOrderListModel.agreementStatus" placeholder="请选择" style="margin-left: 0.25rem">
                                     <el-option
                                         v-for="item in payStatus"
@@ -72,7 +72,7 @@
                                 </el-select>
                             </div>
                             <div class="flex_direction_row">
-                                <h1 class="align-self-center text-head" style="margin-left: 0.25rem;min-width: 0.61rem">协议状态:</h1>
+                                <h1 class="align-self-center text-head" style="margin-left: 0.25rem;min-width: 61px">协议状态:</h1>
                                 <el-select v-model="QueryOrderListModel.payStatus" placeholder="请选择" style="margin-left: 0.25rem">
                                     <el-option
                                         v-for="item in agreementStatus"
@@ -326,7 +326,6 @@
                             }else if (tableData.applyStatus == 6){
                                 tableData.applyStatus_str = '已通过';
                             }
-
                             // if (tableData.applyStatus  == 1){
                             //     if (tableData.agreementStatus == 1 || tableData.agreementStatus == 2 || tableData.agreementStatus == 3){
                             //         tableData.applyStatusBtnVisible = false;
@@ -400,19 +399,12 @@
                 }
 
             },
-
-            test(scope){``
-                // const obj = {name:'zhangsan',age:18};
-                // console.log(JSON.stringify(obj))
-
-            },
         }
     }
 </script>
 <style scoped lang="less" rel="stylesheet/less">
     @import "../assets/css/_variable";
     @import "../assets/css/_mixin";
-
 
     .investigate-main {
         position: relative;

@@ -11,17 +11,16 @@ module.exports = {
         assetsSubDirectory: 'static',
         // 发布路径
         assetsPublicPath: '/',
+
+        //配置跨域请求,注意配置完之后需要重启编译该项目
         proxyTable: {
-            // '/api/v1/**': {
-            //     target: 'https://cnodejs.org', // 你接口的域名
-            //     secure: false,
-            //     changeOrigin: false,
-            // }
-            '/api/': {
-                target: 'http://localhost:3000',
-                changeOrigin: true,
+            //请求名字变量可以自己定义
+            '/api': {
+                target: 'http://app.dev.financegt.com', // 请求的接口域名或IP地址，开头是http或https
+                // secure: false,  // 如果是https接口，需要配置这个参数
+                changeOrigin: true, // 是否跨域，如果接口跨域，需要进行这个参数配置
                 pathRewrite: {
-                    '^/api/': ''
+                    '^/api': '/api'//表示需要rewrite重写路径
                 }
             }
         },

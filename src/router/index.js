@@ -56,7 +56,7 @@ export default new Router({
         },
         {
             path: '/CreditApplication',
-            name: '授信申请',
+            name: '融资授信',
             component: CreditApplication
         },
         {

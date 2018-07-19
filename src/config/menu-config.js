@@ -18,7 +18,7 @@ module.exports = [
             },
             {
                 id: '20002',
-                name: '授信申请',
+                name: '融资授信',
                 componentName: 'Investigate',
                 route: '/Investigate?type=3'
             },

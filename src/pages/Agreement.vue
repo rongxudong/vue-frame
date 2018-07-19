@@ -3,7 +3,7 @@
         <el-tabs v-model="activeName" @tab-click="handleClick">
             <el-tab-pane v-for="(item,index) in agreementList" :key="index" :label="item.agreementTitle" :name="item.nameId">
                 <div class="ag-content flex_direction_column">
-                    <div :id="item.selectId" class="pdfobject-container" style="height: 620px;"></div>
+                    <div :id="item.selectId" style="height: 620px;"></div>
                     <div class="flex_direction_column align_items-center" v-if="item.status == 3 ">
                         <el-checkbox :id="item.checkId" style="margin-top: 0.25rem" v-model="checked[index]">同意以上协议
                         </el-checkbox>
@@ -155,6 +155,7 @@
         padding: 20px;
         background-color: #fff;
     }
+
 
 
 </style>

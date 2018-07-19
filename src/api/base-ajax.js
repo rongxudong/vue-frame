@@ -1,19 +1,17 @@
-import { Message } from 'element-ui';
+import {Message} from 'element-ui';
 // 引用axios
 import axios from 'axios';
 
-// 配置API接口地址 (http://account.dev.financegt.com  http://192.168.50.18:8081)
-// let root = 'http://account.dev.financegt.com',
-let root = 'http://192.168.50.18:8081',
-// let root = '',
-    cancel ,
+let cancel,
     promiseArr = {};
+
 // 自定义判断元素类型JS
-function toType (obj) {
+function toType(obj) {
     return ({}).toString.call(obj).match(/\s([a-zA-Z]+)/)[1].toLowerCase()
 }
+
 // 参数过滤函数
-function filterNull (o) {
+function filterNull(o) {
     for (let key in o) {
         if (o[key] === null) {
             delete o[key]
@@ -29,17 +27,37 @@ function filterNull (o) {
     return o
 }
 
-    //添加一个请求拦截器
-axios.interceptors.request.use(config=> {
+//添加一个请求拦截器
+axios.interceptors.request.use(config => {
     // 配置config
-    config.headers.Accept = 'application/json';
-    config.headers.token = 'f4aba4499dd6fd155f477d65c5cafa3c';
 
-    // config.headers.System = 'vue';
-        // let token = Vue.localStorage.get('token');
-        // if(token){
-        //     config.headers.Token = token;
-        // }
+    //从cookie拿token
+    const cookies = document.cookie;
+    var token = '';
+    if (cookies) {
+        const cookieArray = cookies.split(';');
+        for (let i = 0; i < cookieArray.length; i++) {
+            if (cookieArray[i].split('=')[0] == 'bl_sid') {
+                token = cookieArray[i].split('=')[1];
+            }
+        }
+    }
+    //处理baseUrl
+    var baseUrl = 'http://account.financegt.com'
+    var domain = document.domain;
+    if (domain.indexOf('dev') != -1) {
+        baseUrl = 'http://account.dev.financegt.com';
+    }
+    if (domain.indexOf('stage') != -1) {
+        baseUrl = 'http://account.stage.financegt.com';
+    }
+    console.log('token == ' + token);
+    console.log('baseUrl == ' + baseUrl);
+
+    config.headers.token = process.env.NODE_ENV == 'development' ? '4433d716545da07db452c6208415c8c9' : token;
+    config.baseURL = process.env.NODE_ENV == 'development' ? 'http://account.dev.financegt.com' : baseUrl;
+
+    config.headers.Accept = 'application/json';
     //在请求发出之前进行一些操作
     if (promiseArr[config.url]) {
         promiseArr[config.url]('操作取消')
@@ -49,7 +67,7 @@ axios.interceptors.request.use(config=> {
         promiseArr[config.url] = cancel
     }
     return config
-}, err=> {
+}, err => {
     Message.error({
         showClose: true,
         message: '请求超时!'
@@ -110,8 +128,7 @@ axios.interceptors.response.use(response => {
             default:
                 err.message = '连接错误' + err.response.status
         }
-    }
-    else {
+    } else {
         err.message = "连接到服务器失败"
     }
     Message.error({
@@ -131,7 +148,7 @@ axios.interceptors.response.use(response => {
   另外，不同的项目的处理方法也是不一致的，这里出错就是简单的alert
 */
 
-function apiAxios (method, url, params, success, failure) {
+function apiAxios(method, url, params, success, failure) {
     if (params) {
         params = filterNull(params)
     }
@@ -140,8 +157,8 @@ function apiAxios (method, url, params, success, failure) {
         method: method,
         // 请求的url,例如url: '/user/12345'
         url: url,
-        // 相对路径：域名
-        baseURL: root,
+        // 相对路径：域名；注释掉了，放在了请求拦截器中处理
+        // baseURL: root,
         // 要发送的自定义标头
         headers: {'X-Requested-With': 'XMLHttpRequest'},
         // 请求所要发送的数据,例如data: {firstName: 'Fred',lastName: 'Flintstone'}
@@ -151,7 +168,7 @@ function apiAxios (method, url, params, success, failure) {
         // 指定请求超时前的毫秒数,如果请求花费的时间超过“timeout”，则请求将被中止
         timeout: 5000,
         // 表示是否存在跨站点访问控制请求
-        withCredentials: false,
+        withCredentials: true,
         // 表示服务器将使用的数据类型,选项“arrayBuffer”、“blob”、“document”、“json”、“text”、“stream;默认为JSON
         responseType: 'json',
         // 表示用于解码响应的编码
@@ -162,16 +179,11 @@ function apiAxios (method, url, params, success, failure) {
         maxRedirects: 5
     })
     // then时进行response数据处理
-    .then(function (res) {
-        // if (res.data.success === true) {
-        //     if (success) {
-        //         success(res.data)
-        //     }
-        // }
-        if (success) {
-            success(res.data)
-        }
-    })
+        .then(function (res) {
+            if (success) {
+                success(res.data)
+            }
+        })
 }
 
 // 返回在vue模板中的调用接口

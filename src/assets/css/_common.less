@@ -259,81 +259,6 @@ button {
         min-width: 350px;
         padding: .15rem .32rem;
         .common_radius(5px);
-        .right-list {
-            width: 100%;
-            padding: .1rem 0;
-            border-top: 1px solid RGBA(182, 194, 202, .4);
-            .item {
-                position: relative;
-                overflow: hidden;
-                width: 100%;
-                cursor: pointer;
-                color: @main-col;
-                background-color: #ffffff;
-                .file-name {
-                    float: left;
-                    width: 60%;
-                    height: 44px;
-                    padding-left: .45rem;
-                    line-height: 44px;
-                }
-                .file-operate {
-                    float: left;
-                    width: 40%;
-                    height: 44px;
-                    line-height: 44px;
-                }
-                i {
-                    position: absolute;
-                    top: 11px;
-                    left: .04rem;
-                    width: 22px;
-                    height: 22px;
-                }
-                .icon-word {
-                    background: url("../../assets/img/Home/file-word.png") no-repeat center left;
-                }
-                .icon-JPGs {
-                    background: url("../../assets/img/Home/file-photo.png") no-repeat center left;
-                }
-                .icon-pdf {
-                    background: url("../../assets/img/Home/file-pdf.png") no-repeat center left;
-                }
-                /*.icon-ELXs {*/
-                /*background: url("../assets/img/Home/file-word.png") no-repeat center left;*/
-                /*}*/
-                .icon-wenjian {
-                    background: url("../../assets/img/Home/file-txt.png") no-repeat center left;
-                }
-                .operate {
-                    display: inline-block;
-                    width: 56px;
-                    height: 26px;
-                    line-height: 26px;
-                    text-align: center;
-                    margin-left: .08rem;
-                    font-size: .13rem;
-                    .common_radius(13px);
-                    &:hover {
-                        color: #fff;
-                    }
-                }
-                span.look {
-                    color: RGBA(46, 170, 253, 1);
-                    border: 1px solid RGBA(46, 170, 253, 1);
-                    &:hover {
-                        background-color: RGBA(46, 170, 253, 1);
-                    }
-                }
-                span.upLoad {
-                    color: RGBA(84, 190, 117, 1);
-                    border: 1px solid RGBA(84, 190, 117, 1);
-                    &:hover {
-                        background-color: RGBA(84, 190, 117, 1);
-                    }
-                }
-            }
-        }
     }
     .title {
         position: relative;
@@ -386,6 +311,81 @@ button {
     }
 }
 
+.right-list {
+    width: 100%;
+    padding: .1rem 0;
+    border-top: 1px solid RGBA(182, 194, 202, .4);
+    .item {
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+        cursor: pointer;
+        color: @main-col;
+        background-color: #ffffff;
+        .file-name {
+            float: left;
+            width: 60%;
+            height: 44px;
+            padding-left: .45rem;
+            line-height: 44px;
+        }
+        .file-operate {
+            float: left;
+            width: 40%;
+            height: 44px;
+            line-height: 44px;
+        }
+        i {
+            position: absolute;
+            top: 11px;
+            left: .04rem;
+            width: 22px;
+            height: 22px;
+        }
+        .icon-word {
+            background: url("../../assets/img/Home/file-word.png") no-repeat center left;
+        }
+        .icon-JPGs {
+            background: url("../../assets/img/Home/file-photo.png") no-repeat center left;
+        }
+        .icon-pdf {
+            background: url("../../assets/img/Home/file-pdf.png") no-repeat center left;
+        }
+        /*.icon-ELXs {*/
+        /*background: url("../assets/img/Home/file-word.png") no-repeat center left;*/
+        /*}*/
+        .icon-wenjian {
+            background: url("../../assets/img/Home/file-txt.png") no-repeat center left;
+        }
+        .operate {
+            display: inline-block;
+            width: 56px;
+            height: 26px;
+            line-height: 26px;
+            text-align: center;
+            margin-left: .08rem;
+            font-size: .13rem;
+            .common_radius(13px);
+            &:hover {
+                color: #fff;
+            }
+        }
+        span.look {
+            color: RGBA(46, 170, 253, 1);
+            border: 1px solid RGBA(46, 170, 253, 1);
+            &:hover {
+                background-color: RGBA(46, 170, 253, 1);
+            }
+        }
+        span.upLoad {
+            color: RGBA(84, 190, 117, 1);
+            border: 1px solid RGBA(84, 190, 117, 1);
+            &:hover {
+                background-color: RGBA(84, 190, 117, 1);
+            }
+        }
+    }
+}
 
 //common
 .bg-style {

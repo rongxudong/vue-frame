@@ -29,7 +29,7 @@
                         <span>{{item.creatime | filterTime('YYYY-MM-DD HH:mm')}}</span>
                     </div>
                     <div class="msg-item-right flex_end">
-                        <button type="button" class="look-btn">查看详情</button>
+                        <button type="button" class="look-btn" v-on:click="navRoute(item)">查看详情</button>
                     </div>
                 </div>
             </div>
@@ -99,23 +99,23 @@
             }
         },
         methods: {
-            getResList () {
+            getResList() {
                 let messageListModel = {
                     pageNum: 1,
                     pageSize: 15
                 }
                 this.$ajax.post('/api/bussiness/account/message/getFileList', messageListModel, res => {
-                    if( res.code == 0 ) {
+                    if (res.code == 0) {
                         let fileExtension;
                         res.data.filesList.forEach(function (item, index) {
                             fileExtension = item.fileName.split('.').pop().toLowerCase();
-                            if( fileExtension == 'doc' || fileExtension == 'docx' ) {
+                            if (fileExtension == 'doc' || fileExtension == 'docx') {
                                 res.data.filesList[index].type = 1;
                             }
-                            else if( fileExtension == 'png' || fileExtension == 'jpg' || fileExtension == 'jpeg' || fileExtension == 'gif') {
+                            else if (fileExtension == 'png' || fileExtension == 'jpg' || fileExtension == 'jpeg' || fileExtension == 'gif') {
                                 res.data.filesList[index].type = 2;
                             }
-                            else if( fileExtension == 'pdf' ) {
+                            else if (fileExtension == 'pdf') {
                                 res.data.filesList[index].type = 3;
                             }
                             else {
@@ -132,13 +132,13 @@
                     }
                 })
             },
-            getMessageList () {
+            getMessageList() {
                 let params = {
                     pageNum: 1,
                     pageSize: 5
                 }
                 this.$ajax.post('/api/bussiness/account/message/getMessageList', params, res => {
-                    if( res.code == 0 ) {
+                    if (res.code == 0) {
                         this.DataMessageList = res.data;
                     }
                     else {
@@ -149,22 +149,66 @@
                     }
                 })
             },
-            goMsgList (e) {
+            goMsgList(e) {
                 e.preventDefault();
-                this.$router.push({path:'/MessageList'});
+                this.$router.push({path: '/MessageList'});
             },
-            goFileList (e) {
+            goFileList(e) {
                 e.preventDefault();
-                this.$router.push({path:'/FileList'});
+                this.$router.push({path: '/FileList'});
             },
-            onLook (url, fileType) {
-                window.open(this.$store.state.resUrl + url,'_blank');
+            onLook(url, fileType) {
+                window.open(this.$store.state.resUrl + url, '_blank');
             },
-            onDownload () {
+            onDownload() {
                 alert('2')
+            },
+            navRoute(item) {
+                console.log(item.title)
+                switch (item.title) {
+                    case '实名认证' :
+                        this.$router.push({
+                            name: '实名认证',
+                        });
+                        break;
+                    case '签署协议':
+                        item.id = item.targetUrl;
+                        this.$router.push({
+                            name: '签署协议',
+                            query:item
+                        });
+                        break;
+                    case 'GTCP申请':
+                        item.id = item.targetUrl;
+                        this.$router.push({
+                            name: 'GTCP申请',
+                            query:item
+                        });
+                        break;
+                    case '尽职调查':
+                        this.$router.push({
+                            name: '尽职调查',
+                        });
+                        break;
+                    case 'GTR评估':
+                        this.$router.push({
+                            name: 'GTR评估',
+                        });
+                        break;
+                    case '授信申请':
+                        this.$router.push({
+                            name: '授信申请',
+                        });
+                        break;
+                    case '商账管理':
+                        this.$router.push({
+                            name: '商账管理',
+                        });
+                        break;
+                }
             }
         },
-        created () {
+        created() {
             this.getResList();
             this.getMessageList();
         },
@@ -192,6 +236,7 @@
             }
         }
     }
+
     @media (min-width: 1024px) and (max-width: 1279px) {
         .Home-main {
             display: block;
@@ -206,16 +251,19 @@
             }
         }
     }
+
     @media (min-width: 1280px) and (max-width: 1365px) {
         .Home-main .left .left-wrapper .step {
             margin-right: .6rem;
         }
     }
+
     @media (min-width: 1366px) and (max-width: 1439px) {
         .Home-main .left .left-wrapper .step {
             margin-right: .8rem;
         }
     }
+
     @media (min-width: 1440px) and (max-width: 1679px) {
         .Home-main .left .left-wrapper .step {
             margin-right: .8rem;

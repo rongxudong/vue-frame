@@ -14,7 +14,7 @@
                         <span>{{item.date}}</span>
                     </div>
                     <div class="msg-item-right flex_end">
-                        <button type="button" class="look-btn">查看详情</button>
+                        <button type="button" class="look-btn" v-on:click="navRoute(item)">查看详情</button>
                     </div>
                 </div>
             </div>
@@ -51,6 +51,50 @@
                         });
                     }
                 })
+            },
+            navRoute(item) {
+                console.log(item.title)
+                switch (item.title) {
+                    case '实名认证' :
+                        this.$router.push({
+                            name: '实名认证',
+                        });
+                        break;
+                    case '签署协议':
+                        item.id = item.targetUrl;
+                        this.$router.push({
+                            name: '签署协议',
+                            query:item
+                        });
+                        break;
+                    case 'GTCP申请':
+                        item.id = item.targetUrl;
+                        this.$router.push({
+                            name: 'GTCP申请',
+                            query:item
+                        });
+                        break;
+                    case '尽职调查':
+                        this.$router.push({
+                            name: '尽职调查',
+                        });
+                        break;
+                    case 'GTR评估':
+                        this.$router.push({
+                            name: 'GTR评估',
+                        });
+                        break;
+                    case '授信申请':
+                        this.$router.push({
+                            name: '授信申请',
+                        });
+                        break;
+                    case '商账管理':
+                        this.$router.push({
+                            name: '商账管理',
+                        });
+                        break;
+                }
             }
         },
         created () {

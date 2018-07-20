@@ -18,14 +18,14 @@
                         </el-dropdown-item>
                     </el-dropdown-menu>
                 </el-dropdown>
-                <li class="header-message align_items">
-                    <i class="iconfont icon-xiaoxi1"></i>
-                    <em class="small-icon"></em>
-                </li>
-                <li class="header-logo align_items">
-                    <img src="../assets/img/Home/step1.png"/>
-                    <i class="iconfont icon-yonghu"></i>
-                </li>
+                <!--<li class="header-message align_items">-->
+                    <!--<i class="iconfont icon-xiaoxi1"></i>-->
+                    <!--<em class="small-icon"></em>-->
+                <!--</li>-->
+                <!--<li class="header-logo align_items">-->
+                    <!--<img src="../assets/img/Home/step1.png"/>-->
+                    <!--<i class="iconfont icon-yonghu"></i>-->
+                <!--</li>-->
                 <li class="head-language align_items">
                     <div class="select">
                         <span :class="{'isActive': value === item.value}" v-for="item in options"

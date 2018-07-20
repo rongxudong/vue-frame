@@ -2,9 +2,11 @@
     <div style="background-color: #ffffff;padding: 0.16rem 0 0.5rem 0">
         <div class="align_items-center head-border" style="height: 50px;margin: 0 0.5rem 0 0.4rem">
             <div class="rectangle"></div>
-            <h5 class="head-text" style="margin-left: 0.1rem" v-on:click="fetchData">授信申请状态</h5>
+            <h5 class="head-text" style="margin-left: 0.1rem" v-on:click="fetchData" >授信申请状态</h5>
         </div>
-        <h4 class="head-text" style="font-size: 0.15rem;margin: 0.22rem 0 0.16rem 0.65rem;">审核已提交</h4>
+        <h4 class="head-text" style="font-size: 0.15rem;margin: 0.22rem 0 0.16rem 0.65rem;" v-if="BusinessAccountGtcpApply.status == 2">审核已提交</h4>
+        <h4 class="head-text" style="font-size: 0.15rem;margin: 0.22rem 0 0.16rem 0.65rem;" v-else-if="BusinessAccountGtcpApply.status == 4">审核已通过</h4>
+        <h4 class="head-text" style="font-size: 0.15rem;margin: 0.22rem 0 0.16rem 0.65rem;" v-else-if="BusinessAccountGtcpApply.status == 5">审核已终止</h4>
         <div class="align_items-center" style="height: 50px;margin: 0 0.5rem 0.1rem 0.4rem">
             <div class="rectangle"></div>
             <h5 class="head-text" style="margin-left: 0.1rem">GTCP申请表</h5>

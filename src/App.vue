@@ -101,15 +101,17 @@
                 for (let option of this.options ) {
                     if (option.name === to.name) {
                         flag = true;
-                        this.$store.commit('set_active_index', '/' + to.path.split('/')[1]);
+//                        this.$store.commit('set_active_index', '/' + to.path.split('/')[1]);
+                        this.$store.commit('set_active_index', to.path);
                         break
                     }
                 }
 
                 if (!flag) {
-                    console.log('apppage 添加了新的路由')
-                    this.$store.commit('add_tabs', {route: '/' + to.path.split('/')[1], name: to.name});
-                    this.$store.commit('set_active_index', '/' + to.path.split('/')[1]);
+//                    this.$store.commit('add_tabs', {route: '/' + to.path.split('/')[1], name: to.name});
+//                    this.$store.commit('set_active_index', '/' + to.path.split('/')[1]);
+                    this.$store.commit('add_tabs', {route: to.path, name: to.name});
+                    this.$store.commit('set_active_index', to.path);
                 }
                 localStorage.setItem('currentRouteName', to.name);
             }

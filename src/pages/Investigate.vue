@@ -261,6 +261,7 @@
             }
         },
         created () {
+            console.log(this.$route.path.split('/')[2])
             this.serviceType = this.$route.query.type;
             this.QueryOrderListModel.orderType = this.$route.query.type;
             this.fetchData();

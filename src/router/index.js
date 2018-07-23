@@ -47,6 +47,33 @@ export default new Router({
             }
         },
         {
+            path: '/Investigate',
+            name: '授信管理',
+            component: Investigate,
+            children: [
+                {
+                    path: '1',
+                    name: '尽职调查',
+                    component: Investigate
+                },
+                {
+                    path: '2',
+                    name: 'GTR评估',
+                    component: Investigate
+                },
+                {
+                    path: '3',
+                    name: '融资授信',
+                    component: Investigate
+                },
+                {
+                    path: '4',
+                    name: '商账管理',
+                    component: Investigate
+                }
+            ]
+        },
+        {
             path: '/Agreement',
             name: '签署协议',
             component: Agreement,
@@ -63,26 +90,6 @@ export default new Router({
             path: '/QuotaApplicationForm',
             name: '授信额度申请表',
             component: QuotaApplicationForm
-        },
-        {
-            path: '/Investigate',
-            name: '尽职调查',
-            component: Investigate
-        },
-        {
-            path: '/Investigate',
-            name: 'GTR评估',
-            component: Investigate
-        },
-        {
-            path: '/Investigate',
-            name: '授信申请',
-            component: Investigate
-        },
-        {
-            path: '/Investigate',
-            name: '商账管理',
-            component: Investigate
         },
         {
             path: '/customerApplication',

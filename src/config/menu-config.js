@@ -8,27 +8,26 @@ module.exports = [
                 id: '20004',
                 name: '尽职调查',
                 componentName: 'Investigate',
-                route: '/Investigate?type=1'
+                route: '/Investigate/1'
             },
             {
                 id: '20006',
                 name: 'GTR评估',
                 componentName: 'Investigate',
-                route: '/Investigate?type=2'
+                route: '/Investigate/2'
             },
             {
                 id: '20002',
                 name: '融资授信',
                 componentName: 'Investigate',
-                route: '/Investigate?type=3'
+                route: '/Investigate/3'
             },
             {
                 id: '20007',
                 name: '商账管理',
                 componentName: 'Investigate',
-                route: '/Investigate?type=4'
+                route: '/Investigate/4'
             },
-
         ]
     },
     {

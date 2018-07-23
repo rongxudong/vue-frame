@@ -1,15 +1,15 @@
 <template>
     <el-menu
-            class="el-menu-vertical-demo"
-            :default-active="$route.path"
-            router
-            unique-opened
-            @open="handleOpen"
-            @close="handleClose"
-            @select="selectItems"
-            background-color="#2c323e"
-            text-color="#afb8c1"
-            active-text-color="#2fa8fd">
+        class="el-menu-vertical-demo"
+        :default-active="$route.path"
+        :router='true'
+        unique-opened
+        @open="handleOpen"
+        @close="handleClose"
+        @select="selectItems"
+        background-color="#2c323e"
+        text-color="#afb8c1"
+        active-text-color="#2fa8fd">
         <el-menu-item index="/">
             <i class="iconfont icon-shouye1"></i>
             <span slot="title">总览</span>
@@ -31,44 +31,43 @@
     import menu from '@/config/menu-config'
 
     export default {
-        data () {
+        data() {
             return {
                 menu: menu
             }
         },
-        created () {
+        created() {
 
         },
         computed: {
-            options () {
+            options() {
                 return this.$store.state.options;
             }
         },
-        mounted () {
+        mounted() {
             const routePath = localStorage.getItem('currentRoutePath');
             const routeName = localStorage.getItem('currentRouteName');
-            if ( routePath !== '/' ) {
-                this.$store.commit('add_tabs', { route: '/', name: '总览' });
-                this.$store.commit('add_tabs', { route: routePath , name: routeName });
+            if (routePath !== '/') {
+                this.$store.commit('add_tabs', {route: '/', name: '总览'});
+                this.$store.commit('add_tabs', {route: routePath, name: routeName});
                 this.$store.commit('set_active_index', this.$route.path);
-                console.log(this.$route.path);
             } else {
-                this.$store.commit('add_tabs', { route: '/', name: '总览' });
+                this.$store.commit('add_tabs', {route: '/', name: '总览'});
                 this.$store.commit('set_active_index', '/');
                 this.$router.push('/');
             }
         },
         methods: {
-            handleOpen (key, keyPath) {
-//                console.log(key, keyPath)
+            handleOpen(key, keyPath) {
+
             },
-            handleClose (key, keyPath) {
-//                console.log(key, keyPath)
+            handleClose(key, keyPath) {
+
             },
-            selectItems(index, indexPath){
-                console.log(index)
-                console.log(indexPath)
+            selectItems(index, indexPath) {
+
                 localStorage.setItem('currentRoutePath', index);
+
             }
         }
     }
@@ -77,31 +76,37 @@
 <style lang="less" rel="stylesheet/less">
     @import "../assets/css/_variable";
 
-    .over-hide{
+    .over-hide {
         overflow: hidden;
     }
+
     .el-menu-vertical-demo {
         height: 100%;
         min-height: calc(100vh - 60px);
     }
+
     .el-menu .iconfont {
         font-size: 16px;
         margin-right: 20px;
         color: #afb8c1;
     }
+
     .el-menu-item-group__title {
         padding: 0;
     }
+
     .el-submenu .el-menu-item {
         height: 36px;
-        padding-left: 60px!important;
-        padding-right: 20px!important;
+        padding-left: 60px !important;
+        padding-right: 20px !important;
         line-height: 36px;
-        background-color: #232832!important;
+        background-color: #232832 !important;
     }
+
     .is-opened .el-submenu__title {
-        background-color: #232832!important;
+        background-color: #232832 !important;
     }
+
     .is-opened .el-submenu__title:before {
         content: '';
         position: absolute;
@@ -112,7 +117,8 @@
         height: 100%;
         background-color: @base;
     }
+
     .is-opened i {
-        color: @base!important;
+        color: @base !important;
     }
 </style>

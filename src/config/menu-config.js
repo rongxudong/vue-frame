@@ -28,26 +28,7 @@ module.exports = [
                 componentName: 'Investigate',
                 route: '/Investigate?type=4'
             },
-            // {
-            //     id: '20001',
-            //     name: '签署协议',
-            //     componentName: 'Agreement',
-            //     route: '/Agreement',
-            // },
-            //
-            // {
-            //     id: '20003',
-            //     name: '授信额度申请表',
-            //     componentName: 'QuotaApplicationForm',
-            //     route: '/QuotaApplicationForm'
-            // },
-            //
-            // {
-            //     id: '20005',
-            //     name: '客户申请',
-            //     componentName: 'customerApplication',
-            //     route: '/customerApplication'
-            // }
+
         ]
     },
     {
@@ -61,12 +42,6 @@ module.exports = [
                 componentName: 'RealName',
                 route: '/RealName'
             },
-            // {
-            //     id: '40004',
-            //     name: '客户池',
-            //     componentName: 'CustomerPool',
-            //     route: '/CustomerPool'
-            // }
         ]
     }
 ]

@@ -65,8 +65,23 @@ export default new Router({
             component: QuotaApplicationForm
         },
         {
-            path: '/Investigate',
+            path: '/Investigate?type=1',
             name: '尽职调查',
+            component: Investigate
+        },
+        {
+            path: '/Investigate?type=2',
+            name: 'GTR评估',
+            component: Investigate
+        },
+        {
+            path: '/Investigate?type=3',
+            name: '授信申请',
+            component: Investigate
+        },
+        {
+            path: '/Investigate?type=4',
+            name: '商账管理',
             component: Investigate
         },
         {

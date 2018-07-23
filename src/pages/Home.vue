@@ -1,6 +1,8 @@
 <template>
     <div class="Home-main">
+
         <div class="left bg-style">
+
             <div class="top">
                 <div class="title">
                     <span>{{UseStep.title}}</span>
@@ -35,6 +37,7 @@
             </div>
         </div>
         <div class="right bg-style">
+
             <div class="title" style="margin: .18rem 0;">
                 <span>公告栏</span>
                 <a href="#" @click="goFileList">MORE &gt;&gt;</a>
@@ -89,9 +92,10 @@
                     ]
                 },
                 DataResList: [],
-                DataMessageList: []
+                DataMessageList: [],
             }
         },
+
         filters: {
             filterTime: function (value, formatString) {
                 formatString = formatString || 'YYYY-MM-DD HH:mm:ss';
@@ -161,7 +165,7 @@
                 window.open(this.$store.state.resUrl + url, '_blank');
             },
             onDownload() {
-                alert('2')
+                // alert('2')
             },
             navRoute(item) {
                 console.log(item.title)

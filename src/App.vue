@@ -44,7 +44,7 @@
         name: 'app',
         data () {
             return {
-//                color: this.getRandColor,
+
             }
         },
         created () {
@@ -105,7 +105,9 @@
                         break
                     }
                 }
+
                 if (!flag) {
+                    console.log('apppage 添加了新的路由')
                     this.$store.commit('add_tabs', {route: '/' + to.path.split('/')[1], name: to.name});
                     this.$store.commit('set_active_index', '/' + to.path.split('/')[1]);
                 }

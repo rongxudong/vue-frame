@@ -192,7 +192,9 @@
                         :total=total>
                     </el-pagination>
                 </div>
+
             </div>
+
         </div>
     </div>
 </template>
@@ -255,6 +257,7 @@
                 serviceTitle:['占位','尽职调查','GTR评估','授信申请','商账管理'],
                 serviceType:1,
 
+
             }
         },
         created () {
@@ -264,9 +267,13 @@
         },
         watch: {
             $route(){
+
                 this.serviceType = this.$route.query.type;
                 this.QueryOrderListModel.orderType = this.$route.query.type;
                 this.fetchData();
+
+                // this.$store.commit('add_tabs', {route: '/' + this.$route.path.split('/')[1], name: to.name});
+                // this.$store.commit('set_active_index', '/' + this.$route.path.split('/')[1]);
             },
         },
         methods: {

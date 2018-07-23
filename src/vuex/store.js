@@ -12,7 +12,6 @@ const options = {
         message: '',
         options: [],
         activeIndex: '/Home',
-        //http://account.dev.financegt.com   http://192.168.50.18:8081
         domain: 'http://192.168.50.18:8081',
         resUrl: 'http://image.financegt.com',
     },

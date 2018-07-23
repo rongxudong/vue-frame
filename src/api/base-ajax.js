@@ -33,7 +33,7 @@ axios.interceptors.request.use(config => {
 
     //从cookie拿token
     const cookies = document.cookie;
-    var token = '';
+    let token = '';
     if (cookies) {
         const cookieArray = cookies.split(';');
         for (let i = 0; i < cookieArray.length; i++) {
@@ -43,8 +43,8 @@ axios.interceptors.request.use(config => {
         }
     }
     //处理baseUrl
-    var baseUrl = 'http://account.financegt.com'
-    var domain = document.domain;
+    let baseUrl = 'http://account.financegt.com'
+    let domain = document.domain;
     if (domain.indexOf('dev') != -1) {
         baseUrl = 'http://account.dev.financegt.com';
     }

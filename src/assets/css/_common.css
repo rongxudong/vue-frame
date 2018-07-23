@@ -468,85 +468,6 @@ button:focus {
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
 }
-.Home-main .right .right-list {
-  width: 100%;
-  padding: .1rem 0;
-  border-top: 1px solid rgba(182, 194, 202, 0.4);
-}
-.Home-main .right .right-list .item {
-  position: relative;
-  overflow: hidden;
-  width: 100%;
-  cursor: pointer;
-  color: #303133;
-  background-color: #ffffff;
-  /*.icon-ELXs {*/
-  /*background: url("../assets/img/Home/file-word.png") no-repeat center left;*/
-  /*}*/
-}
-.Home-main .right .right-list .item .file-name {
-  float: left;
-  width: 60%;
-  height: 44px;
-  padding-left: .45rem;
-  line-height: 44px;
-}
-.Home-main .right .right-list .item .file-operate {
-  float: left;
-  width: 40%;
-  height: 44px;
-  line-height: 44px;
-}
-.Home-main .right .right-list .item i {
-  position: absolute;
-  top: 11px;
-  left: .04rem;
-  width: 22px;
-  height: 22px;
-}
-.Home-main .right .right-list .item .icon-word {
-  background: url("../../assets/img/Home/file-word.png") no-repeat center left;
-}
-.Home-main .right .right-list .item .icon-JPGs {
-  background: url("../../assets/img/Home/file-photo.png") no-repeat center left;
-}
-.Home-main .right .right-list .item .icon-pdf {
-  background: url("../../assets/img/Home/file-pdf.png") no-repeat center left;
-}
-.Home-main .right .right-list .item .icon-wenjian {
-  background: url("../../assets/img/Home/file-txt.png") no-repeat center left;
-}
-.Home-main .right .right-list .item .operate {
-  display: inline-block;
-  width: 56px;
-  height: 26px;
-  line-height: 26px;
-  text-align: center;
-  margin-left: .08rem;
-  font-size: .13rem;
-  border-radius: 13px;
-  -o-border-radius: 13px;
-  -ms-border-radius: 13px;
-  -moz-border-radius: 13px;
-  -webkit-border-radius: 13px;
-}
-.Home-main .right .right-list .item .operate:hover {
-  color: #fff;
-}
-.Home-main .right .right-list .item span.look {
-  color: #2eaafd;
-  border: 1px solid #2eaafd;
-}
-.Home-main .right .right-list .item span.look:hover {
-  background-color: #2eaafd;
-}
-.Home-main .right .right-list .item span.upLoad {
-  color: #54be75;
-  border: 1px solid #54be75;
-}
-.Home-main .right .right-list .item span.upLoad:hover {
-  background-color: #54be75;
-}
 .Home-main .title {
   position: relative;
   overflow: hidden;
@@ -598,6 +519,85 @@ button:focus {
   width: 100%;
   margin: .3rem 0 .2rem;
   text-align: center;
+}
+.right-list {
+  width: 100%;
+  padding: .1rem 0;
+  border-top: 1px solid rgba(182, 194, 202, 0.4);
+}
+.right-list .item {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  cursor: pointer;
+  color: #303133;
+  background-color: #ffffff;
+  /*.icon-ELXs {*/
+  /*background: url("../assets/img/Home/file-word.png") no-repeat center left;*/
+  /*}*/
+}
+.right-list .item .file-name {
+  float: left;
+  width: 60%;
+  height: 44px;
+  padding-left: .45rem;
+  line-height: 44px;
+}
+.right-list .item .file-operate {
+  float: left;
+  width: 40%;
+  height: 44px;
+  line-height: 44px;
+}
+.right-list .item i {
+  position: absolute;
+  top: 11px;
+  left: .04rem;
+  width: 22px;
+  height: 22px;
+}
+.right-list .item .icon-word {
+  background: url("../../assets/img/Home/file-word.png") no-repeat center left;
+}
+.right-list .item .icon-JPGs {
+  background: url("../../assets/img/Home/file-photo.png") no-repeat center left;
+}
+.right-list .item .icon-pdf {
+  background: url("../../assets/img/Home/file-pdf.png") no-repeat center left;
+}
+.right-list .item .icon-wenjian {
+  background: url("../../assets/img/Home/file-txt.png") no-repeat center left;
+}
+.right-list .item .operate {
+  display: inline-block;
+  width: 56px;
+  height: 26px;
+  line-height: 26px;
+  text-align: center;
+  margin-left: .08rem;
+  font-size: .13rem;
+  border-radius: 13px;
+  -o-border-radius: 13px;
+  -ms-border-radius: 13px;
+  -moz-border-radius: 13px;
+  -webkit-border-radius: 13px;
+}
+.right-list .item .operate:hover {
+  color: #fff;
+}
+.right-list .item span.look {
+  color: #2eaafd;
+  border: 1px solid #2eaafd;
+}
+.right-list .item span.look:hover {
+  background-color: #2eaafd;
+}
+.right-list .item span.upLoad {
+  color: #54be75;
+  border: 1px solid #54be75;
+}
+.right-list .item span.upLoad:hover {
+  background-color: #54be75;
 }
 .bg-style {
   background-color: #fff;

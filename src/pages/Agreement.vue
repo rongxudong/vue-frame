@@ -24,7 +24,7 @@
 
 <script>
 
-    import {PDFObject} from '../assets/js/pdfobject.js'
+//    import {PDFObject} from '../assets/js/pdfobject.js'
 
     export default {
 

@@ -25,6 +25,9 @@ module.exports = {
     entry: {
         app: './src/main.js'
     },
+    externals:{
+        'pdfobject': 'PDFObject'
+    },
     output: {
         // webpack输出的目标文件夹路径（例如：/dist）
         path: config.build.assetsRoot,

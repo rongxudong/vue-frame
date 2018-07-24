@@ -1,8 +1,6 @@
 <template>
     <div class="Home-main">
-
         <div class="left bg-style">
-
             <div class="top">
                 <div class="title">
                     <span>{{UseStep.title}}</span>
@@ -24,7 +22,7 @@
                     <a href="#" @click="goMsgList">MORE &gt;&gt;</a>
                 </div>
                 <div class="msg-item align_items" v-for="(item, index) in DataMessageList" :key="item.index">
-                    <div class="sign" v-if="item.type == 0"></div>
+                    <div class="sign" v-if="item.read == 0"></div>
                     <div class="msg-item-left">
                         <h1>{{item.title}}</h1>
                         <p class="text_overflow">{{item.content}}</p>
@@ -37,7 +35,6 @@
             </div>
         </div>
         <div class="right bg-style">
-
             <div class="title" style="margin: .18rem 0;">
                 <span>公告栏</span>
                 <a href="#" @click="goFileList">MORE &gt;&gt;</a>
@@ -95,7 +92,6 @@
                 DataMessageList: [],
             }
         },
-
         filters: {
             filterTime: function (value, formatString) {
                 formatString = formatString || 'YYYY-MM-DD HH:mm:ss';
@@ -143,7 +139,7 @@
                 }
                 this.$ajax.post('/api/bussiness/account/message/getMessageList', params, res => {
                     if (res.code == 0) {
-                        this.DataMessageList = res.data;
+                        this.DataMessageList = res.data.viewList;
                     }
                     else {
                         this.$message({

@@ -6,8 +6,8 @@
                     <span>消息列表</span>
                     <!--<a href="#" @click="goMsgList">MORE &gt;&gt;</a>-->
                 </div>
-                <div class="msg-item align_items" v-for="(item, index) in DataMessageList" :key="item.index">
-                    <div class="sign" v-if="item.type == 0"></div>
+                <div class="msg-item align_items" v-for="(item, index) in DataMessageList" :key="index">
+                    <div class="sign" v-if="item.read == 0"></div>
                     <div class="msg-item-left">
                         <h1>{{item.title}}</h1>
                         <p class="text_overflow">{{item.content}}</p>
@@ -19,30 +19,68 @@
                 </div>
             </div>
             <div class="page-wrap">
-                <pagination :pageSizes="[10, 20]" :pageSize="20" :totalNum="60"></pagination>
+                <el-pagination
+                        class="page"
+                        background
+                        :page-sizes="pageSizes"
+                        :page-size="messageListModel['pageSize']"
+                        :current-page="pageNo"
+                        :total="totalNumber"
+                        layout="total, sizes, prev, pager, next, jumper"
+                        @size-change="handleSizeChange"
+                        @current-change="handleCurrentChange"
+                >
+                </el-pagination>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-    import Pagination from '@/components/Pagination'
+//    import Pagination from '@/components/Pagination'
 
     export default {
         data () {
             return {
-                DataMessageList: []
+                pageNo: 1, //当前页
+                pageSizes: [5, 10, 15, 20],
+                DataMessageList: [], //返回的结果集合
+                totalNumber: 0, //数据的总数
+                messageListModel: {
+                    pageNum: 1,
+                    pageSize: 10
+                }
             }
         },
         methods: {
-            getMessageList () {
-                let params = {
-                    pageNum: 1,
-                    pageSize: 5
+            //改变每页显示数量
+            handleSizeChange(val) {
+                let pageSize = `${val}`;
+                this.pageNo = 1;
+                this.messageListModel['pageSize'] = parseInt(pageSize);
+                this.$nextTick(() =>
+                    this.getAndDraw(this.messageListModel)
+                )
+            },
+            //改变页码
+            handleCurrentChange(val) {
+                let pageNum = `${val}`;
+                this.messageListModel['pageNum'] = parseInt(pageNum);
+                this.getAndDraw(this.messageListModel);
+            },
+            getAndDraw (params, func) {
+                if( func ) {
+                    this.$ajax.post('/api/bussiness/account/message/getMessageList', params, func)
                 }
-                this.$ajax.post('/api/bussiness/account/message/getMessageList', params, res => {
+                else {
+                    this.getMessageList(params);
+                }
+            },
+            getMessageList (param) {
+                this.$ajax.post('/api/bussiness/account/message/getMessageList', param, res => {
                     if( res.code == 0 ) {
-                        this.DataMessageList = res.data;
+                        this.DataMessageList = res.data.viewList;
+                        this.totalNumber = res.data.total;
                     }
                     else {
                         this.$message({
@@ -98,11 +136,11 @@
             }
         },
         created () {
-            this.getMessageList();
+            this.getMessageList(this.messageListModel);
         },
-        components: {
-            'pagination': Pagination
-        }
+//        components: {
+//            'pagination': Pagination
+//        }
     }
 </script>
 

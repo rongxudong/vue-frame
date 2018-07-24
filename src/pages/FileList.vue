@@ -27,44 +27,65 @@
 
             </div>
             <div class="page-wrap">
-                <pagination
+                <el-pagination
+                        class="page"
+                        background
                         :page-sizes="pageSizes"
-                        :page-size="messageListModel['pageSize']"
+                        :page-size="fileListModel['pageSize']"
+                        :current-page="pageNo"
                         :total="totalNumber"
-                        :size-change="handleSizeChange"
-                        :current-change="handleCurrentChange"
+                        layout="total, sizes, prev, pager, next, jumper"
+                        @size-change="handleSizeChange"
+                        @current-change="handleCurrentChange"
                 >
-                </pagination>
+                </el-pagination>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-    import pagination from '@/components/Pagination'
+//    import pagination from '@/components/Pagination'
 
     export default {
         data () {
             return {
-                DataResList: [],
-                pageSizes: [10, 20],
-                totalNumber: 0,
-                messageListModel: {
+                pageNo: 1, //当前页
+                pageSizes: [10, 15, 20, 30, 50],
+                DataResList: [], //返回的结果集合
+                totalNumber: 0, //数据的总数
+                fileListModel: {
                     pageNum: 1,
                     pageSize: 10
                 }
             }
         },
         methods: {
+            //改变每页显示数量
             handleSizeChange(val) {
-                console.log(val);
+                let pageSize = `${val}`;
+                this.pageNo = 1;
+                this.fileListModel['pageSize'] = parseInt(pageSize);
+                this.$nextTick(() =>
+                    this.getAndDraw(this.fileListModel)
+                )
             },
+            //改变页码
             handleCurrentChange(val) {
-                console.log(val);
-                this.messageListModel['pageNum'] = val;
+                let pageNum = `${val}`;
+                this.fileListModel['pageNum'] = parseInt(pageNum);
+                this.getAndDraw(this.fileListModel);
             },
-            getResList () {
-                this.$ajax.post('/api/bussiness/account/message/getFileList', this.messageListModel, res => {
+            getAndDraw (params, func) {
+                if( func ) {
+                    this.$ajax.post('/api/bussiness/account/message/getFileList', params, func)
+                }
+                else {
+                    this.getResList(params);
+                }
+            },
+            getResList (param) {
+                this.$ajax.post('/api/bussiness/account/message/getFileList', param, res => {
                     if( res.code == 0 ) {
                         let fileExtension;
                         res.data.filesList.forEach(function (item, index) {
@@ -82,8 +103,6 @@
                                 res.data.filesList[index].type = 4;
                             }
                         })
-                        this.totalNumber = res.data.total;
-                        console.log(this.totalNumber);
                         this.DataResList = res.data.filesList;
                     }
                     else {
@@ -92,6 +111,7 @@
                             message: res.message
                         });
                     }
+                    this.totalNumber = res.data.total;
                 })
             },
             onLook (url, fileType) {
@@ -101,17 +121,14 @@
 
             }
         },
-        mounted() {
-
-        },
         created () {
-            this.getResList();
+            this.getResList(this.fileListModel);
         },
-        components: {
-            pagination,
-        },
+//        components: {
+//            pagination,
+//        },
         watch: {
-            messageListModel: 'getResList'
+            fileListModel: 'getResList'
         }
     }
 </script>

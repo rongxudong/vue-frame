@@ -4,11 +4,11 @@
             background
             @size-change="handleSizeChange"
             @current-change="handleCurrentChange"
-            :current-page="currentPage"
+            :current-page.sync="currentPageNumber"
             :page-sizes="pageSizesObj"
             :page-size="pageSizeNumber"
             layout="total, sizes, prev, pager, next, jumper"
-            :total="totalNumber">
+            :total="totalDataNumber">
     </el-pagination>
 </template>
 
@@ -30,24 +30,28 @@
                 type: Number,
                 required: true
             },
+            currentPage: {
+                type: Number,
+                required: true
+            },
             sizeChange: Function,
             currentChange: Function,
             uploadId: null, //接收到的自定义的参数,
         },
         data () {
             return {
-                currentPage: 1,
+                currentPageNumber: this.currentPage,
                 pageSizesObj: this.pageSizes,
                 pageSizeNumber: this.pageSize,
-                totalNumber: this.total,
+                totalDataNumber: this.total,
             }
         },
         methods: {
             handleSizeChange(val) {
-                this.sizeChange(...arguments,this.uploadId)
+                this.sizeChange(...arguments, this.currentPage, this.uploadId)
             },
             handleCurrentChange(val) {
-                this.currentChange(...arguments,this.uploadId)
+                this.currentChange(...arguments, this.currentPage, this.uploadId)
             }
         }
     }

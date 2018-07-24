@@ -114,6 +114,7 @@
                     this.$store.commit('set_active_index', to.path);
                 }
                 localStorage.setItem('currentRouteName', to.name);
+                localStorage.setItem('currentRoutePath', to.path);
             }
         }
     }

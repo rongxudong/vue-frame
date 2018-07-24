@@ -82,11 +82,6 @@ export default new Router({
             }
         },
         {
-            path: '/CreditApplication',
-            name: '融资授信',
-            component: CreditApplication
-        },
-        {
             path: '/QuotaApplicationForm',
             name: '授信额度申请表',
             component: QuotaApplicationForm

@@ -161,7 +161,8 @@
                 window.open(this.$store.state.resUrl + url, '_blank');
             },
             onDownload(Obj, NAME) {
-
+//                $('.upLoad').css('backgroundColor', 'red');
+                $.cookie('the_cookie', '33');
             },
             downFile (blob, fileName) {
                 if (window.navigator.msSaveOrOpenBlob) {

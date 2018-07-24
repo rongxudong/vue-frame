@@ -27,6 +27,7 @@ module.exports = {
     },
     externals:{
         'pdfobject': 'PDFObject',
+        'jquery': '$',
         'jquery.cookie': 'cookie',
     },
     output: {

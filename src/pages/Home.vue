@@ -52,8 +52,8 @@
                         {{item.fileName}}
                     </div>
                     <div class="file-operate align_items flex_end">
-                        <span class="operate look" @click="onLook(item.url,item.fileName)">查看</span>
-                        <span class="operate upLoad" @click="onDownload()">下载</span>
+                        <span class="operate look" @click="onLook(item.url, item.fileName)">查看</span>
+                        <span class="operate upLoad" @click="onDownload(item, item.fileName)">下载</span>
                     </div>
                 </div>
             </div>
@@ -160,8 +160,20 @@
             onLook(url, fileType) {
                 window.open(this.$store.state.resUrl + url, '_blank');
             },
-            onDownload() {
-                // alert('2')
+            onDownload(Obj, NAME) {
+
+            },
+            downFile (blob, fileName) {
+                if (window.navigator.msSaveOrOpenBlob) {
+                    navigator.msSaveBlob(blob, fileName);
+                } else {
+                    let link = document.createElement('a'); // 创建a标签
+                    //创建一个新的对象URL,该对象URL可以代表某一个指定的File对象或Blob对象.
+                    link.href = window.URL.createObjectURL(blob);
+                    link.download = fileName;
+                    link.click(); // 触发点击a标签事件
+                    window.URL.revokeObjectURL(link.href); // 释放URL 对象
+                }
             },
             navRoute(item) {
                 console.log(item.title)

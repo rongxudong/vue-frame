@@ -26,7 +26,8 @@ module.exports = {
         app: './src/main.js'
     },
     externals:{
-        'pdfobject': 'PDFObject'
+        'pdfobject': 'PDFObject',
+        'jquery.cookie': 'cookie',
     },
     output: {
         // webpack输出的目标文件夹路径（例如：/dist）

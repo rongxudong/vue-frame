@@ -49,6 +49,7 @@
         },
         created () {
             Vue.myGlobalMethod();
+
         },
         mounted(){
             let location = document.location;

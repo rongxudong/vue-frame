@@ -1,16 +1,6 @@
 <template>
     <div>
-        <el-carousel indicator-position="outside" height="500px" :interval="5000">
-            <el-carousel-item v-for="item in params.row" :key="item.id">
-                <img :src="item.image"/>
-            </el-carousel-item>
-        </el-carousel>
-        <div class="pic"></div>
-        <!--<img :src="basic"/>-->
-        <img-elem :data="imgUrl">
-            <p slot="foo">first</p>
-            <p>second</p>
-        </img-elem>
+        个人信息
     </div>
 </template>
 

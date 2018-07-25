@@ -41,6 +41,18 @@ module.exports = [
                 componentName: 'RealName',
                 route: '/RealName'
             },
+            {
+                id: '40002',
+                name: '个人资料',
+                componentName: 'Personal',
+                route: '/Personal'
+            },
+            {
+                id: '40003',
+                name: '修改密码',
+                componentName: 'Password',
+                route: '/Password'
+            }
         ]
     }
 ]

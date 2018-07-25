@@ -26,6 +26,8 @@ const ApplyDetail = () => import(/* webpackChunkName: "chunkname3" */ '@/pages/A
 
 const customerApplication = () => import(/* webpackChunkName: "chunkname1" */ '@/pages/customerApplication.vue')
 const RealName = () => import(/* webpackChunkName: "chunkname1" */ '@/pages/RealName.vue')
+const Password = () => import(/* webpackChunkName: "chunkname1" */ '@/pages/Password.vue')
+const Personal = () => import(/* webpackChunkName: "chunkname1" */ '@/pages/Personal.vue')
 
 const FileList = () => import(/* webpackChunkName: "chunkname1" */ '@/pages/FileList.vue')
 const MessageList = () => import(/* webpackChunkName: "chunkname1" */ '@/pages/MessageList.vue')
@@ -121,6 +123,16 @@ export default new Router({
             path: '/MessageList',
             name: '公告列表',
             component: MessageList,
+        },
+        {
+            path: '/personal',
+            name: '个人资料',
+            component: Personal,
+        },
+        {
+            path: '/password',
+            name: '修改密码',
+            component: Password,
         }
     ]
 })

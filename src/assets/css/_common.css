@@ -433,6 +433,10 @@ button:focus {
 .Home-main .left .left-wrapper .step {
   margin-right: 1rem;
   text-align: center;
+  cursor: pointer;
+}
+.Home-main .left .left-wrapper .step:hover .step-icon-wrap {
+  background-color: rgba(241, 240, 245, 0.5);
 }
 .Home-main .left .left-wrapper .step-icon-wrap {
   width: 1.34rem;
@@ -519,6 +523,16 @@ button:focus {
   width: 100%;
   margin: .3rem 0 .2rem;
   text-align: center;
+}
+#view-dialog .el-dialog {
+  width: 70%;
+  height: 70vh;
+}
+#view-dialog .el-dialog .el-dialog__body {
+  height: calc(100% - 30px);
+  height: -ms-calc(100% - 30px);
+  height: -moz-calc(100% - 30px);
+  height: -webkit-calc(100% - 30px);
 }
 .right-list {
   width: 100%;

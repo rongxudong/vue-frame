@@ -231,12 +231,16 @@ button {
             .step {
                 margin-right: 1rem;
                 text-align: center;
+                cursor: pointer;
+                &:hover .step-icon-wrap {
+                    background-color: rgba(241,240,245,.5);
+                }
             }
             .step-icon-wrap {
                 width: 1.34rem;
                 height: 1.34rem;
                 text-align: center;
-                background:rgba(241,240,245,1);
+                background: rgba(241,240,245,1);
                 .common_radius(50%);
                 img {
                     display: inline-block;
@@ -310,6 +314,17 @@ button {
         text-align: center;
     }
 }
+#view-dialog .el-dialog {
+    width: 70%;
+    height: 70vh;
+    .el-dialog__body {
+        height: calc(~"100% - 30px");
+        height: -ms-calc(~"100% - 30px");
+        height: -moz-calc(~"100% - 30px");
+        height: -webkit-calc(~"100% - 30px");
+    }
+}
+
 
 .right-list {
     width: 100%;

@@ -18,13 +18,10 @@
                         {{item.fileName}}
                     </div>
                     <div class="file-operate align_items flex_end">
-                        <span class="operate look" @click="onLook(item.url,item.fileName)">查看</span>
-                        <span class="operate upLoad" @click="onDownload()">下载</span>
+                        <span class="operate look" @click="onLook(item, item.fileName)">查看</span>
+                        <span class="operate upLoad" @click="onDownload(item, item.fileName)">下载</span>
                     </div>
                 </div>
-            </div>
-            <div style="width: 100%;">
-
             </div>
             <div class="page-wrap">
                 <el-pagination
@@ -41,6 +38,14 @@
                 </el-pagination>
             </div>
         </div>
+        <el-dialog :visible.sync="outerVisible" id="view-dialog">
+            <iframe :src="previewUrl" width="100%" height="100%" id='viewPhoto'>
+                <!--This browser does not support PDFs. Please download the PDF to view it: <a :href="previewUrl">Download PDF</a>-->
+            </iframe>
+            <!--<div slot="footer" class="dialog-footer">-->
+            <!--<el-button @click="outerVisible = false">取 消</el-button>-->
+            <!--</div>-->
+        </el-dialog>
     </div>
 </template>
 
@@ -57,7 +62,9 @@
                 fileListModel: {
                     pageNum: 1,
                     pageSize: 10
-                }
+                },
+                outerVisible: false,
+                previewUrl: ''
             }
         },
         methods: {
@@ -90,13 +97,13 @@
                         let fileExtension;
                         res.data.filesList.forEach(function (item, index) {
                             fileExtension = item.fileName.split('.').pop().toLowerCase();
-                            if( fileExtension == 'doc' || fileExtension == 'docx' ) {
+                            if( fileExtension === 'doc' || fileExtension === 'docx' ) {
                                 res.data.filesList[index].type = 1;
                             }
-                            else if( fileExtension == 'png' || fileExtension == 'jpg' || fileExtension == 'jpeg' || fileExtension == 'gif') {
+                            else if( fileExtension === 'png' || fileExtension === 'jpg' || fileExtension === 'jpeg' || fileExtension === 'gif') {
                                 res.data.filesList[index].type = 2;
                             }
-                            else if( fileExtension == 'pdf' ) {
+                            else if( fileExtension === 'pdf' ) {
                                 res.data.filesList[index].type = 3;
                             }
                             else {

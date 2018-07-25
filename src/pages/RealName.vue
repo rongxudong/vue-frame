@@ -254,13 +254,20 @@
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
                         this.$ajax.post( '/api/bussinessAccount/yqq/userIdentity', this.ruleForm, res => {
-                            this.$message({
-                                type: 'info',
-                                message: res.message
-                            });
+                            if( res.code == 0 ){
+                                this.$message({
+                                    type: 'success',
+                                    message: res.message
+                                });
+                            }
+                            else{
+                                this.$message({
+                                    type: 'info',
+                                    message: res.message
+                                });
+                            }
                         })
                     } else {
-                        console.log('error submit!!');
                         return false;
                     }
                 });
@@ -278,10 +285,7 @@
                         }
                     }
                     else {
-                        this.$message({
-                            type: 'error',
-                            message: res.message
-                        });
+                        this.ruleForm['auditFlag'] = '2';
                     }
                 })
             },
@@ -289,11 +293,13 @@
             findUserIdentity () {
                 this.$ajax.get('/api/bussinessAccount/yqq/findUserIdentity', null, res => {
                     if(res.code == 0){
-                        this.ruleForm = res.data;
-                        this.ruleForm['businessLicense'] = this.$store.state.resUrl + res.data.businessLicense;
-                        this.ruleForm['idPicBehind'] = this.$store.state.resUrl + res.data.idPicBehind;
-                        this.ruleForm['idPicFront'] = this.$store.state.resUrl + res.data.idPicFront;
-                        this.ruleForm['idPicHand'] = this.$store.state.resUrl + res.data.idPicHand;
+                        if(res.data) {
+                            this.ruleForm = res.data;
+                            this.ruleForm['businessLicense'] = this.$store.state.resUrl + res.data.businessLicense;
+                            this.ruleForm['idPicBehind'] = this.$store.state.resUrl + res.data.idPicBehind;
+                            this.ruleForm['idPicFront'] = this.$store.state.resUrl + res.data.idPicFront;
+                            this.ruleForm['idPicHand'] = this.$store.state.resUrl + res.data.idPicHand;
+                        }
                     }
                     else {
                         this.$message({

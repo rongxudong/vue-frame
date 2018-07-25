@@ -7,7 +7,7 @@
                 </div>
                 <div class="left-wrapper flex_start" style="padding-left: .18rem;">
                     <div v-for="(item, index) in UseStep.step" :key="index" class="flex_start">
-                        <div class="step">
+                        <div class="step" @click="toService(item.route)">
                             <div class="step-icon-wrap horizontal_center">
                                 <img :src="item.url"/>
                             </div>
@@ -52,12 +52,20 @@
                         {{item.fileName}}
                     </div>
                     <div class="file-operate align_items flex_end">
-                        <span class="operate look" @click="onLook(item.url, item.fileName)">查看</span>
+                        <span class="operate look" @click="onLook(item, item.fileName)">查看</span>
                         <span class="operate upLoad" @click="onDownload(item, item.fileName)">下载</span>
                     </div>
                 </div>
             </div>
         </div>
+        <el-dialog :visible.sync="outerVisible" id="view-dialog">
+            <iframe :src="previewUrl" width="100%" height="100%" id='viewPhoto'>
+                <!--This browser does not support PDFs. Please download the PDF to view it: <a :href="previewUrl">Download PDF</a>-->
+            </iframe>
+            <!--<div slot="footer" class="dialog-footer">-->
+                <!--<el-button @click="outerVisible = false">取 消</el-button>-->
+            <!--</div>-->
+        </el-dialog>
     </div>
 </template>
 
@@ -72,24 +80,30 @@
                     step: [
                         {
                             name: '尽职调查',
-                            url: require('../assets/img/Home/step1.png')
+                            url: require('../assets/img/Home/step1.png'),
+                            route: '/Investigate/1'
                         },
                         {
                             name: 'GTR评估',
-                            url: require('../assets/img/Home/step2.png')
+                            url: require('../assets/img/Home/step2.png'),
+                            route: '/Investigate/2'
                         },
                         {
                             name: '授信申请',
-                            url: require('../assets/img/Home/step3.png')
+                            url: require('../assets/img/Home/step3.png'),
+                            route: '/Investigate/3'
                         },
                         {
                             name: '商账管理',
-                            url: require('../assets/img/Home/step4.png')
+                            url: require('../assets/img/Home/step4.png'),
+                            route: '/Investigate/4'
                         }
                     ]
                 },
                 DataResList: [],
                 DataMessageList: [],
+                outerVisible: false,
+                previewUrl: ''
             }
         },
         filters: {
@@ -99,10 +113,13 @@
             }
         },
         methods: {
-            getResList() {
+            toService (URL) {
+                this.$router.push({path: URL});
+            },
+            getResList () {
                 let messageListModel = {
                     pageNum: 1,
-                    pageSize: 15
+                    pageSize: 30
                 }
                 this.$ajax.post('/api/bussiness/account/message/getFileList', messageListModel, res => {
                     if (res.code == 0) {
@@ -132,7 +149,7 @@
                     }
                 })
             },
-            getMessageList() {
+            getMessageList () {
                 let params = {
                     pageNum: 1,
                     pageSize: 5
@@ -149,25 +166,75 @@
                     }
                 })
             },
-            goMsgList(e) {
+            goMsgList (e) {
                 e.preventDefault();
                 this.$router.push({path: '/MessageList'});
             },
-            goFileList(e) {
+            goFileList (e) {
                 e.preventDefault();
                 this.$router.push({path: '/FileList'});
             },
-            onLook(url, fileType) {
-                window.open(this.$store.state.resUrl + url, '_blank');
+            onLook (Obj, fileType) {
+                this.previewUrl = this.$store.state.resUrl + Obj.url;
+                    let nameSuffix = Obj.fileName.split('.').pop().toLowerCase();
+                if( nameSuffix === 'png' || nameSuffix === 'jpg' || nameSuffix === 'jpeg' || nameSuffix === 'gif' ) {
+                    window.open(this.previewUrl, '_blank');
+                }
+                else if ( nameSuffix === 'pdf'){
+                    this.outerVisible = true;
+                }
+                else {
+                    this.previewUrl = 'https://view.officeapps.live.com/op/view.aspx?src=' + this.$store.state.resUrl + Obj.url;
+                    console.log(this.previewUrl)
+                    this.outerVisible = true;
+                }
             },
-            onDownload(Obj, NAME) {
-//                $('.upLoad').css('backgroundColor', 'red');
+            onDownload (Obj, NAME) {
+                let nameSuffix = NAME.split('.').pop().toLowerCase();
+                let TYPE = {
+                    type: 'text/plain'
+                }
+                Obj.url = this.$store.state.resUrl + Obj.url
+                console.log(Obj)
+                switch (nameSuffix){
+                    case 'xls':
+                        TYPE.type = 'application/vnd.ms-excel';
+                        break;
+                    case 'xlsx':
+                        TYPE.type = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+                        break;
+                    case 'pdf':
+                        TYPE.type = 'application/pdf';
+                        break;
+                    case 'doc':
+                        TYPE.type = 'application/msword';
+                        break;
+                    case 'docx':
+                        TYPE.type = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+                        break;
+                    case 'png':
+                        TYPE.type = 'image/png';
+                        break;
+                    case 'gif':
+                        TYPE.type = 'image/gif';
+                        break;
+                    case 'jpeg':
+                        TYPE.type = 'image/jpeg';
+                        break;
+                    case 'jpg':
+                        TYPE.type = 'image/jpeg';
+                        break;
+                    default:
+                        TYPE.type = 'image/plain';
+                }
+                let blob = new Blob([Obj], TYPE);
+                let fileName = NAME;
 
-                console.log($.cookie('the_cookie'));
+                this.downFile(blob, fileName);
             },
             downFile (blob, fileName) {
-                if (window.navigator.msSaveOrOpenBlob) {
-                    navigator.msSaveBlob(blob, fileName);
+                if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+                    window.navigator.msSaveOrOpenBlob(blob, fileName);
                 } else {
                     let link = document.createElement('a'); // 创建a标签
                     //创建一个新的对象URL,该对象URL可以代表某一个指定的File对象或Blob对象.
@@ -177,7 +244,7 @@
                     window.URL.revokeObjectURL(link.href); // 释放URL 对象
                 }
             },
-            navRoute(item) {
+            navRoute (item) {
                 console.log(item.title)
                 switch (item.title) {
                     case '实名认证' :
@@ -222,11 +289,11 @@
                 }
             }
         },
-        created() {
+        created () {
             this.getResList();
             this.getMessageList();
         },
-        beforeRouteLeave(to, from, next) {
+        beforeRouteLeave (to, from, next) {
             // 设置下一个路由的 meta
             to.meta.keepAlive = true;  // 让 A 缓存，即不刷新
             next();

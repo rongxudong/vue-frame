@@ -105,9 +105,9 @@ export default new Router({
             path: '/RealName',
             name: '实名认证',
             component: RealName,
-            meta: {
-                keepAlive: true // 需要被缓存
-            }
+            // meta: {
+            //     keepAlive: true // 需要被缓存
+            // }
         },
         {
             path: '/CustomerPool',

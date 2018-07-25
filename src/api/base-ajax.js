@@ -157,7 +157,6 @@ function apiAxios(method, url, params, success, failure) {
     })
     // then时进行response数据处理
         .then(function (res) {
-            console.log('res == '+res)
             if (success) {
                 success(res.data)
             }

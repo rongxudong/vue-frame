@@ -49,9 +49,9 @@
         },
         beforeCreate () {
 //            Vue.myGlobalMethod();
-            localStorage.setItem("User_token", process.env.NODE_ENV == 'development' ? 'e5cd8950d18e791cdfab9a61a3562fb9' : $.cookie('bl_sid'));
+            localStorage.setItem("User_token", process.env.NODE_ENV == 'development' ? 'f91d70b2606ec761e01f28ab1c92d346' : $.cookie('bl_sid'));
 
-            this.$store.state.token = $.cookie('bl_sid');
+            this.$store.state.token = localStorage.getItem("User_token");
 
             let baseUrl = 'http://account.financegt.com'
             let domain = document.domain;
@@ -64,9 +64,9 @@
             if (domain.indexOf('kf') != -1) {
                 baseUrl = 'http://account.dev.financegt.com';
             }
-
+            //http://192.168.50.18:8081
             localStorage.setItem("baseUrl", process.env.NODE_ENV == 'development' ? 'http://account.dev.financegt.com' : baseUrl);
-            this.$store.state.baseUrl = baseUrl;
+            this.$store.state.baseUrl = localStorage.getItem("baseUrl");
         },
         mounted(){
             let location = document.location;

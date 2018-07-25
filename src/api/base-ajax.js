@@ -31,28 +31,8 @@ function filterNull(o) {
 axios.interceptors.request.use(config => {
     // 配置config
 
-    let token;
-
-    token = $.cookie('bl_sid');
-
-    //处理baseUrl
-    let baseUrl = 'http://account.financegt.com'
-    let domain = document.domain;
-    if (domain.indexOf('dev') != -1) {
-        baseUrl = 'http://account.dev.financegt.com';
-    }
-    if (domain.indexOf('stage') != -1) {
-        baseUrl = 'http://account.stage.financegt.com';
-    }
-    if (domain.indexOf('kf') != -1) {
-        baseUrl = 'http://account.dev.financegt.com';
-    }
-    console.log('domain == ' + domain);
-    console.log('token == ' + token);
-    console.log('baseUrl == ' + baseUrl);
-
-    config.headers.token = process.env.NODE_ENV == 'development' ? '4433d716545da07db452c6208415c8c9' : token;
-    config.baseURL = process.env.NODE_ENV == 'development' ? 'http://account.dev.financegt.com' : baseUrl;
+    config.headers.token = localStorage.getItem("User_token")
+    config.baseURL = localStorage.getItem("baseUrl");
 
     config.headers.Accept = 'application/json';
     //在请求发出之前进行一些操作

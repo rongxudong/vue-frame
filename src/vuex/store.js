@@ -12,8 +12,9 @@ const options = {
         message: '',
         options: [],
         activeIndex: '/Home',
-        domain: 'http://192.168.50.18:8081',
         resUrl: 'http://image.financegt.com',
+        token: '',
+        baseUrl: ''
     },
 
     // 操作

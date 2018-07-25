@@ -150,9 +150,9 @@
                 dialog: false,
                 isEdit: false,
                 myHeaders: {
-                    token: "f4aba4499dd6fd155f477d65c5cafa3c"
+                    token: this.$store.state.token
                 },
-                action: this.$store.state.domain + "/api/bussinessAccount/yqq/uploadPic",
+                action: this.$store.state.baseUrl + "/api/bussinessAccount/yqq/uploadPic",
                 nameType: 'file',
                 ruleForm: {
                     address: null,

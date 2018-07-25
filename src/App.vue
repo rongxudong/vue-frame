@@ -47,9 +47,26 @@
 
             }
         },
-        created () {
-            Vue.myGlobalMethod();
+        beforeCreate () {
+//            Vue.myGlobalMethod();
+            localStorage.setItem("User_token", process.env.NODE_ENV == 'development' ? 'e5cd8950d18e791cdfab9a61a3562fb9' : $.cookie('bl_sid'));
 
+            this.$store.state.token = $.cookie('bl_sid');
+
+            let baseUrl = 'http://account.financegt.com'
+            let domain = document.domain;
+            if (domain.indexOf('dev') != -1) {
+                baseUrl = 'http://account.dev.financegt.com';
+            }
+            if (domain.indexOf('stage') != -1) {
+                baseUrl = 'http://account.stage.financegt.com';
+            }
+            if (domain.indexOf('kf') != -1) {
+                baseUrl = 'http://account.dev.financegt.com';
+            }
+
+            localStorage.setItem("baseUrl", process.env.NODE_ENV == 'development' ? 'http://account.dev.financegt.com' : baseUrl);
+            this.$store.state.baseUrl = baseUrl;
         },
         mounted(){
             let location = document.location;
@@ -74,9 +91,9 @@
                 })
             }
             //修改浏览器地址
-            var stateObject = {};
-            var title = "";
-            var newUrl = "http://" + window.location.host + "/baZy";
+            let stateObject = {};
+            let title = "";
+            let newUrl = "http://" + window.location.host + "/baZy";
             history.pushState(stateObject,title,newUrl);
         },
         components: {

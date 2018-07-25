@@ -249,7 +249,7 @@
                     <div class="file-upload">
                         <el-upload
                                 class="upload-demo"
-                                :action="this.$store.state.domain + importFileUrl"
+                                :action="this.$store.state.baseUrl + importFileUrl"
                                 :headers="myHeaders"
                                 :data="upLoadData"
                                 :on-change="handleChange"
@@ -548,7 +548,7 @@
                     orderId: 1
                 },
                 myHeaders: {
-                    token: "f4aba4499dd6fd155f477d65c5cafa3c"
+                    token: this.$store.state.token
                 },
                 array: {
                     orderId: 1,

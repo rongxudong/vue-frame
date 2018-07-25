@@ -31,17 +31,10 @@ function filterNull(o) {
 axios.interceptors.request.use(config => {
     // 配置config
 
-    //从cookie拿token
-    const cookies = document.cookie;
-    let token = '';
-    if (cookies) {
-        const cookieArray = cookies.split(';');
-        for (let i = 0; i < cookieArray.length; i++) {
-            if (cookieArray[i].split('=')[0] == 'bl_sid') {
-                token = cookieArray[i].split('=')[1];
-            }
-        }
-    }
+    let token;
+
+    token = $.cookie('bl_sid');
+
     //处理baseUrl
     let baseUrl = 'http://account.financegt.com'
     let domain = document.domain;
@@ -51,6 +44,10 @@ axios.interceptors.request.use(config => {
     if (domain.indexOf('stage') != -1) {
         baseUrl = 'http://account.stage.financegt.com';
     }
+    if (domain.indexOf('kf') != -1) {
+        baseUrl = 'http://account.dev.financegt.com';
+    }
+    console.log('domain == ' + domain);
     console.log('token == ' + token);
     console.log('baseUrl == ' + baseUrl);
 
@@ -180,6 +177,7 @@ function apiAxios(method, url, params, success, failure) {
     })
     // then时进行response数据处理
         .then(function (res) {
+            console.log('res == '+res)
             if (success) {
                 success(res.data)
             }

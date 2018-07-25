@@ -50,6 +50,34 @@
         created () {
             Vue.myGlobalMethod();
         },
+        mounted(){
+            let location = document.location;
+            let tag = '';
+
+            if (location.search){
+
+                tag = location.search.split('=')[1];
+
+            }
+            if (tag == 'RealName'){
+                this.$router.push({
+                    path:'/RealName',
+                })
+            }else if (tag == 'MessageList'){
+                this.$router.push({
+                    path:'/MessageList',
+                })
+            }else if (tag == 'Investigate'){
+                this.$router.push({
+                    path:'/Investigate/1',
+                })
+            }
+            //修改浏览器地址
+            var stateObject = {};
+            var title = "";
+            var newUrl = "http://" + window.location.host + "/baZy";
+            history.pushState(stateObject,title,newUrl);
+        },
         components: {
             'nav-menu': NavMenu,
             'web-header': Header
@@ -87,6 +115,7 @@
                 return this.$store.state.options;
             },
             activeIndex: {
+
                 get () {
                     return this.$store.state.activeIndex;
                 },

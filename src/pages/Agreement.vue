@@ -4,16 +4,17 @@
             <el-tab-pane v-for="(item,index) in agreementList" :key="index" :label="item.agreementTitle" :name="item.nameId">
                 <div class="ag-content flex_direction_column">
                     <div :id="item.selectId" style="height: 620px;"></div>
-                    <div class="flex_direction_column align_items-center" v-if="item.status == 3 ">
+
+                    <div v-else class="justify_content_center" v-if="item.status == 4 ">
+                        <div style="margin-top: 0.25rem;margin-bottom: 0.3rem">
+                            <el-button type="primary" style="width: 140px">已完成签署</el-button>
+                        </div>
+                    </div>
+                    <div class="flex_direction_column align_items-center" v-else>
                         <el-checkbox :id="item.checkId" style="margin-top: 0.25rem" v-model="checked[index]">同意以上协议
                         </el-checkbox>
                         <div style="margin-top: 0.25rem;margin-bottom: 0.3rem">
                             <el-button type="primary" style="width: 120px" v-on:click="signAgreement(item.id)">签署</el-button>
-                        </div>
-                    </div>
-                    <div v-else class="justify_content_center">
-                        <div style="margin-top: 0.25rem;margin-bottom: 0.3rem">
-                            <el-button type="primary" style="width: 140px">已完成签署</el-button>
                         </div>
                     </div>
                 </div>

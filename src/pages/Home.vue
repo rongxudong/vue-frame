@@ -162,7 +162,8 @@
             },
             onDownload(Obj, NAME) {
 //                $('.upLoad').css('backgroundColor', 'red');
-                $.cookie('the_cookie', '33');
+
+                console.log($.cookie('the_cookie'));
             },
             downFile (blob, fileName) {
                 if (window.navigator.msSaveOrOpenBlob) {

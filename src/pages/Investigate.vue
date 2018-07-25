@@ -261,20 +261,17 @@
             }
         },
         created () {
-            console.log(this.$route.path.split('/')[2])
-            this.serviceType = this.$route.query.type;
-            this.QueryOrderListModel.orderType = this.$route.query.type;
+
+            this.serviceType = this.$route.path.split('/')[2];
+
+            this.QueryOrderListModel.orderType = this.$route.path.split('/')[2];
             this.fetchData();
         },
         watch: {
             $route(){
-
-                this.serviceType = this.$route.query.type;
-                this.QueryOrderListModel.orderType = this.$route.query.type;
+                this.serviceType = this.$route.path.split('/')[2];
+                this.QueryOrderListModel.orderType = this.$route.path.split('/')[2];
                 this.fetchData();
-
-                // this.$store.commit('add_tabs', {route: '/' + this.$route.path.split('/')[1], name: to.name});
-                // this.$store.commit('set_active_index', '/' + this.$route.path.split('/')[1]);
             },
         },
         methods: {
@@ -295,25 +292,25 @@
                                 tableData.orderType_str = '商账管理';
                             }
 
-                            // if (tableData.agreementStatus == 1){
-                            //     tableData.agreementStatus_str = '未编辑';
-                            //     tableData.btnVisible = false;
-                            // }else if (tableData.agreementStatus == 2){
-                            //     tableData.agreementStatus_str = '未审核';
-                            //     tableData.btnVisible = true;
-                            // }else if (tableData.agreementStatus == 3){
-                            //     tableData.agreementStatus_str = '未签署';
-                            //     tableData.btnVisible = true;
-                            //     tableData.btnDesc = '签署';
-                            // }else if (tableData.agreementStatus == 4){
-                            //     tableData.agreementStatus_str = '已签署';
-                            //     tableData.btnVisible = true;
-                            //     tableData.btnDesc = '查看';
-                            // }
+                            if (tableData.agreementStatus == 1){
+                                tableData.agreementStatus_str = '未编辑';
+                                tableData.btnVisible = false;
+                            }else if (tableData.agreementStatus == 2){
+                                tableData.agreementStatus_str = '未审核';
+                                tableData.btnVisible = false;
+                            }else if (tableData.agreementStatus == 3){
+                                tableData.agreementStatus_str = '未签署';
+                                tableData.btnVisible = true;
+                                tableData.btnDesc = '签署';
+                            }else if (tableData.agreementStatus == 4){
+                                tableData.agreementStatus_str = '已签署';
+                                tableData.btnVisible = true;
+                                tableData.btnDesc = '查看';
+                            }
 
-                            tableData.agreementStatus_str = '未编辑';
-                            tableData.btnVisible = true;
-                            tableData.btnDesc = '查看';
+                            // tableData.agreementStatus_str = '未编辑';
+                            // tableData.btnVisible = true;
+                            // tableData.btnDesc = '查看';
 
                             if (tableData.payStatus == 1){
                                 tableData.payStatus_str = '已支付';
@@ -334,19 +331,19 @@
                             }else if (tableData.applyStatus == 6){
                                 tableData.applyStatus_str = '已通过';
                             }
-                            // if (tableData.applyStatus  == 1){
-                            //     if (tableData.agreementStatus == 1 || tableData.agreementStatus == 2 || tableData.agreementStatus == 3){
-                            //         tableData.applyStatusBtnVisible = false;
-                            //     } else {
-                            //         tableData.applyStatusBtnVisible = true;
-                            //         tableData.applyStatusBtnDesc = '填写';
-                            //     }
-                            // } else {
-                            //     tableData.applyStatusBtnVisible = true;
-                            //     tableData.applyStatusBtnDesc = '查看';
-                            // }
+                            if (tableData.applyStatus  == 1){
+                                if (tableData.agreementStatus == 1 || tableData.agreementStatus == 2 || tableData.agreementStatus == 3){
+                                    tableData.applyStatusBtnVisible = false;
+                                } else {
+                                    tableData.applyStatusBtnVisible = true;
+                                    tableData.applyStatusBtnDesc = '填写';
+                                }
+                            } else {
                                 tableData.applyStatusBtnVisible = true;
                                 tableData.applyStatusBtnDesc = '查看';
+                            }
+                                // tableData.applyStatusBtnVisible = true;
+                                // tableData.applyStatusBtnDesc = '查看';
                             arrayData.push(tableData)
                         }
                     }
@@ -402,8 +399,6 @@
                             query:query
                         });
                     }
-
-
                 }
 
             },

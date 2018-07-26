@@ -13,6 +13,7 @@ const options = {
         options: [],
         activeIndex: '/Home',
         resUrl: 'http://image.financegt.com',
+
         token: '',
         baseUrl: ''
     },

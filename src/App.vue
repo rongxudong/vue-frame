@@ -67,6 +67,12 @@
             //http://192.168.50.18:8081
             localStorage.setItem("baseUrl", process.env.NODE_ENV == 'development' ? 'http://account.dev.financegt.com' : baseUrl);
             this.$store.state.baseUrl = localStorage.getItem("baseUrl");
+
+            const token = process.env.NODE_ENV == 'development' ? 'e5dd4b346ff10e7a39d6e77418eb6234' : $.cookie('bl_sid');
+            this.$ajax.get('/api/user/'+token,null,res=>{
+                localStorage.setItem("user", res.data);
+            })
+
         },
         mounted(){
             let location = document.location;

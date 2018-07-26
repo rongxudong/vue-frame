@@ -1,85 +1,79 @@
 <template>
-    <div>
-        个人信息
+    <div class="box-container justify_content_center align_items-center flex_direction_column">
+
+        <div class="flex_direction_row">
+            <div>
+                <h3 style="margin: 45px 0 0 0">头像</h3>
+                <h3 style="margin: 100px 0 0 0">账号</h3>
+                <h3 style="margin: 100px 0 0 0">真实姓名</h3>
+            </div>
+
+            <div style="margin: 0 0 0 50px">
+                <img class="img-head"  src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1532520426978&di=fd6b3f143842f34b796fb85536e0b78f&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F0117e2571b8b246ac72538120dd8a4.jpg%401280w_1l_2o_100sh.jpg" alt="头像">
+                <el-upload
+                    class="upload-demo"
+                    ref="upload"
+                    :headers="myHeaders"
+                    :action="action"
+                    :on-success="onUploadSuccess"
+                    :on-error="onUploadError"
+                    :show-file-list="false"
+                    :auto-upload="true">
+                    <el-button style="margin: 10px 0 0 0" type="primary" slot="trigger">更改头像</el-button>
+                </el-upload>
+                <h3 style="margin: 127px 0 0 0">师傅被妖怪抓走了</h3>
+                <el-button style="margin: 10px 0 0 0" type="primary">去实名认证</el-button>
+            </div>
+        </div>
+        <el-button style="margin: 50px 0 0 0" type="danger">退出登录</el-button>
+
     </div>
 </template>
-
 <script>
     export default {
-        data () {
+        data() {
             return {
-//                params: [
-//                    { "id":"1", "image": "https://img.mukewang.com/5abcc39c00018fd009360316.jpg" },
-//                    { "id":"2", "image": "https://img.mukewang.com/5ac4a7940001a9aa09360316.jpg" },
-//                    { "id":"3", "image": "https://img.mukewang.com/5acecbcd00019e0b09360316.jpg" },
-//                    { "id":"4", "image": "https://img.mukewang.com/5ac3142b000166ec09360316.jpg" },
-//                    { "id":"5", "image": "https://img.mukewang.com/5ac4a754000113f009360316.jpg" },
-//                    { "id":"6", "image": "https://img.mukewang.com/5acde54700014ee509360316.jpg" }
-//                ]
-                params: {
-                    row: []
+                url: '',
+                myHeaders: {
+                    token: this.$store.state.token
                 },
-                imgUrl: ""
+                action: this.$store.state.baseUrl + "/api/bussinessAccount/yqq/uploadPic",
             }
         },
         methods: {
-            getBannerList () {
-                this.$ajax.get('banner', null, r => {
-                    this.params.row = r.data.bannerList;
-                    this.imgUrl = this.params.row[3].image;
-                })
+            onUploadSuccess(response, file, fileList) {
+                console.log('success = response ='+response);
+                console.log('success = file ='+file);
+                console.log('success = fileList ='+fileList);
+
+            },
+            onUploadError(err, file, fileList) {
+                console.log('err = err ='+err);
+                console.log('err = file ='+file);
+                console.log('err = fileList ='+fileList);
             }
         },
-        created () {
-            this.getBannerList();
-        },
-        beforeRouteEnter(to, from, next) {
-            console.log(to.meta.keepAlive)
-            next();
-        },
-        components: {
-            'img-elem': {
-                data (){
-                    return {
-                        defaultCover: "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2423595334,4074539958&fm=27&gp=0.jpg"
-                    }
-                },
-                props: ['data'],
-                render: function (createElement, context) {
-                    return createElement('img',{
-                        attrs: {
-                            src: this.data //后台返回的图片
-                        },
-                        on: {
-                            'error': () => {
-                                this.imgUrl = this.defaultCover //本地的默认图片重新赋值
-                            }
-                        }
-                    }, this.$slots.default)
-                }
-            }
+        created() {
+            // this.url = this.$store.resUrl+localStorage.getItem('user').photo;
         }
     }
 </script>
 
 <style lang="less" rel="stylesheet/less">
-    @import "../assets/css/_variable";
-    @import "../assets/css/_mixin";
 
-    #xdd {
-        .text_overflow;
-    }
-    .el-carousel__item img {
+    .box-container {
+        background-color: white;
         width: 100%;
-        height: 100%;
-        object-fit: cover;
+        height: 780px;
+
     }
 
-    .el-carousel__item:nth-child(2n) {
-        background-color: @base;
+    .img-head {
+        width: 100px;
+        height: 100px;
+        border-radius: 50px;
+        display: block;
     }
 
-    .el-carousel__item:nth-child(2n+1) {
-        background-color: #d3dce6;
-    }
+
 </style>

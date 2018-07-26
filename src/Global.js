@@ -33,5 +33,6 @@ MyPlugin.install = function (Vue, options) {
     //5.全局变量
     Vue.prototype.getRandColor = '#ADADAD';
 
+
 }
 module.exports = MyPlugin;

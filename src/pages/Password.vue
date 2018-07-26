@@ -1,34 +1,34 @@
 <template>
     <div class="box-container justify_content_center align_items-center flex_direction_column">
 
-        <div class="flex_direction_row align_items-center">
-            <h3 class="title">原密码</h3>
+        <div>
             <el-input
+                style="width: 250px"
                 class="input"
-                placeholder="请输入内容"
+                placeholder="原密码"
                 v-model="businessAccountResetPasswordModel.oldPassword"
                 clearable>
             </el-input>
         </div>
-        <div class="flex_direction_row align_items-center">
-            <h3 class="title">新密码</h3>
+        <div>
             <el-input
+                style="width: 250px;margin-top: 17px"
                 class="input"
-                placeholder="请输入内容"
+                placeholder="新密码"
                 v-model="businessAccountResetPasswordModel.newPassword"
                 clearable>
             </el-input>
         </div>
-        <div class="flex_direction_row align_items-center">
-            <h3 class="title">确认新密码</h3>
+        <div>
             <el-input
+                style="width: 250px;margin-top: 17px"
                 class="input"
-                placeholder="请输入内容"
+                placeholder="确认新密码"
                 v-model="businessAccountResetPasswordModel.newPasswordAgain"
                 clearable>
             </el-input>
         </div>
-        <el-button style="margin: 50px 0 0 0" type="primary" v-on:click="changePassword">修改</el-button>
+        <el-button style="margin: 50px 0 0 0;width: 250px;" type="primary" v-on:click="changePassword">修改</el-button>
 
     </div>
 </template>

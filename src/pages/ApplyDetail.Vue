@@ -39,8 +39,6 @@
 
 <script>
 
-//    import {PDFObject} from '../assets/js/pdfobject.js'
-
     export default {
         data() {
             return {

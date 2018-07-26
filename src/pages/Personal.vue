@@ -1,11 +1,11 @@
 <template>
-    <div class="box-container justify_content_center align_items-center flex_direction_column">
+    <div class="box-container flex_direction_column">
 
-        <div class="flex_direction_row">
+        <div class="flex_direction_row" style="margin-left: 100px">
             <div>
-                <h3 style="margin: 45px 0 0 0">头像</h3>
-                <h3 style="margin: 130px 0 0 0">账号</h3>
-                <h3 style="margin: 100px 0 0 0">真实姓名</h3>
+                <h3 class="text-title" style="margin: 100px 0 0 0">头像</h3>
+                <h3 class="text-title" style="margin: 124px 0 0 0">账号</h3>
+                <h3 class="text-title" style="margin: 100px 0 0 0">真实姓名</h3>
             </div>
 
             <div style="margin: 0 0 0 50px">
@@ -20,16 +20,14 @@
                     :before-upload="beforeAvatarUpload"
                     :show-file-list="false"
                     :auto-upload="true">
-                    <el-button style="margin: 10px 0 0 0" type="primary" slot="trigger">更改头像</el-button>
+                    <el-button style="margin: 15px 0 0 0" type="primary" plain slot="trigger" size="medium">更改头像</el-button>
                 </el-upload>
-                <h3 style="margin: 27px 0 0 0">{{$store.state.user.username}}</h3>
+                <h3 class="text-content" style="margin: 40px 0 0 0">{{$store.state.user.username}}</h3>
                 <h3 style="margin: 100px 0 0 0" v-if="$store.state.user.identifyStatus == 1">
                     {{$store.state.user.name}}</h3>
-                <el-button style="margin: 10px 0 0 0" type="primary" v-else v-on:click="navRealName">去实名认证</el-button>
+                <el-button size="small" style="margin: 90px 0 0 0" type="primary" v-else v-on:click="navRealName">去实名认证</el-button>
             </div>
         </div>
-        <el-button style="margin: 50px 0 0 0" type="danger" v-on:click="logout">退出登录</el-button>
-
     </div>
 </template>
 <script>
@@ -49,25 +47,24 @@
                     path:'/RealName',
                 })
             },
-            logout() {
-                this.$alert('确认退出！', '提示', {
-                    confirmButtonText: '确定',
-                    callback: action => {
-                        this.$ajax.post('/api/bussiness/account/user/logout', null, res => {
-                            if (res.code == 0) {
-                                document.location.replace(this.$store.state.baseUrl.replace('account.', ''));
-                            } else {
-                                this.$message({
-                                    type: 'error',
-                                    message: res.message
-                                })
-                            }
-                        })
-
-                    }
-                })
-
-            },
+            // logout() {
+            //     this.$alert('确认退出！', '提示', {
+            //         confirmButtonText: '确定',
+            //         callback: action => {
+            //             this.$ajax.post('/api/bussiness/account/user/logout', null, res => {
+            //                 if (res.code == 0) {
+            //                     document.location.replace(this.$store.state.baseUrl.replace('account.', ''));
+            //                 } else {
+            //                     this.$message({
+            //                         type: 'error',
+            //                         message: res.message
+            //                     })
+            //                 }
+            //             })
+            //
+            //         }
+            //     })
+            // },
             onUploadSuccess(response, file, fileList) {
                 if (response.code == 0) {
                     this.$alert('修改头像成功！', '提示', {
@@ -92,7 +89,7 @@
                 const isLt2M = file.size / 1024 / 1024 < 2;
 
                 if (!isLt2M) {
-                    this.$message.error('上传头像图片大小不能超过 2MB!');
+                    this.$message.error('上传文件大小不能超过 2MB!');
                     return false;
                 }
                 if (isJPG) {
@@ -122,10 +119,21 @@
     }
 
     .img-head {
-        width: 100px;
-        height: 100px;
-        border-radius: 50px;
+        width: 84px;
+        height: 84px;
+        border-radius: 42px;
         display: block;
+        margin-top: 65px;
+    }
+    .text-title{
+        font-size: 15px;
+        color: #666666;
+        font-family: MicrosoftYaHei;
+    }
+    .text-content{
+        font-size: 14px;
+        color: #666666;
+        font-family: MicrosoftYaHei;
     }
 
 

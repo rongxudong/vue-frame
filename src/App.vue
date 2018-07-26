@@ -68,9 +68,9 @@
             localStorage.setItem("baseUrl", process.env.NODE_ENV == 'development' ? 'http://account.dev.financegt.com' : baseUrl);
             this.$store.state.baseUrl = localStorage.getItem("baseUrl");
 
-            const token = process.env.NODE_ENV == 'development' ? 'e5dd4b346ff10e7a39d6e77418eb6234' : $.cookie('bl_sid');
-            this.$ajax.get('/api/user/'+token,null,res=>{
-                localStorage.setItem("user", res.data);
+            this.$ajax.get('/api/user/'+this.$store.state.token,null,res=>{
+                this.$store.state.user = res.data;
+                console.log(res.data)
             })
 
         },

@@ -30,7 +30,6 @@ function filterNull(o) {
 //添加一个请求拦截器
 axios.interceptors.request.use(config => {
     // 配置config
-
     config.headers.token = localStorage.getItem("User_token")
     config.baseURL = localStorage.getItem("baseUrl");
 

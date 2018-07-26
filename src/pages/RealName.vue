@@ -7,7 +7,7 @@
                     <h1>抱歉，您的实名认证审核未通过，请修改后重新提交！</h1>
                     <p class="flex_start">
                         <span>失败原因：</span>
-                        <span>1.手持身份证照片拍摄不符合要求<br/>2.身份证和营业执照名字不符</span>
+                        <span>{{failDesc}}</span>
                     </p>
                 </div>
             </div>
@@ -208,7 +208,8 @@
                     address: [
                         { required: true, message: '请输入住所地', trigger: 'blur' }
                     ]
-                }
+                },
+                failDesc: ''
             }
         },
         methods: {
@@ -278,7 +279,8 @@
             findUserIdentityStatus () {
                 this.$ajax.get('/api/bussinessAccount/yqq/findUserIdentityStatus', null, res => {
                     if( res.code == 0) {
-                        this.ruleForm['auditFlag'] = res.data;
+                        this.ruleForm['auditFlag'] = res.data.status;
+                        this.failDesc = res.data.desc;
                         if( this.ruleForm['auditFlag'] == '4' || this.ruleForm['auditFlag'] == '1') {
                             this.isEdit = true;
                         }

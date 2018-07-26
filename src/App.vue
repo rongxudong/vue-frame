@@ -65,23 +65,21 @@
                 baseUrl = 'http://account.dev.financegt.com';
             }
             //http://192.168.50.18:8081
+            //http://192.168.50.11:8081
+            //http://account.dev.financegt.com
             localStorage.setItem("baseUrl", process.env.NODE_ENV == 'development' ? 'http://account.dev.financegt.com' : baseUrl);
             this.$store.state.baseUrl = localStorage.getItem("baseUrl");
 
-            this.$ajax.get('/api/user/'+this.$store.state.token,null,res=>{
+            this.$ajax.get('/api/user/'+this.$store.state.token, null, res=>{
                 this.$store.state.user = res.data;
-                console.log(res.data)
             })
-
         },
         mounted () {
             let location = document.location;
             let tag = '';
 
             if (location.search){
-
                 tag = location.search.split('=')[1];
-
             }
             if (tag == 'RealName'){
                 this.$router.push({

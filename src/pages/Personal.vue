@@ -9,7 +9,7 @@
             </div>
 
             <div style="margin: 0 0 0 50px">
-                <img class="img-head" :src="url" alt="头像">
+                <img class="img-head" :src="url" alt="头像" />
                 <el-upload
                     class="upload-demo"
                     ref="upload"
@@ -47,24 +47,6 @@
                     path:'/RealName',
                 })
             },
-            // logout() {
-            //     this.$alert('确认退出！', '提示', {
-            //         confirmButtonText: '确定',
-            //         callback: action => {
-            //             this.$ajax.post('/api/bussiness/account/user/logout', null, res => {
-            //                 if (res.code == 0) {
-            //                     document.location.replace(this.$store.state.baseUrl.replace('account.', ''));
-            //                 } else {
-            //                     this.$message({
-            //                         type: 'error',
-            //                         message: res.message
-            //                     })
-            //                 }
-            //             })
-            //
-            //         }
-            //     })
-            // },
             onUploadSuccess(response, file, fileList) {
                 if (response.code == 0) {
                     this.$alert('修改头像成功！', '提示', {
@@ -72,11 +54,9 @@
                         callback: action => {
                             this.$store.state.user.photo = response.data;
                             this.url = this.$store.state.resUrl + this.$store.state.user.photo;
-
                         }
                     })
                 }
-
             },
             onUploadError(err, file, fileList) {
                 console.log('err = err =' + JSON.stringify(err));
@@ -100,11 +80,15 @@
                 }
                 this.$message.error('请上传png或者jpg格式的头像')
                 return false;
+            },
+            getAvatarImg () {
+                this.url = this.$store.state.resUrl + this.$store.state.user.photo;
             }
         },
-        created() {
-            this.url = this.$store.state.resUrl + this.$store.state.user.photo;
-
+        mounted() {
+            setTimeout(()=>{
+                this.getAvatarImg();
+            },1000)
         }
     }
 </script>

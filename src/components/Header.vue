@@ -24,12 +24,12 @@
                 </li>
                 <el-dropdown placement="bottom">
                     <li class="header-logo align_items">
-                        <img :src="defaultAvatarImg"/>
+                        <img :src="defaultAvatarImg" />
                     </li>
                     <el-dropdown-menu slot="dropdown" class="ps-information">
-                        <el-dropdown-item>
-                            <a class="header-dropdown-style" href="javascript:void(0);">真实姓名</a>
-                        </el-dropdown-item>
+                        <!--<el-dropdown-item>-->
+                            <!--<a class="header-dropdown-style" href="javascript:void(0);">真实姓名</a>-->
+                        <!--</el-dropdown-item>-->
                         <el-dropdown-item>
                             <a class="header-dropdown-style" @click="toView('/Personal')">个人资料</a>
                         </el-dropdown-item>
@@ -37,7 +37,7 @@
                             <a class="header-dropdown-style" @click="toView('/RealName')">实名认证</a>
                         </el-dropdown-item>
                         <el-dropdown-item>
-                            <a class="header-dropdown-style" href="javascript:void(0);">退出登录</a>
+                            <a class="header-dropdown-style" href="javascript:void(0);" @click="logout">退出登录</a>
                         </el-dropdown-item>
                     </el-dropdown-menu>
                 </el-dropdown>
@@ -70,7 +70,7 @@
                 ],
                 value: this.$i18n.locale,
                 codeImg: require('../assets/img/RealName/real-fail.png'),
-                defaultAvatarImg: this.$store.state.resUrl + this.$store.state.user.photo
+                defaultAvatarImg: require('../assets/img/Home/default-avatar-img.png')
             };
         },
         watch: {
@@ -99,7 +99,39 @@
             },
             toView (path) {
                 this.$router.push({path: path});
+            },
+            getAvatarImg () {
+                this.defaultAvatarImg = this.$store.state.resUrl + this.$store.state.user.photo;
+            },
+            logout () {
+                this.$alert('确认退出吗？', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    this.$ajax.post('/api/bussiness/account/user/logout', null, res => {
+                        if (res.code == 0) {
+                            document.location.replace(this.$store.state.baseUrl.replace('account.', ''));
+                            localStorage.clear();
+                        } else {
+                            this.$message({
+                                type: 'error',
+                                message: res.message
+                            })
+                        }
+                    })
+                }).catch(() => {
+                    this.$message({
+                        type: 'info',
+                        message: '已取消退出登录'
+                    });
+                })
             }
+        },
+        mounted () {
+            setTimeout(()=>{
+                this.getAvatarImg();
+            },1000)
         }
     }
 </script>

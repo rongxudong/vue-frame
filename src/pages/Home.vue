@@ -19,7 +19,7 @@
             <div class="bottom">
                 <div class="title">
                     <span>消息</span>
-                    <a href="#" @click="goMsgList">MORE &gt;&gt;</a>
+                    <a href="javascript:void(0);" @click="goMsgList">MORE &gt;&gt;</a>
                 </div>
                 <div class="msg-item align_items" v-for="(item, index) in DataMessageList" :key="item.index">
                     <div class="sign" v-if="item.read == 0"></div>
@@ -37,7 +37,7 @@
         <div class="right bg-style">
             <div class="title" style="margin: .18rem 0;">
                 <span>公告栏</span>
-                <a href="#" @click="goFileList">MORE &gt;&gt;</a>
+                <a href="javascript:void(0);" @click="goFileList">MORE &gt;&gt;</a>
             </div>
             <div class="right-list">
                 <div class="item" v-for="(item, index) in DataResList" :key="item.index">
@@ -59,9 +59,10 @@
             </div>
         </div>
         <el-dialog :visible.sync="outerVisible" id="view-dialog">
-            <iframe :src="previewUrl" width="100%" height="100%" id='viewPhoto'>
+            <iframe :src="previewUrl" width="100%" height="100%" frameborder="1" id='viewPhoto' v-show="iframeShow">
                 This browser does not support PDFs. Please download the PDF to view it: <a :href="previewUrl">Download PDF</a>
             </iframe>
+            <img :src="viewPhotoUrl" width="100%" v-show="imgShow"/>
         </el-dialog>
     </div>
 </template>
@@ -100,7 +101,10 @@
                 DataResList: [],
                 DataMessageList: [],
                 outerVisible: false,
-                previewUrl: ''
+                previewUrl: '',
+                viewPhotoUrl: '',
+                iframeShow: true,
+                imgShow: true
             }
         },
         filters: {
@@ -172,16 +176,24 @@
                 this.$router.push({path: '/FileList'});
             },
             onLook (Obj, NAME) {
-                this.previewUrl = this.$store.state.resUrl + Obj.url;
                 let nameSuffix = Obj.fileName.split('.').pop().toLowerCase();
                 if( nameSuffix === 'png' || nameSuffix === 'jpg' || nameSuffix === 'jpeg' || nameSuffix === 'gif' ) {
-                    window.open(this.previewUrl, '_blank');
+                    this.previewUrl = '';
+                    this.viewPhotoUrl = this.$store.state.resUrl + Obj.url;
+                    this.iframeShow = false;
+                    this.imgShow = true;
+                    this.outerVisible = true;
                 }
                 else if ( nameSuffix === 'pdf') {
+                    this.previewUrl = this.$store.state.resUrl + Obj.url;
+                    this.iframeShow = true;
+                    this.imgShow = false;
                     this.outerVisible = true;
                 }
                 else {
                     this.previewUrl = 'https://view.officeapps.live.com/op/view.aspx?src=' + this.$store.state.resUrl + Obj.url;
+                    this.iframeShow = true;
+                    this.imgShow = false;
                     this.outerVisible = true;
                 }
             },
@@ -291,7 +303,6 @@
 <style scoped lang="less" rel="stylesheet/less">
     @import "../assets/css/_variable";
     @import "../assets/css/_mixin";
-
     //针对ipad/平板
     @media (min-width: 768px) and (max-width: 1023px) {
         .Home-main .left .left-wrapper {

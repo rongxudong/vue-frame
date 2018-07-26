@@ -537,6 +537,7 @@ a:focus {
   height: 70vh;
 }
 #view-dialog .el-dialog .el-dialog__body {
+  overflow-y: scroll;
   height: calc(100% - 30px);
   height: -ms-calc(100% - 30px);
   height: -moz-calc(100% - 30px);

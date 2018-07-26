@@ -12,11 +12,14 @@ const options = {
         message: '',
         options: [],
         activeIndex: '/Home',
+        activeDate: '',
         resUrl: 'http://image.financegt.com',
 
         token: '',
         baseUrl: '',
-        user:{}
+        user:{
+            photo: ''
+        }
     },
 
     // 操作

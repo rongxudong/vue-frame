@@ -28,7 +28,7 @@
                         <keep-alive>
                             <router-view v-if="$route.meta.keepAlive"></router-view>
                         </keep-alive>
-                        <router-view v-if="!$route.meta.keepAlive"></router-view>
+                        <router-view v-if="!$route.meta.keepAlive" :key="this.$store.state.activeDate"></router-view>
                     </div>
                 </el-main>
             </el-container>
@@ -74,7 +74,7 @@
             })
 
         },
-        mounted(){
+        mounted () {
             let location = document.location;
             let tag = '';
 

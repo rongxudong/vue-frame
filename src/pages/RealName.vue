@@ -259,6 +259,8 @@
                                     type: 'success',
                                     message: res.message
                                 });
+//                                this.$router.go(0);
+                                this.$store.state.activeDate = new Date().getTime();
                             }
                             else{
                                 this.$message({

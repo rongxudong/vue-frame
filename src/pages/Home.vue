@@ -180,6 +180,7 @@
                 if( nameSuffix === 'png' || nameSuffix === 'jpg' || nameSuffix === 'jpeg' || nameSuffix === 'gif' ) {
                     this.previewUrl = '';
                     this.viewPhotoUrl = this.$store.state.resUrl + Obj.url;
+                    console.log(this.viewPhotoUrl)
                     this.iframeShow = false;
                     this.imgShow = true;
                     this.outerVisible = true;

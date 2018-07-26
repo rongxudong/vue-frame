@@ -8,12 +8,12 @@
         </el-col>
         <el-col :span="4">
             <ul class="grid-content bg-purple flex_end">
-                <el-dropdown placement="bottom">
+                <el-dropdown placement="bottom" class="code-img-box">
                     <li class="header-code align_items">
                         <i class="iconfont icon-erweima"></i>
                     </li>
                     <el-dropdown-menu slot="dropdown">
-                        <el-dropdown-item>
+                        <el-dropdown-item class="align_items">
                             <img class="codeImg" :src="codeImg"/>
                         </el-dropdown-item>
                     </el-dropdown-menu>
@@ -22,10 +22,25 @@
                     <i class="iconfont icon-xiaoxi1"></i>
                     <em class="small-icon"></em>
                 </li>
-                <!--<li class="header-logo align_items">-->
-                    <!--<img src="../assets/img/Home/step1.png"/>-->
-                    <!--<i class="iconfont icon-yonghu"></i>-->
-                <!--</li>-->
+                <el-dropdown placement="bottom">
+                    <li class="header-logo align_items">
+                        <img :src="defaultAvatarImg"/>
+                    </li>
+                    <el-dropdown-menu slot="dropdown" class="ps-information">
+                        <el-dropdown-item>
+                            <a class="header-dropdown-style" href="javascript:void(0);">真实姓名</a>
+                        </el-dropdown-item>
+                        <el-dropdown-item>
+                            <a class="header-dropdown-style" @click="toView('/Personal')">个人资料</a>
+                        </el-dropdown-item>
+                        <el-dropdown-item>
+                            <a class="header-dropdown-style" @click="toView('/RealName')">实名认证</a>
+                        </el-dropdown-item>
+                        <el-dropdown-item>
+                            <a class="header-dropdown-style" href="javascript:void(0);">退出登录</a>
+                        </el-dropdown-item>
+                    </el-dropdown-menu>
+                </el-dropdown>
                 <li class="head-language align_items">
                     <div class="select">
                         <span :class="{'isActive': value === item.value}" v-for="item in options"
@@ -41,7 +56,7 @@
     import LangStorage from '../assets/js/lang/local_lang';
 
     export default {
-        data() {
+        data () {
             return {
                 activeIndex: '1',
                 options: [
@@ -54,7 +69,8 @@
                     }
                 ],
                 value: this.$i18n.locale,
-                codeImg: require('../assets/img/RealName/real-fail.png')
+                codeImg: require('../assets/img/RealName/real-fail.png'),
+                defaultAvatarImg: this.$store.state.resUrl + this.$store.state.user.photo
             };
         },
         watch: {
@@ -80,6 +96,9 @@
             },
             selectLanguage (key) {
                 this.value = key;
+            },
+            toView (path) {
+                this.$router.push({path: path});
             }
         }
     }
@@ -92,6 +111,7 @@
         height: 60px;
         line-height: 60px;
         ul li {
+            height: 60px;
             cursor: pointer;
         }
         li:not(.head-language) {

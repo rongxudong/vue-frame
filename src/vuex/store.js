@@ -15,7 +15,8 @@ const options = {
         resUrl: 'http://image.financegt.com',
 
         token: '',
-        baseUrl: ''
+        baseUrl: '',
+        user:{}
     },
 
     // 操作

@@ -49,7 +49,7 @@
         },
         beforeCreate () {
 //            Vue.myGlobalMethod();
-            localStorage.setItem("User_token", process.env.NODE_ENV == 'development' ? 'f91d70b2606ec761e01f28ab1c92d346' : $.cookie('bl_sid'));
+            localStorage.setItem("User_token", process.env.NODE_ENV == 'development' ? '7083171adb87543bc7270bc7c8951920' : $.cookie('bl_sid'));
 
             this.$store.state.token = localStorage.getItem("User_token");
 

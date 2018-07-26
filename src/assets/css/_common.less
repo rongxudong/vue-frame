@@ -20,6 +20,14 @@ button {
         outline: none!important;
     }
 }
+a {
+    cursor: pointer;
+    &:hover,
+    &:active,
+    &:focus{
+        text-decoration: none;
+    }
+}
 .text-center {
     text-align: center!important;
 }
@@ -385,14 +393,14 @@ button {
                 color: #fff;
             }
         }
-        span.look {
+        a.look {
             color: RGBA(46, 170, 253, 1);
             border: 1px solid RGBA(46, 170, 253, 1);
             &:hover {
                 background-color: RGBA(46, 170, 253, 1);
             }
         }
-        span.upLoad {
+        a.upLoad {
             color: RGBA(84, 190, 117, 1);
             border: 1px solid RGBA(84, 190, 117, 1);
             &:hover {

@@ -18,8 +18,8 @@
                         {{item.fileName}}
                     </div>
                     <div class="file-operate align_items flex_end">
-                        <span class="operate look" @click="onLook(item, item.fileName)">查看</span>
-                        <span class="operate upLoad" @click="onDownload(item, item.fileName)">下载</span>
+                        <a class="operate look" @click="onLook(item, item.fileName)">查看</a>
+                        <a class="operate upLoad" @click="onDownload(item, item.fileName)">下载</a>
                     </div>
                 </div>
             </div>

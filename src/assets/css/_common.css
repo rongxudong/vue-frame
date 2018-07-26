@@ -196,6 +196,14 @@ button:active,
 button:focus {
   outline: none!important;
 }
+a {
+  cursor: pointer;
+}
+a:hover,
+a:active,
+a:focus {
+  text-decoration: none;
+}
 .text-center {
   text-align: center!important;
 }
@@ -599,18 +607,18 @@ button:focus {
 .right-list .item .operate:hover {
   color: #fff;
 }
-.right-list .item span.look {
+.right-list .item a.look {
   color: #2eaafd;
   border: 1px solid #2eaafd;
 }
-.right-list .item span.look:hover {
+.right-list .item a.look:hover {
   background-color: #2eaafd;
 }
-.right-list .item span.upLoad {
+.right-list .item a.upLoad {
   color: #54be75;
   border: 1px solid #54be75;
 }
-.right-list .item span.upLoad:hover {
+.right-list .item a.upLoad:hover {
   background-color: #54be75;
 }
 .bg-style {

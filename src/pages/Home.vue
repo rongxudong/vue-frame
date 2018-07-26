@@ -1,5 +1,5 @@
 <template>
-    <div class="Home-main">
+    <div class="Home-main" id="HomeVue">
         <div class="left bg-style">
             <div class="top">
                 <div class="title">
@@ -52,19 +52,16 @@
                         {{item.fileName}}
                     </div>
                     <div class="file-operate align_items flex_end">
-                        <span class="operate look" @click="onLook(item, item.fileName)">查看</span>
-                        <span class="operate upLoad" @click="onDownload(item, item.fileName)">下载</span>
+                        <a class="operate look" @click="onLook(item, item.fileName)">查看</a>
+                        <a class="operate upLoad" @click="onDownload(item, item.fileName)">下载</a>
                     </div>
                 </div>
             </div>
         </div>
         <el-dialog :visible.sync="outerVisible" id="view-dialog">
             <iframe :src="previewUrl" width="100%" height="100%" id='viewPhoto'>
-                <!--This browser does not support PDFs. Please download the PDF to view it: <a :href="previewUrl">Download PDF</a>-->
+                This browser does not support PDFs. Please download the PDF to view it: <a :href="previewUrl">Download PDF</a>
             </iframe>
-            <!--<div slot="footer" class="dialog-footer">-->
-                <!--<el-button @click="outerVisible = false">取 消</el-button>-->
-            <!--</div>-->
         </el-dialog>
     </div>
 </template>
@@ -119,7 +116,7 @@
             getResList () {
                 let messageListModel = {
                     pageNum: 1,
-                    pageSize: 30
+                    pageSize: 15
                 }
                 this.$ajax.post('/api/bussiness/account/message/getFileList', messageListModel, res => {
                     if (res.code == 0) {
@@ -174,74 +171,34 @@
                 e.preventDefault();
                 this.$router.push({path: '/FileList'});
             },
-            onLook (Obj, fileType) {
+            onLook (Obj, NAME) {
                 this.previewUrl = this.$store.state.resUrl + Obj.url;
-                    let nameSuffix = Obj.fileName.split('.').pop().toLowerCase();
+                let nameSuffix = Obj.fileName.split('.').pop().toLowerCase();
                 if( nameSuffix === 'png' || nameSuffix === 'jpg' || nameSuffix === 'jpeg' || nameSuffix === 'gif' ) {
                     window.open(this.previewUrl, '_blank');
                 }
-                else if ( nameSuffix === 'pdf'){
+                else if ( nameSuffix === 'pdf') {
                     this.outerVisible = true;
                 }
                 else {
                     this.previewUrl = 'https://view.officeapps.live.com/op/view.aspx?src=' + this.$store.state.resUrl + Obj.url;
-                    console.log(this.previewUrl)
                     this.outerVisible = true;
                 }
             },
             onDownload (Obj, NAME) {
+                let self = this;
                 let nameSuffix = NAME.split('.').pop().toLowerCase();
-                let TYPE = {
-                    type: 'text/plain'
+                let fileUrl = this.$store.state.resUrl + Obj.url;
+                if(nameSuffix === 'png' || nameSuffix === 'gif' || nameSuffix === 'jpeg' || nameSuffix === 'jpg' || nameSuffix === 'tiff') {
+                    if (this.browserIsIe()) {
+                        this.createIframe(fileUrl);
+                    } else {
+                        $(self).attr("download", fileUrl);
+                        $(self).attr("href", fileUrl);
+                    }
                 }
-                Obj.url = this.$store.state.resUrl + Obj.url
-                console.log(Obj)
-                switch (nameSuffix){
-                    case 'xls':
-                        TYPE.type = 'application/vnd.ms-excel';
-                        break;
-                    case 'xlsx':
-                        TYPE.type = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
-                        break;
-                    case 'pdf':
-                        TYPE.type = 'application/pdf';
-                        break;
-                    case 'doc':
-                        TYPE.type = 'application/msword';
-                        break;
-                    case 'docx':
-                        TYPE.type = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
-                        break;
-                    case 'png':
-                        TYPE.type = 'image/png';
-                        break;
-                    case 'gif':
-                        TYPE.type = 'image/gif';
-                        break;
-                    case 'jpeg':
-                        TYPE.type = 'image/jpeg';
-                        break;
-                    case 'jpg':
-                        TYPE.type = 'image/jpeg';
-                        break;
-                    default:
-                        TYPE.type = 'image/plain';
-                }
-                let blob = new Blob([Obj], TYPE);
-                let fileName = NAME;
-
-                this.downFile(blob, fileName);
-            },
-            downFile (blob, fileName) {
-                if (window.navigator && window.navigator.msSaveOrOpenBlob) {
-                    window.navigator.msSaveOrOpenBlob(blob, fileName);
-                } else {
-                    let link = document.createElement('a'); // 创建a标签
-                    //创建一个新的对象URL,该对象URL可以代表某一个指定的File对象或Blob对象.
-                    link.href = window.URL.createObjectURL(blob);
-                    link.download = fileName;
-                    link.click(); // 触发点击a标签事件
-                    window.URL.revokeObjectURL(link.href); // 释放URL 对象
+                else {
+                    window.open(fileUrl, '_blank');
                 }
             },
             navRoute (item) {
@@ -286,6 +243,36 @@
                             name: '商账管理',
                         });
                         break;
+                }
+            },
+            //判断是否为Trident内核浏览器(IE等)函数
+            browserIsIe () {
+                if (!!window.ActiveXObject || "ActiveXObject" in window){
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            },
+            //创建iframe并赋值的函数,传入参数为图片的src属性值.
+            createIframe (imgSrc) {
+                //如果隐藏的iframe不存在则创建
+                if ($("#IframeReportImg").length === 0){
+                    $('<iframe style="display:none;" id="IframeReportImg" name="IframeReportImg" onload="downloadImg();" width="0" height="0" src="about:blank"></iframe>').appendTo("body");
+                }
+                //iframe的src属性如不指向图片地址,则手动修改,加载图片
+                if ($('#IframeReportImg').attr("src") != imgSrc) {
+                    $('#IframeReportImg').attr("src",imgSrc);
+                } else {
+                    //如指向图片地址,直接调用下载方法
+                    this.downloadImg();
+                }
+            },
+            //下载图片的函数
+            downloadImg () {
+                //iframe的src属性不为空,调用execCommand(),保存图片
+                if ($('#IframeReportImg').src != "about:blank") {
+                    window.frames["IframeReportImg"].document.execCommand("SaveAs");
                 }
             }
         },

@@ -251,7 +251,7 @@
                                 class="upload-demo"
                                 :action="this.$store.state.baseUrl + importFileUrl"
                                 :headers="myHeaders"
-                                :data="upLoadData"
+                                :data="array['orderId']"
                                 :on-change="handleChange"
                                 :on-error="uploadError"
                                 :on-success="uploadSuccess"
@@ -544,9 +544,6 @@
                 ],
                 fileList: [],
                 importFileUrl: "/api/bussiness/account/order/uploadGtcpFile",
-                upLoadData: {
-                    orderId: 1
-                },
                 myHeaders: {
                     token: this.$store.state.token
                 },
@@ -739,8 +736,8 @@
             }
         },
         created　() {
+            this.array['orderId'] = this.$route.query.id;
             this.getGtcpDetail();
-            this.array['orderId'] = this.$route.query;
         }
     }
 </script>

@@ -140,8 +140,8 @@
                 LangStorage.setLang(val);
             },
             avatarImg: function(a, b) {
-                console.log("修改后为：" + a);
-                console.log("修改前为：" + b);
+//                console.log("修改后为：" + a);
+//                console.log("修改前为：" + b);
                 this.defaultAvatarImg = this.$store.state.resUrl + a;
             }
         },

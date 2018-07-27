@@ -1,5 +1,5 @@
 <template>
-    <div class="Home-main">
+    <div class="Home-main MessageList-main">
         <div class="left bg-style">
             <div class="bottom">
                 <div class="title">
@@ -11,7 +11,7 @@
                     <div class="msg-item-left">
                         <h1>{{item.title}}</h1>
                         <p class="text_overflow">{{item.content}}</p>
-                        <span>{{item.date}}</span>
+                        <span>{{item.creatime | filterTime('YYYY-MM-DD HH:mm')}}</span>
                     </div>
                     <div class="msg-item-right flex_end">
                         <button type="button" class="look-btn" v-on:click="navRoute(item)">查看详情</button>
@@ -38,6 +38,7 @@
 
 <script>
 //    import Pagination from '@/components/Pagination'
+    import moment from 'moment';
 
     export default {
         data () {
@@ -50,6 +51,12 @@
                     pageNum: 1,
                     pageSize: 10
                 }
+            }
+        },
+        filters: {
+            filterTime: function (value, formatString) {
+                formatString = formatString || 'YYYY-MM-DD HH:mm:ss';
+                return moment(value).format(formatString);
             }
         },
         methods: {
@@ -91,6 +98,21 @@
                 })
             },
             navRoute(item) {
+                let params = {
+                    messageId: item._id,
+                    pageNum: this.messageListModel['pageNum'],
+                    pageSize: this.messageListModel['pageSize']
+                };
+                this.$ajax.post('/api/bussiness/account/message/lookMessage', params, res => {
+                    if(res.code === 0){
+                        this.DataMessageList = res.data.viewList;
+                    } else {
+                        this.$message({
+                            type: 'error',
+                            message: res.message
+                        });
+                    }
+                });
                 console.log(item.title)
                 switch (item.title) {
                     case '实名认证' :
@@ -145,6 +167,13 @@
 </script>
 
 <style scoped lang="less" rel="stylesheet/less">
+    @import "../assets/css/_mixin";
+
+    .MessageList-main .title {
+        .box-sizing(border-box);
+        padding-bottom: 20px;
+        border-bottom: 1px dashed #cccccc;
+    }
     .left {
         width: 100%;
         .bottom {

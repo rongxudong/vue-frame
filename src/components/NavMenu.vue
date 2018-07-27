@@ -40,9 +40,9 @@
 
         },
         computed: {
-//            options() {
-//                return this.$store.state.options;
-//            }
+            options() {
+                return this.$store.state.options;
+            }
         },
         mounted() {
             const routePath = localStorage.getItem('currentRoutePath');
@@ -82,7 +82,10 @@
 
     .el-menu-vertical-demo {
         height: 100%;
-        min-height: calc(100vh - 60px);
+        min-height: calc(~'100vh - 60px');
+        min-height: -ms-calc(~'100vh - 60px');
+        min-height: -moz-calc(~'100vh - 60px');
+        min-height: -webkit-calc(~'100vh - 60px');
     }
 
     .el-menu .iconfont {

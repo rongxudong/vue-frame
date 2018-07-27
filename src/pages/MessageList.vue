@@ -171,7 +171,7 @@
 
     .MessageList-main .title {
         .box-sizing(border-box);
-        padding-bottom: 20px;
+        padding-bottom: 30px;
         border-bottom: 1px dashed #cccccc;
     }
     .left {

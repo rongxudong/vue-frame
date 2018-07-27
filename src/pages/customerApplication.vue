@@ -251,7 +251,7 @@
                                 class="upload-demo"
                                 :action="this.$store.state.baseUrl + importFileUrl"
                                 :headers="myHeaders"
-                                :data="array['orderId']"
+                                :data="upLoadData"
                                 :on-change="handleChange"
                                 :on-error="uploadError"
                                 :on-success="uploadSuccess"
@@ -544,6 +544,9 @@
                 ],
                 fileList: [],
                 importFileUrl: "/api/bussiness/account/order/uploadGtcpFile",
+                upLoadData: {
+                    orderId: null
+                },
                 myHeaders: {
                     token: this.$store.state.token
                 },
@@ -624,7 +627,7 @@
             },
             // 监听文件状态改变
             handleChange(file, fileList) {
-                console.log(file);
+//                console.log(file);
             },
             // 删除文件之前的钩子
             beforeRemove(file, fileList) {
@@ -646,7 +649,6 @@
             asyncReq (file,fileList) {
                 this.$ajax.post('/api/bussiness/account/order/deleteGtcpFile?fileId=' + file.id + '&orderId=' + this.array['orderId'], null, res => {
                     this.fileList = this.File(res.files);
-                    console.log(res.message)
                 })
             },
             // 保存
@@ -654,6 +656,17 @@
                 this.$ajax.post( '/api/bussiness/account/order/saveGtcp?orderId=' + this.array['orderId'], this.array, res => {
                     console.log(res.data)
                     console.log(res.message)
+                    if(res.code === 0){
+                        this.$message({
+                            type: 'success',
+                            message: res.message
+                        });
+                    } else {
+                        this.$message({
+                            type: 'error',
+                            message: res.message
+                        });
+                    }
                 })
             },
             // 提交
@@ -711,9 +724,7 @@
             },
             // 上传成功后的回调
             uploadSuccess (response, file, fileList) {
-                console.log('文件', file)
-                console.log('上传文件', response)
-                this.fileList = response.data.files;
+                this.fileList = this.File(response.data.files);
             },
             // 上传错误
             uploadError (response, file, fileList) {
@@ -737,6 +748,7 @@
         },
         created　() {
             this.array['orderId'] = this.$route.query.id;
+            this.upLoadData['orderId'] = this.$route.query.id;
             this.getGtcpDetail();
         }
     }

@@ -40,9 +40,9 @@
 
         },
         computed: {
-            options() {
-                return this.$store.state.options;
-            }
+//            options() {
+//                return this.$store.state.options;
+//            }
         },
         mounted() {
             const routePath = localStorage.getItem('currentRoutePath');

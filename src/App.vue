@@ -70,6 +70,7 @@
 
             this.$ajax.get('/api/user/'+this.$store.state.token, null, res=>{
                 this.$store.state.user = res.data;
+                this.$store.state.avatarImg = res.data.photo;
             })
         },
         mounted () {

@@ -83,7 +83,7 @@
                 return false;
             },
             getAvatarImg () {
-                this.url = this.$store.state.resUrl + this.$store.state.user.photo;
+                this.url = this.$store.state.resUrl + this.$store.state.avatarImg;
             }
         },
         mounted() {

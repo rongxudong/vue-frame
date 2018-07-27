@@ -91,7 +91,7 @@
                 this.$router.push({path: path});
             },
             getAvatarImg () {
-                this.defaultAvatarImg = this.$store.state.resUrl + this.$store.state.user.photo;
+                this.defaultAvatarImg = this.$store.state.resUrl + this.$store.state.avatarImg;
             },
             logout () {
                 this.$alert('确认退出吗？', '提示', {
@@ -118,17 +118,9 @@
                 })
             }
         },
-        mounted () {
-            setTimeout(()=>{
-                this.getAvatarImg();
-            },1000)
-        },
         computed: {
-//            defaultAvatarImg () {
-//
-//            }
             avatarImg () {
-                return this.$store.state.user.photo;
+                return this.$store.state.avatarImg;
             }
         },
         watch: {
@@ -146,7 +138,17 @@
                 }
 //                console.log(`${this.moment.locale()}`);
                 LangStorage.setLang(val);
+            },
+            avatarImg: function(a, b) {
+                console.log("修改后为：" + a);
+                console.log("修改前为：" + b);
+                this.defaultAvatarImg = this.$store.state.resUrl + a;
             }
+        },
+        mounted () {
+            setTimeout(()=>{
+                this.getAvatarImg();
+            },1000)
         }
     }
 </script>

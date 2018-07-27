@@ -17,9 +17,8 @@ const options = {
 
         token: '',
         baseUrl: '',
-        user:{
-            photo: ''
-        }
+        user: {},
+        avatarImg: ''
     },
 
     // 操作
@@ -48,7 +47,8 @@ const options = {
         },
         // 设置头像
         set_avatar_img (state, url) {
-            state.user.photo = url;
+            state.avatarImg = null;
+            state.avatarImg = url;
         }
     }
 }

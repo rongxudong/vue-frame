@@ -50,20 +50,13 @@
                 this.preViewPDF(this.agreementList[tab.index].pdfFile);
             },
             preViewPDF(pdfPath) {
-                if (!PDFObject.supportsPDFs) {
+                if (pdfPath) {
+                    PDFObject.embed(this.$store.state.resUrl + pdfPath, '#'+this.agreementList[this.currentPage].selectId);
+                } else {
                     this.$message({
                         type: 'error',
-                        message: '该浏览器无法支持pdf文件'
+                        message: '文件出错'
                     })
-                } else {
-                    if (pdfPath) {
-                        PDFObject.embed(this.$store.state.resUrl + pdfPath, '#'+this.agreementList[this.currentPage].selectId);
-                    } else {
-                        this.$message({
-                            type: 'error',
-                            message: '文件出错'
-                        })
-                    }
                 }
             },
             fetchData() {

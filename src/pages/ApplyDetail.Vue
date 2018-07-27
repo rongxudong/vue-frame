@@ -71,20 +71,13 @@
             },
 
             preViewPDF(pdfPath) {
-                if (!PDFObject.supportsPDFs) {
+                if (pdfPath) {
+                    PDFObject.embed(this.$store.state.resUrl + pdfPath, '#pdf');
+                } else {
                     this.$message({
                         type: 'error',
-                        message: '该浏览器无法支持pdf文件'
+                        message: '文件出错'
                     })
-                } else {
-                    if (pdfPath) {
-                        PDFObject.embed(this.$store.state.resUrl + pdfPath, '#pdf');
-                    } else {
-                        this.$message({
-                            type: 'error',
-                            message: '文件出错'
-                        })
-                    }
                 }
             },
             onLook (url, fileType) {

@@ -47,7 +47,7 @@
         },
         beforeCreate () {
 //            Vue.myGlobalMethod();
-            localStorage.setItem("User_token", process.env.NODE_ENV == 'development' ? '1bb8e77e6cc25759e246759dd48aa149' : $.cookie('bl_sid'));
+            localStorage.setItem("User_token", process.env.NODE_ENV == 'development' ? '8321a56a820fa7d0bdeb7b2db39a1e4a' : $.cookie('bl_sid'));
             this.$store.state.token = localStorage.getItem("User_token");
 
             let baseUrl = 'http://account.financegt.com'
@@ -68,8 +68,8 @@
             // localStorage.setItem("baseUrl", process.env.NODE_ENV == 'development' ? 'http://192.168.50.11:8081' : baseUrl);
             this.$store.state.baseUrl = localStorage.getItem("baseUrl");
 
-            this.$ajax.get('/api/user/'+this.$store.state.token, null, res=>{
-                this.$store.state.user = res.data;
+            this.$ajax.get('/api/user/'+this.$store.state.token, null, res => {
+                this.$store.commit('set_user', res.data);
                 this.$store.state.avatarImg = res.data.photo;
             })
         },

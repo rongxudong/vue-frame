@@ -49,6 +49,11 @@ const options = {
         set_avatar_img (state, url) {
             state.avatarImg = null;
             state.avatarImg = url;
+        },
+        // 获取用户信息
+        set_user (state, info) {
+            state.user = null;
+            state.user = info;
         }
     }
 }

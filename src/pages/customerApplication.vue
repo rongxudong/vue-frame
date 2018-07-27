@@ -648,14 +648,14 @@
             // 远请求服务器如果成功则把fileList中要删除的file移除即可
             asyncReq (file,fileList) {
                 this.$ajax.post('/api/bussiness/account/order/deleteGtcpFile?fileId=' + file.id + '&orderId=' + this.array['orderId'], null, res => {
-                    this.fileList = this.File(res.files);
+                    if(res.data){
+                        this.fileList = this.File(res.data.files);
+                    }
                 })
             },
             // 保存
             saveBtn () {
                 this.$ajax.post( '/api/bussiness/account/order/saveGtcp?orderId=' + this.array['orderId'], this.array, res => {
-                    console.log(res.data)
-                    console.log(res.message)
                     if(res.code === 0){
                         this.$message({
                             type: 'success',
@@ -678,10 +678,17 @@
                     delete this.array.gtcpApplyPdf
                 }
                 this.$ajax.post( '/api/bussiness/account/order/submitGtcp?orderId=' + this.array['orderId'], this.array, res => {
-                    this.$message({
-                        type: 'info',
-                        message: res.message
-                    });
+                    if(res.code === 0){
+                        this.$message({
+                            type: 'info',
+                            message: res.message
+                        });
+                    } else {
+                        this.$message({
+                            type: 'error',
+                            message: res.message
+                        });
+                    }
                 })
             },
             // 获取之前保存的信息

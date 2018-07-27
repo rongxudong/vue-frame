@@ -22,9 +22,8 @@
                     :auto-upload="true">
                     <el-button style="margin: 15px 0 0 0" type="primary" plain slot="trigger" size="medium">更改头像</el-button>
                 </el-upload>
-                <h3 class="text-content" style="margin: 40px 0 0 0">{{$store.state.user.username}}</h3>
-                <h3 style="margin: 100px 0 0 0" v-if="$store.state.user.baIdentifyStatus == 1">
-                    {{$store.state.user.name}}</h3>
+                <h3 class="text-content" style="margin: 40px 0 0 0">{{username}}</h3>
+                <h3 style="margin: 100px 0 0 0" v-if="$store.state.user.baIdentifyStatus == 1">{{name}}</h3>
                 <el-button size="small" style="margin: 90px 0 0 0" type="primary" v-else v-on:click="navRealName">去实名认证</el-button>
             </div>
         </div>
@@ -39,6 +38,8 @@
                     token: this.$store.state.token
                 },
                 action: this.$store.state.baseUrl + "/api/bussiness/account/user/uploadPic",
+                username: '',
+                name: ''
             }
         },
         methods: {
@@ -84,6 +85,17 @@
             },
             getAvatarImg () {
                 this.url = this.$store.state.resUrl + this.$store.state.avatarImg;
+            }
+        },
+        computed: {
+            user () {
+                return this.$store.state.user
+            }
+        },
+        watch: {
+            user: function (a, b) {
+                this.username = a.username;
+                this.name = a.name;
             }
         },
         mounted() {

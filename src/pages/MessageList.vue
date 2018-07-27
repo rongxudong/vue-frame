@@ -4,7 +4,14 @@
             <div class="bottom">
                 <div class="title">
                     <span>消息列表</span>
-                    <!--<a href="#" @click="goMsgList">MORE &gt;&gt;</a>-->
+                    <a href="#" @click="allRead">
+                        <el-switch
+                            v-model="allReadValue"
+                            active-text="全部标为已读"
+                            active-color="#dcdfe6"
+                            inactive-color="#13ce66">
+                        </el-switch>
+                    </a>
                 </div>
                 <div class="msg-item align_items" v-for="(item, index) in DataMessageList" :key="index">
                     <div class="sign" v-if="item.read == 0"></div>
@@ -50,7 +57,8 @@
                 messageListModel: {
                     pageNum: 1,
                     pageSize: 10
-                }
+                },
+                allReadValue: true
             }
         },
         filters: {
@@ -60,6 +68,9 @@
             }
         },
         methods: {
+            allRead: function () {
+
+            },
             //改变每页显示数量
             handleSizeChange(val) {
                 let pageSize = `${val}`;
@@ -170,8 +181,8 @@
     @import "../assets/css/_mixin";
 
     .MessageList-main .title {
-        .box-sizing(border-box);
-        padding-bottom: 30px;
+        height: 38px;
+        padding-bottom: 20px;
         border-bottom: 1px dashed #cccccc;
     }
     .left {

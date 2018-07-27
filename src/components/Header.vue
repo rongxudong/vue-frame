@@ -18,10 +18,10 @@
                         </el-dropdown-item>
                     </el-dropdown-menu>
                 </el-dropdown>
-                <li class="header-message align_items">
-                    <i class="iconfont icon-xiaoxi1"></i>
-                    <em class="small-icon"></em>
-                </li>
+                <!--<li class="header-message align_items">-->
+                    <!--<i class="iconfont icon-xiaoxi1"></i>-->
+                    <!--<em class="small-icon"></em>-->
+                <!--</li>-->
                 <el-dropdown placement="bottom">
                     <li class="header-logo align_items">
                         <img :src="defaultAvatarImg" />

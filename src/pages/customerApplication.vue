@@ -551,7 +551,7 @@
                     token: this.$store.state.token
                 },
                 array: {
-                    orderId: 1,
+                    orderId: null,
                     quotaRange: '1',
                     iiCompanyName: null,
                     iiCompanyNameSuffix: null,
@@ -740,6 +740,7 @@
         },
         created　() {
             this.getGtcpDetail();
+            this.array['orderId'] = this.$route.query;
         }
     }
 </script>

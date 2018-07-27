@@ -215,8 +215,20 @@
                 }
             },
             navRoute (item) {
-                this.$ajax.post('/api/bussiness/account/message/lookMessage', null, res => {
-
+                let messageListModel = {
+                    messageId: item._id,
+                    pageNum: 1,
+                    pageSize: 5
+                };
+                this.$ajax.post('/api/bussiness/account/message/lookMessage', messageListModel, res => {
+                    if(res.code === 0){
+                        this.DataMessageList = res.data.viewList;
+                    } else {
+                        this.$message({
+                            type: 'error',
+                            message: res.message
+                        });
+                    }
                 });
                 console.log(item.title)
                 switch (item.title) {

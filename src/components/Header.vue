@@ -31,6 +31,9 @@
                             <!--<a class="header-dropdown-style" href="javascript:void(0);">真实姓名</a>-->
                         <!--</el-dropdown-item>-->
                         <el-dropdown-item>
+                            <a class="header-dropdown-style" @click="toClient()">官网首页</a>
+                        </el-dropdown-item>
+                        <el-dropdown-item>
                             <a class="header-dropdown-style" @click="toView('/Personal')">个人资料</a>
                         </el-dropdown-item>
                         <el-dropdown-item>
@@ -54,6 +57,7 @@
 
 <script>
     import LangStorage from '../assets/js/lang/local_lang';
+//    import {mapState,mapMutations,mapGetters} from 'vuex';
 
     export default {
         data () {
@@ -69,26 +73,9 @@
                     }
                 ],
                 value: this.$i18n.locale,
-                codeImg: require('../assets/img/RealName/real-fail.png'),
+                codeImg: require('../assets/img/Home/app-code.png'),
                 defaultAvatarImg: require('../assets/img/Home/default-avatar-img.png')
             };
-        },
-        watch: {
-            value (val) {
-                this.$i18n.locale = val;
-                switch (val) {
-                    case 'zh_CN':
-                        this.moment.locale('zh-cn');
-                        break;
-                    case 'en':
-                        this.moment.locale('en-gb');
-                        break;
-                    default:
-                        this.moment.locale('zh-cn');
-                }
-//                console.log(`${this.moment.locale()}`);
-                LangStorage.setLang(val);
-            }
         },
         methods: {
             handleSelect(key, keyPath) {
@@ -96,6 +83,9 @@
             },
             selectLanguage (key) {
                 this.value = key;
+            },
+            toClient () {
+                document.location.replace(this.$store.state.baseUrl.replace('account.', ''));
             },
             toView (path) {
                 this.$router.push({path: path});
@@ -132,6 +122,31 @@
             setTimeout(()=>{
                 this.getAvatarImg();
             },1000)
+        },
+        computed: {
+//            defaultAvatarImg () {
+//
+//            }
+            avatarImg () {
+                return this.$store.state.user.photo;
+            }
+        },
+        watch: {
+            value (val) {
+                this.$i18n.locale = val;
+                switch (val) {
+                    case 'zh_CN':
+                        this.moment.locale('zh-cn');
+                        break;
+                    case 'en':
+                        this.moment.locale('en-gb');
+                        break;
+                    default:
+                        this.moment.locale('zh-cn');
+                }
+//                console.log(`${this.moment.locale()}`);
+                LangStorage.setLang(val);
+            }
         }
     }
 </script>

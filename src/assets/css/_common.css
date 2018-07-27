@@ -490,6 +490,7 @@ a:focus {
 .Home-main .title {
   position: relative;
   overflow: hidden;
+  width: 100%;
   color: #58666E;
   padding-left: 20px;
   height: 18px;

@@ -215,6 +215,9 @@
                 }
             },
             navRoute (item) {
+                this.$ajax.post('/api/bussiness/account/message/lookMessage', null, res => {
+
+                });
                 console.log(item.title)
                 switch (item.title) {
                     case '实名认证' :

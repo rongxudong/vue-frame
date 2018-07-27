@@ -43,14 +43,11 @@
     export default {
         name: 'app',
         data () {
-            return {
-
-            }
+            return {}
         },
         beforeCreate () {
 //            Vue.myGlobalMethod();
-            localStorage.setItem("User_token", process.env.NODE_ENV == 'development' ? '7083171adb87543bc7270bc7c8951920' : $.cookie('bl_sid'));
-
+            localStorage.setItem("User_token", process.env.NODE_ENV == 'development' ? 'efe3aaad665eb069f56da05058e6003f' : $.cookie('bl_sid'));
             this.$store.state.token = localStorage.getItem("User_token");
 
             let baseUrl = 'http://account.financegt.com'
@@ -137,7 +134,6 @@
                 return this.$store.state.options;
             },
             activeIndex: {
-
                 get () {
                     return this.$store.state.activeIndex;
                 },
@@ -157,7 +153,6 @@
                         break
                     }
                 }
-
                 if (!flag) {
 //                    this.$store.commit('add_tabs', {route: '/' + to.path.split('/')[1], name: to.name});
 //                    this.$store.commit('set_active_index', '/' + to.path.split('/')[1]);

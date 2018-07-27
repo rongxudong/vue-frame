@@ -11,7 +11,7 @@ const options = {
     state: {
         message: '',
         options: [],
-        activeIndex: '/Home',
+        activeIndex: '',
         activeDate: '',
         resUrl: 'http://image.financegt.com',
 
@@ -29,7 +29,7 @@ const options = {
     mutations: {
         // 添加tabs
         add_tabs (state, data) {
-            this.state.options.push(data);
+            state.options.push(data);
         },
         // 删除tabs
         delete_tabs (state, route) {
@@ -40,13 +40,17 @@ const options = {
                 }
                 index++;
             }
-            this.state.options.splice(index, 1);
+            state.options.splice(index, 1);
         },
         // 设置当前激活的tab
         set_active_index (state, index) {
-            this.state.activeIndex = index;
+            state.activeIndex = index;
+        },
+        // 设置头像
+        set_avatar_img (state, url) {
+            state.user.photo = url;
         }
-    },
+    }
 }
 
 // 为每个 state 字段生成对应的 mutations 方法

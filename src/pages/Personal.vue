@@ -34,7 +34,7 @@
     export default {
         data() {
             return {
-                url: '',
+                url: require('../assets/img/Home/default-avatar-img.png'),
                 myHeaders: {
                     token: this.$store.state.token
                 },
@@ -52,8 +52,9 @@
                     this.$alert('修改头像成功！', '提示', {
                         confirmButtonText: '确定',
                         callback: action => {
-                            this.$store.state.user.photo = response.data;
-                            this.url = this.$store.state.resUrl + this.$store.state.user.photo;
+                            this.$store.commit('set_avatar_img', response.data);
+//                            this.$store.state.user.photo = response.data;
+                            this.url = this.$store.state.resUrl + response.data;
                         }
                     })
                 }

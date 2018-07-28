@@ -230,4 +230,11 @@
         background-color: #fff;
         .common_box_shadow(0 2px 4px rgba(7, 17, 27, .15));
     }
+    #app .app-wrap {
+        width: 100%;
+        height: calc(~'100% - 40px');
+        height: -ms-calc(~'100% - 40px');
+        height: -moz-calc(~'100% - 40px');
+        height: -webkit-calc(~'100% - 40px');
+    }
 </style>

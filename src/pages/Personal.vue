@@ -1,90 +1,116 @@
 <template>
-    <div class="box-container flex_direction_column">
-
-        <div class="flex_direction_row" style="margin-left: 100px">
-            <div>
-                <h3 class="text-title" style="margin: 100px 0 0 0">头像</h3>
-                <h3 class="text-title" style="margin: 124px 0 0 0">账号</h3>
-                <h3 class="text-title" style="margin: 100px 0 0 0">真实姓名</h3>
-            </div>
-
-            <div style="margin: 0 0 0 50px">
-                <img class="img-head" :src="url" alt="头像" />
-                <el-upload
-                    class="upload-demo"
-                    ref="upload"
-                    :headers="myHeaders"
-                    :action="action"
-                    :on-success="onUploadSuccess"
-                    :on-error="onUploadError"
-                    :before-upload="beforeAvatarUpload"
-                    :show-file-list="false"
-                    :auto-upload="true">
-                    <el-button style="margin: 15px 0 0 0" type="primary" plain slot="trigger" size="medium">更改头像</el-button>
-                </el-upload>
-                <h3 class="text-content" style="margin: 40px 0 0 0">{{username}}</h3>
-                <h3 style="margin: 100px 0 0 0" v-if="$store.state.user.baIdentifyStatus == 1">{{name}}</h3>
-                <el-button size="small" style="margin: 90px 0 0 0" type="primary" v-else v-on:click="navRealName">去实名认证</el-button>
-            </div>
-        </div>
+    <div class="personal-main flex_direction_column bg-style pd50">
+        <el-form label-width="142px" label-position="left">
+            <el-form-item label="头像" class="img-head-wrap">
+                <img class="img-head" :src="imgDataUrl" alt="头像"/>
+                <my-upload field="file"
+                           @crop-success="cropSuccess"
+                           @crop-upload-success="cropUploadSuccess"
+                           @crop-upload-fail="cropUploadFail"
+                           v-model="show"
+                           :width="84"
+                           :height="84"
+                           langType="zh"
+                           :url="action"
+                           :params="params"
+                           :headers="myHeaders"
+                           img-format="png">
+                </my-upload>
+                <el-button style="margin-top: 15px;" type="primary" size="small" @click="toggleShow">更改头像</el-button>
+            </el-form-item>
+            <el-form-item label="账号">
+                <p class="text-content">{{username}}</p>
+            </el-form-item>
+            <el-form-item label="真实姓名">
+                <p v-if="$store.state.user.baIdentifyStatus == 1">{{name}}</p>
+                <el-button size="small" type="primary" v-else @click="navRealName">去实名认证</el-button>
+            </el-form-item>
+        </el-form>
     </div>
 </template>
 <script>
+    import myUpload from 'vue-image-crop-upload';
+
     export default {
         data() {
             return {
-                url: require('../assets/img/Home/default-avatar-img.png'),
+                imgDataUrl: require('../assets/img/Home/default-avatar-img.png'),
+                action: this.$store.state.baseUrl + "/api/bussiness/account/user/uploadPic",
+                params: null,
                 myHeaders: {
                     token: this.$store.state.token
                 },
-                action: this.$store.state.baseUrl + "/api/bussiness/account/user/uploadPic",
-                username: '',
-                name: ''
+                show: false,
+                username: null,
+                name: null
             }
         },
+        components: {
+            'my-upload': myUpload
+        },
         methods: {
+            toggleShow () {
+                this.show = !this.show;
+            },
+            /**
+             * crop success
+             *
+             * [param] imgDataUrl
+             * [param] field
+             */
+            cropSuccess(imgDataUrl, field){
+//                console.log('-------- crop success --------');
+//                console.log(imgDataUrl);
+                this.imgDataUrl = imgDataUrl;
+            },
+            /**
+             * upload success
+             *
+             * [param] jsonData   服务器返回数据，已进行json转码
+             * [param] field
+             */
+            cropUploadSuccess(jsonData, field){
+//                console.log('-------- upload success --------');
+                console.log(jsonData);
+//                console.log('field: ' + field);
+                this.$store.commit('set_avatar_img', jsonData.data);
+            },
+            /**
+             * upload fail
+             *
+             * [param] status    server api return error status, like 500
+             * [param] field
+             */
+            cropUploadFail(status, field){
+                console.log('-------- upload fail --------');
+                console.log(status);
+                console.log('field: ' + field);
+            },
             navRealName() {
                 this.$router.push({
                     path:'/RealName',
                 })
             },
-            onUploadSuccess(response, file, fileList) {
-                if (response.code == 0) {
-                    this.$alert('修改头像成功！', '提示', {
-                        confirmButtonText: '确定',
-                        callback: action => {
-                            this.$store.commit('set_avatar_img', response.data);
-//                            this.$store.state.user.photo = response.data;
-                            this.url = this.$store.state.resUrl + response.data;
-                        }
-                    })
-                }
-            },
-            onUploadError(err, file, fileList) {
-                console.log('err = err =' + JSON.stringify(err));
-                console.log('err = file =' + file);
-                console.log('err = fileList =' + fileList);
-            },
-            beforeAvatarUpload(file) {
-                const isJPG = file.type === 'image/jpeg';
-                const isPNG = file.type === 'image/png';
-                const isLt2M = file.size / 1024 / 1024 < 2;
-
-                if (!isLt2M) {
-                    this.$message.error('上传文件大小不能超过 2MB!');
-                    return false;
-                }
-                if (isJPG) {
-                    return true
-                }
-                if (isPNG) {
-                    return true
-                }
-                this.$message.error('请上传png或者jpg格式的头像')
-                return false;
-            },
+//            beforeAvatarUpload(file) {
+//                const isJPG = file.type === 'image/jpeg';
+//                const isPNG = file.type === 'image/png';
+//                const isLt2M = file.size / 1024 / 1024 < 2;
+//
+//                if (!isLt2M) {
+//                    this.$message.error('上传文件大小不能超过 2MB!');
+//                    return false;
+//                }
+//                if (isJPG) {
+//                    return true
+//                }
+//                if (isPNG) {
+//                    return true
+//                }
+//                this.$message.error('请上传png或者jpg格式的头像')
+//                return false;
+//            },
             getAvatarImg () {
-                this.url = this.$store.state.resUrl + this.$store.state.avatarImg;
+                this.imgDataUrl = this.$store.state.resUrl + this.$store.state.avatarImg;
                 this.username = this.$store.state.user.username;
                 this.name = this.$store.state.user.name;
             }
@@ -103,9 +129,7 @@
                 this.name = a.name;
             },
             avatarImg: function(a, b) {
-//                console.log("修改后为：" + a);
-//                console.log("修改前为：" + b);
-                this.url = this.$store.state.resUrl + a;
+                this.imgDataUrl = this.$store.state.resUrl + a;
             }
         },
         mounted() {
@@ -122,24 +146,27 @@
 </script>
 
 <style lang="less" rel="stylesheet/less">
-
-    .box-container {
-        background-color: white;
+    @import "../assets/css/_mixin";
+    .personal-main {
         width: 100%;
-        height: 780px;
-
+        height: 100%;
+        background-color: #fff;
+        .img-head-wrap .el-form-item__label {
+            margin-top: 22px;
+        }
     }
-
+    .pd50 {
+        padding: 50px;
+    }
     .img-head {
         width: 84px;
         height: 84px;
-        border-radius: 42px;
+        .common_radius(100%);
         display: block;
-        margin-top: 65px;
     }
     .text-title{
-        font-size: 15px;
-        color: #666666;
+        font-size: 14px;
+        color: RGBA(102, 102, 102, 1);
         font-family: MicrosoftYaHei;
     }
     .text-content{

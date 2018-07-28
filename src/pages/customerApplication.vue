@@ -249,7 +249,7 @@
                     <div class="file-upload">
                         <el-upload
                                 class="upload-demo"
-                                :action="this.$store.state.baseUrl + importFileUrl"
+                                :action="actions"
                                 :headers="myHeaders"
                                 :data="upLoadData"
                                 :on-change="handleChange"
@@ -543,7 +543,7 @@
                     }
                 ],
                 fileList: [],
-                importFileUrl: "/api/bussiness/account/order/uploadGtcpFile",
+                actions: this.$store.state.baseUrl + "/api/bussiness/account/order/uploadGtcpFile",
                 upLoadData: {
                     orderId: null
                 },

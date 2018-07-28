@@ -1,5 +1,5 @@
 <template>
-    <div class="box-container justify_content_center align_items-center flex_direction_column">
+    <div class="box-container bg-style justify_content_center align_items-center flex_direction_column">
 
         <div>
             <el-input
@@ -100,8 +100,7 @@
     .box-container {
         background-color: white;
         width: 100%;
-        height: 780px;
-
+        height: 100%;
     }
 
     .input-password {

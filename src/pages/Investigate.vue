@@ -365,7 +365,7 @@
                     this.$ajax.post('/api/bussiness/account/order/creatNewOrder?orderType='+this.serviceType, null, (res)=>{
                         if (res.code == 0){
                             this.$message({
-                                type: 'info',
+                                type: 'success',
                                 message: '创建成功!'
                             });
                             that.fetchData();
@@ -411,7 +411,10 @@
 
     .investigate-main {
         position: relative;
-        min-height: calc(100vh - .45rem - 100px);
+        min-height: calc(~'100vh - .45rem - 100px');
+        min-height: -ms-calc(~'100vh - .45rem - 100px');
+        min-height: -moz-calc(~'100vh - .45rem - 100px');
+        min-height: -webkit-calc(~'100vh - .45rem - 100px');
         padding: 0 20px 20px;
         .line {
             border-bottom: 1px solid #ccc!important;

@@ -9,7 +9,8 @@
                             v-model="allReadValue"
                             active-text="全部标为已读"
                             active-color="#dcdfe6"
-                            inactive-color="#13ce66">
+                            inactive-color="#13ce66"
+                            :disabled="allReadValue">
                         </el-switch>
                     </a>
                 </div>
@@ -58,7 +59,7 @@
                     pageNum: 1,
                     pageSize: 10
                 },
-                allReadValue: true
+                allReadValue: false
             }
         },
         filters: {
@@ -68,8 +69,9 @@
             }
         },
         methods: {
+            // 一键阅读
             allRead: function () {
-
+//                this.$ajax.post('/api/bussiness/account/message/allHaveLook', )
             },
             //改变每页显示数量
             handleSizeChange(val) {
@@ -94,6 +96,7 @@
                     this.getMessageList(params);
                 }
             },
+            // 获取消息列表
             getMessageList (param) {
                 this.$ajax.post('/api/bussiness/account/message/getMessageList', param, res => {
                     if( res.code == 0 ) {
@@ -166,10 +169,28 @@
                         });
                         break;
                 }
+            },
+            //获取未读的消息总数
+            getMessageCount () {
+                this.$ajax.post('/api/bussiness/account/message/getMessageCount', null, res => {
+                    if(res.code === 0){
+                        if (res.data == 0) {
+                            this.allReadValue = true;
+                        } else {
+                            this.allReadValue = false;
+                        }
+                    } else {
+                        this.$message({
+                            type: 'error',
+                            message: res.message
+                        });
+                    }
+                })
             }
         },
         created () {
             this.getMessageList(this.messageListModel);
+            this.getMessageCount();
         },
 //        components: {
 //            'pagination': Pagination

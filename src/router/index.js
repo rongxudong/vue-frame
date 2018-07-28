@@ -44,9 +44,9 @@ export default new Router({
             path: '/',
             name: '总览',
             component: Home,
-            meta: {
-                keepAlive: true // 需要被缓存
-            }
+            // meta: {
+            //     keepAlive: true // 需要被缓存
+            // }
         },
         {
             path: '/Investigate',
@@ -105,9 +105,9 @@ export default new Router({
             path: '/RealName',
             name: '实名认证',
             component: RealName,
-            // meta: {
-            //     keepAlive: true // 需要被缓存
-            // }
+            meta: {
+                keepAlive: true // 需要被缓存
+            }
         },
         {
             path: '/CustomerPool',
@@ -128,6 +128,9 @@ export default new Router({
             path: '/personal',
             name: '个人资料',
             component: Personal,
+            meta: {
+                keepAlive: true // 需要被缓存
+            }
         },
         {
             path: '/password',

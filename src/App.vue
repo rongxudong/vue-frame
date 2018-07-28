@@ -69,8 +69,11 @@
             this.$store.state.baseUrl = localStorage.getItem("baseUrl");
 
             this.$ajax.get('/api/user/'+this.$store.state.token, null, res => {
-                this.$store.commit('set_user', res.data);
-                this.$store.state.avatarImg = res.data.photo;
+                if (res.code === 0 && res.data) {
+                    this.$store.commit('set_user', res.data);
+                    this.$store.commit('set_avatar_img', res.data.photo);
+                }
+
             })
         },
         mounted () {

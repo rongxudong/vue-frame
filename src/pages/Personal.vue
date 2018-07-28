@@ -85,24 +85,39 @@
             },
             getAvatarImg () {
                 this.url = this.$store.state.resUrl + this.$store.state.avatarImg;
+                this.username = this.$store.state.user.username;
+                this.name = this.$store.state.user.name;
             }
         },
         computed: {
             user () {
                 return this.$store.state.user
+            },
+            avatarImg () {
+                return this.$store.state.avatarImg;
             }
         },
         watch: {
             user: function (a, b) {
                 this.username = a.username;
                 this.name = a.name;
+            },
+            avatarImg: function(a, b) {
+//                console.log("修改后为：" + a);
+//                console.log("修改前为：" + b);
+                this.url = this.$store.state.resUrl + a;
             }
         },
         mounted() {
             setTimeout(()=>{
                 this.getAvatarImg();
             },1000)
-        }
+        },
+//        beforeRouteLeave(to, from, next) {
+//            // 设置下一个路由的 meta
+//            to.meta.keepAlive = true;  // 让 A 缓存，即不刷新
+//            next();
+//        }
     }
 </script>
 

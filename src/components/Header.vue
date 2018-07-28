@@ -90,9 +90,6 @@
             toView (path) {
                 this.$router.push({path: path});
             },
-            getAvatarImg () {
-                this.defaultAvatarImg = this.$store.state.resUrl + this.$store.state.avatarImg;
-            },
             logout () {
                 this.$alert('确认退出吗？', '提示', {
                     confirmButtonText: '确定',
@@ -145,11 +142,7 @@
                 this.defaultAvatarImg = this.$store.state.resUrl + a;
             }
         },
-        mounted () {
-            setTimeout(()=>{
-                this.getAvatarImg();
-            },1000)
-        }
+        mounted () {}
     }
 </script>
 <style scoped lang="less" rel="stylesheet/less">

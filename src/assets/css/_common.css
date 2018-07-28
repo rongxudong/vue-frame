@@ -555,6 +555,12 @@ a:focus {
   height: -moz-calc(100% - 30px);
   height: -webkit-calc(100% - 30px);
 }
+#view-dialog .el-dialog .overflow_y_scroll {
+  overflow-y: scroll;
+}
+#view-dialog .el-dialog .overflow_y_hidden {
+  overflow-y: hidden;
+}
 .right-list {
   width: 100%;
   padding: .1rem 0;

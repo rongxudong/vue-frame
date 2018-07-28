@@ -26,6 +26,7 @@ module.exports = {
         app: './src/main.js'
     },
     externals:{
+        'html5shiv': '',
         'pdfobject': 'PDFObject',
         'jquery': '$',
         'jquery.cookie': 'cookie',

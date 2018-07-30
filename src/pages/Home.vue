@@ -249,7 +249,7 @@
                     case 'GTCP申请':
                         item.id = item.targetUrl;
                         this.$router.push({
-                            name: 'GTCP申请',
+                            name: '申请详情',
                             query:item
                         });
                         break;

@@ -22,7 +22,7 @@
                 <p class="text-content">{{username}}</p>
             </el-form-item>
             <el-form-item label="真实姓名">
-                <p v-if="$store.state.user.baIdentifyStatus == 1">{{name}}</p>
+                <p v-if="$store.state.user.baIdentifyStatus == 1">{{baName}}</p>
                 <el-button size="small" type="primary" v-else @click="navRealName">去实名认证</el-button>
             </el-form-item>
         </el-form>
@@ -42,7 +42,7 @@
                 },
                 show: false,
                 username: null,
-                name: null
+                baName: null
             }
         },
         components: {
@@ -112,7 +112,7 @@
             getAvatarImg () {
                 this.imgDataUrl = this.$store.state.resUrl + this.$store.state.avatarImg;
                 this.username = this.$store.state.user.username;
-                this.name = this.$store.state.user.name;
+                this.baName = this.$store.state.user.baName;
             }
         },
         computed: {
@@ -126,7 +126,7 @@
         watch: {
             user: function (a, b) {
                 this.username = a.username;
-                this.name = a.name;
+                this.baName = a.baName;
             },
             avatarImg: function(a, b) {
                 this.imgDataUrl = this.$store.state.resUrl + a;

@@ -261,7 +261,6 @@
             }
         },
         created () {
-
             this.serviceType = this.$route.path.split('/')[2];
 
             this.QueryOrderListModel.orderType = this.$route.path.split('/')[2];
@@ -278,6 +277,7 @@
             fetchData () {
                 this.$ajax.post('/api/bussiness/account/order/getOrderList', this.QueryOrderListModel, res => {
                     const arrayData = [];
+                    console.log(res.data.list);
                     if (res.data.list){
                         this.total = res.data.total;
                         for (let i = 0;i < res.data.list.length;i++){
@@ -347,6 +347,7 @@
                             arrayData.push(tableData)
                         }
                     }
+                    console.log('arrayData =='+arrayData)
                     this.tableData = arrayData;
                 })
 

@@ -220,6 +220,9 @@ a:focus {
   padding: 0 20px;
   color: #666666;
 }
+.header-dropdown-style:hover {
+  text-decoration: none;
+}
 .RealName-main .el-upload--picture-card,
 .personalData-main .el-upload--picture-card,
 .password-main .el-upload--picture-card {

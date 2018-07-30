@@ -11,10 +11,10 @@
             <div class="basic">
                 <div class="title">
                     GTCP申请表
-                    <span class="btn-block">
-                        <button type="button" class="btn">下 载</button>
-                        <button type="button" class="btn">打 印</button>
-                    </span>
+                    <!--<span class="btn-block">-->
+                        <!--<button type="button" class="btn">下 载</button>-->
+                        <!--<button type="button" class="btn">打 印</button>-->
+                    <!--</span>-->
                 </div>
                 <!--进口商-->
                 <h1 class="module-title">IMPORTER INFORMATION</h1>
@@ -69,7 +69,9 @@
                                     <el-radio :label="150">150days</el-radio>
                                     <el-radio :label="Others">Others</el-radio>
                                 </el-radio-group>
-                                <input v-if="array['iiCreditTermsRequest'] == Others" v-on:blur="change(array['iiCreditTermsRequest'])"
+                                <input v-if="array['iiCreditTermsRequest'] != 90 && array['iiCreditTermsRequest'] != 120
+                                 && array['iiCreditTermsRequest'] != 150 && array['iiCreditTermsRequest'] != null"
+                                       v-on:blur="change(array['iiCreditTermsRequest'])"
                                        v-model="array['iiCreditTermsRequest']" name="iiCreditTermsRequest" class="formInput"
                                        type="text" :placeholder="$t('personal.placeholder')" autocomplete="off" style="width: 96px;margin-left: 20px;"/>
                             </li>
@@ -132,9 +134,10 @@
                                 <el-radio-group v-model="array['iiCreditTermsRequest']">
                                     <el-radio :label="60">60days</el-radio>
                                     <el-radio :label="90">90days</el-radio>
-                                    <el-radio :label="0">Others</el-radio>
+                                    <el-radio :label="Others">Others</el-radio>
                                 </el-radio-group>
-                                <input v-show="array['iiCreditTermsRequest'] == null" v-model="array['iiCreditTermsRequest']" v-on:change="change"
+                                <input v-show="array['iiCreditTermsRequest'] != 60 && array['iiCreditTermsRequest'] != 90 &&
+                                array['iiCreditTermsRequest'] != null" v-model="array['iiCreditTermsRequest']" v-on:blur="change(array['iiCreditTermsRequest'])"
                                        name="iiCreditTermsRequest" class="formInput" type="text" :placeholder="$t('personal.placeholder')" autocomplete="off" style="width: 96px;margin-left: 20px;"/>
                             </li>
                             <li>
@@ -674,9 +677,10 @@
                 if( this.array.files ) {
                     delete this.array.files
                 }
-                if( this.array.gtcpApplyPdf ) {
-                    delete this.array.gtcpApplyPdf
-                }
+//                if( this.array.gtcpApplyPdf ) {
+//                    delete this.array.gtcpApplyPdf
+//                }
+                console.log(this.array)
                 this.$ajax.post( '/api/bussiness/account/order/submitGtcp?orderId=' + this.array['orderId'], this.array, res => {
                     if(res.code === 0){
                         this.$message({
@@ -696,7 +700,6 @@
                 this.$ajax.get('/api/bussiness/account/order/getGtcpDetail/' + this.array['orderId'], null, res => {
                     if( res.code == 0 ) {
                         let getDetail = res.data;
-                        console.log(getDetail.quotaRange)
                         if(!getDetail.quotaRange) {
                             getDetail.quotaRange = '1';
                         }
@@ -730,6 +733,7 @@
             },
             // 上传成功后的回调
             uploadSuccess (response, file, fileList) {
+                console.log(response)
                 this.fileList = this.File(response.data.files);
             },
             // 上传错误

@@ -180,7 +180,6 @@
                 if( nameSuffix === 'png' || nameSuffix === 'jpg' || nameSuffix === 'jpeg' || nameSuffix === 'gif' ) {
                     this.previewUrl = '';
                     this.viewPhotoUrl = this.$store.state.resUrl + Obj.url;
-                    console.log(this.viewPhotoUrl)
                     this.iframeShow = false;
                     this.imgShow = true;
                     this.outerVisible = true;
@@ -208,7 +207,7 @@
                 if(nameSuffix === 'png' || nameSuffix === 'gif' || nameSuffix === 'jpeg' || nameSuffix === 'jpg' || nameSuffix === 'tiff') {
 //                    if (this.browserIsIe()) {
 //                        this.createIframe(fileUrl);
-//                    } else {
+
 //                        $(self).attr("download", fileUrl);
 //                        $(self).attr("href", fileUrl);
 //                    }

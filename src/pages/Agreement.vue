@@ -1,19 +1,18 @@
 <template>
-    <div class="agreement">
-        <el-tabs v-model="activeName" @tab-click="handleClick">
+    <div class="agreement-main">
+        <el-tabs v-model="activeName" @tab-click="handleClick" type="border-card">
             <el-tab-pane v-for="(item,index) in agreementList" :key="index" :label="item.agreementTitle" :name="item.nameId">
                 <div class="ag-content flex_direction_column">
-                    <div :id="item.selectId" style="height: 620px;"></div>
+                    <div :id="item.selectId" class="sign-am-pdf"></div>
 
-                    <div v-else class="justify_content_center" v-if="item.status == 4 ">
-                        <div style="margin-top: 0.25rem;margin-bottom: 0.3rem">
+                    <div class="justify_content_center sign-btn-wrap" v-if="item.status == 4">
+                        <div>
                             <el-button type="primary" style="width: 140px">已完成签署</el-button>
                         </div>
                     </div>
-                    <div class="flex_direction_column align_items-center" v-else>
-                        <el-checkbox :id="item.checkId" style="margin-top: 0.25rem" v-model="checked[index]">同意以上协议
-                        </el-checkbox>
-                        <div style="margin-top: 0.25rem;margin-bottom: 0.3rem">
+                    <div class="flex_direction_column align_items-center sign-btn-wrap" v-else>
+                        <el-checkbox :id="item.checkId" style="margin-bottom: 0.25rem" v-model="checked[index]">同意以上协议</el-checkbox>
+                        <div>
                             <el-button type="primary" style="width: 120px" v-on:click="signAgreement(item.id)">签署</el-button>
                         </div>
                     </div>
@@ -145,12 +144,18 @@
     @import "../assets/css/_variable";
     @import "../assets/css/_mixin";
 
+    .agreement-main {
+        .sign-am-pdf {
+            height: 620px;
+        }
+        .sign-btn-wrap {
+            margin: .5rem 0 .3rem;
+        }
+    }
     .ag-content {
         padding: 20px;
         background-color: #fff;
     }
-
-
 
 </style>
 

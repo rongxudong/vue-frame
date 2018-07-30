@@ -47,7 +47,7 @@
         },
         beforeCreate () {
 //            Vue.myGlobalMethod();
-            localStorage.setItem("User_token", process.env.NODE_ENV == 'development' ? '8321a56a820fa7d0bdeb7b2db39a1e4a' : $.cookie('bl_sid'));
+            localStorage.setItem("User_token", process.env.NODE_ENV == 'development' ? 'b490adf1d7ff80e81901fc5ddf440c99' : $.cookie('bl_sid'));
             this.$store.state.token = localStorage.getItem("User_token");
 
             let baseUrl = 'http://account.financegt.com'
@@ -72,8 +72,11 @@
                 if (res.code === 0 && res.data) {
                     this.$store.commit('set_user', res.data);
                     this.$store.commit('set_avatar_img', res.data.photo);
+                } else {
+                    if(res.message === "未登录") {
+//                        document.location.replace(this.$store.state.baseUrl.replace('account.', '') + '/user/login');
+                    }
                 }
-
             })
         },
         mounted () {

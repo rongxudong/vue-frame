@@ -63,13 +63,13 @@
                                        :placeholder="$t('personal.placeholder')" autocomplete="off"/>
                             </li>
                             <li class="creditInput horizontal_center">
-                                <el-radio-group v-model="Others">
+                                <el-radio-group v-model="array['iiCreditTermsRequest']">
                                     <el-radio :label="90">90days</el-radio>
                                     <el-radio :label="120">120days</el-radio>
                                     <el-radio :label="150">150days</el-radio>
-                                    <el-radio :label="0">Others</el-radio>
+                                    <el-radio :label="Others">Others</el-radio>
                                 </el-radio-group>
-                                <input v-if="Others != 90 && Others != 120 && Others != 150" v-on:change="change"
+                                <input v-if="array['iiCreditTermsRequest'] == Others" v-on:blur="change(array['iiCreditTermsRequest'])"
                                        v-model="array['iiCreditTermsRequest']" name="iiCreditTermsRequest" class="formInput"
                                        type="text" :placeholder="$t('personal.placeholder')" autocomplete="off" style="width: 96px;margin-left: 20px;"/>
                             </li>
@@ -132,13 +132,13 @@
                                 <el-radio-group v-model="array['iiCreditTermsRequest']">
                                     <el-radio :label="60">60days</el-radio>
                                     <el-radio :label="90">90days</el-radio>
-                                    <el-radio :label="null">Others</el-radio>
+                                    <el-radio :label="0">Others</el-radio>
                                 </el-radio-group>
-                                <input v-show="array['iiCreditTermsRequest'] == null" v-model="array['iiCreditTermsRequest']"
+                                <input v-show="array['iiCreditTermsRequest'] == null" v-model="array['iiCreditTermsRequest']" v-on:change="change"
                                        name="iiCreditTermsRequest" class="formInput" type="text" :placeholder="$t('personal.placeholder')" autocomplete="off" style="width: 96px;margin-left: 20px;"/>
                             </li>
                             <li>
-                                <input v-model="array['iiContactPerson']" name="iiContactPerson" class="formInput" type="text"
+                                <input v-model="array['iiEmailAddress']" name="iiEmailAddress" class="formInput" type="text"
                                        :placeholder="$t('personal.placeholder')" autocomplete="off"/>
                             </li>
                         </ul>
@@ -552,7 +552,7 @@
                 },
                 array: {
                     orderId: null,
-                    quotaRange: '1',
+                    quotaRange: null,
                     iiCompanyName: null,
                     iiCompanyNameSuffix: null,
                     iiUsedCompanyName: null,
@@ -615,7 +615,7 @@
             },
             // 获取iiCreditTermsRequest的变化
             change(value) {
-                this.Others = 0;
+                this.Others = value;
             },
             // 选择申请的额度范围
             selectRange (module) {
@@ -696,8 +696,9 @@
                 this.$ajax.get('/api/bussiness/account/order/getGtcpDetail/' + this.array['orderId'], null, res => {
                     if( res.code == 0 ) {
                         let getDetail = res.data;
+                        console.log(getDetail.quotaRange)
                         if(!getDetail.quotaRange) {
-                            this.array['quotaRange'] = '1';
+                            getDetail.quotaRange = '1';
                         }
                         this.fileList = this.File(getDetail.files);
                         this.array = getDetail;
@@ -707,16 +708,14 @@
                         if( getQuotaRange == '1') {
                             if( getLabelNum != 90 && getLabelNum != 120 && getLabelNum != 150 ) {
                                 this.Others = 0;
-                            }
-                            else {
+                            } else {
                                 this.Others = getLabelNum;
                             }
                         }
                         else {
                             if( getLabelNum != 60 && getLabelNum != 90 ) {
                                 this.Others = 0;
-                            }
-                            else {
+                            } else {
                                 this.Others = getLabelNum;
                             }
                         }

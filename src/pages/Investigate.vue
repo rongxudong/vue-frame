@@ -188,7 +188,7 @@
                         @current-change="handleCurrentChange"
                         :current-page="QueryOrderListModel.pageNum"
                         :page-size="QueryOrderListModel.pageSize"
-                        layout="total, prev, pager, next, jumper"
+                        layout="prev, pager, next, jumper"
                         :total=total>
                     </el-pagination>
                 </div>

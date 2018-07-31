@@ -62,7 +62,6 @@
                 this.$ajax.post('/api/bussiness/account/order/getAgreementList?orderId=' + this.orderInfo.id, null, (res) => {
                     console.log(res)
                     if (res.code == 0) {
-
                         this.agreementList = res.data;
                         for (let i = 0; i < this.agreementList.length; i++) {
                             this.agreementList[i].selectId = 'selectId'+i;
@@ -75,9 +74,10 @@
 
                     } else {
                         this.$message({
-                            type: error,
+                            type: 'error',
                             message: res.message
                         })
+
                     }
                 });
             },

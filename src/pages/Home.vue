@@ -232,7 +232,6 @@
                         });
                     }
                 });
-                console.log(item.title)
                 switch (item.title) {
                     case '实名认证' :
                         this.$router.push({

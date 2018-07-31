@@ -40,6 +40,7 @@
         },
         created() {
             this.orderInfo = this.$route.query;
+            console.log(this.orderInfo)
             this.fetchData();
         },
         methods: {
@@ -60,7 +61,6 @@
             },
             fetchData() {
                 this.$ajax.post('/api/bussiness/account/order/getAgreementList?orderId=' + this.orderInfo.id, null, (res) => {
-                    console.log(res)
                     if (res.code == 0) {
                         this.agreementList = res.data;
                         for (let i = 0; i < this.agreementList.length; i++) {
@@ -77,7 +77,6 @@
                             type: 'error',
                             message: res.message
                         })
-
                     }
                 });
             },
@@ -97,7 +96,6 @@
                                     return;
                                 }
                             }
-                            console.log("123");
                             //说明签署完了，回退到订单列表
                             this.$router.back();
 

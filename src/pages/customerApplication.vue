@@ -282,7 +282,7 @@
                 options: [],
                 list: [],
                 loading: false,
-                Others: null,
+                Others: 0,
                 states: [
                     "AB", "a.d.", "AG", "A.G", "APS",
                     "A/S", "bd", "BHD", "BV", "B.V.",
@@ -570,7 +570,7 @@
                     iiPurchaseVolume: null,
                     iiSaleVolume: null,
                     iiProducts: null,
-                    iiCreditTermsRequest: null,
+                    iiCreditTermsRequest: 0,
                     iiTotalCreditLineRequired: null,
                     iiQuantityOfSuppliers: null,
                     iiMajorLocationOfSuppliers: null,
@@ -660,6 +660,9 @@
                 if( this.array.files ) {
                     delete this.array.files
                 }
+                if( this.array.gtcpApplyPdf ) {
+                    delete this.array.gtcpApplyPdf
+                }
                 this.$ajax.post( '/api/bussiness/account/order/saveGtcp?orderId=' + this.array['orderId'], this.array, res => {
                     if(res.code === 0){
                         this.$message({
@@ -682,11 +685,11 @@
                 if( this.array.gtcpApplyPdf ) {
                     delete this.array.gtcpApplyPdf
                 }
-                console.log(this.array)
                 this.$ajax.post( '/api/bussiness/account/order/submitGtcp?orderId=' + this.array['orderId'], this.array, res => {
                     if(res.code === 0){
+                        this.$router.push({path: '/Investigate'});
                         this.$message({
-                            type: 'info',
+                            type: 'success',
                             message: res.message
                         });
                     } else {
@@ -699,35 +702,35 @@
             },
             // 获取之前保存的信息
             getGtcpDetail () {
-                if( this.array.files ) {
-                    delete this.array.files
-                }
-                if( this.array.gtcpApplyPdf ) {
-                    delete this.array.gtcpApplyPdf
-                }
+//                if( this.array.files ) {
+//                    delete this.array.files
+//                }
+//                if( this.array.gtcpApplyPdf ) {
+//                    delete this.array.gtcpApplyPdf
+//                }
                 this.$ajax.get('/api/bussiness/account/order/getGtcpDetail/' + this.array['orderId'], null, res => {
                     if( res.code == 0 ) {
                         let getDetail = res.data;
-                        if(!getDetail.quotaRange) {
-                            getDetail.quotaRange = '1';
-                        }
-                        this.fileList = this.File(getDetail.files);
-                        this.array = getDetail;
-
-                        let getLabelNum = this.array['iiCreditTermsRequest'];
-                        let getQuotaRange = this.array['quotaRange'];
-                        if( getQuotaRange == '1') {
-                            if( getLabelNum != 90 && getLabelNum != 120 && getLabelNum != 150 ) {
-                                this.Others = 0;
-                            } else {
-                                this.Others = getLabelNum;
+                        if(!getDetail) {
+                            this.array['quotaRange'] = '1';
+                        } else {
+                            this.array = getDetail;
+                            this.fileList = this.File(getDetail.files);
+                            let getLabelNum = this.array['iiCreditTermsRequest'];
+                            let getQuotaRange = this.array['quotaRange'];
+                            if( getQuotaRange == '1') {
+                                if( getLabelNum != 90 && getLabelNum != 120 && getLabelNum != 150 ) {
+                                    this.Others = getLabelNum;
+                                } else {
+                                    this.Others = 0;
+                                }
                             }
-                        }
-                        else {
-                            if( getLabelNum != 60 && getLabelNum != 90 ) {
-                                this.Others = 0;
-                            } else {
-                                this.Others = getLabelNum;
+                            else {
+                                if( getLabelNum != 60 && getLabelNum != 90 ) {
+                                    this.Others = getLabelNum;
+                                } else {
+                                    this.Others = 0;
+                                }
                             }
                         }
                     }

@@ -136,12 +136,19 @@
                                     @click="navRoute('签署协议', scope.row)">{{ scope.row.btnDesc}}</el-button>
                             </template>
                         </el-table-column>
+                        <!--prop="agreementTitle"-->
                         <el-table-column
-                            showOverflowTooltip
                             align="center"
-                            prop="agreementTitle"
                             label="协议"
                             width="180">
+                            <template slot-scope="scope" v-if="scope.row.agreementTitle.length > 0">
+                                <el-popover trigger="hover" placement="top">
+                                    <p v-for="(item,index) in scope.row.agreementTitle">协议{{index + 1}}: {{item}}</p>
+                                    <div slot="reference">
+                                        <el-tag size="medium">{{ scope.row.agreementTitle }}</el-tag>
+                                    </div>
+                                </el-popover>
+                            </template>
                         </el-table-column>
                         <el-table-column
                             align="center"
@@ -256,8 +263,6 @@
                 },
                 serviceTitle:['占位','尽职调查','GTR评估','授信申请','商账管理'],
                 serviceType:1,
-
-
             }
         },
         created () {
@@ -277,7 +282,6 @@
             fetchData () {
                 this.$ajax.post('/api/bussiness/account/order/getOrderList', this.QueryOrderListModel, res => {
                     const arrayData = [];
-                    console.log(res.data.list);
                     if (res.data.list){
                         this.total = res.data.total;
                         for (let i = 0;i < res.data.list.length;i++){
@@ -343,10 +347,8 @@
                             arrayData.push(tableData)
                         }
                     }
-                    console.log('arrayData =='+arrayData)
                     this.tableData = arrayData;
                 })
-
             },
             handleCurrentChange(curPage){
                 this.QueryOrderListModel.pageNum = curPage;
@@ -375,7 +377,6 @@
                     })
                 });
             },
-
             navRoute(name,query){
                 if ('签署协议' == name){
                     this.$router.push({

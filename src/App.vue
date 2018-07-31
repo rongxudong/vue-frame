@@ -47,7 +47,7 @@
         },
         beforeCreate () {
 //            Vue.myGlobalMethod();
-            localStorage.setItem("User_token", process.env.NODE_ENV == 'development' ? '60f9a61db38c12e3701adf40d3bb8777' : $.cookie('bl_sid'));
+            localStorage.setItem("User_token", process.env.NODE_ENV == 'development' ? '3a750dd983f51a8b581f8afbd35a113f' : $.cookie('bl_sid'));
             this.$store.state.token = localStorage.getItem("User_token");
 
             let baseUrl = 'http://account.financegt.com'
@@ -157,18 +157,18 @@
                     if (option.name === to.name) {
                         flag = true;
 //                        this.$store.commit('set_active_index', '/' + to.path.split('/')[1]);
-                        this.$store.commit('set_active_index', to.path);
+                        this.$store.commit('set_active_index', to.fullPath);
                         break
                     }
                 }
                 if (!flag) {
 //                    this.$store.commit('add_tabs', {route: '/' + to.path.split('/')[1], name: to.name});
 //                    this.$store.commit('set_active_index', '/' + to.path.split('/')[1]);
-                    this.$store.commit('add_tabs', {route: to.path, name: to.name});
-                    this.$store.commit('set_active_index', to.path);
+                    this.$store.commit('add_tabs', {route: to.fullPath, name: to.name});
+                    this.$store.commit('set_active_index', to.fullPath);
                 }
                 localStorage.setItem('currentRouteName', to.name);
-                localStorage.setItem('currentRoutePath', to.path);
+                localStorage.setItem('currentRoutePath', to.fullPath);
             }
         }
     }

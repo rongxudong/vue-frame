@@ -308,10 +308,6 @@
                                 tableData.btnDesc = '查看';
                             }
 
-                            // tableData.agreementStatus_str = '未编辑';
-                            // tableData.btnVisible = true;
-                            // tableData.btnDesc = '查看';
-
                             if (tableData.payStatus == 1){
                                 tableData.payStatus_str = '已支付';
                             }else if (tableData.payStatus == 2){
@@ -331,7 +327,8 @@
                             }else if (tableData.applyStatus == 6){
                                 tableData.applyStatus_str = '已通过';
                             }
-                            if (tableData.applyStatus  == 1){
+                            //----------------------------------------------------
+                            if (tableData.applyStatus  == 1 || tableData.applyStatus  == 3){
                                 if (tableData.agreementStatus == 1 || tableData.agreementStatus == 2 || tableData.agreementStatus == 3){
                                     tableData.applyStatusBtnVisible = false;
                                 } else {
@@ -342,8 +339,7 @@
                                 tableData.applyStatusBtnVisible = true;
                                 tableData.applyStatusBtnDesc = '查看';
                             }
-                                // tableData.applyStatusBtnVisible = true;
-                                // tableData.applyStatusBtnDesc = '查看';
+                            //----------------------------------------------------
                             arrayData.push(tableData)
                         }
                     }

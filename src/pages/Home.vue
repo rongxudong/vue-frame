@@ -62,7 +62,7 @@
             <iframe :src="previewUrl" width="100%" height="100%" frameborder="1" id='viewPhoto' v-show="iframeShow">
                 This browser does not support PDFs. Please download the PDF to view it: <a :href="previewUrl">Download PDF</a>
             </iframe>
-            <img :src="viewPhotoUrl" width="100%" v-show="imgShow"/>
+            <img :src="viewPhotoUrl" v-show="imgShow" class="iframe-img"/>
         </el-dialog>
     </div>
 </template>
@@ -296,6 +296,11 @@
 <style scoped lang="less" rel="stylesheet/less">
     @import "../assets/css/_variable";
     @import "../assets/css/_mixin";
+    .iframe-img {
+        display: block;
+        max-width: 100%;
+        margin: auto;
+    }
     //针对ipad/平板
     @media (min-width: 768px) and (max-width: 1023px) {
         .Home-main .left .left-wrapper {

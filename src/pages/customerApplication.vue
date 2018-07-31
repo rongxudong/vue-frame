@@ -608,8 +608,7 @@
                     setTimeout(() => {
                         this.loading = false;
                         this.options = this.list.filter(item => {
-                            return item.label.toLowerCase()
-                                .indexOf(query.toLowerCase()) > -1;
+                            return item.label.toLowerCase().indexOf(query.toLowerCase()) > -1;
                         });
                     }, 200);
                 } else {
@@ -658,6 +657,9 @@
             },
             // 保存
             saveBtn () {
+                if( this.array.files ) {
+                    delete this.array.files
+                }
                 this.$ajax.post( '/api/bussiness/account/order/saveGtcp?orderId=' + this.array['orderId'], this.array, res => {
                     if(res.code === 0){
                         this.$message({
@@ -677,9 +679,9 @@
                 if( this.array.files ) {
                     delete this.array.files
                 }
-//                if( this.array.gtcpApplyPdf ) {
-//                    delete this.array.gtcpApplyPdf
-//                }
+                if( this.array.gtcpApplyPdf ) {
+                    delete this.array.gtcpApplyPdf
+                }
                 console.log(this.array)
                 this.$ajax.post( '/api/bussiness/account/order/submitGtcp?orderId=' + this.array['orderId'], this.array, res => {
                     if(res.code === 0){
@@ -697,6 +699,12 @@
             },
             // 获取之前保存的信息
             getGtcpDetail () {
+                if( this.array.files ) {
+                    delete this.array.files
+                }
+                if( this.array.gtcpApplyPdf ) {
+                    delete this.array.gtcpApplyPdf
+                }
                 this.$ajax.get('/api/bussiness/account/order/getGtcpDetail/' + this.array['orderId'], null, res => {
                     if( res.code == 0 ) {
                         let getDetail = res.data;

@@ -380,6 +380,7 @@ a:focus {
 }
 .Home-main .left .bottom .msg-item {
   position: relative;
+  height: 82px;
   padding: 10px 0;
   margin-left: 20px;
   border-bottom: 1px solid rgba(27, 160, 208, 0.14);
@@ -419,7 +420,7 @@ a:focus {
   line-height: 18px;
 }
 .Home-main .left .bottom .msg-item span {
-  display: inline-block;
+  display: block;
   margin-top: 5px;
   font-size: .13rem;
   color: #909399;
@@ -429,6 +430,7 @@ a:focus {
   min-width: 60px;
   height: 30px;
   line-height: 30px;
+  line-height: 30px\9;
   font-size: .14rem;
   color: #2c97ff;
   text-align: center;

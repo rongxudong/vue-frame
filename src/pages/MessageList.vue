@@ -22,7 +22,7 @@
                         <span>{{item.creatime | filterTime('YYYY-MM-DD HH:mm')}}</span>
                     </div>
                     <div class="msg-item-right flex_end">
-                        <button type="button" class="look-btn" v-on:click="navRoute(item)">查看详情</button>
+                        <button type="button" class="look-btn" @click="navRoute(item)">查看详情</button>
                     </div>
                 </div>
             </div>
@@ -71,7 +71,22 @@
         methods: {
             // 一键阅读
             allRead: function () {
-//                this.$ajax.post('/api/bussiness/account/message/allHaveLook', )
+                let params = {
+                    messageId: '',
+                    pageNum: this.messageListModel['pageNum'],
+                    pageSize: this.messageListModel['pageSize']
+                };
+                this.$ajax.post('/api/bussiness/account/message/allHaveLook', params, res => {
+                    if(res.code == 0) {
+                        console.log(res.data);
+                        this.DataMessageList = res.data.viewList;
+                    } else {
+                        this.$message({
+                            type: 'error',
+                            message: res.message
+                        });
+                    }
+                })
             },
             //改变每页显示数量
             handleSizeChange(val) {

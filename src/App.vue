@@ -184,11 +184,13 @@
         border-bottom: none;
         .el-tabs__nav {
             border: none;
+            line-height: 0\9;
         }
     }
     .main-tab .el-tabs__item.is-active {
         height: 40px;
         line-height: 40px;
+        line-height: 40px\9;
         vertical-align: top;
         color: #000!important;
         background-color: #ffffff!important;
@@ -198,6 +200,7 @@
         margin-right: 8px;
         height: 34px;
         line-height: 34px;
+        vertical-align: top;
         color: #fff;
         background-color: RGBA(182, 194, 202, 1)!important;
         .border-top-radius(5px);

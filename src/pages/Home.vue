@@ -222,11 +222,11 @@
                         this.$ChromeFfIedownload(fileUrl);
                     }
                 }
-                else if (nameSuffix === 'doc' || nameSuffix === 'docx' || nameSuffix === 'xlsx' || nameSuffix === 'xls') {
-                    if(this.$MyBrowser() === '360' || this.$MyBrowser() === 'Opera' || this.$MyBrowser() === 'Chrome') {
+                else if (nameSuffix === 'doc' || nameSuffix === 'docx') {
+                    if(this.$MyBrowser() === '360' || this.$MyBrowser() === 'Opera') {
                         this.$Opera360Download(fileUrl);
                     }
-                    else if (this.$MyBrowser() === 'FF' || this.$MyBrowser() === 'IE'){
+                    else if (this.$MyBrowser() === 'FF' || this.$MyBrowser() === 'IE' || this.$MyBrowser() === 'Chrome'){
                         this.$ChromeFfIedownload(fileUrl);
                     }
                     else {

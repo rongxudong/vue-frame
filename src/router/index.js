@@ -116,12 +116,12 @@ export default new Router({
         },
         {
             path: '/FileList',
-            name: '消息列表',
+            name: '公告列表',
             component: FileList,
         },
         {
             path: '/MessageList',
-            name: '公告列表',
+            name: '消息列表',
             component: MessageList,
         },
         {

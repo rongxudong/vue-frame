@@ -47,7 +47,7 @@
         },
         beforeCreate () {
 //            Vue.myGlobalMethod();
-            localStorage.setItem("User_token", process.env.NODE_ENV == 'development' ? '6cb4a01eafa3a66e3fecbd0ac1da090c' : $.cookie('bl_sid'));
+            localStorage.setItem("User_token", process.env.NODE_ENV == 'development' ? '3a750dd983f51a8b581f8afbd35a113f' : $.cookie('bl_sid'));
             this.$store.state.token = localStorage.getItem("User_token");
 
             let baseUrl = 'http://account.financegt.com'
@@ -184,13 +184,11 @@
         border-bottom: none;
         .el-tabs__nav {
             border: none;
-            line-height: 0\9;
         }
     }
     .main-tab .el-tabs__item.is-active {
         height: 40px;
         line-height: 40px;
-        line-height: 40px\9;
         vertical-align: top;
         color: #000!important;
         background-color: #ffffff!important;
@@ -200,7 +198,6 @@
         margin-right: 8px;
         height: 34px;
         line-height: 34px;
-        vertical-align: top;
         color: #fff;
         background-color: RGBA(182, 194, 202, 1)!important;
         .border-top-radius(5px);

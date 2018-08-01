@@ -24,8 +24,6 @@
 
 <script>
 
-//    import {PDFObject} from '../assets/js/pdfobject.js'
-
     export default {
 
         data() {
@@ -40,8 +38,17 @@
         },
         created() {
             this.orderInfo = this.$route.query;
-            console.log(this.orderInfo)
             this.fetchData();
+        },
+        watch: {
+            $route(to , from){
+                console.log()
+                if (to.name == '签署协议'){
+                    this.orderInfo = this.$route.query;
+                    this.fetchData();
+                }
+
+            },
         },
         methods: {
             handleClick(tab, event) {
@@ -82,7 +89,6 @@
             },
             signAgreement(agreementId) {
                 if (this.checked[this.currentPage]) {
-                    console.log('123');
                     this.$ajax.post('/api/bussiness/account/order/signAgreement?agreementId=' + agreementId, null,(res) => {
                         if (res.code == 0) {
                             this.$message({
@@ -90,14 +96,23 @@
                                 message: '签署成功'
                             })
                             for (let i = 0; i < res.data.length; i++) {
-                                console.log(this.agreementList[i].status);
                                 if (res.data[i].status == 3) {
                                     this.fetchData();
                                     return;
                                 }
                             }
                             //说明签署完了，回退到订单列表
-                            this.$router.back();
+                            // this.$router.back();
+                            if (this.orderInfo.orderType) {
+                                let path = '/Investigate/'+this.orderInfo.orderType
+                                this.$router.push({
+                                    path:path,
+                                })
+                            }else {
+                                this.$router.push({
+                                    path:'/Investigate/1',
+                                })
+                            }
 
                         } else {
                             this.$message({

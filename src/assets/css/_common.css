@@ -584,6 +584,7 @@ a:focus {
   float: left;
   width: 60%;
   height: 44px;
+  font-size: .14rem;
   padding-left: .45rem;
   line-height: 44px;
 }
@@ -650,6 +651,9 @@ a:focus {
   -ms-box-shadow: 0 2px 4px rgba(7, 17, 27, 0.15);
   -moz-box-shadow: 0 2px 4px rgba(7, 17, 27, 0.15);
   -webkit-box-shadow: 0 2px 4px rgba(7, 17, 27, 0.15);
+}
+.el-message .el-icon-error {
+  font-size: 14px;
 }
 @media only screen and (min-device-width: 320px) {
   html {

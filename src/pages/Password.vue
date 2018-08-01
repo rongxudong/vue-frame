@@ -1,35 +1,26 @@
 <template>
-    <div class="box-container bg-style justify_content_center align_items-center flex_direction_column">
-
-        <div>
-            <el-input
-                style="width: 250px"
-                class="input"
-                placeholder="原密码"
-                v-model="businessAccountResetPasswordModel.oldPassword"
-                clearable>
-            </el-input>
-        </div>
-        <div>
-            <el-input
-                style="width: 250px;margin-top: 17px"
-                class="input"
-                placeholder="新密码"
-                v-model="businessAccountResetPasswordModel.newPassword"
-                clearable>
-            </el-input>
-        </div>
-        <div>
-            <el-input
-                style="width: 250px;margin-top: 17px"
-                class="input"
-                placeholder="确认新密码"
-                v-model="businessAccountResetPasswordModel.newPasswordAgain"
-                clearable>
-            </el-input>
-        </div>
-        <el-button style="margin: 50px 0 0 0;width: 250px;" type="primary" v-on:click="changePassword">修改</el-button>
-
+    <div class="psd-main bg-style justify_content_center align_items-center flex_direction_column">
+        <el-input
+            class="input w250"
+            placeholder="原密码"
+            v-model="businessAccountResetPasswordModel.oldPassword"
+            clearable>
+        </el-input>
+        <el-input
+            style="margin-top: 17px"
+            class="input w250"
+            placeholder="新密码"
+            v-model="businessAccountResetPasswordModel.newPassword"
+            clearable>
+        </el-input>
+        <el-input
+            style="margin-top: 17px"
+            class="input w250"
+            placeholder="确认新密码"
+            v-model="businessAccountResetPasswordModel.newPasswordAgain"
+            clearable>
+        </el-input>
+        <el-button class="w250" style="margin: 50px 0 0 0;" type="primary" v-on:click="changePassword">修改</el-button>
     </div>
 </template>
 <script>
@@ -97,10 +88,13 @@
 
 <style lang="less" rel="stylesheet/less">
 
-    .box-container {
-        background-color: white;
+
+    .psd-main {
         width: 100%;
         height: 100%;
+        .w250 {
+            width: 250px;
+        }
     }
 
     .input-password {

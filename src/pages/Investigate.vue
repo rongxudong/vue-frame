@@ -25,8 +25,8 @@
                         <h1 class="text-head" style="margin-left: 0.12rem">筛选查询</h1>
                     </div>
                     <div class="flex_direction_column" style="height: 100%">
-                        <div class="align_items-center" style="height: 50%;width: 100%">
-                            <div class="flex_direction_row ">
+                        <div class="filter-query align_items-center">
+                            <div class="flex_direction_row">
                                 <h1 class="align-self-center text-head" style="margin-left: 0.25rem;min-width: 61px">发起时间:</h1>
                                 <el-date-picker
                                     style="margin-left: 0.25rem"
@@ -59,7 +59,7 @@
                                 </el-select>
                             </div>
                         </div>
-                        <div class="align_items-center" style="height: 50%;width: 100%">
+                        <div class="filter-query align_items-center">
                             <div class="flex_direction_row ">
                                 <h1 class="align-self-center text-head" style="margin-left: 0.25rem;min-width: 61px">支付状态:</h1>
                                 <el-select v-model="QueryOrderListModel.agreementStatus" placeholder="请选择" style="margin-left: 0.25rem">
@@ -201,7 +201,6 @@
                 </div>
 
             </div>
-
         </div>
     </div>
 </template>
@@ -365,7 +364,7 @@
                         if (res.code == 0){
                             this.$message({
                                 type: 'success',
-                                message: '创建成功!'
+                                message: '创建尽职调查服务成功，相关协议编辑中，请耐心等待'
                             });
                             that.fetchData();
                         }else {
@@ -473,6 +472,7 @@
                         p {
                             color: RGBA(102, 102, 102, 1);
                             padding: .19rem 0 .13rem;
+                            font-size: .14rem;
                         }
                     }
                 }
@@ -485,19 +485,17 @@
                 }
             }
         }
+        .filter-query {
+            width: 100%;
+            height: 74px;
+        }
     }
-    .search-container{
+    .search-container,
+    .table-container {
         width: 100%;
-        height: 1.92rem;
-        border: 1px solid @4th-border-col;
-        border-radius: 5px;
         margin-top: 0.25rem;
-    }
-    .table-container{
-        width: 100%;
         border: 1px solid @4th-border-col;
-        border-radius: 5px;
-        margin-top: 0.25rem;
+        .common_radius(5px);
     }
     .container-width-100{
         width: 100%;

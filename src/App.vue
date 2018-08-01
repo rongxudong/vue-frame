@@ -47,7 +47,7 @@
         },
         beforeCreate () {
 //            Vue.myGlobalMethod();
-            localStorage.setItem("User_token", process.env.NODE_ENV == 'development' ? '3a750dd983f51a8b581f8afbd35a113f' : $.cookie('bl_sid'));
+            localStorage.setItem("User_token", process.env.NODE_ENV == 'development' ? 'f9088a35ae7295a472cc3469128c5cf2' : $.cookie('bl_sid'));
             this.$store.state.token = localStorage.getItem("User_token");
 
             let baseUrl = 'http://account.financegt.com'

@@ -278,7 +278,6 @@
             // 用户查询实名认证状态
             findUserIdentityStatus () {
                 this.$ajax.get('/api/bussinessAccount/yqq/findUserIdentityStatus', null, res => {
-                    console.log('res.code == '+JSON.stringify(res));
                     if( res.code == 0) {
 
                         this.ruleForm['auditFlag'] = res.data.status;

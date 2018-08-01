@@ -62,7 +62,7 @@
                         <div class="align_items-center" style="height: 50%;width: 100%">
                             <div class="flex_direction_row ">
                                 <h1 class="align-self-center text-head" style="margin-left: 0.25rem;min-width: 61px">支付状态:</h1>
-                                <el-select v-model="QueryOrderListModel.agreementStatus" placeholder="请选择" style="margin-left: 0.25rem">
+                                <el-select v-model="QueryOrderListModel.payStatus" placeholder="请选择" style="margin-left: 0.25rem">
                                     <el-option
                                         v-for="item in payStatus"
                                         :key="item.value"
@@ -73,7 +73,7 @@
                             </div>
                             <div class="flex_direction_row">
                                 <h1 class="align-self-center text-head" style="margin-left: 0.25rem;min-width: 61px">协议状态:</h1>
-                                <el-select v-model="QueryOrderListModel.payStatus" placeholder="请选择" style="margin-left: 0.25rem">
+                                <el-select v-model="QueryOrderListModel.agreementStatus" placeholder="请选择" style="margin-left: 0.25rem">
                                     <el-option
                                         v-for="item in agreementStatus"
                                         :key="item.value"
@@ -183,7 +183,7 @@
                             <template slot-scope="scope">
                                 <ul>
                                     <li v-for="item in scope.row.filesList">
-                                        <a v-bind:href="'http://image.financegt.com'+item.url" style="color: #2fa8fd">{{item.fileName}}</a>
+                                        <a v-bind:href="'http://image.financegt.com'+item.url" style="color: #2fa8fd" target="_blank">{{item.fileName}}</a>
                                     </li>
                                 </ul>
                             </template>
@@ -377,6 +377,7 @@
                     })
                 });
             },
+
             navRoute(name,query){
                 if ('签署协议' == name){
                     this.$router.push({

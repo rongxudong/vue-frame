@@ -38,7 +38,7 @@
             <iframe :src="previewUrl" width="100%" height="100%" frameborder="1" id='viewPhoto' v-show="iframeShow">
                 This browser does not support PDFs. Please download the PDF to view it: <a :href="previewUrl">Download PDF</a>
             </iframe>
-            <img :src="viewPhotoUrl" width="100%" v-show="imgShow"/>
+            <img :src="viewPhotoUrl" v-show="imgShow" class="iframe-img"/>
         </el-dialog>
     </div>
 </template>
@@ -175,36 +175,3 @@
 
 
 </style>
-
-
-<!--<template>-->
-<!--<div>-->
-<!--<p>申请详情</p>-->
-<!--</div>-->
-<!--</template>-->
-
-<!--<script>-->
-
-<!--export default {-->
-<!--data() {-->
-<!--return {}-->
-<!--},-->
-<!--created() {-->
-<!--this.fetchData()-->
-<!--},-->
-<!--watch: {-->
-<!--'': 'fetchData'-->
-<!--},-->
-<!--methods: {-->
-<!--fetchData() {-->
-
-<!--}-->
-<!--}-->
-<!--}-->
-<!--</script>-->
-
-<!--<style>-->
-<!--.container {-->
-
-<!--}-->
-<!--</style>-->

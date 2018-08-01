@@ -145,16 +145,37 @@
                 }
             },
             onDownload (Obj, NAME) {
-                let self = this;
                 let nameSuffix = NAME.split('.').pop().toLowerCase();
                 let fileUrl = this.$store.state.resUrl + Obj.url;
                 if(nameSuffix === 'png' || nameSuffix === 'gif' || nameSuffix === 'jpeg' || nameSuffix === 'jpg' || nameSuffix === 'tiff') {
-//                    if (this.browserIsIe()) {
-//                        this.createIframe(fileUrl);
-//                    } else {
-//                        $(self).attr("download", fileUrl);
-//                        $(self).attr("href", fileUrl);
-//                    }
+                    if(this.$MyBrowser() === '360' || this.$MyBrowser() === 'Opera') {
+                        this.$Opera360Download(fileUrl);
+                    }
+                    else if (this.$MyBrowser() === 'Chrome' || this.$MyBrowser() === 'FF' || this.$MyBrowser() === 'IE'){
+                        this.$ChromeFfIedownload(fileUrl);
+                    }
+                    else {
+                        this.$Opera360Download(fileUrl);
+                    }
+                }
+                else if(nameSuffix === 'pdf') {
+                    if(this.$MyBrowser() === '360') {
+                        this.$Opera360Download(fileUrl);
+                    }
+                    else {
+                        this.$ChromeFfIedownload(fileUrl);
+                    }
+                }
+                else if (nameSuffix === 'doc' || nameSuffix === 'docx' || nameSuffix === 'xlsx' || nameSuffix === 'xls') {
+                    if(this.$MyBrowser() === '360' || this.$MyBrowser() === 'Opera' || this.$MyBrowser() === 'Chrome') {
+                        this.$Opera360Download(fileUrl);
+                    }
+                    else if (this.$MyBrowser() === 'FF' || this.$MyBrowser() === 'IE'){
+                        this.$ChromeFfIedownload(fileUrl);
+                    }
+                    else {
+                        this.$Opera360Download(fileUrl);
+                    }
                 }
                 else {
                     window.open(fileUrl, '_blank');

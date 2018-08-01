@@ -92,7 +92,7 @@
                     this.$ajax.post('/api/bussiness/account/order/signAgreement?agreementId=' + agreementId, null,(res) => {
                         if (res.code == 0) {
                             this.$message({
-                                type: 'info',
+                                type: 'success',
                                 message: '签署成功'
                             })
                             for (let i = 0; i < res.data.length; i++) {

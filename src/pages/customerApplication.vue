@@ -260,9 +260,10 @@
                                 :on-success="uploadSuccess"
                                 :on-remove="handleRemove"
                                 :before-remove="beforeRemove"
+                                :before-upload="beforeUpload"
                                 :file-list="fileList">
                             <el-button size="small" type="primary">点击上传</el-button>
-                            <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+                            <div slot="tip" class="el-upload__tip">只能上传jpg/png、word、pdf、xlsx等相关文件，且不超过50M</div>
                         </el-upload>
                     </div>
                 </div>
@@ -617,7 +618,30 @@
             },
             // 获取iiCreditTermsRequest的变化
             change(value) {
-                this.Others = value;
+                if(this.array['quotaRange'] === '1'){
+                    if(value == 90 || value == 120 || value == 150) {
+                        this.$message({
+                            type: 'error',
+                            message: '请输入其他的天数'
+                        });
+                        this.Others = 0;
+                        this.array['iiCreditTermsRequest'] = 0;
+                    } else {
+                        this.Others = value;
+                    }
+                } else {
+                    if(value == 60 || value == 90) {
+                        this.$message({
+                            type: 'error',
+                            message: '请输入其他的天数'
+                        });
+                        this.Others = 0;
+                        this.array['iiCreditTermsRequest'] = 0;
+                    } else {
+                        this.Others = value;
+                    }
+                }
+
             },
             // 选择申请的额度范围
             selectRange (module) {
@@ -630,6 +654,14 @@
             // 监听文件状态改变
             handleChange(file, fileList) {
 //                console.log(file);
+            },
+            beforeUpload(file) {
+//                const isJPG = file.type === 'image/jpeg';
+                const isLt2M = file.size / 1024 / 1024 < 50;
+                if (!isLt2M) {
+                    this.$message.error('上传文件大小不能超过 50MB!');
+                }
+                return isLt2M;
             },
             // 删除文件之前的钩子
             beforeRemove(file, fileList) {
@@ -733,8 +765,7 @@
                                 }
                             }
                         }
-                    }
-                    else {
+                    } else {
                         this.$message({
                             type: 'error',
                             message: res.message

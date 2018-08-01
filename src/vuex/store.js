@@ -12,7 +12,6 @@ const options = {
         message: '',
         options: [],
         activeIndex: '',
-        activeDate: '',
         resUrl: 'http://image.financegt.com',
 
         token: '',

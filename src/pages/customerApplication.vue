@@ -719,7 +719,7 @@
                 }
                 this.$ajax.post( '/api/bussiness/account/order/submitGtcp?orderId=' + this.array['orderId'], this.array, res => {
                     if(res.code === 0){
-                        this.$router.push({path: '/Investigate'});
+                        this.$router.push({path: '/Investigate/' + this.$route.query.orderType});
                         this.$message({
                             type: 'success',
                             message: res.message
@@ -734,12 +734,6 @@
             },
             // 获取之前保存的信息
             getGtcpDetail () {
-//                if( this.array.files ) {
-//                    delete this.array.files
-//                }
-//                if( this.array.gtcpApplyPdf ) {
-//                    delete this.array.gtcpApplyPdf
-//                }
                 this.$ajax.get('/api/bussiness/account/order/getGtcpDetail/' + this.array['orderId'], null, res => {
                     if( res.code == 0 ) {
                         let getDetail = res.data;
@@ -776,6 +770,7 @@
             // 上传成功后的回调
             uploadSuccess (response, file, fileList) {
                 console.log(response)
+                console.log(file)
                 this.fileList = this.File(response.data.files);
             },
             // 上传错误

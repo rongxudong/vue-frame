@@ -101,8 +101,7 @@
                                     return;
                                 }
                             }
-                            //说明签署完了，回退到订单列表
-                            // this.$router.back();
+                            //说明签署完了，到订单列表
                             if (this.orderInfo.orderType) {
                                 let path = '/Investigate/'+this.orderInfo.orderType
                                 this.$router.push({

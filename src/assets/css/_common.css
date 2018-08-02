@@ -217,8 +217,13 @@ a:focus {
   min-height: -webkit-calc(100vh - 60px);
 }
 .app-container .aside {
+  width: 12.5%!important;
   min-width: 200px;
-  min-height: 100%;
+  min-height: calc(100% - 60px);
+  min-height: -ms-calc(100% - 60px);
+  min-height: -moz-calc(100% - 60px);
+  min-height: -webkit-calc(100% - 60px);
+  background-color: #2c323e;
 }
 .ps-information .el-dropdown-menu__item {
   padding: 0!important;

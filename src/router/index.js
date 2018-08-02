@@ -91,10 +91,7 @@ export default new Router({
         {
             path: '/customerApplication',
             name: '客户申请',
-            component: customerApplication,
-            meta: {
-                keepAlive: true // 需要被缓存
-            }
+            component: customerApplication
         },
         {
             path: '/ApplyDetail',

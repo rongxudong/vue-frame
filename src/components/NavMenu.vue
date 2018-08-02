@@ -19,7 +19,7 @@
                 <i class="iconfont" :class="item.icon"></i>
                 <span v-text="item.name"></span>
             </template>
-            <el-menu-item-group class="over-hide" v-for="sub in item.sub" :key="sub.route" v-if="item.sub">
+            <el-menu-item-group v-for="sub in item.sub" :key="sub.route" v-if="item.sub">
                 <el-menu-item :index="sub.route" v-text="sub.name">
                 </el-menu-item>
             </el-menu-item-group>
@@ -76,12 +76,10 @@
 <style lang="less" rel="stylesheet/less">
     @import "../assets/css/_variable";
 
-    .over-hide {
-        overflow: hidden;
-    }
+
 
     .el-menu-vertical-demo {
-        height: 100%;
+        border-right: none;
     }
 
     .el-menu .iconfont {

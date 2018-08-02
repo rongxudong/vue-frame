@@ -226,8 +226,7 @@
                     {value: '2', label: '已提交待审核'},
                     {value: '3', label: '已审核驳回'},
                     {value: '4', label: '已审核通过'},
-                    {value: '5', label: '已审核终止'},
-                    {value: '6', label: '已审核通过并已上传尽调调查资料'}
+                    {value: '5', label: '已审核终止'}
                 ],
                 agreementStatus: [
                     {value: '1', label: '未编辑'},

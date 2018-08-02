@@ -1,7 +1,7 @@
 <template>
     <div class="bg-style">
         <div class="application-main">
-            <div class="basic">
+            <div class="basic" v-show="serveOrderType != 4 && serveOrderType != 1">
                 <div class="title">请选择您想申请的额度范围</div>
                 <ul class="select-range">
                     <li class="item iconfont" :class="{'is-active': array['quotaRange'] == '1'}" @click="selectRange('1')">十万以上</li>
@@ -22,10 +22,11 @@
                 <div class="input-block" v-for="(inputItem, index) in fullImporter" :key="index" v-if="array['quotaRange'] == '1'">
                     <div v-if="inputItem.sub != ''">
                         <ul class="block-top">
-                            <li v-for="(children, $index) in inputItem.sub" :key="$index">{{children.text}}</li>
+                            <li v-for="(children, $index) in inputItem.sub" :key="$index"
+                                v-show="children.management == true">{{children.text}}</li>
                         </ul>
                         <ul class="block-bottom">
-                            <li v-for="(children, $index) in inputItem.sub" :key="$index">
+                            <li v-for="(children, $index) in inputItem.sub" :key="$index" v-show="children.management == true">
                                 <div v-if="children.name == 'iiCompanyName'" class="select-suffix">
                                     <input v-model="array['iiCompanyName']" name="iiCompanyName" class="formInput" type="text"
                                            :placeholder="$t('personal.placeholder')" autocomplete="off"/>
@@ -54,15 +55,15 @@
                     <div v-else>
                         <ul class="block-top">
                             <li>PRODUCTS</li>
-                            <li class="creditInput text-center">CREDIT TERMS REQUEST (DAYS FROM DATE OF BILL OF LADING)</li>
-                            <li>TOTAL CREDIT LINE REQUIRED</li>
+                            <li class="creditInput text-center" v-show="serveOrderType != 4">CREDIT TERMS REQUEST (DAYS FROM DATE OF BILL OF LADING)</li>
+                            <li v-show="serveOrderType != 4">TOTAL CREDIT LINE REQUIRED</li>
                         </ul>
                         <ul class="block-bottom">
                             <li>
                                 <input v-model="array['iiProducts']" name="iiProducts" class="formInput" type="text"
                                        :placeholder="$t('personal.placeholder')" autocomplete="off"/>
                             </li>
-                            <li class="creditInput horizontal_center">
+                            <li class="creditInput horizontal_center" v-show="serveOrderType != 4">
                                 <el-radio-group v-model="array['iiCreditTermsRequest']">
                                     <el-radio :label="90">90days</el-radio>
                                     <el-radio :label="120">120days</el-radio>
@@ -70,12 +71,12 @@
                                     <el-radio :label="Others">Others</el-radio>
                                 </el-radio-group>
                                 <input v-if="array['iiCreditTermsRequest'] != 90 && array['iiCreditTermsRequest'] != 120
-                                 && array['iiCreditTermsRequest'] != 150 && array['iiCreditTermsRequest'] != null"
+                                 && array['iiCreditTermsRequest'] != 150"
                                        v-on:blur="change(array['iiCreditTermsRequest'])"
                                        v-model="array['iiCreditTermsRequest']" name="iiCreditTermsRequest" class="formInput"
                                        type="text" :placeholder="$t('personal.placeholder')" autocomplete="off" style="width: 96px;margin-left: 20px;"/>
                             </li>
-                            <li>
+                            <li v-show="serveOrderType != 4">
                                 <input v-model="array['iiTotalCreditLineRequired']" name="iiTotalCreditLineRequired" class="formInput"
                                        type="text" :placeholder="$t('personal.placeholder')" autocomplete="off"/>
                             </li>
@@ -136,8 +137,7 @@
                                     <el-radio :label="90">90days</el-radio>
                                     <el-radio :label="Others">Others</el-radio>
                                 </el-radio-group>
-                                <input v-show="array['iiCreditTermsRequest'] != 60 && array['iiCreditTermsRequest'] != 90 &&
-                                array['iiCreditTermsRequest'] != null" v-model="array['iiCreditTermsRequest']" v-on:blur="change(array['iiCreditTermsRequest'])"
+                                <input v-show="array['iiCreditTermsRequest'] != 60 && array['iiCreditTermsRequest'] != 90" v-model="array['iiCreditTermsRequest']" v-on:blur="change(array['iiCreditTermsRequest'])"
                                        name="iiCreditTermsRequest" class="formInput" type="text" :placeholder="$t('personal.placeholder')" autocomplete="off" style="width: 96px;margin-left: 20px;"/>
                             </li>
                             <li>
@@ -148,9 +148,10 @@
                     </div>
                 </div>
                 <!--供应商-->
-                <h1 class="module-title">SUPPLIER INFORMATION</h1>
+                <h1 class="module-title" v-show="serveOrderType != 4 && serveOrderType != 1">SUPPLIER INFORMATION</h1>
                 <!--供应商(10万以上)列表信息-->
-                <div class="input-block" v-for="inputItem in fullSupplier" :key="inputItem.id" v-if="array['quotaRange'] == '1'">
+                <div class="input-block" v-for="inputItem in fullSupplier" :key="inputItem.id"
+                     v-if="array['quotaRange'] == '1'" v-show="serveOrderType != 4 && serveOrderType != 1">
                     <div v-if="inputItem.sub != ''">
                         <ul class="block-top">
                             <li v-for="children in inputItem.sub" :key="children.text">{{children.text}}</li>
@@ -190,8 +191,8 @@
                     </ul>
                 </div>
                 <!--其他额外供应商-->
-                <h1 class="module-title">PREPARER INFORMATION</h1>
-                <div class="input-block" v-for="inputItem in otherSupplier" :key="inputItem.id">
+                <h1 class="module-title" v-show="serveOrderType != 4 && serveOrderType != 1">PREPARER INFORMATION</h1>
+                <div class="input-block" v-for="inputItem in otherSupplier" :key="inputItem.id" v-show="serveOrderType != 4 && serveOrderType != 1">
                     <ul class="block-top">
                         <li v-for="children in inputItem.sub" :key="children.text" :index="children.text">{{children.text}}</li>
                     </ul>
@@ -203,7 +204,7 @@
                     </ul>
                 </div>
                 <!--note-->
-                <div class="note" v-if="array['quotaRange'] == '1'">
+                <div class="note" v-if="array['quotaRange'] == '1'" v-show="serveOrderType != 4 && serveOrderType != 1">
                     Note:
                     <p>
                         * By filling out this form, the importer (applicant) listed above agrees to the usage terms of the
@@ -245,7 +246,7 @@
 
                 </div>
             </div>
-            <div class="basic">
+            <div class="basic" v-show="serveOrderType != 1">
                 <div class="title">相关文件上传</div>
                 <div class="upload-wrap">
                     <p class="text-upload">请上传公司基本资料、贸易资料、财务资料、产品图片、公司图片以及相关视频，具体需上传的资料以顾问的要求为主</p>
@@ -302,19 +303,27 @@
                         sub: [
                             {
                                 text: 'COMPANY NAME',
-                                name: 'iiCompanyName'
+                                name: 'iiCompanyName',
+                                dueDiligence: true,
+                                management: true
                             },
                             {
                                 text: 'USED COMPANY NAME',
-                                name: 'iiUsedCompanyName'
+                                name: 'iiUsedCompanyName',
+                                dueDiligence: false,
+                                management: true
                             },
                             {
                                 text: 'REGISTERED ADDRESS',
-                                name: 'iiRegisteredAddress'
+                                name: 'iiRegisteredAddress',
+                                dueDiligence: true,
+                                management: true
                             },
                             {
                                 text: 'PRINCIPAL / OWNER OF IMPORTER CO.',
-                                name: 'iiPrincipal'
+                                name: 'iiPrincipal',
+                                dueDiligence: false,
+                                management: true
                             }
                         ]
                     },
@@ -323,19 +332,27 @@
                         sub: [
                             {
                                 text: 'IMPORTER OWNER PASSPORT NO.',
-                                name: 'iiPassportNo'
+                                name: 'iiPassportNo',
+                                dueDiligence: false,
+                                management: true
                             },
                             {
                                 text: 'IMPORTER TAX NO.',
-                                name: 'iiTaxNo'
+                                name: 'iiTaxNo',
+                                dueDiligence: false,
+                                management: true
                             },
                             {
                                 text: 'IMPORTER ENTERPRISE REGISTRATION NO.',
-                                name: 'iiRegistrationNo'
+                                name: 'iiRegistrationNo',
+                                dueDiligence: false,
+                                management: true
                             },
                             {
                                 text: 'CONTACT PERSON',
-                                name: 'iiContactPerson'
+                                name: 'iiContactPerson',
+                                dueDiligence: false,
+                                management: true
                             }
                         ]
                     },
@@ -344,19 +361,27 @@
                         sub: [
                             {
                                 text: 'PHONE NO.',
-                                name: 'iiPhoneNo'
+                                name: 'iiPhoneNo',
+                                dueDiligence: true,
+                                management: true
                             },
                             {
                                 text: 'EMAIL ADDRESS',
-                                name: 'iiEmailAddress'
+                                name: 'iiEmailAddress',
+                                dueDiligence: true,
+                                management: true
                             },
                             {
                                 text: 'AVERAGE ANNUAL PURCHASE VOLUME(USD)',
-                                name: 'iiPurchaseVolume'
+                                name: 'iiPurchaseVolume',
+                                dueDiligence: false,
+                                management: true
                             },
                             {
                                 text: 'AVERAGE ANNUAL SALE VOLUME(USD)',
-                                name: 'iiSaleVolume'
+                                name: 'iiSaleVolume',
+                                dueDiligence: false,
+                                management: true
                             }
                         ]
                     },
@@ -369,11 +394,15 @@
                         sub: [
                             {
                                 text: 'THE QUANTITY OF SUPPLIERS',
-                                name: 'iiQuantityOfSuppliers'
+                                name: 'iiQuantityOfSuppliers',
+                                dueDiligence: false,
+                                management: false
                             },
                             {
                                 text: 'THE MAJOR LOCATION OF SUPPLIERS',
-                                name: 'iiMajorLocationOfSuppliers'
+                                name: 'iiMajorLocationOfSuppliers',
+                                dueDiligence: false,
+                                management: false
                             }
                         ]
                     }
@@ -742,20 +771,25 @@
                         } else {
                             this.array = getDetail;
                             this.fileList = this.File(getDetail.files);
+                            if(!this.array['quotaRange']) {
+                                this.array['quotaRange'] = '1';
+                            }
                             let getLabelNum = this.array['iiCreditTermsRequest'];
                             let getQuotaRange = this.array['quotaRange'];
                             if( getQuotaRange == '1') {
-                                if( getLabelNum != 90 && getLabelNum != 120 && getLabelNum != 150 ) {
+                                if( getLabelNum != 90 && getLabelNum != 120 && getLabelNum != 150 && getLabelNum != null) {
                                     this.Others = getLabelNum;
                                 } else {
                                     this.Others = 0;
+                                    this.array['iiCreditTermsRequest'] = 0;
                                 }
                             }
                             else {
-                                if( getLabelNum != 60 && getLabelNum != 90 ) {
+                                if( getLabelNum != 60 && getLabelNum != 90 && getLabelNum != null) {
                                     this.Others = getLabelNum;
                                 } else {
                                     this.Others = 0;
+                                    this.array['iiCreditTermsRequest'] = 0;
                                 }
                             }
                         }
@@ -771,12 +805,26 @@
             uploadSuccess (response, file, fileList) {
                 console.log(response)
                 console.log(file)
-                this.fileList = this.File(response.data.files);
+                if(response.code == 0){
+                    this.fileList = this.File(response.data.files);
+                    this.$message({
+                        showClose: true,
+                        type: 'success',
+                        message: response.message
+                    });
+                } else {
+                    this.$message({
+                        showClose: true,
+                        type: 'error',
+                        message: response.message
+                    });
+                }
             },
             // 上传错误
             uploadError (response, file, fileList) {
                 this.$message({
                     showClose: true,
+                    type: 'error',
                     message: response.message
                 });
             },
@@ -796,6 +844,7 @@
         created　() {
             this.array['orderId'] = this.$route.query.id;
             this.upLoadData['orderId'] = this.$route.query.id;
+            this.serveOrderType = this.$route.query.orderType;
             this.getGtcpDetail();
         }
     }

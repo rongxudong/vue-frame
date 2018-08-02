@@ -5,7 +5,7 @@
                 <web-header></web-header>
             </el-header>
             <el-container class="app-container">
-                <el-aside width="12.5%" class="aside">
+                <el-aside class="aside">
                     <nav-menu></nav-menu>
                 </el-aside>
                 <el-main>
@@ -247,5 +247,22 @@
         height: -ms-calc(~'100% - 40px');
         height: -moz-calc(~'100% - 40px');
         height: -webkit-calc(~'100% - 40px');
+    }
+    //针对ipad/平板
+    @media (min-width: 768px) and (max-width: 1023px) {
+
+    }
+
+    @media (min-width: 1024px) and (max-width: 1279px) {
+        .app-container {
+            position: relative;
+            .aside {
+                position: absolute;
+                top: 0;
+                left: 0;
+                z-index: 1111;
+                min-height: 100%;
+            }
+        }
     }
 </style>

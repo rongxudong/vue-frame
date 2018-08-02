@@ -24,9 +24,9 @@
                         <img class="image-search" src="../assets/img/investigate/search-icon.png" alt="搜索">
                         <h1 class="text-head" style="margin-left: 0.12rem">筛选查询</h1>
                     </div>
-                    <div class="flex_direction_column mg17">
+                    <div class="flex_direction_column">
                         <div class="filter-query flex_start">
-                            <div class="flex_direction_row mgt17">
+                            <div class="flex_direction_row mg17">
                                 <h1 class="align-self-center text-head input-mg">发起时间:</h1>
                                 <el-date-picker
                                     style="margin-left: 0.2rem"
@@ -38,7 +38,7 @@
                                     :picker-options="pickerOptions">
                                 </el-date-picker>
                             </div>
-                            <div class="flex_direction_row mgt17">
+                            <div class="flex_direction_row mg17">
                                 <h1 class="align-self-center text-head input-mg">调查对象:</h1>
                                 <el-input
                                     style="margin-left: 0.2rem;min-width: 2rem;"
@@ -47,7 +47,7 @@
                                     clearable>
                                 </el-input>
                             </div>
-                            <div class="align_content mgt17">
+                            <div class="align_content mg17">
                                 <h1 class="align-self-center text-head" style="margin-left: 0.2rem;min-width: 80px;">申请表状态:</h1>
                                 <el-select v-model="QueryOrderListModel.applyStatus" placeholder="请选择" style="margin-left: 0.2rem;">
                                     <el-option
@@ -60,7 +60,7 @@
                             </div>
                         </div>
                         <div class="filter-query flex_start">
-                            <div class="flex_direction_row mgt17">
+                            <div class="flex_direction_row mg17">
                                 <h1 class="align-self-center text-head input-mg">支付状态:</h1>
                                 <el-select v-model="QueryOrderListModel.payStatus" placeholder="请选择" style="margin-left: 0.2rem;">
                                     <el-option
@@ -71,7 +71,7 @@
                                     </el-option>
                                 </el-select>
                             </div>
-                            <div class="flex_direction_row mgt17">
+                            <div class="flex_direction_row mg17">
                                 <h1 class="align-self-center text-head input-mg">协议状态:</h1>
                                 <el-select v-model="QueryOrderListModel.agreementStatus" placeholder="请选择" style="margin-left: 0.2rem;">
                                     <el-option
@@ -82,7 +82,7 @@
                                     </el-option>
                                 </el-select>
                             </div>
-                            <el-button class="mgt17" type="primary" round style="margin-left: 0.2rem;" @click="this.fetchData">查询</el-button>
+                            <el-button class="mg17" type="primary" round style="margin-left: 0.2rem;" @click="this.fetchData">查询</el-button>
                         </div>
                     </div>
                 </div>
@@ -501,9 +501,6 @@
         .mg17 {
             margin: 17px 0;
         }
-        .mgt17 {
-            margin-top: 17px;
-        }
     }
     .search-container,
     .table-container {
@@ -531,22 +528,36 @@
     }
     //针对ipad/平板
     @media (min-width: 768px) and (max-width: 1023px) {
-
+        .investigate-main .mg17 {
+            margin: 10px 0;
+        }
     }
 
     @media (min-width: 1024px) and (max-width: 1279px) {
-
+        .investigate-main .mg17 {
+            margin: 10px 0;
+        }
     }
 
     @media (min-width: 1280px) and (max-width: 1365px) {
-
+        .investigate-main .mg17 {
+            margin: 10px 0;
+        }
     }
 
     @media (min-width: 1366px) and (max-width: 1439px) {
-
+        .investigate-main .mg17 {
+            margin: 10px 0;
+        }
     }
 
     @media (min-width: 1440px) and (max-width: 1679px) {
+
+    }
+    @media (min-width: 1680px) and (max-width: 1919px) {
+
+    }
+    @media (min-width: 1920px) {
 
     }
 </style>

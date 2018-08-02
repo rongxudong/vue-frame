@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-style" style="min-width: 880px">
+    <div class="bg-style">
         <div class="investigate-main">
             <div class="basic">
                 <div class="title process-title line">{{this.serviceTitle[this.serviceType]}}服务流程</div>
@@ -24,12 +24,12 @@
                         <img class="image-search" src="../assets/img/investigate/search-icon.png" alt="搜索">
                         <h1 class="text-head" style="margin-left: 0.12rem">筛选查询</h1>
                     </div>
-                    <div class="flex_direction_column" style="height: 100%">
-                        <div class="filter-query align_items-center">
-                            <div class="flex_direction_row">
-                                <h1 class="align-self-center text-head" style="margin-left: 0.25rem;min-width: 61px">发起时间:</h1>
+                    <div class="flex_direction_column mg17">
+                        <div class="filter-query flex_start">
+                            <div class="flex_direction_row mgt17">
+                                <h1 class="align-self-center text-head input-mg">发起时间:</h1>
                                 <el-date-picker
-                                    style="margin-left: 0.25rem"
+                                    style="margin-left: 0.2rem"
                                     v-model="data"
                                     type="daterange"
                                     range-separator="至"
@@ -38,18 +38,18 @@
                                     :picker-options="pickerOptions">
                                 </el-date-picker>
                             </div>
-                            <div class="flex_direction_row">
-                                <h1 class="align-self-center text-head" style="margin-left: 0.25rem;min-width: 61px">调查对象:</h1>
+                            <div class="flex_direction_row mgt17">
+                                <h1 class="align-self-center text-head input-mg">调查对象:</h1>
                                 <el-input
-                                    style="margin-left: 0.25rem;min-width: 2rem"
+                                    style="margin-left: 0.2rem;min-width: 2rem;"
                                     placeholder="请输入内容"
                                     v-model="QueryOrderListModel.userCompanyName"
                                     clearable>
                                 </el-input>
                             </div>
-                            <div class="align_content">
-                                <h1 class="align-self-center text-head" style="margin-left: 0.25rem;min-width: 80px;">申请表状态:</h1>
-                                <el-select v-model="QueryOrderListModel.applyStatus" placeholder="请选择" style="margin-left: 0.25rem">
+                            <div class="align_content mgt17">
+                                <h1 class="align-self-center text-head" style="margin-left: 0.2rem;min-width: 80px;">申请表状态:</h1>
+                                <el-select v-model="QueryOrderListModel.applyStatus" placeholder="请选择" style="margin-left: 0.2rem;">
                                     <el-option
                                         v-for="item in applyStatus"
                                         :key="item.value"
@@ -59,10 +59,10 @@
                                 </el-select>
                             </div>
                         </div>
-                        <div class="filter-query align_items-center">
-                            <div class="flex_direction_row ">
-                                <h1 class="align-self-center text-head" style="margin-left: 0.25rem;min-width: 61px">支付状态:</h1>
-                                <el-select v-model="QueryOrderListModel.payStatus" placeholder="请选择" style="margin-left: 0.25rem">
+                        <div class="filter-query flex_start">
+                            <div class="flex_direction_row mgt17">
+                                <h1 class="align-self-center text-head input-mg">支付状态:</h1>
+                                <el-select v-model="QueryOrderListModel.payStatus" placeholder="请选择" style="margin-left: 0.2rem;">
                                     <el-option
                                         v-for="item in payStatus"
                                         :key="item.value"
@@ -71,9 +71,9 @@
                                     </el-option>
                                 </el-select>
                             </div>
-                            <div class="flex_direction_row">
-                                <h1 class="align-self-center text-head" style="margin-left: 0.25rem;min-width: 61px">协议状态:</h1>
-                                <el-select v-model="QueryOrderListModel.agreementStatus" placeholder="请选择" style="margin-left: 0.25rem">
+                            <div class="flex_direction_row mgt17">
+                                <h1 class="align-self-center text-head input-mg">协议状态:</h1>
+                                <el-select v-model="QueryOrderListModel.agreementStatus" placeholder="请选择" style="margin-left: 0.2rem;">
                                     <el-option
                                         v-for="item in agreementStatus"
                                         :key="item.value"
@@ -82,7 +82,7 @@
                                     </el-option>
                                 </el-select>
                             </div>
-                            <el-button type="primary" round style="margin-left: 0.25rem" v-on:click="this.fetchData">查询</el-button>
+                            <el-button class="mgt17" type="primary" round style="margin-left: 0.2rem;" @click="this.fetchData">查询</el-button>
                         </div>
                     </div>
                 </div>
@@ -177,9 +177,11 @@
                             width="130">
                         </el-table-column>
                         <el-table-column
+                            fixed="right"
                             align="center"
                             prop="filesList"
-                            label="结果反馈">
+                            label="结果反馈"
+                            min-width="150">
                             <template slot-scope="scope">
                                 <ul>
                                     <li v-for="item in scope.row.filesList">
@@ -410,9 +412,9 @@
     .investigate-main {
         position: relative;
         min-height: calc(~'100vh - .45rem - 100px');
-        min-height: -ms-calc(~'100vh - .45rem - 100px');
-        min-height: -moz-calc(~'100vh - .45rem - 100px');
-        min-height: -webkit-calc(~'100vh - .45rem - 100px');
+        min-height: -ms-calc(~'100vh - 145px');
+        min-height: -moz-calc(~'100vh - 145px');
+        min-height: -webkit-calc(~'100vh - 145px');
         padding: 0 20px 20px;
         .line {
             border-bottom: 1px solid #ccc!important;
@@ -488,7 +490,19 @@
         }
         .filter-query {
             width: 100%;
-            height: 74px;
+            min-height: 40px;
+            flex-direction: row;
+            flex-wrap: wrap;
+            .input-mg {
+                min-width: 64px;
+                margin-left: 0.2rem;
+            }
+        }
+        .mg17 {
+            margin: 17px 0;
+        }
+        .mgt17 {
+            margin-top: 17px;
         }
     }
     .search-container,
@@ -515,5 +529,24 @@
         height: 0.53rem;
         .align_items
     }
+    //针对ipad/平板
+    @media (min-width: 768px) and (max-width: 1023px) {
 
+    }
+
+    @media (min-width: 1024px) and (max-width: 1279px) {
+
+    }
+
+    @media (min-width: 1280px) and (max-width: 1365px) {
+
+    }
+
+    @media (min-width: 1366px) and (max-width: 1439px) {
+
+    }
+
+    @media (min-width: 1440px) and (max-width: 1679px) {
+
+    }
 </style>

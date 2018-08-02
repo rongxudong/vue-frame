@@ -4,11 +4,11 @@
             <el-header>
                 <web-header></web-header>
             </el-header>
-            <el-container>
-                <el-aside width="12.5%" style="min-width: 200px;">
+            <el-container class="app-container">
+                <el-aside width="12.5%" class="aside">
                     <nav-menu></nav-menu>
                 </el-aside>
-                <el-main style="display:block; width: 87.5%;">
+                <el-main>
                     <el-tabs
                             class="main-tab"
                             v-model="activeIndex"
@@ -218,9 +218,13 @@
         .common_box_shadow(0 2px 4px rgba(7, 17, 27, .15));
     }
     .el-main {
-        margin-top: .05rem;
-        padding: .2rem .35rem;
+        display:block;
+        width: 87.5%;
+        min-height: 100%;
+        margin-top: 5px;
+        padding: 20px .35rem;
         background-color: #f7f5fb;
+        .box-sizing(border-box);
     }
     .el-main .el-tabs__header {
         margin: 0;
@@ -238,6 +242,7 @@
     }
     #app .app-wrap {
         width: 100%;
+        /*height: 100%;*/
         height: calc(~'100% - 40px');
         height: -ms-calc(~'100% - 40px');
         height: -moz-calc(~'100% - 40px');

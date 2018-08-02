@@ -35,6 +35,18 @@ a {
     margin-top: 15px;
 }
 
+//App.vue
+.app-container {
+    min-height: calc(~'100vh - 60px');
+    min-height: -ms-calc(~'100vh - 60px');
+    min-height: -moz-calc(~'100vh - 60px');
+    min-height: -webkit-calc(~'100vh - 60px');
+    .aside {
+        min-width: 200px;
+        min-height: 100%;
+    }
+}
+
 //Header.vue
 .ps-information .el-dropdown-menu__item {
     padding: 0!important;
@@ -49,8 +61,8 @@ a {
         text-decoration: none;
     }
 }
-//RealName.vue
 
+//RealName.vue
 .RealName-main .el-upload--picture-card,
 .personalData-main .el-upload--picture-card ,
 .password-main .el-upload--picture-card {
@@ -146,7 +158,6 @@ a {
 }
 
 //customerApplication.vue
-
 .suffix {
     position: absolute;
     top: 1px;
@@ -356,8 +367,6 @@ a {
         overflow-y: hidden;
     }
 }
-
-
 .right-list {
     width: 100%;
     padding: .1rem 0;

@@ -374,4 +374,35 @@
             }
         }
     }
+
+    //针对ipad/平板
+    @media (min-width: 768px) and (max-width: 1023px) {
+
+    }
+
+    @media (min-width: 1024px) and (max-width: 1279px) {
+        .basic .basic-form,
+        .company .basic-form {
+            padding: .25rem 0 0 .6rem;
+            .input-width {
+                max-width: 250px;
+                min-width: 200px;
+            }
+        }
+        .RealName-main .real-icon {
+            left: 70%;
+        }
+    }
+
+    @media (min-width: 1280px) and (max-width: 1365px) {
+
+    }
+
+    @media (min-width: 1366px) and (max-width: 1439px) {
+
+    }
+
+    @media (min-width: 1440px) and (max-width: 1679px) {
+
+    }
 </style>

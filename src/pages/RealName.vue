@@ -179,7 +179,7 @@
                 rules: {
                     name: [
                         { required: true, message: '请输入姓名', trigger: 'blur' },
-                        { min: 2, max: 16, message: '长度在 2 到 16 个字符', trigger: 'blur' }
+                        { min: 2, max: 1000000, message: '长度大于 2 位', trigger: 'blur' }
                     ],
                     idCard: [
                         { required: true, message: '请输入有效证件号码', trigger: 'blur' },
@@ -235,20 +235,22 @@
                 this.$refs.businessLicense.clearValidate();
             },
             beforeAvatarUpload(file, ele) {
+                console.log(file.type);
                 const isJPG = file.type === 'image/jpeg';
                 const isGIF = file.type === 'image/gif';
                 const isPNG = file.type === 'image/png';
                 const isBMP = file.type === 'image/bmp';
+                const isPDF = file.type === 'application/pdf';
 
-                const isLt2M = file.size / 1024 / 1024 < 2;
+                const isLt20M = file.size / 1024 / 1024 < 20;
 
-                if (!isJPG && !isGIF && !isPNG && !isBMP) {
-                    this.$message.error('上传图片必须是JPG/GIF/PNG/BMP 格式!');
+                if (!isJPG && !isGIF && !isPNG && !isBMP && !isPDF) {
+                    this.$message.error('上传图片必须是JPG/GIF/PNG/BMP/PDF 格式!');
                 }
-                if (!isLt2M) {
-                    this.$message.error('上传头像图片大小不能超过 2MB!');
+                if (!isLt20M) {
+                    this.$message.error('上传头像图片大小不能超过 20MB!');
                 }
-                return (isJPG || isBMP || isGIF || isPNG) && isLt2M;
+                return (isJPG || isBMP || isGIF || isPNG || isPDF) && isLt20M;
             },
             // 用户提交实名认证信息
             submitForm(formName) {

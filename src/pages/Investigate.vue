@@ -267,7 +267,6 @@
         },
         created () {
             this.serviceType = this.$route.path.split('/')[2];
-
             this.QueryOrderListModel.orderType = this.$route.path.split('/')[2];
             this.fetchData();
         },
@@ -379,6 +378,7 @@
             },
 
             navRoute(name,query){
+                console.log(query)
                 if ('签署协议' == name){
                     this.$router.push({
                         name: name,
@@ -389,13 +389,13 @@
                     if (query.applyStatusBtnDesc == '查看'){
                         this.$router.push({
                             name: '申请详情',
-                            query:query
+                            query: query
                         });
                     }
                     if (query.applyStatusBtnDesc == '填写'){
                         this.$router.push({
                             name: '客户申请',
-                            query:query
+                            query: query
                         });
                     }
                 }

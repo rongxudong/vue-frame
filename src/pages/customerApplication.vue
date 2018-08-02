@@ -22,11 +22,10 @@
                 <div class="input-block" v-for="(inputItem, index) in fullImporter" :key="index" v-if="array['quotaRange'] == '1'">
                     <div v-if="inputItem.sub != ''">
                         <ul class="block-top">
-                            <li v-for="(children, $index) in inputItem.sub" :key="$index"
-                                v-show="children.management == true">{{children.text}}</li>
+                            <li v-for="(children, $index) in inputItem.sub" :key="$index">{{children.text}}</li>
                         </ul>
                         <ul class="block-bottom">
-                            <li v-for="(children, $index) in inputItem.sub" :key="$index" v-show="children.management == true">
+                            <li v-for="(children, $index) in inputItem.sub" :key="$index">
                                 <div v-if="children.name == 'iiCompanyName'" class="select-suffix">
                                     <input v-model="array['iiCompanyName']" name="iiCompanyName" class="formInput" type="text"
                                            :placeholder="$t('personal.placeholder')" autocomplete="off"/>
@@ -150,8 +149,7 @@
                 <!--供应商-->
                 <h1 class="module-title" v-show="serveOrderType != 4 && serveOrderType != 1">SUPPLIER INFORMATION</h1>
                 <!--供应商(10万以上)列表信息-->
-                <div class="input-block" v-for="inputItem in fullSupplier" :key="inputItem.id"
-                     v-if="array['quotaRange'] == '1'" v-show="serveOrderType != 4 && serveOrderType != 1">
+                <div class="input-block" v-for="inputItem in fullSupplier" :key="inputItem.id" v-if="array['quotaRange'] == '1'">
                     <div v-if="inputItem.sub != ''">
                         <ul class="block-top">
                             <li v-for="children in inputItem.sub" :key="children.text">{{children.text}}</li>
@@ -192,7 +190,7 @@
                 </div>
                 <!--其他额外供应商-->
                 <h1 class="module-title" v-show="serveOrderType != 4 && serveOrderType != 1">PREPARER INFORMATION</h1>
-                <div class="input-block" v-for="inputItem in otherSupplier" :key="inputItem.id" v-show="serveOrderType != 4 && serveOrderType != 1">
+                <div class="input-block" v-for="inputItem in otherSupplier" :key="inputItem.id">
                     <ul class="block-top">
                         <li v-for="children in inputItem.sub" :key="children.text" :index="children.text">{{children.text}}</li>
                     </ul>
@@ -304,25 +302,21 @@
                             {
                                 text: 'COMPANY NAME',
                                 name: 'iiCompanyName',
-                                dueDiligence: true,
                                 management: true
                             },
                             {
                                 text: 'USED COMPANY NAME',
                                 name: 'iiUsedCompanyName',
-                                dueDiligence: false,
                                 management: true
                             },
                             {
                                 text: 'REGISTERED ADDRESS',
                                 name: 'iiRegisteredAddress',
-                                dueDiligence: true,
                                 management: true
                             },
                             {
                                 text: 'PRINCIPAL / OWNER OF IMPORTER CO.',
                                 name: 'iiPrincipal',
-                                dueDiligence: false,
                                 management: true
                             }
                         ]
@@ -333,25 +327,21 @@
                             {
                                 text: 'IMPORTER OWNER PASSPORT NO.',
                                 name: 'iiPassportNo',
-                                dueDiligence: false,
                                 management: true
                             },
                             {
                                 text: 'IMPORTER TAX NO.',
                                 name: 'iiTaxNo',
-                                dueDiligence: false,
                                 management: true
                             },
                             {
                                 text: 'IMPORTER ENTERPRISE REGISTRATION NO.',
                                 name: 'iiRegistrationNo',
-                                dueDiligence: false,
                                 management: true
                             },
                             {
                                 text: 'CONTACT PERSON',
                                 name: 'iiContactPerson',
-                                dueDiligence: false,
                                 management: true
                             }
                         ]
@@ -362,25 +352,21 @@
                             {
                                 text: 'PHONE NO.',
                                 name: 'iiPhoneNo',
-                                dueDiligence: true,
                                 management: true
                             },
                             {
                                 text: 'EMAIL ADDRESS',
                                 name: 'iiEmailAddress',
-                                dueDiligence: true,
                                 management: true
                             },
                             {
                                 text: 'AVERAGE ANNUAL PURCHASE VOLUME(USD)',
                                 name: 'iiPurchaseVolume',
-                                dueDiligence: false,
                                 management: true
                             },
                             {
                                 text: 'AVERAGE ANNUAL SALE VOLUME(USD)',
                                 name: 'iiSaleVolume',
-                                dueDiligence: false,
                                 management: true
                             }
                         ]
@@ -395,13 +381,11 @@
                             {
                                 text: 'THE QUANTITY OF SUPPLIERS',
                                 name: 'iiQuantityOfSuppliers',
-                                dueDiligence: false,
                                 management: false
                             },
                             {
                                 text: 'THE MAJOR LOCATION OF SUPPLIERS',
                                 name: 'iiMajorLocationOfSuppliers',
-                                dueDiligence: false,
                                 management: false
                             }
                         ]
@@ -845,6 +829,122 @@
             this.array['orderId'] = this.$route.query.id;
             this.upLoadData['orderId'] = this.$route.query.id;
             this.serveOrderType = this.$route.query.orderType;
+            if( this.serveOrderType == 1) {
+                this.fullImporter = [
+                    {
+                        id: 1,
+                        sub: [
+                            {
+                                text: 'COMPANY NAME',
+                                name: 'iiCompanyName',
+                                management: true
+                            },
+                            {
+                                text: 'REGISTERED ADDRESS',
+                                name: 'iiRegisteredAddress',
+                                management: true
+                            },
+                            {
+                                text: 'PHONE NO.',
+                                name: 'iiPhoneNo',
+                                management: true
+                            },
+                            {
+                                text: 'EMAIL ADDRESS',
+                                name: 'iiEmailAddress',
+                                management: true
+                            }
+                        ]
+                    }
+                ];
+                this.fullSupplier = [];
+                this.otherSupplier = [];
+            }
+            else if( this.serveOrderType == 4 ) {
+                this.fullImporter = [
+                    {
+                        id: 1,
+                        sub: [
+                            {
+                                text: 'COMPANY NAME',
+                                name: 'iiCompanyName',
+                                management: true
+                            },
+                            {
+                                text: 'USED COMPANY NAME',
+                                name: 'iiUsedCompanyName',
+                                management: true
+                            },
+                            {
+                                text: 'REGISTERED ADDRESS',
+                                name: 'iiRegisteredAddress',
+                                management: true
+                            },
+                            {
+                                text: 'PRINCIPAL / OWNER OF IMPORTER CO.',
+                                name: 'iiPrincipal',
+                                management: true
+                            }
+                        ]
+                    },
+                    {
+                        id: 2,
+                        sub: [
+                            {
+                                text: 'IMPORTER OWNER PASSPORT NO.',
+                                name: 'iiPassportNo',
+                                management: true
+                            },
+                            {
+                                text: 'IMPORTER TAX NO.',
+                                name: 'iiTaxNo',
+                                management: true
+                            },
+                            {
+                                text: 'IMPORTER ENTERPRISE REGISTRATION NO.',
+                                name: 'iiRegistrationNo',
+                                management: true
+                            },
+                            {
+                                text: 'CONTACT PERSON',
+                                name: 'iiContactPerson',
+                                management: true
+                            }
+                        ]
+                    },
+                    {
+                        id: 3,
+                        sub: [
+                            {
+                                text: 'PHONE NO.',
+                                name: 'iiPhoneNo',
+                                management: true
+                            },
+                            {
+                                text: 'EMAIL ADDRESS',
+                                name: 'iiEmailAddress',
+                                management: true
+                            },
+                            {
+                                text: 'AVERAGE ANNUAL PURCHASE VOLUME(USD)',
+                                name: 'iiPurchaseVolume',
+                                management: true
+                            },
+                            {
+                                text: 'AVERAGE ANNUAL SALE VOLUME(USD)',
+                                name: 'iiSaleVolume',
+                                management: true
+                            }
+                        ]
+                    },
+                    {
+                        id: 4,
+                        sub: []
+                    }
+                ];
+                this.fullSupplier = [];
+                this.otherSupplier = [];
+            }
             this.getGtcpDetail();
         }
     }

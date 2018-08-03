@@ -185,8 +185,8 @@
                             <template slot-scope="scope">
                                 <ul>
                                     <li v-for="item in scope.row.filesList">
-                                        <!--<a v-bind:href="'http://image.financegt.com'+item.url" style="color: #2fa8fd" target="_blank">{{item.fileName}}</a>-->
-                                        <el-button type="primary" @click="auditReportDialog(item.url)">{{item.fileName}}</el-button>
+                                        <el-button type="primary" @click="auditReportDialog(item.url)" v-if="serviceType == 4">{{item.fileName}}</el-button>
+                                        <a v-bind:href="'http://image.financegt.com'+item.url" style="color: #2fa8fd" target="_blank" v-else>{{item.fileName}}</a>
                                     </li>
                                 </ul>
                             </template>

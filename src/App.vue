@@ -19,7 +19,7 @@
                             @tab-remove="tabRemove">
                         <el-tab-pane
                                 v-for="(item, index) in options"
-                                :key="item.name"
+                                :key="item.route"
                                 :label="item.name"
                                 :name="item.route">
                         </el-tab-pane>
@@ -154,7 +154,7 @@
             '$route'(to) {
                 let flag = false;
                 for (let option of this.options ) {
-                    if (option.name === to.name) {
+                    if (option.route === to.fullPath) {
                         flag = true;
 //                        this.$store.commit('set_active_index', '/' + to.path.split('/')[1]);
                         this.$store.commit('set_active_index', to.fullPath);

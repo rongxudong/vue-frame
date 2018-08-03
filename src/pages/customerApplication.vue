@@ -295,102 +295,7 @@
                     "SDN BHD", "S.P.A.", "SP.Z.O.O", "SRL", "S.R.L.",
                     "S.R.O", "S.R.O.", "TIC", "Y.K"
                 ],
-                fullImporter: [
-                    {
-                        id: 1,
-                        sub: [
-                            {
-                                text: 'COMPANY NAME',
-                                name: 'iiCompanyName',
-                                management: true
-                            },
-                            {
-                                text: 'USED COMPANY NAME',
-                                name: 'iiUsedCompanyName',
-                                management: true
-                            },
-                            {
-                                text: 'REGISTERED ADDRESS',
-                                name: 'iiRegisteredAddress',
-                                management: true
-                            },
-                            {
-                                text: 'PRINCIPAL / OWNER OF IMPORTER CO.',
-                                name: 'iiPrincipal',
-                                management: true
-                            }
-                        ]
-                    },
-                    {
-                        id: 2,
-                        sub: [
-                            {
-                                text: 'IMPORTER OWNER PASSPORT NO.',
-                                name: 'iiPassportNo',
-                                management: true
-                            },
-                            {
-                                text: 'IMPORTER TAX NO.',
-                                name: 'iiTaxNo',
-                                management: true
-                            },
-                            {
-                                text: 'IMPORTER ENTERPRISE REGISTRATION NO.',
-                                name: 'iiRegistrationNo',
-                                management: true
-                            },
-                            {
-                                text: 'CONTACT PERSON',
-                                name: 'iiContactPerson',
-                                management: true
-                            }
-                        ]
-                    },
-                    {
-                        id: 3,
-                        sub: [
-                            {
-                                text: 'PHONE NO.',
-                                name: 'iiPhoneNo',
-                                management: true
-                            },
-                            {
-                                text: 'EMAIL ADDRESS',
-                                name: 'iiEmailAddress',
-                                management: true
-                            },
-                            {
-                                text: 'AVERAGE ANNUAL PURCHASE VOLUME(USD)',
-                                name: 'iiPurchaseVolume',
-                                management: true
-                            },
-                            {
-                                text: 'AVERAGE ANNUAL SALE VOLUME(USD)',
-                                name: 'iiSaleVolume',
-                                management: true
-                            }
-                        ]
-                    },
-                    {
-                        id: 4,
-                        sub: []
-                    },
-                    {
-                        id: 5,
-                        sub: [
-                            {
-                                text: 'THE QUANTITY OF SUPPLIERS',
-                                name: 'iiQuantityOfSuppliers',
-                                management: false
-                            },
-                            {
-                                text: 'THE MAJOR LOCATION OF SUPPLIERS',
-                                name: 'iiMajorLocationOfSuppliers',
-                                management: false
-                            }
-                        ]
-                    }
-                ],
+                fullImporter: [],
                 noFullImporter: [
                     {
                         id: 111,
@@ -448,75 +353,7 @@
                         ]
                     }
                 ],
-                fullSupplier: [
-                    {
-                        id: 6,
-                        sub: [
-                            {
-                                text: 'CREDIT LINE REQUIRED',
-                                name: 'siCreditLineRequired'
-                            },
-                            {
-                                text: 'COMPANY NAME',
-                                name: 'siCompanyName'
-                            },
-                            {
-                                text: 'ORGANIZATION CODE',
-                                name: 'siOrganizationCode'
-                            },
-                            {
-                                text: 'REGISTERED ADDRESS',
-                                name: 'siRegisteredAddress'
-                            }
-                        ]
-                    },
-                    {
-                        id: 7,
-                        sub: [
-                            {
-                                text: 'CONTACT PERSON',
-                                name: 'siContactPerson'
-                            },
-                            {
-                                text: 'PHONE NO.',
-                                name: 'siPhoneNo'
-                            },
-                            {
-                                text: 'EMAIL ADDRESS',
-                                name: 'siEmailAddress'
-                            },
-                            {
-                                text: 'AMOUNT OF ANNUAL PURCHASES',
-                                name: 'siAmountOfAnnualPurchases'
-                            }
-                        ]
-                    },
-                    {
-                        id: 8,
-                        sub: [
-                            {
-                                text: 'THE AMOUNT OF THE LATEST ORDER',
-                                name: 'siAmountOfLatestOrder'
-                            },
-                            {
-                                text: 'PRODUCTS PURCHASED',
-                                name: 'siProductsPurchased'
-                            },
-                            {
-                                text: 'PAYMENT TERMS',
-                                name: 'siPaymentTerms'
-                            },
-                            {
-                                text: 'CREDIT TERM',
-                                name: 'siCreditTerm'
-                            }
-                        ]
-                    },
-                    {
-                        id: 9,
-                        sub: []
-                    }
-                ],
+                fullSupplier: [],
                 noFullSupplier: [
                     {
                         id: 10,
@@ -536,29 +373,7 @@
                         ]
                     }
                 ],
-                otherSupplier: [
-                    {
-                        id: 11,
-                        sub: [
-                            {
-                                text: 'NAME',
-                                name: 'piName'
-                            },
-                            {
-                                text: 'COMPANY NAME',
-                                name: 'piCompanyName'
-                            },
-                            {
-                                text: 'POSITION',
-                                name: 'piPosition'
-                            },
-                            {
-                                text: 'PHONE NO.',
-                                name: 'piPhoneNo'
-                            }
-                        ]
-                    }
-                ],
+                otherSupplier: [],
                 fileList: [],
                 actions: this.$store.state.baseUrl + "/api/bussiness/account/order/uploadGtcpFile",
                 upLoadData: {
@@ -614,6 +429,9 @@
             this.list = this.states.map(item => {
                 return { value: item, label: item };
             });
+        },
+        watch: {
+            '$route' : 'judgeServeType'
         },
         methods: {
             remoteMethod(query) {
@@ -823,128 +641,321 @@
                     list.push(item);
                 })
                 return list;
+            },
+            judgeServeType () {
+                this.serveOrderType = this.$route.query.orderType;
+                if( this.serveOrderType == 1) {
+                    this.fullImporter = [
+                        {
+                            id: 1,
+                            sub: [
+                                {
+                                    text: 'COMPANY NAME',
+                                    name: 'iiCompanyName',
+                                    management: true
+                                },
+                                {
+                                    text: 'REGISTERED ADDRESS',
+                                    name: 'iiRegisteredAddress',
+                                    management: true
+                                },
+                                {
+                                    text: 'PHONE NO.',
+                                    name: 'iiPhoneNo',
+                                    management: true
+                                },
+                                {
+                                    text: 'EMAIL ADDRESS',
+                                    name: 'iiEmailAddress',
+                                    management: true
+                                }
+                            ]
+                        }
+                    ];
+                    this.fullSupplier = [];
+                    this.otherSupplier = [];
+                }
+                else if( this.serveOrderType == 4 ) {
+                    this.fullImporter = [
+                        {
+                            id: 1,
+                            sub: [
+                                {
+                                    text: 'COMPANY NAME',
+                                    name: 'iiCompanyName',
+                                    management: true
+                                },
+                                {
+                                    text: 'USED COMPANY NAME',
+                                    name: 'iiUsedCompanyName',
+                                    management: true
+                                },
+                                {
+                                    text: 'REGISTERED ADDRESS',
+                                    name: 'iiRegisteredAddress',
+                                    management: true
+                                },
+                                {
+                                    text: 'PRINCIPAL / OWNER OF IMPORTER CO.',
+                                    name: 'iiPrincipal',
+                                    management: true
+                                }
+                            ]
+                        },
+                        {
+                            id: 2,
+                            sub: [
+                                {
+                                    text: 'IMPORTER OWNER PASSPORT NO.',
+                                    name: 'iiPassportNo',
+                                    management: true
+                                },
+                                {
+                                    text: 'IMPORTER TAX NO.',
+                                    name: 'iiTaxNo',
+                                    management: true
+                                },
+                                {
+                                    text: 'IMPORTER ENTERPRISE REGISTRATION NO.',
+                                    name: 'iiRegistrationNo',
+                                    management: true
+                                },
+                                {
+                                    text: 'CONTACT PERSON',
+                                    name: 'iiContactPerson',
+                                    management: true
+                                }
+                            ]
+                        },
+                        {
+                            id: 3,
+                            sub: [
+                                {
+                                    text: 'PHONE NO.',
+                                    name: 'iiPhoneNo',
+                                    management: true
+                                },
+                                {
+                                    text: 'EMAIL ADDRESS',
+                                    name: 'iiEmailAddress',
+                                    management: true
+                                },
+                                {
+                                    text: 'AVERAGE ANNUAL PURCHASE VOLUME(USD)',
+                                    name: 'iiPurchaseVolume',
+                                    management: true
+                                },
+                                {
+                                    text: 'AVERAGE ANNUAL SALE VOLUME(USD)',
+                                    name: 'iiSaleVolume',
+                                    management: true
+                                }
+                            ]
+                        },
+                        {
+                            id: 4,
+                            sub: []
+                        }
+                    ];
+                    this.fullSupplier = [];
+                    this.otherSupplier = [];
+                }
+                else {
+                    this.fullImporter = [
+                        {
+                            id: 1,
+                            sub: [
+                                {
+                                    text: 'COMPANY NAME',
+                                    name: 'iiCompanyName',
+                                    management: true
+                                },
+                                {
+                                    text: 'USED COMPANY NAME',
+                                    name: 'iiUsedCompanyName',
+                                    management: true
+                                },
+                                {
+                                    text: 'REGISTERED ADDRESS',
+                                    name: 'iiRegisteredAddress',
+                                    management: true
+                                },
+                                {
+                                    text: 'PRINCIPAL / OWNER OF IMPORTER CO.',
+                                    name: 'iiPrincipal',
+                                    management: true
+                                }
+                            ]
+                        },
+                        {
+                            id: 2,
+                            sub: [
+                                {
+                                    text: 'IMPORTER OWNER PASSPORT NO.',
+                                    name: 'iiPassportNo',
+                                    management: true
+                                },
+                                {
+                                    text: 'IMPORTER TAX NO.',
+                                    name: 'iiTaxNo',
+                                    management: true
+                                },
+                                {
+                                    text: 'IMPORTER ENTERPRISE REGISTRATION NO.',
+                                    name: 'iiRegistrationNo',
+                                    management: true
+                                },
+                                {
+                                    text: 'CONTACT PERSON',
+                                    name: 'iiContactPerson',
+                                    management: true
+                                }
+                            ]
+                        },
+                        {
+                            id: 3,
+                            sub: [
+                                {
+                                    text: 'PHONE NO.',
+                                    name: 'iiPhoneNo',
+                                    management: true
+                                },
+                                {
+                                    text: 'EMAIL ADDRESS',
+                                    name: 'iiEmailAddress',
+                                    management: true
+                                },
+                                {
+                                    text: 'AVERAGE ANNUAL PURCHASE VOLUME(USD)',
+                                    name: 'iiPurchaseVolume',
+                                    management: true
+                                },
+                                {
+                                    text: 'AVERAGE ANNUAL SALE VOLUME(USD)',
+                                    name: 'iiSaleVolume',
+                                    management: true
+                                }
+                            ]
+                        },
+                        {
+                            id: 4,
+                            sub: []
+                        },
+                        {
+                            id: 5,
+                            sub: [
+                                {
+                                    text: 'THE QUANTITY OF SUPPLIERS',
+                                    name: 'iiQuantityOfSuppliers',
+                                    management: false
+                                },
+                                {
+                                    text: 'THE MAJOR LOCATION OF SUPPLIERS',
+                                    name: 'iiMajorLocationOfSuppliers',
+                                    management: false
+                                }
+                            ]
+                        }
+                    ];
+                    this.fullSupplier = [
+                        {
+                            id: 6,
+                            sub: [
+                                {
+                                    text: 'CREDIT LINE REQUIRED',
+                                    name: 'siCreditLineRequired'
+                                },
+                                {
+                                    text: 'COMPANY NAME',
+                                    name: 'siCompanyName'
+                                },
+                                {
+                                    text: 'ORGANIZATION CODE',
+                                    name: 'siOrganizationCode'
+                                },
+                                {
+                                    text: 'REGISTERED ADDRESS',
+                                    name: 'siRegisteredAddress'
+                                }
+                            ]
+                        },
+                        {
+                            id: 7,
+                            sub: [
+                                {
+                                    text: 'CONTACT PERSON',
+                                    name: 'siContactPerson'
+                                },
+                                {
+                                    text: 'PHONE NO.',
+                                    name: 'siPhoneNo'
+                                },
+                                {
+                                    text: 'EMAIL ADDRESS',
+                                    name: 'siEmailAddress'
+                                },
+                                {
+                                    text: 'AMOUNT OF ANNUAL PURCHASES',
+                                    name: 'siAmountOfAnnualPurchases'
+                                }
+                            ]
+                        },
+                        {
+                            id: 8,
+                            sub: [
+                                {
+                                    text: 'THE AMOUNT OF THE LATEST ORDER',
+                                    name: 'siAmountOfLatestOrder'
+                                },
+                                {
+                                    text: 'PRODUCTS PURCHASED',
+                                    name: 'siProductsPurchased'
+                                },
+                                {
+                                    text: 'PAYMENT TERMS',
+                                    name: 'siPaymentTerms'
+                                },
+                                {
+                                    text: 'CREDIT TERM',
+                                    name: 'siCreditTerm'
+                                }
+                            ]
+                        },
+                        {
+                            id: 9,
+                            sub: []
+                        }
+                    ];
+                    this.otherSupplier = [
+                        {
+                            id: 11,
+                            sub: [
+                                {
+                                    text: 'NAME',
+                                    name: 'piName'
+                                },
+                                {
+                                    text: 'COMPANY NAME',
+                                    name: 'piCompanyName'
+                                },
+                                {
+                                    text: 'POSITION',
+                                    name: 'piPosition'
+                                },
+                                {
+                                    text: 'PHONE NO.',
+                                    name: 'piPhoneNo'
+                                }
+                            ]
+                        }
+                    ];
+                }
             }
         },
         created　() {
             this.array['orderId'] = this.$route.query.id;
             this.upLoadData['orderId'] = this.$route.query.id;
-            this.serveOrderType = this.$route.query.orderType;
-            if( this.serveOrderType == 1) {
-                this.fullImporter = [
-                    {
-                        id: 1,
-                        sub: [
-                            {
-                                text: 'COMPANY NAME',
-                                name: 'iiCompanyName',
-                                management: true
-                            },
-                            {
-                                text: 'REGISTERED ADDRESS',
-                                name: 'iiRegisteredAddress',
-                                management: true
-                            },
-                            {
-                                text: 'PHONE NO.',
-                                name: 'iiPhoneNo',
-                                management: true
-                            },
-                            {
-                                text: 'EMAIL ADDRESS',
-                                name: 'iiEmailAddress',
-                                management: true
-                            }
-                        ]
-                    }
-                ];
-                this.fullSupplier = [];
-                this.otherSupplier = [];
-            }
-            else if( this.serveOrderType == 4 ) {
-                this.fullImporter = [
-                    {
-                        id: 1,
-                        sub: [
-                            {
-                                text: 'COMPANY NAME',
-                                name: 'iiCompanyName',
-                                management: true
-                            },
-                            {
-                                text: 'USED COMPANY NAME',
-                                name: 'iiUsedCompanyName',
-                                management: true
-                            },
-                            {
-                                text: 'REGISTERED ADDRESS',
-                                name: 'iiRegisteredAddress',
-                                management: true
-                            },
-                            {
-                                text: 'PRINCIPAL / OWNER OF IMPORTER CO.',
-                                name: 'iiPrincipal',
-                                management: true
-                            }
-                        ]
-                    },
-                    {
-                        id: 2,
-                        sub: [
-                            {
-                                text: 'IMPORTER OWNER PASSPORT NO.',
-                                name: 'iiPassportNo',
-                                management: true
-                            },
-                            {
-                                text: 'IMPORTER TAX NO.',
-                                name: 'iiTaxNo',
-                                management: true
-                            },
-                            {
-                                text: 'IMPORTER ENTERPRISE REGISTRATION NO.',
-                                name: 'iiRegistrationNo',
-                                management: true
-                            },
-                            {
-                                text: 'CONTACT PERSON',
-                                name: 'iiContactPerson',
-                                management: true
-                            }
-                        ]
-                    },
-                    {
-                        id: 3,
-                        sub: [
-                            {
-                                text: 'PHONE NO.',
-                                name: 'iiPhoneNo',
-                                management: true
-                            },
-                            {
-                                text: 'EMAIL ADDRESS',
-                                name: 'iiEmailAddress',
-                                management: true
-                            },
-                            {
-                                text: 'AVERAGE ANNUAL PURCHASE VOLUME(USD)',
-                                name: 'iiPurchaseVolume',
-                                management: true
-                            },
-                            {
-                                text: 'AVERAGE ANNUAL SALE VOLUME(USD)',
-                                name: 'iiSaleVolume',
-                                management: true
-                            }
-                        ]
-                    },
-                    {
-                        id: 4,
-                        sub: []
-                    }
-                ];
-                this.fullSupplier = [];
-                this.otherSupplier = [];
-            }
+            this.judgeServeType();
             this.getGtcpDetail();
         }
     }

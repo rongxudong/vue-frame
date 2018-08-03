@@ -388,7 +388,6 @@
                 });
             },
             navRoute(name,query){
-                console.log(query)
                 if ('签署协议' == name){
                     this.$router.push({
                         name: name,
@@ -417,7 +416,7 @@
                     this.dialogVisible = true;
                     setTimeout(function () {
                         $('#reportContent button').css('display','none');
-                        $('#reportContent input.layui-input,textarea.layui-textarea').addClass('layui-disabled');
+                        $('#reportContent input.layui-input,textarea.layui-textarea').addClass('layui-disabled').attr('disabled', 'true');
                     },100)
                 })
             }

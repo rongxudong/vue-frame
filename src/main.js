@@ -19,10 +19,11 @@ import 'element-ui/lib/theme-chalk/index.css';
 import 'normalize.css';
 import './assets/css/_reset.css';
 
+
 /* font-class */
 import '../static/iconfont/iconfont.css';
 
-// 引用js文件(自己的)
+// 引用文件(自己的)
 import Rem from './assets/js/rem'
 import ajax from './api/base-ajax';
 import LangStorage from './assets/js/lang/local_lang';

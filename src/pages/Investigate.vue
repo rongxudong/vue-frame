@@ -185,7 +185,8 @@
                             <template slot-scope="scope">
                                 <ul>
                                     <li v-for="item in scope.row.filesList">
-                                        <a v-bind:href="'http://image.financegt.com'+item.url" style="color: #2fa8fd" target="_blank">{{item.fileName}}</a>
+                                        <!--<a v-bind:href="'http://image.financegt.com'+item.url" style="color: #2fa8fd" target="_blank">{{item.fileName}}</a>-->
+                                        <el-button type="primary" @click="auditReportDialog(item.url)">{{item.fileName}}</el-button>
                                     </li>
                                 </ul>
                             </template>
@@ -201,9 +202,17 @@
                         :total=total>
                     </el-pagination>
                 </div>
-
             </div>
         </div>
+        <el-dialog
+                title="商管审核报告"
+                :visible.sync="dialogVisible"
+                width="70%">
+            <span v-html="reportContent" id="reportContent"></span>
+            <span slot="footer" class="dialog-footer">
+                <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+            </span>
+        </el-dialog>
     </div>
 </template>
 <script>
@@ -263,6 +272,8 @@
                 },
                 serviceTitle:['占位','尽职调查','GTR评估','授信申请','商账管理'],
                 serviceType:1,
+                reportContent: '',
+                dialogVisible: false
             }
         },
         created () {
@@ -376,7 +387,6 @@
                     })
                 });
             },
-
             navRoute(name,query){
                 console.log(query)
                 if ('签署协议' == name){
@@ -401,6 +411,16 @@
                 }
 
             },
+            auditReportDialog (orderId) {
+                this.$ajax.post('/api/bussiness/account/order/getBusinessManageHtml/' + orderId, null, res => {
+                    this.reportContent = res.data;
+                    this.dialogVisible = true;
+                    setTimeout(function () {
+                        $('#reportContent button').css('display','none');
+                        $('#reportContent input.layui-input,textarea.layui-textarea').addClass('layui-disabled');
+                    },100)
+                })
+            }
         }
     }
 </script>

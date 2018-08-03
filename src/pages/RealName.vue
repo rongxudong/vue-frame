@@ -35,8 +35,9 @@
                                 :show-file-list="false"
                                 :on-success="idPicFrontFileSuccess"
                                 :before-upload="beforeAvatarUpload">
-                            <img v-if="ruleForm.idPicFront" :src="ruleForm.idPicFront" class="avatar">
-                            <i v-else="!ruleForm.idPicFront" class="el-icon-plus avatar-uploader-icon"></i>
+                            <img v-show="ruleForm.idPicFront && !idPicFrontPdf" src="../assets/img/RealName/pdf.png" class="avatar"/>
+                            <img v-show="ruleForm.idPicFront && idPicFrontPdf" :src="ruleForm.idPicFront" class="avatar">
+                            <i v-show="!ruleForm.idPicFront" class="el-icon-plus avatar-uploader-icon"></i>
                         </el-upload>
                     </el-form-item>
                     <el-form-item :label="$t('personal.idPicBehind')" prop="idPicBehind" class="upload-flex" ref="idPicBehind">
@@ -52,8 +53,9 @@
                                 :show-file-list="false"
                                 :on-success="idPicBehindFileSuccess"
                                 :before-upload="beforeAvatarUpload">
-                            <img v-if="ruleForm.idPicBehind" :src="ruleForm.idPicBehind" class="avatar">
-                            <i v-else="!ruleForm.idPicBehind" class="el-icon-plus avatar-uploader-icon"></i>
+                            <img v-show="ruleForm.idPicBehind && !idPicBehindPdf" src="../assets/img/RealName/pdf.png" class="avatar"/>
+                            <img v-show="ruleForm.idPicBehind && idPicBehindPdf" :src="ruleForm.idPicBehind" class="avatar">
+                            <i v-show="!ruleForm.idPicBehind" class="el-icon-plus avatar-uploader-icon"></i>
                         </el-upload>
                     </el-form-item>
                     <el-form-item :label="$t('personal.idPicHand')" prop="idPicHand" class="upload-flex" ref="idPicHand">
@@ -69,8 +71,9 @@
                                 :show-file-list="false"
                                 :on-success="idPicHandFileSuccess"
                                 :before-upload="beforeAvatarUpload">
-                            <img v-if="ruleForm.idPicHand" :src="ruleForm.idPicHand" class="avatar">
-                            <i v-else="!ruleForm.idPicHand" class="el-icon-plus avatar-uploader-icon"></i>
+                            <img v-show="ruleForm.idPicHand && !idPicHandPdf" src="../assets/img/RealName/pdf.png" class="avatar"/>
+                            <img v-show="ruleForm.idPicHand && idPicHandPdf" :src="ruleForm.idPicHand" class="avatar">
+                            <i v-show="!ruleForm.idPicHand" class="el-icon-plus avatar-uploader-icon"></i>
                         </el-upload>
                     </el-form-item>
                 </div>
@@ -91,8 +94,9 @@
                                 :show-file-list="false"
                                 :on-success="businessLicenseFileSuccess"
                                 :before-upload="beforeAvatarUpload">
-                            <img v-if="ruleForm.businessLicense" :src="ruleForm.businessLicense" class="avatar">
-                            <i v-else="!ruleForm.businessLicense" class="el-icon-plus avatar-uploader-icon"></i>
+                            <img v-show="ruleForm.businessLicense && !businessLicensePdf" src="../assets/img/RealName/pdf.png" class="avatar"/>
+                            <img v-show="ruleForm.businessLicense && businessLicensePdf" :src="ruleForm.businessLicense" class="avatar">
+                            <i v-show="!ruleForm.businessLicense" class="el-icon-plus avatar-uploader-icon"></i>
                         </el-upload>
                     </el-form-item>
                     <el-form-item :label="$t('personal.companyName')" prop="companyName">
@@ -209,7 +213,11 @@
                         { required: true, message: '请输入住所地', trigger: 'blur' }
                     ]
                 },
-                failDesc: ''
+                failDesc: '',
+                idPicFrontPdf: true,
+                idPicBehindPdf: true,
+                idPicHandPdf: true,
+                businessLicensePdf: true
             }
         },
         methods: {
@@ -219,23 +227,42 @@
 //                this.ruleForm[ele] = file;
             },
             idPicFrontFileSuccess(res, file, fileList) {
+                if ( file.raw.type === 'application/pdf') {
+                    this.idPicFrontPdf = false;
+                } else {
+                    this.idPicFrontPdf = true;
+                }
                 this.ruleForm.idPicFront = URL.createObjectURL(file.raw);
                 this.$refs.idPicFront.clearValidate();
             },
             idPicBehindFileSuccess(res, file, fileList) {
+                if ( file.raw.type === 'application/pdf') {
+                    this.idPicBehindPdf = false;
+                } else {
+                    this.idPicBehindPdf = true;
+                }
                 this.ruleForm.idPicBehind = URL.createObjectURL(file.raw);
                 this.$refs.idPicBehind.clearValidate();
             },
             idPicHandFileSuccess(res, file, fileList) {
+                if ( file.raw.type === 'application/pdf') {
+                    this.idPicHandPdf = false;
+                } else {
+                    this.idPicHandPdf = true;
+                }
                 this.ruleForm.idPicHand = URL.createObjectURL(file.raw);
                 this.$refs.idPicHand.clearValidate();
             },
             businessLicenseFileSuccess(res, file, fileList) {
+                if ( file.raw.type === 'application/pdf') {
+                    this.businessLicensePdf = false;
+                } else {
+                    this.businessLicensePdf = true;
+                }
                 this.ruleForm.businessLicense = URL.createObjectURL(file.raw);
                 this.$refs.businessLicense.clearValidate();
             },
             beforeAvatarUpload(file, ele) {
-                console.log(file.type);
                 const isJPG = file.type === 'image/jpeg';
                 const isGIF = file.type === 'image/gif';
                 const isPNG = file.type === 'image/png';
@@ -280,7 +307,6 @@
             findUserIdentityStatus () {
                 this.$ajax.get('/api/bussinessAccount/yqq/findUserIdentityStatus', null, res => {
                     if( res.code == 0) {
-
                         this.ruleForm['auditFlag'] = res.data.status;
                         this.failDesc = res.data.desc;
                         if( this.ruleForm['auditFlag'] == '4' || this.ruleForm['auditFlag'] == '1') {
@@ -301,6 +327,10 @@
                     if(res.code == 0){
                         if(res.data) {
                             this.ruleForm = res.data;
+                            this.idPicFrontPdf = this.ifIsPdf(res.data.idPicFront);
+                            this.idPicBehindPdf = this.ifIsPdf(res.data.idPicBehind);
+                            this.idPicHandPdf = this.ifIsPdf(res.data.idPicHand);
+                            this.businessLicensePdf = this.ifIsPdf(res.data.businessLicense);
                             this.ruleForm['businessLicense'] = this.$store.state.resUrl + res.data.businessLicense;
                             this.ruleForm['idPicBehind'] = this.$store.state.resUrl + res.data.idPicBehind;
                             this.ruleForm['idPicFront'] = this.$store.state.resUrl + res.data.idPicFront;
@@ -314,6 +344,13 @@
                         });
                     }
                 })
+            },
+            ifIsPdf (Name) {
+                if( Name.split('.').pop().toLowerCase() === 'pdf' ){
+                    return false
+                } else {
+                    return true
+                }
             },
             handleClose(done) {
                 this.dialog = false;

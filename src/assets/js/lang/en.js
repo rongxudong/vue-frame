@@ -2,7 +2,7 @@
 
 module.exports = {
     header: {
-        name: "Avenue group risk control system",
+        name: "Avenue factoring financing credit system/",
         versions: 'v1.0'
     },
     personal: {

@@ -2,7 +2,7 @@
 
 module.exports = {
     header: {
-        name: "大道集团风控系统后台",
+        name: "大道保理融资增信系统",
         versions: 'v1.0'
     },
     personal: {

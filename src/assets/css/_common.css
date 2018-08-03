@@ -370,6 +370,9 @@ a:focus {
   width: 8%;
   min-width: 26px;
 }
+.reportContent button {
+  display: none;
+}
 .Home-main {
   width: 100%;
   display: -webkit-box;

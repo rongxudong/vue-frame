@@ -97,7 +97,7 @@ MyPlugin.install = function (Vue, options) {
 
 
         let evObj = document.createEvent('MouseEvents');
-        evObj.initMouseEvent( 'click', true, true, window, 0, 0, 0, 0, 0, false, false, true, false, 0, null);
+        evObj.initMouseEvent( 'click', true, true, window, 0, 0, 0, 0, 0, true, false, true, false, 0, null);
         $a.dispatchEvent(evObj);
     }
 

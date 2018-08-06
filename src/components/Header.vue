@@ -298,19 +298,19 @@
                 bottom: 0;
                 margin: auto;
                 height: 3px;
-                width: 26px;
+                width: 24px;
                 background-color: @base;
                 .common_radius(2px);
                 .transition(all 100ms ease-out);
             }
             .x {
-                top: -18px;
+                top: -16px;
             }
             .y {
                 top: 0;
             }
             .z {
-                top: 18px;
+                top: 16px;
             }
         }
         .open {

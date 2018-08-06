@@ -413,7 +413,7 @@ a:focus {
 .Home-main .left .bottom .msg-item .sign {
   position: absolute;
   left: -19px;
-  top: 16px;
+  top: 17px;
   z-index: 1;
   width: 8px;
   height: 8px;
@@ -506,7 +506,7 @@ a:focus {
   float: right;
   width: 36.25%;
   min-width: 350px;
-  padding: .15rem .32rem;
+  padding: .15rem .3rem;
   border-radius: 5px;
   -o-border-radius: 5px;
   -ms-border-radius: 5px;
@@ -638,7 +638,7 @@ a:focus {
   height: 26px;
   line-height: 26px;
   text-align: center;
-  margin-left: .08rem;
+  margin-left: 8px;
   font-size: .13rem;
   border-radius: 13px;
   -o-border-radius: 13px;

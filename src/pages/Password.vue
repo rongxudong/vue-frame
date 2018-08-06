@@ -92,6 +92,7 @@
     .psd-main {
         width: 100%;
         height: 100%;
+        padding: 50px;
         .w250 {
             width: 250px;
         }

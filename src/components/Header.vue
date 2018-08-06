@@ -1,5 +1,12 @@
 <template>
     <el-row type="flex" class="row-bg header" justify="space-between">
+        <el-col :span="4" class="menu-burger-btn">
+            <div class="burger">
+                <div class="x"></div>
+                <div class="y"></div>
+                <div class="z"></div>
+            </div>
+        </el-col>
         <el-col :span="6">
             <div class="grid-content bg-purple head-wrap">
                 {{ $t('header.name') }}
@@ -167,6 +174,8 @@
         }
     }
     .head-wrap {
+        height: 60px;
+        line-height: 60px;
         font-size: 20px;
         color: @base;
         font-weight: bold;

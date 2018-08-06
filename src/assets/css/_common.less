@@ -66,6 +66,37 @@ a {
         text-decoration: none;
     }
 }
+.menu-burger-btn {
+    position: relative;
+    height: 60px;
+    .burger {
+        height: 30px;
+        width: 40px;
+        position: absolute;
+        top: 5px;
+        left: 20px;
+        cursor: pointer;
+        .x,
+        .y,
+        .z {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            height: 3px;
+            width: 26px;
+            background-color: @base;
+            .common_radius(2px);
+            .transition(all 100ms ease-out);
+        }
+        .y {
+            top: 18px;
+        }
+        .z {
+            top: 37px;
+        }
+    }
+}
 
 //RealName.vue
 .RealName-main .el-upload--picture-card,

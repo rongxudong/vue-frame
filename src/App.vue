@@ -47,7 +47,7 @@
         },
         beforeCreate () {
 //            Vue.myGlobalMethod();
-            localStorage.setItem("User_token", process.env.NODE_ENV == 'development' ? 'a1ab17072e8fbd350a022dbd7ac16b87' : $.cookie('bl_sid'));
+            localStorage.setItem("User_token", process.env.NODE_ENV == 'development' ? 'e0b8692d06f83782ccba9d6799fa8d75' : $.cookie('bl_sid'));
             this.$store.state.token = localStorage.getItem("User_token");
 
             let baseUrl = 'http://account.financegt.com'
@@ -259,9 +259,18 @@
             .aside {
                 position: absolute;
                 top: 0;
-                left: 0;
-                z-index: 1111;
+                left: -200px;
+                z-index: 11;
                 min-height: 100%;
+                .transition(left .5s linear);
+            }
+            .el-main {
+                position: absolute;
+                top: 0;
+                left: 0;
+                z-index: 10;
+                width: 100%;
+                .transition(left .5s linear);
             }
         }
     }

@@ -79,6 +79,7 @@
 
 
     .el-menu-vertical-demo {
+        width: 100%;
         border-right: none;
     }
 

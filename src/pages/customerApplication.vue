@@ -1075,7 +1075,8 @@
                 margin: 40px 0;
             }
             .file-upload {
-                width: 28%;
+                width: 100%;
+                max-width: 360px;
                 min-width: 200px;
             }
         }

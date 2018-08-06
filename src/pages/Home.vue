@@ -204,10 +204,10 @@
                 let nameSuffix = NAME.split('.').pop().toLowerCase();
                 let fileUrl = this.$store.state.resUrl + Obj.url;
                 if(nameSuffix === 'png' || nameSuffix === 'gif' || nameSuffix === 'jpeg' || nameSuffix === 'jpg' || nameSuffix === 'tiff') {
-                    if(this.$MyBrowser() === '360' || this.$MyBrowser() === 'Opera') {
+                    if(this.$MyBrowser() === 'Chrome' || this.$MyBrowser() === '360' || this.$MyBrowser() === 'Opera') {
                         this.$Opera360Download(fileUrl);
                     }
-                    else if (this.$MyBrowser() === 'Chrome' || this.$MyBrowser() === 'FF' || this.$MyBrowser() === 'IE'){
+                    else if (this.$MyBrowser() === 'FF' || this.$MyBrowser() === 'IE'){
                         this.$ChromeFfIedownload(fileUrl);
                     }
                     else {
@@ -323,13 +323,25 @@
     }
     //针对ipad/平板
     @media (min-width: 768px) and (max-width: 1023px) {
-        .Home-main .left .left-wrapper {
-            .step-icon-wrap {
-                width: 1rem;
-                height: 1rem;
+        .Home-main {
+            display: block;
+            .left {
+                clear: none;
+                width: 100%;
+                .left-wrapper {
+                    .step-icon-wrap {
+                        width: 1rem;
+                        height: 1rem;
+                    }
+                    .step {
+                        margin-right: .5rem;
+                    }
+                }
             }
-            .step {
-                margin-right: .5rem;
+            .right {
+                clear: none;
+                width: 100%;
+                margin-top: 30px;
             }
         }
     }

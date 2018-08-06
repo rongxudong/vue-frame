@@ -123,10 +123,10 @@
                 let nameSuffix = NAME.split('.').pop().toLowerCase();
                 let fileUrl = this.$store.state.resUrl + Obj.url;
                 if(nameSuffix === 'png' || nameSuffix === 'gif' || nameSuffix === 'jpeg' || nameSuffix === 'jpg' || nameSuffix === 'tiff') {
-                    if(this.$MyBrowser() === '360' || this.$MyBrowser() === 'Opera') {
+                    if(this.$MyBrowser() === 'Chrome' || this.$MyBrowser() === '360' || this.$MyBrowser() === 'Opera') {
                         this.$Opera360Download(fileUrl);
                     }
-                    else if (this.$MyBrowser() === 'Chrome' || this.$MyBrowser() === 'FF' || this.$MyBrowser() === 'IE'){
+                    else if (this.$MyBrowser() === 'FF' || this.$MyBrowser() === 'IE'){
                         this.$ChromeFfIedownload(fileUrl);
                     }
                     else {

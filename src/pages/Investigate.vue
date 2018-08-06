@@ -29,7 +29,7 @@
                             <div class="flex_direction_row mg17">
                                 <h1 class="align-self-center text-head input-mg">发起时间:</h1>
                                 <el-date-picker
-                                    style="margin-left: 0.2rem"
+                                        style="width: 265px;"
                                     v-model="data"
                                     type="daterange"
                                     range-separator="至"
@@ -41,15 +41,15 @@
                             <div class="flex_direction_row mg17">
                                 <h1 class="align-self-center text-head input-mg">调查对象:</h1>
                                 <el-input
-                                    style="margin-left: 0.2rem;min-width: 2rem;"
+                                    class="amStatus"
                                     placeholder="请输入内容"
                                     v-model="QueryOrderListModel.userCompanyName"
                                     clearable>
                                 </el-input>
                             </div>
                             <div class="align_content mg17">
-                                <h1 class="align-self-center text-head" style="margin-left: 0.2rem;min-width: 80px;">申请表状态:</h1>
-                                <el-select v-model="QueryOrderListModel.applyStatus" placeholder="请选择" style="margin-left: 0.2rem;">
+                                <h1 class="align-self-center text-head input-mg">申请表状态:</h1>
+                                <el-select v-model="QueryOrderListModel.applyStatus" placeholder="请选择" class="amStatus">
                                     <el-option
                                         v-for="item in applyStatus"
                                         :key="item.value"
@@ -58,27 +58,25 @@
                                     </el-option>
                                 </el-select>
                             </div>
-                        </div>
-                        <div class="filter-query flex_start">
                             <div class="flex_direction_row mg17">
                                 <h1 class="align-self-center text-head input-mg">支付状态:</h1>
-                                <el-select v-model="QueryOrderListModel.payStatus" placeholder="请选择" style="margin-left: 0.2rem;">
+                                <el-select v-model="QueryOrderListModel.payStatus" placeholder="请选择" class="payStatus">
                                     <el-option
-                                        v-for="item in payStatus"
-                                        :key="item.value"
-                                        :label="item.label"
-                                        :value="item.value">
+                                            v-for="item in payStatus"
+                                            :key="item.value"
+                                            :label="item.label"
+                                            :value="item.value">
                                     </el-option>
                                 </el-select>
                             </div>
                             <div class="flex_direction_row mg17">
                                 <h1 class="align-self-center text-head input-mg">协议状态:</h1>
-                                <el-select v-model="QueryOrderListModel.agreementStatus" placeholder="请选择" style="margin-left: 0.2rem;">
+                                <el-select v-model="QueryOrderListModel.agreementStatus" placeholder="请选择" class="amStatus">
                                     <el-option
-                                        v-for="item in agreementStatus"
-                                        :key="item.value"
-                                        :label="item.label"
-                                        :value="item.value">
+                                            v-for="item in agreementStatus"
+                                            :key="item.value"
+                                            :label="item.label"
+                                            :value="item.value">
                                     </el-option>
                                 </el-select>
                             </div>
@@ -429,7 +427,7 @@
 
     .investigate-main {
         position: relative;
-        min-height: calc(~'100vh - .45rem - 100px');
+        min-height: calc(~'100vh - 145px');
         min-height: -ms-calc(~'100vh - 145px');
         min-height: -moz-calc(~'100vh - 145px');
         min-height: -webkit-calc(~'100vh - 145px');
@@ -509,15 +507,19 @@
         .filter-query {
             width: 100%;
             min-height: 40px;
+            padding-right: .2rem;
             flex-direction: row;
             flex-wrap: wrap;
             .input-mg {
-                min-width: 64px;
+                min-width: 85px;
                 margin-left: 0.2rem;
             }
         }
         .mg17 {
             margin: 17px 0;
+        }
+        .amStatus {
+            width: 195px;
         }
     }
     .search-container,
@@ -542,30 +544,48 @@
     .container-head-bg{
         background-color: #ECF1F5;
         height: 0.53rem;
-        .align_items
+        .align_items;
     }
     //针对ipad/平板
     @media (min-width: 768px) and (max-width: 1023px) {
-        .investigate-main .mg17 {
-            margin: 10px 0;
+        .investigate-main {
+            .content li .step-item .img {
+                width: 100px;
+                height: 100px;
+            }
+            .mg17 {
+                margin: 10px 0;
+            }
+            .payStatus {
+                width: 265px;
+            }
         }
     }
 
     @media (min-width: 1024px) and (max-width: 1279px) {
-        .investigate-main .mg17 {
-            margin: 10px 0;
+        .investigate-main {
+            .mg17 {
+                margin: 12px 0;
+            }
+            .payStatus {
+                width: 265px;
+            }
         }
     }
 
     @media (min-width: 1280px) and (max-width: 1365px) {
-        .investigate-main .mg17 {
-            margin: 10px 0;
+        .investigate-main {
+            .mg17 {
+                margin: 12px 0;
+            }
         }
     }
 
     @media (min-width: 1366px) and (max-width: 1439px) {
-        .investigate-main .mg17 {
-            margin: 10px 0;
+        .investigate-main {
+            .mg17 {
+                margin: 12px 0;
+            }
         }
     }
 

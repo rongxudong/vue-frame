@@ -1,10 +1,10 @@
 <template>
     <el-row type="flex" class="row-bg header" justify="space-between">
         <el-col :span="4" class="menu-burger-btn">
-            <div class="burger">
-                <div class="x"></div>
+            <div class="burger" @click="menuBurgerBtn" :class="this.$store.state.isHeaderMenuActive ? 'open': ''">
+                <div class="x rotate45"></div>
                 <div class="y"></div>
-                <div class="z"></div>
+                <div class="z rotate135"></div>
             </div>
         </el-col>
         <el-col :span="6">
@@ -120,6 +120,9 @@
                         message: '已取消退出登录'
                     });
                 })
+            },
+            menuBurgerBtn () {
+                this.$store.commit('set_header_menu');
             }
         },
         computed: {
@@ -272,6 +275,74 @@
                 background-color: #5494F8;
                 border: 1px solid #5494F8;
             }
+        }
+    }
+    .menu-burger-btn {
+        position: relative;
+        display: none;
+        height: 60px;
+        .burger {
+            height: 30px;
+            width: 30px;
+            position: absolute;
+            top: 15px;
+            left: 5px;
+            cursor: pointer;
+            .x,
+            .y,
+            .z {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                margin: auto;
+                height: 3px;
+                width: 26px;
+                background-color: @base;
+                .common_radius(2px);
+                .transition(all 100ms ease-out);
+            }
+            .x {
+                top: -18px;
+            }
+            .y {
+                top: 0;
+            }
+            .z {
+                top: 18px;
+            }
+        }
+        .open {
+            .x,
+            .y,
+            .z {
+                top: 0;
+                .transition(all 70ms ease-out);
+            }
+            .rotate45 {
+                .rotate(45deg);
+                .transition(all 100ms ease-out);
+            }
+            .rotate135 {
+                .rotate(135deg);
+                .transition(all 100ms ease-out);
+            }
+            .y {
+                display: none;
+            }
+        }
+    }
+    //针对ipad/平板
+    @media (min-width: 768px) and (max-width: 1023px) {
+        .menu-burger-btn {
+            display: block;
+        }
+    }
+
+    @media (min-width: 1024px) and (max-width: 1279px) {
+        .menu-burger-btn {
+            display: block;
         }
     }
 </style>

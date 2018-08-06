@@ -9,6 +9,7 @@ const options = {
 
     // 多页面共享数据
     state: {
+        isHeaderMenuActive: false,
         message: '',
         options: [],
         activeIndex: '',
@@ -54,6 +55,10 @@ const options = {
         set_user (state, info) {
             state.user = null;
             state.user = info;
+        },
+        // 设置header的menu状态
+        set_header_menu (state) {
+            state.isHeaderMenuActive = !state.isHeaderMenuActive;
         }
     }
 }

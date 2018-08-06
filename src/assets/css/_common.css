@@ -219,10 +219,6 @@ a:focus {
 .app-container .aside {
   width: 12.5%!important;
   min-width: 200px;
-  min-height: calc(100% - 60px);
-  min-height: -ms-calc(100% - 60px);
-  min-height: -moz-calc(100% - 60px);
-  min-height: -webkit-calc(100% - 60px);
   background-color: #2c323e;
 }
 .ps-information .el-dropdown-menu__item {
@@ -237,45 +233,6 @@ a:focus {
 }
 .header-dropdown-style:hover {
   text-decoration: none;
-}
-.menu-burger-btn {
-  position: relative;
-  height: 60px;
-}
-.menu-burger-btn .burger {
-  height: 30px;
-  width: 40px;
-  position: absolute;
-  top: 5px;
-  left: 20px;
-  cursor: pointer;
-}
-.menu-burger-btn .burger .x,
-.menu-burger-btn .burger .y,
-.menu-burger-btn .burger .z {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  margin: auto;
-  height: 3px;
-  width: 26px;
-  background-color: #2fa8fd;
-  border-radius: 2px;
-  -o-border-radius: 2px;
-  -ms-border-radius: 2px;
-  -moz-border-radius: 2px;
-  -webkit-border-radius: 2px;
-  transition: all 100ms ease-out;
-  -o-transition: all 100ms ease-out;
-  -ms-transition: all 100ms ease-out;
-  -moz-transition: all 100ms ease-out;
-  -webkit-transition: all 100ms ease-out;
-}
-.menu-burger-btn .burger .y {
-  top: 18px;
-}
-.menu-burger-btn .burger .z {
-  top: 37px;
 }
 .RealName-main .el-upload--picture-card,
 .personalData-main .el-upload--picture-card,
@@ -410,6 +367,9 @@ a:focus {
   min-width: 26px;
 }
 .reportContent button {
+  display: none;
+}
+.investigate-main .filter-query .el-range__close-icon {
   display: none;
 }
 .Home-main {

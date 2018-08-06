@@ -416,7 +416,17 @@
 
     //针对ipad/平板
     @media (min-width: 768px) and (max-width: 1023px) {
-
+        .basic .basic-form,
+        .company .basic-form {
+            padding: .25rem 0 0 .5rem;
+            .input-width {
+                max-width: 250px;
+                min-width: 180px;
+            }
+        }
+        .RealName-main .real-icon {
+            left: 70%;
+        }
     }
 
     @media (min-width: 1024px) and (max-width: 1279px) {

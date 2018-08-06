@@ -4,11 +4,12 @@
             <el-header>
                 <web-header></web-header>
             </el-header>
-            <el-container class="app-container">
+            <el-container class="app-container" :class="this.$store.state.isHeaderMenuActive ? 'isAsideOpen': ''">
                 <el-aside class="aside">
                     <nav-menu></nav-menu>
                 </el-aside>
                 <el-main>
+                    <div class="main-shadow" @click="closeMenuBurgerBtn"></div>
                     <el-tabs
                             class="main-tab"
                             v-model="activeIndex"
@@ -135,6 +136,9 @@
                         this.$router.push({path: '/'});
                     }
                 }
+            },
+            closeMenuBurgerBtn () {
+                this.$store.commit('set_header_menu');
             }
         },
         computed: {
@@ -249,20 +253,18 @@
         height: -webkit-calc(~'100% - 40px');
     }
     //针对ipad/平板
-    @media (min-width: 768px) and (max-width: 1023px) {
-
-    }
-
-    @media (min-width: 1024px) and (max-width: 1279px) {
+    @media (min-width: 768px) and (max-width: 1279px) {
         .app-container {
             position: relative;
+            width: 100%;
             .aside {
+                .flex_start;
                 position: absolute;
                 top: 0;
                 left: -200px;
                 z-index: 11;
                 min-height: 100%;
-                .transition(left .5s linear);
+                .transition(all 200ms cubic-bezier(0,.995,.99,1));
             }
             .el-main {
                 position: absolute;
@@ -270,8 +272,32 @@
                 left: 0;
                 z-index: 10;
                 width: 100%;
-                .transition(left .5s linear);
+                .transition(all 200ms cubic-bezier(0,.995,.99,1));
+            }
+        }
+        .isAsideOpen {
+            overflow: hidden;
+            .aside {
+                left: 0;
+                .transition(all 200ms cubic-bezier(0,.995,.99,1));
+            }
+            .el-main {
+                left: 200px;
+                .transition(all 200ms cubic-bezier(0,.995,.99,1));
+            }
+            .main-shadow {
+                position: absolute;
+                top: 0;
+                left: 0;
+                z-index: 100;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(7,17,27,.1);
             }
         }
     }
+
+    /*@media (min-width: 1024px) and (max-width: 1279px) {*/
+        /**/
+    /*}*/
 </style>

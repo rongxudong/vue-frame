@@ -98,9 +98,9 @@
                         style="width: 100%">
                         <el-table-column
                             align="center"
-                            label="序号"
-                            type="index"
-                            width="50">
+                            prop="id"
+                            label="订单ID"
+                            width="80">
                         </el-table-column>
                         <el-table-column
                             align="center"
@@ -116,7 +116,7 @@
                         </el-table-column>
                         <el-table-column
                             align="center"
-                            prop="userCompanyName"
+                            prop="respondent"
                             label="调查对象"
                             width="180">
                         </el-table-column>
@@ -290,7 +290,7 @@
             fetchData () {
                 this.$ajax.post('/api/bussiness/account/order/getOrderList', this.QueryOrderListModel, res => {
                     const arrayData = [];
-                    if (res.data.list){
+                    if (res.code == 0 && res.data.list){
                         this.total = res.data.total;
                         for (let i = 0;i < res.data.list.length;i++){
                             let tableData = res.data.list[i];
@@ -354,6 +354,12 @@
                             //----------------------------------------------------
                             arrayData.push(tableData)
                         }
+                    }
+                    if (res.code != 0){
+                        this.$message({
+                            type: 'error',
+                            message: res.message
+                        })
                     }
                     this.tableData = arrayData;
                 })

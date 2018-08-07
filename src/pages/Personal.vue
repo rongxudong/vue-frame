@@ -10,7 +10,7 @@
                            v-model="show"
                            :width="84"
                            :height="84"
-                           langType="zh"
+                           :langType="getLangType"
                            :url="action"
                            :params="params"
                            :headers="myHeaders"
@@ -42,7 +42,8 @@
                 },
                 show: false,
                 username: null,
-                baName: null
+                baName: null,
+                getLangType: 'zh'
             }
         },
         components: {
@@ -120,7 +121,11 @@
                 return this.$store.state.user
             },
             avatarImg () {
-                return this.$store.state.avatarImg;
+                return this.$store.state.avatarImg
+            },
+            listenLanguage () {
+                console.log(this.$store.state.isLanguage)
+                return this.$store.state.isLanguage
             }
         },
         watch: {
@@ -130,6 +135,18 @@
             },
             avatarImg: function(a, b) {
                 this.imgDataUrl = this.$store.state.resUrl + a;
+            },
+            listenLanguage: function (a, b) {
+                switch (a) {
+                    case 'zh_CN':
+                        this.getLangType = 'zh';
+                        break;
+                    case 'en':
+                        this.getLangType = 'en';
+                        break;
+                    default:
+                        this.getLangType = 'zh';
+                }
             }
         },
         mounted() {

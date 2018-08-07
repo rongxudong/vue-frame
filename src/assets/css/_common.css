@@ -345,6 +345,9 @@ a:focus {
   height: 100px;
   display: block;
 }
+.lh20 .el-form-item .el-form-item__label {
+  line-height: 20px;
+}
 .suffix {
   position: absolute;
   top: 1px;
@@ -371,6 +374,9 @@ a:focus {
 }
 .investigate-main .filter-query .el-range__close-icon {
   display: none;
+}
+.investigate-main .en-input .input-mg {
+  min-width: 135px!important;
 }
 .Home-main {
   width: 100%;

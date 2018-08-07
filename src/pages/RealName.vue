@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-style">
+    <div class="bg-style" :class="isLanguage == 'en' ? 'lh20' : ''">
         <el-form class="RealName-main" status-icon :model="ruleForm" :rules="rules" ref="ruleForm" label-width="135px" label-position="left">
             <div class="real-fail-wrap flex_start align_items" v-show="ruleForm['auditFlag'] == '3'">
                 <img src="../assets/img/RealName/real-fail.png"/>
@@ -99,11 +99,11 @@
                             <i v-show="!ruleForm.businessLicense" class="el-icon-plus avatar-uploader-icon"></i>
                         </el-upload>
                     </el-form-item>
-                    <el-form-item :label="$t('realName.companyName')" prop="companyName">
+                    <el-form-item :label="$t('realName.fullNameOfCompany')" prop="companyName">
                         <el-input v-model="ruleForm.companyName" class="input-width" type="text"
                                   :placeholder="$t('realName.placeholder')" auto-complete="off" :disabled="isEdit"></el-input>
                     </el-form-item>
-                    <el-form-item :label="$t('realName.legalPerson')" prop="legalPerson">
+                    <el-form-item :label="$t('realName.legalRepresentative')" prop="legalPerson">
                         <el-input v-model="ruleForm.legalPerson" class="input-width" type="text"
                                   :placeholder="$t('realName.placeholder')" auto-complete="off" :disabled="isEdit"></el-input>
                     </el-form-item>

@@ -18,38 +18,38 @@
                 </ul>
             </div>
             <div class="basic">
-                <div class="title process-title line">服务信息</div>
+                <div class="title process-title line">{{ $t('investigate.serviceInformation') }}</div>
                 <div class="search-container flex_direction_column">
                     <div class="flex_direction_row container-head-bg">
-                        <img class="image-search" src="../assets/img/investigate/search-icon.png" alt="搜索">
-                        <h1 class="text-head" style="margin-left: 0.12rem">筛选查询</h1>
+                        <img class="image-search" src="../assets/img/investigate/search-icon.png">
+                        <h1 class="text-head" style="margin-left: 0.12rem">{{ $t('investigate.filterQuery') }}</h1>
                     </div>
                     <div class="flex_direction_column">
-                        <div class="filter-query flex_start">
+                        <div class="filter-query flex_start" :class="isLanguage == 'en' ? 'en-input' : ''">
                             <div class="flex_direction_row mg17">
-                                <h1 class="align-self-center text-head input-mg">发起时间:</h1>
+                                <h1 class="align-self-center text-head input-mg">{{ $t('investigate.dateOfApplication') }}:</h1>
                                 <el-date-picker
                                     style="width: 265px;"
                                     v-model="data"
                                     type="daterange"
-                                    range-separator="至"
-                                    start-placeholder="开始日期"
-                                    end-placeholder="结束日期"
+                                    :range-separator="$t('investigate.to')"
+                                    :start-placeholder="$t('investigate.startTime')"
+                                    :end-placeholder="$t('investigate.endTime')"
                                     :picker-options="pickerOptions">
                                 </el-date-picker>
                             </div>
                             <div class="flex_direction_row mg17">
-                                <h1 class="align-self-center text-head input-mg">调查对象:</h1>
+                                <h1 class="align-self-center text-head input-mg">{{ $t('investigate.object') }}:</h1>
                                 <el-input
                                     class="amStatus"
-                                    placeholder="请输入内容"
+                                    :placeholder="$t('investigate.pleaseEnterTheContent')"
                                     v-model="QueryOrderListModel.userCompanyName"
                                     clearable>
                                 </el-input>
                             </div>
                             <div class="align_content mg17">
-                                <h1 class="align-self-center text-head input-mg">申请表状态:</h1>
-                                <el-select v-model="QueryOrderListModel.applyStatus" placeholder="请选择" class="amStatus">
+                                <h1 class="align-self-center text-head input-mg">{{ $t('investigate.stateOfApplication') }}:</h1>
+                                <el-select v-model="QueryOrderListModel.applyStatus" :placeholder="$t('investigate.pleaseSelect')" class="amStatus">
                                     <el-option
                                         v-for="item in applyStatus"
                                         :key="item.value"
@@ -59,8 +59,8 @@
                                 </el-select>
                             </div>
                             <div class="flex_direction_row mg17">
-                                <h1 class="align-self-center text-head input-mg">支付状态:</h1>
-                                <el-select v-model="QueryOrderListModel.payStatus" placeholder="请选择" class="payStatus">
+                                <h1 class="align-self-center text-head input-mg">{{ $t('investigate.stateOfPayment') }}:</h1>
+                                <el-select v-model="QueryOrderListModel.payStatus" :placeholder="$t('investigate.pleaseSelect')" class="payStatus">
                                     <el-option
                                             v-for="item in payStatus"
                                             :key="item.value"
@@ -70,8 +70,8 @@
                                 </el-select>
                             </div>
                             <div class="flex_direction_row mg17">
-                                <h1 class="align-self-center text-head input-mg">协议状态:</h1>
-                                <el-select v-model="QueryOrderListModel.agreementStatus" placeholder="请选择" class="amStatus">
+                                <h1 class="align-self-center text-head input-mg">{{ $t('investigate.stateOfAgreement') }}:</h1>
+                                <el-select v-model="QueryOrderListModel.agreementStatus" :placeholder="$t('investigate.pleaseSelect')" class="amStatus">
                                     <el-option
                                             v-for="item in agreementStatus"
                                             :key="item.value"
@@ -80,7 +80,7 @@
                                     </el-option>
                                 </el-select>
                             </div>
-                            <el-button class="mg17" type="primary" round style="margin-left: 0.2rem;" @click="this.fetchData">查询</el-button>
+                            <el-button class="mg17" type="primary" round style="margin-left: 0.2rem;" @click="this.fetchData">{{ $t('investigate.submit') }}</el-button>
                         </div>
                     </div>
                 </div>
@@ -90,7 +90,7 @@
                     <div class="flex_direction_row container-head-bg">
                         <img class="image-search" src="../assets/img/investigate/tips.png" alt="搜索">
                         <h1 class="text-head flex-1" style="margin-left: 0.12rem;">您可重新创建一个新的{{this.serviceTitle[this.serviceType]}}服务，需重新签署协议，详细情况请联系融资顾问</h1>
-                        <el-button type="primary" size="small" style="margin-right: 0.2rem" @click="showDialog">创建新服务</el-button>
+                        <el-button type="primary" size="small" style="margin-right: 0.2rem" @click="showDialog">{{$t('investigate.createANewService')}}</el-button>
                     </div>
                     <el-table
                         border
@@ -99,30 +99,30 @@
                         <el-table-column
                             align="center"
                             prop="id"
-                            label="订单ID"
+                            :label="$t('investigate.orderID')"
                             width="80">
                         </el-table-column>
                         <el-table-column
                             align="center"
                             prop="orderType_str"
-                            label="服务类型"
+                            :label="$t('investigate.typeOfService')"
                             width="130">
                         </el-table-column>
                         <el-table-column
                             align="center"
                             prop="createdDate"
-                            label="发起时间"
+                            :label="$t('investigate.dateOfSubmit')"
                             width="170">
                         </el-table-column>
                         <el-table-column
                             align="center"
                             prop="respondent"
-                            label="调查对象"
+                            :label="$t('investigate.serviceObj')"
                             width="180">
                         </el-table-column>
                         <el-table-column
                             align="center"
-                            label="协议状态"
+                            :label="$t('investigate.statusOfAgreements')"
                             width="180">
                             <template slot-scope="scope">
                                 <span style="margin-left: 10px">{{ scope.row.agreementStatus_str}}</span>
@@ -137,7 +137,7 @@
                         <!--prop="agreementTitle"-->
                         <el-table-column
                             align="center"
-                            label="协议"
+                            :label="$t('investigate.agreements')"
                             width="180">
                             <template slot-scope="scope" v-if="scope.row.agreementTitle.length > 0">
                                 <el-popover trigger="hover" placement="top">
@@ -151,13 +151,13 @@
                         <el-table-column
                             align="center"
                             prop="applyStatus_str"
-                            label="申请表状态"
+                            :label="$t('investigate.statusOfApplication')"
                             width="130">
                         </el-table-column>
                         <el-table-column
                             align="center"
                             prop="date"
-                            label="申请表操作"
+                            :label="$t('investigate.applicationFormOperation')"
                             width="130">
                             <template slot-scope="scope">
                                 <el-button
@@ -171,14 +171,14 @@
                         <el-table-column
                             align="center"
                             prop="payStatus_str"
-                            label="金额支付"
+                            :label="$t('investigate.amountOfPayment')"
                             width="130">
                         </el-table-column>
                         <el-table-column
                             fixed="right"
                             align="center"
                             prop="filesList"
-                            label="结果反馈"
+                            :label="$t('investigate.feedback')"
                             min-width="150">
                             <template slot-scope="scope">
                                 <ul>
@@ -223,7 +223,7 @@
                 post: null,
                 error: null,
                 content: [
-                    {title: '签署协议', imgUrl: require('../assets/img/investigate/step1.png'), toUrl: ''},
+                    {title: this.$t('investigate.signTheAgreement'), imgUrl: require('../assets/img/investigate/step1.png'), toUrl: ''},
                     {title: '填写申请表', imgUrl: require('../assets/img/investigate/step2.png'), toUrl: ''},
                     {title: '金额支付', imgUrl: require('../assets/img/investigate/step3.png'), toUrl: ''},
                     {title: '结果反馈', imgUrl: require('../assets/img/investigate/step4.png'), toUrl: ''}
@@ -240,7 +240,6 @@
                     {value: '2', label: '未审核'},
                     {value: '3', label: '未签署'},
                     {value: '4', label: '已签署'}
-
                 ],
                 payStatus: [
                     {value: '1', label: '已付款'},
@@ -250,15 +249,15 @@
                 data: '',
                 total: 0,
                 QueryOrderListModel:{
-                    orderType:1,
-                    beginDate:'',
-                    endDate:'',
-                    userCompanyName:'',
-                    applyStatus:'',
-                    payStatus:'',
-                    agreementStatus:'',
-                    pageSize:5,
-                    pageNum:1
+                    orderType: 1,
+                    beginDate: '',
+                    endDate: '',
+                    userCompanyName: '',
+                    applyStatus: '',
+                    payStatus: '',
+                    agreementStatus: '',
+                    pageSize: 5,
+                    pageNum: 1
                 },
                 pickerOptions: {
                     onPick(obj) {
@@ -266,12 +265,13 @@
                             that.QueryOrderListModel.endDate = this.moment(obj.maxDate).format('YYYY-MM-DD');
                             that.QueryOrderListModel.beginDate = this.moment(obj.minDate).format('YYYY-MM-DD');
                         }
-                    },
+                    }
                 },
-                serviceTitle:['占位','尽职调查','GTR评估','授信申请','商账管理'],
-                serviceType:1,
+                serviceTitle: ['占位','尽职调查','GTR评估','授信申请','商账管理'],
+                serviceType: 1,
                 reportContent: '',
-                dialogVisible: false
+                dialogVisible: false,
+                isLanguage: this.$store.state.isLanguage
             }
         },
         created () {
@@ -279,12 +279,20 @@
             this.QueryOrderListModel.orderType = this.$route.path.split('/')[2];
             this.fetchData();
         },
+        computed: {
+            listenLanguage () {
+                return this.$store.state.isLanguage
+            }
+        },
         watch: {
             $route(){
                 this.serviceType = this.$route.path.split('/')[2];
                 this.QueryOrderListModel.orderType = this.$route.path.split('/')[2];
                 this.fetchData();
             },
+            listenLanguage: function (a, b) {
+                this.isLanguage = a;
+            }
         },
         methods: {
             fetchData () {
@@ -352,7 +360,7 @@
                                 tableData.applyStatusBtnDesc = '查看';
                             }
                             //----------------------------------------------------
-                            arrayData.push(tableData)
+                            arrayData.push(tableData);
                         }
                     }
                     if (res.code != 0){

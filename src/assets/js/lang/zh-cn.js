@@ -5,10 +5,49 @@ module.exports = {
         name: "大道保理融资增信系统",
         versions: 'v1.0'
     },
+    serverName: {
+        dueDiligence: "尽职调查",
+        GTREvaluation: "GTR评估",
+        financialSupport: "融资授信",
+        accountManagement: "商账管理"
+    },
     home: {
         checkProcedures: "使用流程查看",
         messages: "消息",
         notice: "公告栏"
+    },
+    investigate: {
+        signTheAgreement: "签署协议",
+        submitAnApplication: "填写申请表",
+        payTheApplicationFee: "金额支付",
+        getDDReport: "结果反馈",
+
+        serviceInformation: "服务信息",
+        filterQuery: "筛选查询",
+        dateOfApplication: "发起时间",
+        startTime: "开始时间",
+        to: "至",
+        endTime: "结束时间",
+        object: "调查对象",
+        stateOfApplication: "申请表状态",
+        stateOfPayment: "支付状态",
+        stateOfAgreement: "协议状态",
+        submit: "查询",
+
+        createANewService: "创建新服务",
+        orderID: "订单ID",
+        typeOfService: "服务类型",
+        dateOfSubmit: "发起时间",
+        serviceObj: "调查对象",
+        statusOfAgreements: "协议状态",
+        agreements: "协议",
+        statusOfApplication: "申请表状态",
+        applicationFormOperation: "申请表操作",
+        amountOfPayment: "金额支付",
+        feedback: "结果反馈",
+
+        pleaseSelect: "请选择",
+        pleaseEnterTheContent: "请输入内容"
     },
     realName: {
         basicInformation: "基本信息",
@@ -21,8 +60,8 @@ module.exports = {
 
         enterpriseInformation: "企业信息",
         businessLicense: "营业执照",
-        companyName: "公司全称",
-        legalPerson: "法定代表人",
+        fullNameOfCompany: "公司全称",
+        legalRepresentative: "法定代表人",
         legalPersonIdCard: "法人证件号",
         address: "住所地",
         submitCheck: "提交审核",

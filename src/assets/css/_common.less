@@ -74,7 +74,6 @@ a {
 .el-upload--picture-card i {
     color: @general-col;
 }
-
 .basic,
 .company {
     width: 100%;
@@ -157,7 +156,11 @@ a {
         }
     }
 }
-
+.lh20 .el-form-item {
+    .el-form-item__label {
+        line-height: 20px;
+    }
+}
 //customerApplication.vue
 .suffix {
     position: absolute;
@@ -187,6 +190,9 @@ a {
 }
 .investigate-main .filter-query .el-range__close-icon {
     display: none;
+}
+.investigate-main .en-input .input-mg {
+    min-width: 135px!important;
 }
 
 //home.vue

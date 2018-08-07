@@ -5,7 +5,12 @@ module.exports = {
         name: "Avenue factoring financing credit system",
         versions: 'v1.0'
     },
-    personal: {
+    home: {
+        checkProcedures: "Check procedures",
+        messages: "Messages",
+        notice: "Notice"
+    },
+    realName: {
         basicInformation: "Basic information",
         name: "Name",
         idCard: "ID number",
@@ -20,14 +25,20 @@ module.exports = {
         legalPerson: "Legal person",
         legalPersonIdCard: "Legal person card",
         address: "Place",
-        submitCheck: "submit",
+        submitCheck: "Submit",
 
         tips: "Warm prompt",
         paragraphOne: "Congratulations on the successful submission of your real-name certification.",
         paragraphTwo: "We will carry out real-name certification for you. Please wait patiently",
         paragraphThree: "working days.",
-        cancel: "cancel",
-        ok: "ok"
+        cancel: "Cancel",
+        ok: "Ok"
+    },
+    password: {
+        oldPassword: "Old password",
+        newPassword: "New password",
+        confirmPassword: "Confirm password",
+        change: "Change"
     },
     customerApplication: {
 

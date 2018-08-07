@@ -2,25 +2,25 @@
     <div class="psd-main bg-style justify_content_center align_items-center flex_direction_column">
         <el-input
             class="input w250"
-            placeholder="原密码"
+            :placeholder="$t('password.oldPassword')"
             v-model="businessAccountResetPasswordModel.oldPassword"
             clearable>
         </el-input>
         <el-input
             style="margin-top: 17px"
             class="input w250"
-            placeholder="新密码"
+            :placeholder="$t('password.newPassword')"
             v-model="businessAccountResetPasswordModel.newPassword"
             clearable>
         </el-input>
         <el-input
             style="margin-top: 17px"
             class="input w250"
-            placeholder="确认新密码"
+            :placeholder="$t('password.confirmPassword')"
             v-model="businessAccountResetPasswordModel.newPasswordAgain"
             clearable>
         </el-input>
-        <el-button class="w250" style="margin: 50px 0 0 0;" type="primary" v-on:click="changePassword">修改</el-button>
+        <el-button class="w250" style="margin: 50px 0 0 0;" type="primary" v-on:click="changePassword">{{ $t('password.change') }}</el-button>
     </div>
 </template>
 <script>
@@ -87,8 +87,6 @@
 </script>
 
 <style lang="less" rel="stylesheet/less">
-
-
     .psd-main {
         width: 100%;
         height: 100%;
@@ -105,5 +103,4 @@
     .title {
         width: 150px;
     }
-
 </style>

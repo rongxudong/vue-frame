@@ -12,17 +12,17 @@
                 </div>
             </div>
             <div class="basic">
-                <div class="title">{{ $t('personal.basicInformation') }}</div>
+                <div class="title">{{ $t('realName.basicInformation') }}</div>
                 <div class="basic-form">
-                    <el-form-item :label="$t('personal.name')" prop="name">
+                    <el-form-item :label="$t('realName.name')" prop="name">
                         <el-input v-model="ruleForm.name" class="input-width" type="text"
-                                  :placeholder="$t('personal.placeholder')" auto-complete="off" :disabled="isEdit"></el-input>
+                                  :placeholder="$t('realName.placeholder')" auto-complete="off" :disabled="isEdit"></el-input>
                     </el-form-item>
-                    <el-form-item :label="$t('personal.idCard')" prop="idCard">
+                    <el-form-item :label="$t('realName.idCard')" prop="idCard">
                         <el-input v-model="ruleForm.idCard" class="input-width" type="text"
-                                  :placeholder="$t('personal.placeholder')" auto-complete="off" :disabled="isEdit"></el-input>
+                                  :placeholder="$t('realName.placeholder')" auto-complete="off" :disabled="isEdit"></el-input>
                     </el-form-item>
-                    <el-form-item :label="$t('personal.idPicFront')" prop="idPicFront" class="upload-flex" ref="idPicFront">
+                    <el-form-item :label="$t('realName.idPicFront')" prop="idPicFront" class="upload-flex" ref="idPicFront">
                         <el-upload
                                 ref="upload"
                                 class="avatar-uploader"
@@ -40,7 +40,7 @@
                             <i v-show="!ruleForm.idPicFront" class="el-icon-plus avatar-uploader-icon"></i>
                         </el-upload>
                     </el-form-item>
-                    <el-form-item :label="$t('personal.idPicBehind')" prop="idPicBehind" class="upload-flex" ref="idPicBehind">
+                    <el-form-item :label="$t('realName.idPicBehind')" prop="idPicBehind" class="upload-flex" ref="idPicBehind">
                         <el-upload
                                 ref="upload"
                                 class="avatar-uploader"
@@ -58,7 +58,7 @@
                             <i v-show="!ruleForm.idPicBehind" class="el-icon-plus avatar-uploader-icon"></i>
                         </el-upload>
                     </el-form-item>
-                    <el-form-item :label="$t('personal.idPicHand')" prop="idPicHand" class="upload-flex" ref="idPicHand">
+                    <el-form-item :label="$t('realName.idPicHand')" prop="idPicHand" class="upload-flex" ref="idPicHand">
                         <el-upload
                                 ref="upload"
                                 class="avatar-uploader"
@@ -79,9 +79,9 @@
                 </div>
             </div>
             <div class="company">
-                <div class="title">{{ $t('personal.enterpriseInformation') }}</div>
+                <div class="title">{{ $t('realName.enterpriseInformation') }}</div>
                 <div class="basic-form">
-                    <el-form-item :label="$t('personal.businessLicense')" prop="businessLicense" class="upload-flex" ref="businessLicense">
+                    <el-form-item :label="$t('realName.businessLicense')" prop="businessLicense" class="upload-flex" ref="businessLicense">
                         <el-upload
                                 ref="upload"
                                 class="avatar-uploader"
@@ -99,41 +99,41 @@
                             <i v-show="!ruleForm.businessLicense" class="el-icon-plus avatar-uploader-icon"></i>
                         </el-upload>
                     </el-form-item>
-                    <el-form-item :label="$t('personal.companyName')" prop="companyName">
+                    <el-form-item :label="$t('realName.companyName')" prop="companyName">
                         <el-input v-model="ruleForm.companyName" class="input-width" type="text"
-                                  :placeholder="$t('personal.placeholder')" auto-complete="off" :disabled="isEdit"></el-input>
+                                  :placeholder="$t('realName.placeholder')" auto-complete="off" :disabled="isEdit"></el-input>
                     </el-form-item>
-                    <el-form-item :label="$t('personal.legalPerson')" prop="legalPerson">
+                    <el-form-item :label="$t('realName.legalPerson')" prop="legalPerson">
                         <el-input v-model="ruleForm.legalPerson" class="input-width" type="text"
-                                  :placeholder="$t('personal.placeholder')" auto-complete="off" :disabled="isEdit"></el-input>
+                                  :placeholder="$t('realName.placeholder')" auto-complete="off" :disabled="isEdit"></el-input>
                     </el-form-item>
-                    <el-form-item :label="$t('personal.legalPersonIdCard')" prop="legalPersonIdCard">
+                    <el-form-item :label="$t('realName.legalPersonIdCard')" prop="legalPersonIdCard">
                         <el-input v-model="ruleForm.legalPersonIdCard" class="input-width" type="text"
-                                  :placeholder="$t('personal.placeholder')" auto-complete="off" :disabled="isEdit"></el-input>
+                                  :placeholder="$t('realName.placeholder')" auto-complete="off" :disabled="isEdit"></el-input>
                     </el-form-item>
-                    <el-form-item :label="$t('personal.address')" prop="address">
+                    <el-form-item :label="$t('realName.address')" prop="address">
                         <el-input v-model="ruleForm.address" type="text"
-                                  :placeholder="$t('personal.placeholder')" auto-complete="off" :disabled="isEdit"></el-input>
+                                  :placeholder="$t('realName.placeholder')" auto-complete="off" :disabled="isEdit"></el-input>
                     </el-form-item>
                 </div>
             </div>
             <div class="text-center" style="margin-top: 45px;">
-                <el-button type="primary" @click="submitForm('ruleForm')" :disabled="isEdit">{{ $t('personal.submitCheck') }}</el-button>
+                <el-button type="primary" @click="submitForm('ruleForm')" :disabled="isEdit">{{ $t('realName.submitCheck') }}</el-button>
             </div>
             <el-dialog
-                :title="$t('personal.tips')"
+                :title="$t('realName.tips')"
                 :visible.sync="dialog"
-                width="30%"
-                :before-close="handleClose">
+                width="28%"
+                :before-close="dialogClose">
                 <span class="horizontal_center">
                     <i class="iconfont icon-gouxuan"></i>
-                    <span style="margin-left: 15px;">{{ $t('personal.paragraphOne') }}<br>{{ $t('personal.paragraphTwo') }}
-                        <em class="imp">1-2</em>{{ $t('personal.paragraphThree') }}
+                    <span style="margin-left: 15px;">{{ $t('realName.paragraphOne') }}<br>{{ $t('realName.paragraphTwo') }}
+                        <em class="imp">1-2</em>{{ $t('realName.paragraphThree') }}
                     </span>
                 </span>
                 <span slot="footer" class="dialog-footer">
-                    <el-button @click="dialog = false">{{ $t('personal.cancel') }}</el-button>
-                    <el-button type="primary" @click="dialog = false">{{ $t('personal.ok') }}</el-button>
+                    <el-button @click="refreshPage">{{ $t('realName.cancel') }}</el-button>
+                    <el-button type="primary" @click="refreshPage">{{ $t('realName.ok') }}</el-button>
                 </span>
             </el-dialog>
             <div class="real-icon">
@@ -279,17 +279,20 @@
                 }
                 return (isJPG || isBMP || isGIF || isPNG || isPDF) && isLt20M;
             },
+            refreshPage () {
+                this.dialog = false;
+                this.$router.go(0);
+            },
+            dialogClose (action, instance, done) {
+                this.refreshPage();
+            },
             // 用户提交实名认证信息
             submitForm(formName) {
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
                         this.$ajax.post( '/api/bussinessAccount/yqq/userIdentity', this.ruleForm, res => {
                             if( res.code == 0 ){
-                                this.$message({
-                                    type: 'success',
-                                    message: res.message
-                                });
-                                this.$router.go(0);
+                                this.dialog = true;
                             }
                             else{
                                 this.$message({
@@ -411,6 +414,10 @@
             img {
                 .object_fit_img;
             }
+        }
+        .icon-gouxuan {
+            color: @Success;
+            font-size: 46px;
         }
     }
 

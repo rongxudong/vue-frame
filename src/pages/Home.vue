@@ -3,10 +3,10 @@
         <div class="left bg-style">
             <div class="top">
                 <div class="title">
-                    <span>{{UseStep.title}}</span>
+                    <span>{{ $t('home.checkProcedures') }}</span>
                 </div>
                 <div class="left-wrapper flex_start" style="padding-left: .18rem;">
-                    <div v-for="(item, index) in UseStep.step" :key="index" class="flex_start">
+                    <div v-for="(item, index) in UseStep" :key="index" class="flex_start">
                         <div class="step" @click="toService(item.route)">
                             <div class="step-icon-wrap horizontal_center">
                                 <img :src="item.url"/>
@@ -18,7 +18,7 @@
             </div>
             <div class="bottom">
                 <div class="title">
-                    <span>消息</span>
+                    <span>{{ $t('home.messages') }}</span>
                     <a href="javascript:void(0);" @click="goMsgList">MORE &gt;&gt;</a>
                 </div>
                 <div class="msg-item align_items" v-for="(item, index) in DataMessageList" :key="item.index">
@@ -36,7 +36,7 @@
         </div>
         <div class="right bg-style">
             <div class="title" style="margin: .18rem 0;">
-                <span>公告栏</span>
+                <span>{{ $t('home.notice') }}</span>
                 <a href="javascript:void(0);" @click="goFileList">MORE &gt;&gt;</a>
             </div>
             <div class="right-list">
@@ -73,31 +73,28 @@
     export default {
         data() {
             return {
-                UseStep: {
-                    title: '使用流程查看',
-                    step: [
-                        {
-                            name: '尽职调查',
-                            url: require('../assets/img/Home/step1.png'),
-                            route: '/Investigate/1'
-                        },
-                        {
-                            name: 'GTR评估',
-                            url: require('../assets/img/Home/step2.png'),
-                            route: '/Investigate/2'
-                        },
-                        {
-                            name: '授信申请',
-                            url: require('../assets/img/Home/step3.png'),
-                            route: '/Investigate/3'
-                        },
-                        {
-                            name: '商账管理',
-                            url: require('../assets/img/Home/step4.png'),
-                            route: '/Investigate/4'
-                        }
-                    ]
-                },
+                UseStep: [
+                    {
+                        name: '尽职调查',
+                        url: require('../assets/img/Home/step1.png'),
+                        route: '/Investigate/1'
+                    },
+                    {
+                        name: 'GTR评估',
+                        url: require('../assets/img/Home/step2.png'),
+                        route: '/Investigate/2'
+                    },
+                    {
+                        name: '授信申请',
+                        url: require('../assets/img/Home/step3.png'),
+                        route: '/Investigate/3'
+                    },
+                    {
+                        name: '商账管理',
+                        url: require('../assets/img/Home/step4.png'),
+                        route: '/Investigate/4'
+                    }
+                ],
                 DataResList: [],
                 DataMessageList: [],
                 outerVisible: false,

@@ -29,7 +29,7 @@
                             <div class="flex_direction_row mg17">
                                 <h1 class="align-self-center text-head input-mg">发起时间:</h1>
                                 <el-date-picker
-                                        style="width: 265px;"
+                                    style="width: 265px;"
                                     v-model="data"
                                     type="daterange"
                                     range-separator="至"

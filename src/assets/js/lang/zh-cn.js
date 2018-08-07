@@ -5,7 +5,12 @@ module.exports = {
         name: "大道保理融资增信系统",
         versions: 'v1.0'
     },
-    personal: {
+    home: {
+        checkProcedures: "使用流程查看",
+        messages: "消息",
+        notice: "公告栏"
+    },
+    realName: {
         basicInformation: "基本信息",
         name: "姓名",
         idCard: "有效证件号码",
@@ -28,6 +33,12 @@ module.exports = {
         paragraphThree: "个工作日。",
         cancel: "取 消",
         ok: "确 定"
+    },
+    password: {
+        oldPassword: "原密码",
+        newPassword: "新密码",
+        confirmPassword: "确认新密码",
+        change: "修改"
     },
     customerApplication: {
 

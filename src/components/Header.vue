@@ -7,7 +7,7 @@
                 <div class="z rotate135"></div>
             </div>
         </el-col>
-        <el-col :span="6">
+        <el-col :span="8">
             <div class="grid-content bg-purple head-wrap">
                 {{ $t('header.name') }}
                 <span class="sys-versions">{{ $t('header.versions') }}</span>

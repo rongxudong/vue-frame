@@ -22,7 +22,7 @@ export default {
     getLang() {
         let localLang = window.localStorage.getItem('user_lang');
         let language = (navigator.language || navigator.browserLanguage).toLowerCase();
-        if (localLang === null) {
+        if (localLang == null || localLang == 'undefined') {
             return this.browserLanguage(language);
         } else {
             return this.browserLanguage(localLang.toLowerCase());

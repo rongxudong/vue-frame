@@ -18,7 +18,9 @@ const options = {
         token: '',
         baseUrl: '',
         user: {},
-        avatarImg: ''
+        avatarImg: '',
+
+        isLanguage: ''
     },
 
     // 操作
@@ -26,6 +28,10 @@ const options = {
 
     // 数据变更
     mutations: {
+        set_language (state, data) {
+            state.isLanguage = null;
+            state.isLanguage = data;
+        },
         // 添加tabs
         add_tabs (state, data) {
             state.options.push(data);

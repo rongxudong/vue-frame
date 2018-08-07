@@ -1,8 +1,8 @@
 <template>
     <div class="personal-main flex_direction_column bg-style pd50">
         <el-form label-width="142px" label-position="left">
-            <el-form-item label="头像" class="img-head-wrap">
-                <img class="img-head" :src="imgDataUrl" alt="头像"/>
+            <el-form-item :label="$t('personal.profilePhoto')" class="img-head-wrap">
+                <img class="img-head" :src="imgDataUrl"/>
                 <my-upload field="file"
                            @crop-success="cropSuccess"
                            @crop-upload-success="cropUploadSuccess"
@@ -16,12 +16,12 @@
                            :headers="myHeaders"
                            img-format="png">
                 </my-upload>
-                <el-button style="margin-top: 15px;" type="primary" size="small" @click="toggleShow">更改头像</el-button>
+                <el-button style="margin-top: 15px;" type="primary" size="small" @click="toggleShow">{{ $t('personal.changeProfilePhoto') }}</el-button>
             </el-form-item>
-            <el-form-item label="账号">
+            <el-form-item :label="$t('personal.accountNo')">
                 <p class="text-content">{{username}}</p>
             </el-form-item>
-            <el-form-item label="真实姓名">
+            <el-form-item :label="$t('personal.authenticName')">
                 <p v-if="$store.state.user.baIdentifyStatus == 1">{{baName}}</p>
                 <el-button size="small" type="primary" v-else @click="navRealName">去实名认证</el-button>
             </el-form-item>

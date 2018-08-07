@@ -145,14 +145,15 @@
                 }
 //                console.log(`${this.moment.locale()}`);
                 LangStorage.setLang(val);
+                this.$store.commit('set_language', val);
             },
             avatarImg: function(a, b) {
-//                console.log("修改后为：" + a);
-//                console.log("修改前为：" + b);
                 this.defaultAvatarImg = this.$store.state.resUrl + a;
             }
         },
-        mounted () {}
+        mounted () {
+            this.$store.commit('set_language', this.$i18n.locale);
+        }
     }
 </script>
 <style scoped lang="less" rel="stylesheet/less">

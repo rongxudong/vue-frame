@@ -34,6 +34,12 @@ module.exports = {
         cancel: "Cancel",
         ok: "Ok"
     },
+    personal: {
+        profilePhoto: "Profile photo",
+        accountNo: "Account no",
+        authenticName: "Authentic name",
+        changeProfilePhoto: "Change profile photo"
+    },
     password: {
         oldPassword: "Old password",
         newPassword: "New password",

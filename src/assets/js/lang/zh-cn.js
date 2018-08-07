@@ -34,6 +34,12 @@ module.exports = {
         cancel: "取 消",
         ok: "确 定"
     },
+    personal: {
+        profilePhoto: "头像",
+        accountNo: "帐号",
+        authenticName: "真实姓名",
+        changeProfilePhoto: "更换头像"
+    },
     password: {
         oldPassword: "原密码",
         newPassword: "新密码",

@@ -43,7 +43,7 @@
                 show: false,
                 username: null,
                 baName: null,
-                getLangType: 'zh'
+                getLangType: null
             }
         },
         components: {
@@ -92,24 +92,6 @@
                     path:'/RealName',
                 })
             },
-//            beforeAvatarUpload(file) {
-//                const isJPG = file.type === 'image/jpeg';
-//                const isPNG = file.type === 'image/png';
-//                const isLt2M = file.size / 1024 / 1024 < 2;
-//
-//                if (!isLt2M) {
-//                    this.$message.error('上传文件大小不能超过 2MB!');
-//                    return false;
-//                }
-//                if (isJPG) {
-//                    return true
-//                }
-//                if (isPNG) {
-//                    return true
-//                }
-//                this.$message.error('请上传png或者jpg格式的头像')
-//                return false;
-//            },
             getAvatarImg () {
                 this.imgDataUrl = this.$store.state.resUrl + this.$store.state.avatarImg;
                 this.username = this.$store.state.user.username;
@@ -124,7 +106,6 @@
                 return this.$store.state.avatarImg
             },
             listenLanguage () {
-                console.log(this.$store.state.isLanguage)
                 return this.$store.state.isLanguage
             }
         },
@@ -149,10 +130,21 @@
                 }
             }
         },
-        mounted() {
+        created () {
             setTimeout(()=>{
                 this.getAvatarImg();
-            },1000)
+            },1000);
+            switch (this.$store.state.isLanguage) {
+                case 'zh_CN':
+                    this.getLangType = 'zh';
+                    break;
+                case 'en':
+                    this.getLangType = 'en';
+                    break;
+                default:
+                    this.getLangType = 'zh';
+            }
+            console.log(this.getLangType)
         },
 //        beforeRouteLeave(to, from, next) {
 //            // 设置下一个路由的 meta

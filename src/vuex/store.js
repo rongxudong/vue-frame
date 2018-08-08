@@ -31,6 +31,7 @@ const options = {
         set_language (state, data) {
             state.isLanguage = null;
             state.isLanguage = data;
+            console.log(state.isLanguage);
         },
         // 添加tabs
         add_tabs (state, data) {

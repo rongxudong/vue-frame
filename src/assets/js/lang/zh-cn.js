@@ -5,11 +5,17 @@ module.exports = {
         name: "大道保理融资增信系统",
         versions: 'v1.0'
     },
-    serverName: {
+    menu: {
+        index: "总览",
+        investigate: "授信管理",
         dueDiligence: "尽职调查",
         GTREvaluation: "GTR评估",
         financialSupport: "融资授信",
-        accountManagement: "商账管理"
+        accountManagement: "商账管理",
+        personalInformation: "个人信息",
+        verificationOfIdentityCertificate: "实名认证",
+        personalDetails: "个人资料",
+        passwordChange: "修改密码"
     },
     home: {
         checkProcedures: "使用流程查看",
@@ -41,6 +47,7 @@ module.exports = {
         serviceObj: "调查对象",
         statusOfAgreements: "协议状态",
         agreements: "协议",
+        agreement: "协议",
         statusOfApplication: "申请表状态",
         applicationFormOperation: "申请表操作",
         amountOfPayment: "金额支付",

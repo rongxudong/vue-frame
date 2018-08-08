@@ -88,7 +88,7 @@
             <div class="basic">
                 <div class="table-container flex_direction_column">
                     <div class="flex_direction_row container-head-bg">
-                        <img class="image-search" src="../assets/img/investigate/tips.png" alt="搜索">
+                        <img class="image-search" src="../assets/img/investigate/tips.png">
                         <h1 class="text-head flex-1" style="margin-left: 0.12rem;">您可重新创建一个新的{{this.serviceTitle[this.serviceType]}}服务，需重新签署协议，详细情况请联系融资顾问</h1>
                         <el-button type="primary" size="small" style="margin-right: 0.2rem" @click="showDialog">{{$t('investigate.createANewService')}}</el-button>
                     </div>
@@ -131,17 +131,16 @@
                                     style="margin-left: 0.1rem"
                                     size="mini"
                                     type="primary"
-                                    @click="navRoute('签署协议', scope.row)">{{ scope.row.btnDesc}}</el-button>
+                                    @click="navRoute('签署协议', scope.row)">{{ scope.row.btnDesc }}</el-button>
                             </template>
                         </el-table-column>
-                        <!--prop="agreementTitle"-->
                         <el-table-column
                             align="center"
                             :label="$t('investigate.agreements')"
                             width="180">
                             <template slot-scope="scope" v-if="scope.row.agreementTitle.length > 0">
                                 <el-popover trigger="hover" placement="top">
-                                    <p v-for="(item,index) in scope.row.agreementTitle">协议{{index + 1}}: {{item}}</p>
+                                    <p v-for="(item, index) in scope.row.agreementTitle">{{ $t('investigate.agreement') }}{{index + 1}}: {{item}}</p>
                                     <div slot="reference">
                                         <el-tag size="medium">{{ scope.row.agreementTitle }}</el-tag>
                                     </div>
@@ -165,7 +164,7 @@
                                     style="margin-left: 0.1rem"
                                     size="mini"
                                     type="primary"
-                                    @click="navRoute('申请', scope.row)">{{ scope.row.applyStatusBtnDesc}}</el-button>
+                                    @click="navRoute('申请', scope.row)">{{ scope.row.applyStatusBtnDesc }}</el-button>
                             </template>
                         </el-table-column>
                         <el-table-column
@@ -191,7 +190,7 @@
                         </el-table-column>
                     </el-table>
                 </div>
-                <div class="justify-content-center" style="width: 100%;margin-top: 0.2rem">
+                <div class="justify-content-center" style="width: 100%;margin-top: 0.2rem;">
                     <el-pagination
                         @current-change="handleCurrentChange"
                         :current-page="QueryOrderListModel.pageNum"
@@ -224,9 +223,9 @@
                 error: null,
                 content: [
                     {title: this.$t('investigate.signTheAgreement'), imgUrl: require('../assets/img/investigate/step1.png'), toUrl: ''},
-                    {title: '填写申请表', imgUrl: require('../assets/img/investigate/step2.png'), toUrl: ''},
-                    {title: '金额支付', imgUrl: require('../assets/img/investigate/step3.png'), toUrl: ''},
-                    {title: '结果反馈', imgUrl: require('../assets/img/investigate/step4.png'), toUrl: ''}
+                    {title: this.$t('investigate.submitAnApplication'), imgUrl: require('../assets/img/investigate/step2.png'), toUrl: ''},
+                    {title: this.$t('investigate.payTheApplicationFee'), imgUrl: require('../assets/img/investigate/step3.png'), toUrl: ''},
+                    {title: this.$t('investigate.getDDReport'), imgUrl: require('../assets/img/investigate/step4.png'), toUrl: ''}
                 ],
                 applyStatus: [
                     {value: '1', label: '未提交'},

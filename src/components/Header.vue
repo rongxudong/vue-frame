@@ -81,7 +81,8 @@
                 ],
                 value: this.$i18n.locale,
                 codeImg: require('../assets/img/Home/app-code.png'),
-                defaultAvatarImg: require('../assets/img/Home/default-avatar-img.png')
+                defaultAvatarImg: require('../assets/img/Home/default-avatar-img.png'),
+                fullscreenLoading: false
             };
         },
         methods: {
@@ -89,7 +90,15 @@
                 console.log(key, keyPath);
             },
             selectLanguage (key) {
-                this.value = key;
+                const loading = this.$loading({
+                    lock: false,
+                    text: 'Loading'
+                });
+                setTimeout(() => {
+                    this.$router.go(0);
+                    loading.close();
+                    this.value = key;
+                }, 1000);
             },
             toClient () {
                 document.location.replace(this.$store.state.baseUrl.replace('account.', ''));

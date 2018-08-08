@@ -32,7 +32,7 @@ const Personal = () => import(/* webpackChunkName: "chunkname1" */ '@/pages/Pers
 const FileList = () => import(/* webpackChunkName: "chunkname1" */ '@/pages/FileList.vue')
 const MessageList = () => import(/* webpackChunkName: "chunkname1" */ '@/pages/MessageList.vue')
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
     routes: [
@@ -43,10 +43,7 @@ export default new Router({
         {
             path: '/',
             name: '总览',
-            component: Home,
-            // meta: {
-            //     keepAlive: true // 需要被缓存
-            // }
+            component: Home
         },
         {
             path: '/Investigate',

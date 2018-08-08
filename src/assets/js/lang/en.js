@@ -5,11 +5,17 @@ module.exports = {
         name: "Avenue factoring financing credit system",
         versions: 'v1.0'
     },
-    serverName: {
+    menu: {
+        index: "index",
+        investigate: "Investigate",
         dueDiligence: "Due Diligence",
         GTREvaluation: "GTR Evaluation",
         financialSupport: "Financial Support",
-        accountManagement: "Account Management"
+        accountManagement: "Account Management",
+        personalInformation: "Personal information",
+        verificationOfIdentityCertificate: "Verification of Identity Certificate",
+        personalDetails: "Personal details",
+        passwordChange: "Password change"
     },
     home: {
         checkProcedures: "Check procedures",
@@ -41,6 +47,7 @@ module.exports = {
         serviceObj: "Object",
         statusOfAgreements: "Status of agreements",
         agreements: "Agreements",
+        agreement: "Agreement",
         statusOfApplication: "Status of application",
         applicationFormOperation: "Application form operation",
         amountOfPayment: "Amount of payment",

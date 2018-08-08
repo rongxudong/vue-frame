@@ -7,8 +7,9 @@ import App from './App';
 import router from './router';
 import VueI18n from 'vue-i18n';
 import ElementUI from 'element-ui';
-import enLocale from 'element-ui/lib/locale/lang/en';
-import zhLocale from 'element-ui/lib/locale/lang/zh-CN';
+import elementEnLocale from 'element-ui/lib/locale/lang/en';
+import elementZhLocale from 'element-ui/lib/locale/lang/zh-CN';
+
 import Moment from 'moment';
 import 'babel-polyfill';
 
@@ -20,7 +21,7 @@ import 'normalize.css';
 import './assets/css/_reset.css';
 
 
-/* font-class */
+// font-class
 import '../static/iconfont/iconfont.css';
 
 // 引用文件(自己的)
@@ -28,6 +29,8 @@ import Rem from './assets/js/rem'
 import ajax from './api/base-ajax';
 import LangStorage from './assets/js/lang/local_lang';
 import MyPlugin from './Global';
+import enLocale from './assets/js/lang/en';
+import zhLocale from './assets/js/lang/zh-cn';
 
 // 引用js文件(插件)
 import '../static/iconfont/iconfont';
@@ -47,8 +50,16 @@ const store = new Vuex.Store(StoreOption);
 
 const messages = {
     // 将我们项目中的语言包与Element的语言包进行合并
-    'zh_CN': Object.assign(require('./assets/js/lang/zh-cn'),zhLocale),
-    'en': Object.assign(require('./assets/js/lang/en'),enLocale)
+    // 'zh_CN': Object.assign(require('./assets/js/lang/zh-cn'),zhLocale),
+    // 'en': Object.assign(require('./assets/js/lang/en'),enLocale)
+    zh_CN: {
+        ...zhLocale,
+        ...elementZhLocale
+    },
+    en: {
+        ...enLocale,
+        ...elementEnLocale
+    }
 }
 
 // 国际化
@@ -60,7 +71,7 @@ Vue.use(ElementUI, {
     i18n: (key, value) => i18n.t(key, value) // 在注册Element时设置i18n的处理方法
 });
 
-/* eslint-disable no-new */
+// eslint-disable no-new
 new Vue({
     el: '#app',
     router,

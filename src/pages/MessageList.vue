@@ -3,7 +3,7 @@
         <div class="left bg-style">
             <div class="bottom">
                 <div class="title">
-                    <span>消息列表</span>
+                    <span>{{ $t('home.messages') }}</span>
                     <a href="#" @click="allRead">
                         <el-switch
                             v-model="allReadValue"

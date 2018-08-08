@@ -36,7 +36,6 @@ const options = {
         // 添加tabs
         add_tabs (state, data) {
             state.options.push(data);
-            console.log(state.options)
         },
         // 删除tabs
         delete_tabs (state, route) {

@@ -2,7 +2,7 @@
     <div class="Home-main">
         <div class="right bg-style">
             <div class="title" style="margin: .18rem 0;">
-                <span>公告栏</span>
+                <span>{{ $t('home.notice') }}</span>
                 <!--<a href="#">MORE &gt;&gt;</a>-->
             </div>
             <div class="right-list">

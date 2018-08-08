@@ -34,102 +34,211 @@ const MessageList = () => import(/* webpackChunkName: "chunkname1" */ '@/pages/M
 
 Vue.use(Router);
 
-export default new Router({
-    routes: [
-        {
-            path: '*',
-            redirect: '/'
-        },
-        {
-            path: '/',
-            name: '总览',
-            component: Home
-        },
-        {
-            path: '/Investigate',
-            name: '授信管理',
-            component: Investigate,
-            children: [
-                {
-                    path: '1',
-                    name: '尽职调查',
-                    component: Investigate
-                },
-                {
-                    path: '2',
-                    name: 'GTR评估',
-                    component: Investigate
-                },
-                {
-                    path: '3',
-                    name: '融资授信',
-                    component: Investigate
-                },
-                {
-                    path: '4',
-                    name: '商账管理',
-                    component: Investigate
-                }
-            ]
-        },
-        {
-            path: '/Agreement',
-            name: '签署协议',
-            component: Agreement,
-            meta: {
-                keepAlive: true // 需要被缓存
+let zhRouter = [
+    {
+        path: '*',
+        redirect: '/'
+    },
+    {
+        path: '/',
+        name: '总览',
+        component: Home
+    },
+    {
+        path: '/Investigate',
+        name: '授信管理',
+        component: Investigate,
+        children: [
+            {
+                path: '1',
+                name: '尽职调查',
+                component: Investigate
+            },
+            {
+                path: '2',
+                name: 'GTR评估',
+                component: Investigate
+            },
+            {
+                path: '3',
+                name: '融资授信',
+                component: Investigate
+            },
+            {
+                path: '4',
+                name: '商账管理',
+                component: Investigate
             }
-        },
-        {
-            path: '/QuotaApplicationForm',
-            name: '授信额度申请表',
-            component: QuotaApplicationForm
-        },
-        {
-            path: '/customerApplication',
-            name: '客户申请',
-            component: customerApplication
-        },
-        {
-            path: '/ApplyDetail',
-            name: '申请详情',
-            component: ApplyDetail,
-        },
-        {
-            path: '/RealName',
-            name: '实名认证',
-            component: RealName,
-            meta: {
-                keepAlive: true // 需要被缓存
-            }
-        },
-        {
-            path: '/CustomerPool',
-            name: '客户池',
-            component: CustomerPool,
-        },
-        {
-            path: '/FileList',
-            name: '公告列表',
-            component: FileList,
-        },
-        {
-            path: '/MessageList',
-            name: '消息列表',
-            component: MessageList,
-        },
-        {
-            path: '/personal',
-            name: '个人资料',
-            component: Personal,
-            meta: {
-                keepAlive: true // 需要被缓存
-            }
-        },
-        {
-            path: '/password',
-            name: '修改密码',
-            component: Password,
+        ]
+    },
+    {
+        path: '/Agreement',
+        name: '签署协议',
+        component: Agreement,
+        meta: {
+            keepAlive: true // 需要被缓存
         }
-    ]
+    },
+    {
+        path: '/QuotaApplicationForm',
+        name: '授信额度申请表',
+        component: QuotaApplicationForm
+    },
+    {
+        path: '/customerApplication',
+        name: '客户申请',
+        component: customerApplication
+    },
+    {
+        path: '/ApplyDetail',
+        name: '申请详情',
+        component: ApplyDetail,
+    },
+    {
+        path: '/RealName',
+        name: '实名认证',
+        component: RealName,
+        meta: {
+            keepAlive: true // 需要被缓存
+        }
+    },
+    {
+        path: '/CustomerPool',
+        name: '客户池',
+        component: CustomerPool,
+    },
+    {
+        path: '/FileList',
+        name: '公告列表',
+        component: FileList,
+    },
+    {
+        path: '/MessageList',
+        name: '消息列表',
+        component: MessageList,
+    },
+    {
+        path: '/personal',
+        name: '个人资料',
+        component: Personal,
+        meta: {
+            keepAlive: true // 需要被缓存
+        }
+    },
+    {
+        path: '/password',
+        name: '修改密码',
+        component: Password,
+    }
+];
+let enRouter = [
+    {
+        path: '*',
+        redirect: '/'
+    },
+    {
+        path: '/',
+        name: 'Overview',
+        component: Home
+    },
+    {
+        path: '/Investigate',
+        name: 'Credit Management',
+        component: Investigate,
+        children: [
+            {
+                path: '1',
+                name: 'Due Diligence',
+                component: Investigate
+            },
+            {
+                path: '2',
+                name: 'GTR Evaluation',
+                component: Investigate
+            },
+            {
+                path: '3',
+                name: 'Financial Support',
+                component: Investigate
+            },
+            {
+                path: '4',
+                name: 'Account Management',
+                component: Investigate
+            }
+        ]
+    },
+    {
+        path: '/Agreement',
+        name: '签署协议',
+        component: Agreement,
+        meta: {
+            keepAlive: true // 需要被缓存
+        }
+    },
+    {
+        path: '/QuotaApplicationForm',
+        name: '授信额度申请表',
+        component: QuotaApplicationForm
+    },
+    {
+        path: '/customerApplication',
+        name: '客户申请',
+        component: customerApplication
+    },
+    {
+        path: '/ApplyDetail',
+        name: '申请详情',
+        component: ApplyDetail,
+    },
+    {
+        path: '/RealName',
+        name: 'Verification of Identity Certificate',
+        component: RealName,
+        meta: {
+            keepAlive: true // 需要被缓存
+        }
+    },
+    {
+        path: '/personal',
+        name: 'Personal details',
+        component: Personal,
+        meta: {
+            keepAlive: true // 需要被缓存
+        }
+    },
+    {
+        path: '/password',
+        name: 'Password change',
+        component: Password,
+    },
+    {
+        path: '/CustomerPool',
+        name: '客户池',
+        component: CustomerPool,
+    },
+    {
+        path: '/FileList',
+        name: '公告列表',
+        component: FileList,
+    },
+    {
+        path: '/MessageList',
+        name: '消息列表',
+        component: MessageList,
+    }
+];
+
+let localLang = window.localStorage.getItem('user_lang');
+alert(localLang)
+if (localLang === 'en') {
+
+} else {
+
+}
+
+let routerList = zhRouter;
+
+export default new Router({
+    routes: routerList
 })

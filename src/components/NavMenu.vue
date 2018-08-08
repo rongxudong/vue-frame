@@ -65,9 +65,7 @@
 
             },
             selectItems(index, indexPath) {
-
                 localStorage.setItem('currentRoutePath', index);
-
             }
         }
     }
@@ -75,8 +73,6 @@
 
 <style lang="less" rel="stylesheet/less">
     @import "../assets/css/_variable";
-
-
 
     .el-menu-vertical-demo {
         width: 100%;

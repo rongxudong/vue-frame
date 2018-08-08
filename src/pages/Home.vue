@@ -75,22 +75,22 @@
             return {
                 UseStep: [
                     {
-                        name: '尽职调查',
+                        name: this.$t('menu.dueDiligence'),
                         url: require('../assets/img/Home/step1.png'),
                         route: '/Investigate/1'
                     },
                     {
-                        name: 'GTR评估',
+                        name: this.$t('menu.GTREvaluation'),
                         url: require('../assets/img/Home/step2.png'),
                         route: '/Investigate/2'
                     },
                     {
-                        name: '授信申请',
+                        name: this.$t('menu.financialSupport'),
                         url: require('../assets/img/Home/step3.png'),
                         route: '/Investigate/3'
                     },
                     {
-                        name: '商账管理',
+                        name: this.$t('menu.accountManagement'),
                         url: require('../assets/img/Home/step4.png'),
                         route: '/Investigate/4'
                     }

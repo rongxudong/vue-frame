@@ -2,19 +2,19 @@
     <div class="apply-detail bg-style">
         <div class="align_items-center head-border">
             <div class="rectangle"></div>
-            <h5 class="head-text">授信申请状态</h5>
+            <h5 class="head-text">{{ $t('applyDetail.statusOfCreditApplication') }}</h5>
         </div>
-        <h4 class="apply-status" v-if="BusinessAccountGtcpApply.status == 2">审核已提交</h4>
-        <h4 class="apply-status" v-else-if="BusinessAccountGtcpApply.status == 4">审核已通过</h4>
-        <h4 class="apply-status" v-else-if="BusinessAccountGtcpApply.status == 5">审核已终止</h4>
+        <h4 class="apply-status" v-if="BusinessAccountGtcpApply.status == 2">{{ $t('applyDetail.submitted') }}</h4>
+        <h4 class="apply-status" v-else-if="BusinessAccountGtcpApply.status == 4">{{ $t('applyDetail.passed') }}</h4>
+        <h4 class="apply-status" v-else-if="BusinessAccountGtcpApply.status == 5">{{ $t('applyDetail.terminated') }}</h4>
         <div class="align_items-center" style="height: 50px;margin-bottom: .1rem">
             <div class="rectangle"></div>
-            <h5 class="head-text">GTCP申请表</h5>
+            <h5 class="head-text">{{ $t('applyDetail.GTCPApplicationForm') }}</h5>
         </div>
         <div id="pdf" class="pdfobject-container"></div>
         <div class="align_items-center head-border" style="height: 50px;margin-top: 0.14rem;">
             <div class="rectangle"></div>
-            <h5 class="head-text" style="margin-left: 0.1rem">相关文件</h5>
+            <h5 class="head-text" style="margin-left: 0.1rem">{{ $t('applyDetail.relatedFiles') }}</h5>
         </div>
         <div class="right-list" style="width: 450px;margin-top: 0.2rem;border: 1px solid transparent;">
             <div class="item" v-for="(item, index) in BusinessAccountGtcpApply.files" :key="index">
@@ -29,8 +29,8 @@
                     {{item.fileName}}
                 </div>
                 <div class="file-operate align_items flex_end">
-                    <span class="operate look" @click="onLook(item, item.fileName)">查看</span>
-                    <span class="operate upLoad" @click="onDownload(item, item.fileName)">下载</span>
+                    <span class="operate look" @click="onLook(item, item.fileName)">{{ $t('button.check') }}</span>
+                    <span class="operate upLoad" @click="onDownload(item, item.fileName)">{{ $t('button.download') }}</span>
                 </div>
             </div>
         </div>
@@ -78,14 +78,13 @@
                     }
                 });
             },
-
             preViewPDF(pdfPath) {
                 if (pdfPath) {
                     PDFObject.embed(this.$store.state.resUrl + pdfPath, '#pdf');
                 } else {
                     this.$message({
                         type: 'error',
-                        message: '文件出错'
+                        message: this.$t('applyDetail.fileError')
                     })
                 }
             },

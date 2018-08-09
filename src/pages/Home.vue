@@ -29,7 +29,7 @@
                         <span>{{item.creatime | filterTime('YYYY-MM-DD HH:mm')}}</span>
                     </div>
                     <div class="msg-item-right flex_end">
-                        <button type="button" class="look-btn" v-on:click="navRoute(item)">查看详情</button>
+                        <button type="button" class="look-btn" v-on:click="navRoute(item)">{{ $t('home.details') }}</button>
                     </div>
                 </div>
             </div>
@@ -52,8 +52,8 @@
                         {{item.fileName}}
                     </div>
                     <div class="file-operate align_items flex_end">
-                        <a class="operate look" @click="onLook(item, item.fileName)">查看</a>
-                        <a class="operate upLoad" @click="onDownload(item, item.fileName)">下载</a>
+                        <a class="operate look" @click="onLook(item, item.fileName)">{{ $t('button.check') }}</a>
+                        <a class="operate upLoad" @click="onDownload(item, item.fileName)">{{ $t('button.download') }}</a>
                     </div>
                 </div>
             </div>

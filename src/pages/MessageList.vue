@@ -7,7 +7,7 @@
                     <a href="#" @click="allRead">
                         <el-switch
                             v-model="allReadValue"
-                            active-text="全部标为已读"
+                            :active-text="$t('home.allRead')"
                             active-color="#dcdfe6"
                             inactive-color="#13ce66"
                             :disabled="allReadValue">
@@ -22,7 +22,7 @@
                         <span>{{item.creatime | filterTime('YYYY-MM-DD HH:mm')}}</span>
                     </div>
                     <div class="msg-item-right flex_end">
-                        <button type="button" class="look-btn" @click="navRoute(item)">查看详情</button>
+                        <button type="button" class="look-btn" @click="navRoute(item)">{{ $t('home.details') }}</button>
                     </div>
                 </div>
             </div>

@@ -8,9 +8,19 @@ module.exports = {
         save: "Save",
         submit: "Submit"
     },
+    button: {
+        check: "Check",
+        download: "Down"
+    },
     header: {
         name: "User Center",
-        versions: 'v1.0'
+        versions: 'v1.0',
+        homepage: "Homepage",
+        personalData: "Personal data",
+        realName: "Certification",
+        logout: "Log out",
+        confirmExit: "Confirm exit？",
+        logOutHasBeenCanceled: "Log out has been canceled"
     },
     menu: {
         index: "index",
@@ -27,7 +37,9 @@ module.exports = {
     home: {
         checkProcedures: "Check procedures",
         messages: "Messages",
-        notice: "Notice"
+        notice: "Notice",
+        details: "Details",
+        allRead: "Mark as read"
     },
     investigate: {
         signTheAgreement: "Sign the agreement",
@@ -79,6 +91,15 @@ module.exports = {
         uploadTips: "Please upload basic information, trading documents, financial statement, related videos, and pictures of products and company. Contact financial consultants for specific requirement.",
         uploadBtn: "Upload",
         uploadTypeTips: "You can only upload JPG/PNG/WORD/PDF/XLSX, and no more than 50MB!"
+    },
+    applyDetail: {
+        statusOfCreditApplication: "Status of Credit application",
+        submitted: "Submitted",
+        passed: "Passed",
+        terminated: "Terminated",
+        GTCPApplicationForm: "GTCP application form",
+        relatedFiles: "Related files",
+        fileError: "File error"
     },
     realName: {
         basicInformation: "Basic information",

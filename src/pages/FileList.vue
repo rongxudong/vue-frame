@@ -18,8 +18,8 @@
                         {{item.fileName}}
                     </div>
                     <div class="file-operate align_items flex_end">
-                        <a class="operate look" @click="onLook(item, item.fileName)">查看</a>
-                        <a class="operate upLoad" @click="onDownload(item, item.fileName)">下载</a>
+                        <a class="operate look" @click="onLook(item, item.fileName)">{{ $t('button.check') }}</a>
+                        <a class="operate upLoad" @click="onDownload(item, item.fileName)">{{ $t('button.download') }}</a>
                     </div>
                 </div>
             </div>

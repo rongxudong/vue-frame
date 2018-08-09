@@ -8,9 +8,19 @@ module.exports = {
         save: "保 存",
         submit: "提 交"
     },
+    button: {
+        check: "查看",
+        download: "下载"
+    },
     header: {
         name: "用户中心",
-        versions: 'v1.0'
+        versions: 'v1.0',
+        homepage: "官网首页",
+        personalData: "个人资料",
+        realName: "实名认证",
+        logout: "退出登录",
+        confirmExit: "确认退出吗？",
+        logOutHasBeenCanceled: "已取消退出登录"
     },
     menu: {
         index: "总览",
@@ -27,7 +37,9 @@ module.exports = {
     home: {
         checkProcedures: "使用流程查看",
         messages: "消息",
-        notice: "公告栏"
+        notice: "公告栏",
+        details: "查看详情",
+        allRead: "全部标为已读"
     },
     investigate: {
         signTheAgreement: "签署协议",
@@ -79,6 +91,15 @@ module.exports = {
         uploadTips: "请上传公司基本资料、贸易资料、财务资料、产品图片、公司图片以及相关视频，具体需上传的资料以顾问的要求为主",
         uploadBtn: "点击上传",
         uploadTypeTips: "只能上传jpg/png、word、pdf、xlsx等相关文件，且不超过50M!"
+    },
+    applyDetail: {
+        statusOfCreditApplication: "授信申请状态",
+        submitted: "审核已提交",
+        passed: "审核已通过",
+        terminated: "审核已终止",
+        GTCPApplicationForm: "GTCP申请表",
+        relatedFiles: "相关文件",
+        fileError: "文件出错"
     },
     realName: {
         basicInformation: "基本信息",

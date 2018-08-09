@@ -38,16 +38,16 @@
                             <!--<a class="header-dropdown-style" href="javascript:void(0);">真实姓名</a>-->
                         <!--</el-dropdown-item>-->
                         <el-dropdown-item>
-                            <a class="header-dropdown-style" @click="toClient()">官网首页</a>
+                            <a class="header-dropdown-style" @click="toClient()">{{ $t('header.homepage') }}</a>
                         </el-dropdown-item>
                         <el-dropdown-item>
-                            <a class="header-dropdown-style" @click="toView('/Personal')">个人资料</a>
+                            <a class="header-dropdown-style" @click="toView('/Personal')">{{ $t('header.personalData') }}</a>
                         </el-dropdown-item>
                         <el-dropdown-item>
-                            <a class="header-dropdown-style" @click="toView('/RealName')">实名认证</a>
+                            <a class="header-dropdown-style" @click="toView('/RealName')">{{ $t('header.realName') }}</a>
                         </el-dropdown-item>
                         <el-dropdown-item>
-                            <a class="header-dropdown-style" href="javascript:void(0);" @click="logout">退出登录</a>
+                            <a class="header-dropdown-style" href="javascript:void(0);" @click="logout">{{ $t('header.logout') }}</a>
                         </el-dropdown-item>
                     </el-dropdown-menu>
                 </el-dropdown>
@@ -107,9 +107,9 @@
                 this.$router.push({path: path});
             },
             logout () {
-                this.$alert('确认退出吗？', '提示', {
-                    confirmButtonText: '确定',
-                    cancelButtonText: '取消',
+                this.$alert(this.$t('header.confirmExit'), this.$t('dialog.tips'), {
+                    confirmButtonText: this.$t('dialog.ok'),
+                    cancelButtonText: this.$t('dialog.cancel'),
                     type: 'warning'
                 }).then(() => {
                     this.$ajax.post('/api/bussiness/account/user/logout', null, res => {
@@ -126,7 +126,7 @@
                 }).catch(() => {
                     this.$message({
                         type: 'info',
-                        message: '已取消退出登录'
+                        message: this.$t('header.logOutHasBeenCanceled')
                     });
                 })
             },

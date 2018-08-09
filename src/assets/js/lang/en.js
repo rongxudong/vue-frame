@@ -60,6 +60,11 @@ module.exports = {
         submit: "Submit",
 
         createANewService: "Create a new service",
+        accountManagementAuditReport: "Account management audit report",
+        newDialogService: "The agreements will be resigned and the service will be started once creating a new service. Please contact financial consultant first",
+        createAService: "Create a service",
+        createSuccessMessage: "Succeed in applying for DD service, related agreements is being audited, please wait",
+
         orderID: "Order ID",
         typeOfService: "Type of service",
         dateOfSubmit: "Date of submit",
@@ -154,5 +159,23 @@ module.exports = {
         passwordDoesntMatch: "Password doesn’t match",
         enterNewOldPassword: "The new password cannot be the same as the old one",
         success: "Success"
+    },
+    //select
+    selectApplyStatus: {
+        uncommitted: "Uncommitted",
+        waitingForAudit: "Waiting for audit",
+        rejected: "Rejected",
+        passed: "Passed",
+        terminated: "Terminated"
+    },
+    selectAgreementStatus: {
+        unedited: "Unedited",
+        unreviewed: "Unreviewed",
+        unsigned: "Unsigned",
+        signed: "Signed"
+    },
+    selectPayStatus: {
+        paid: "Paid",
+        unpaid: "Unpaid"
     }
 };

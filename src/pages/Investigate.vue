@@ -202,12 +202,12 @@
             </div>
         </div>
         <el-dialog
-                title="商管审核报告"
+                :title="$t('investigate.accountManagementAuditReport')"
                 :visible.sync="dialogVisible"
                 width="70%">
             <span v-html="reportContent" id="reportContent"></span>
             <span slot="footer" class="dialog-footer">
-                <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+                <el-button type="primary" @click="dialogVisible = false">{{ $t('dialog.ok') }}</el-button>
             </span>
         </el-dialog>
     </div>
@@ -228,21 +228,21 @@
                     {title: this.$t('investigate.getDDReport'), imgUrl: require('../assets/img/investigate/step4.png'), toUrl: ''}
                 ],
                 applyStatus: [
-                    {value: '1', label: '未提交'},
-                    {value: '2', label: '已提交待审核'},
-                    {value: '3', label: '已审核驳回'},
-                    {value: '4', label: '已审核通过'},
-                    {value: '5', label: '已审核终止'}
+                    {value: '1', label: this.$t('selectApplyStatus.uncommitted')},
+                    {value: '2', label: this.$t('selectApplyStatus.waitingForAudit')},
+                    {value: '3', label: this.$t('selectApplyStatus.rejected')},
+                    {value: '4', label: this.$t('selectApplyStatus.passed')},
+                    {value: '5', label: this.$t('selectApplyStatus.terminated')}
                 ],
                 agreementStatus: [
-                    {value: '1', label: '未编辑'},
-                    {value: '2', label: '未审核'},
-                    {value: '3', label: '未签署'},
-                    {value: '4', label: '已签署'}
+                    {value: '1', label: this.$t('selectAgreementStatus.unedited')},
+                    {value: '2', label: this.$t('selectAgreementStatus.unreviewed')},
+                    {value: '3', label: this.$t('selectAgreementStatus.unsigned')},
+                    {value: '4', label: this.$t('selectAgreementStatus.signed')}
                 ],
                 payStatus: [
-                    {value: '1', label: '已付款'},
-                    {value: '2', label: '未付款'}
+                    {value: '1', label: this.$t('selectPayStatus.paid')},
+                    {value: '2', label: this.$t('selectPayStatus.unpaid')}
                 ],
                 tableData: [],
                 data: '',
@@ -377,16 +377,16 @@
             },
             showDialog() {
                 const that = this;
-                this.$confirm('创建新服务后，将重新签署协议，并且服务将立即开启请与融资顾问确认后，再创建服务', '提示', {
-                    confirmButtonText: '创建服务',
-                    cancelButtonText: '取消',
+                this.$confirm(this.$t('investigate.newDialogService'), this.$t('dialog.tips'), {
+                    confirmButtonText: this.$t('investigate.createAService'),
+                    cancelButtonText: this.$t('dialog.cancel'),
                     type: 'info'
                 }).then(() => {
                     this.$ajax.post('/api/bussiness/account/order/creatNewOrder?orderType='+this.serviceType, null, (res)=>{
                         if (res.code == 0){
                             this.$message({
                                 type: 'success',
-                                message: '创建尽职调查服务成功，相关协议编辑中，请耐心等待'
+                                message: this.$t('investigate.createSuccessMessage')
                             });
                             that.fetchData();
                         }else {

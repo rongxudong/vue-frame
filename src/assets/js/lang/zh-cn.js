@@ -60,6 +60,11 @@ module.exports = {
         submit: "查询",
 
         createANewService: "创建新服务",
+        accountManagementAuditReport: "商管审核报告",
+        newDialogService: "创建新服务后，将重新签署协议，并且服务将立即开启请与融资顾问确认后，再创建服务",
+        createAService: "创建服务",
+        createSuccessMessage: "创建尽职调查服务成功，相关协议编辑中，请耐心等待",
+
         orderID: "订单ID",
         typeOfService: "服务类型",
         dateOfSubmit: "发起时间",
@@ -154,5 +159,23 @@ module.exports = {
         passwordDoesntMatch: "两次密码不一致",
         enterNewOldPassword: "新密码与旧密码不能相同",
         success: "修改成功"
+    },
+    //select
+    selectApplyStatus: {
+        uncommitted: "未提交",
+        waitingForAudit: "已提交待审核",
+        rejected: "已审核驳回",
+        passed: "已审核通过",
+        terminated: "已审核终止"
+    },
+    selectAgreementStatus: {
+        unedited: "未编辑",
+        unreviewed: "未审核",
+        unsigned: "未签署",
+        signed: "已签署"
+    },
+    selectPayStatus: {
+        paid: "已付款",
+        unpaid: "未付款"
     }
 };

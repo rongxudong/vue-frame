@@ -10,16 +10,12 @@ import Router from 'vue-router'
 // import Hello from '@/pages/Hello'
 
 // const IndexBanner = r => require.ensure([], () => r(require('@/pages/RealName.vue')), 'chunkname1')
-// const IndexContainer = r => require.ensure([], () => r(require('@/pages/CreditApplication.vue')), 'chunkname1')
 // const IndexLayout = r => require.ensure([], () => r(require('@/pages/Agreement.vue')), 'chunkname2')
-// const FormCheckbox = r => require.ensure([], () => r(require('@/pages/QuotaApplicationForm.vue')), 'chunkname2')
 // const FormRadio = r => require.ensure([], () => r(require('@/pages/Investigate.vue')), 'chunkname3')
 // const Hello = r => require.ensure([], () => r(require('@/pages/CustomerPool.vue')), 'chunkname3')
 
 const Home = () => import(/* webpackChunkName: "chunkname1" */ '@/pages/Home.vue')
-const CreditApplication = () => import(/* webpackChunkName: "chunkname1" */ '@/pages/CreditApplication.vue')
 const Agreement = () => import(/* webpackChunkName: "chunkname2" */ '@/pages/Agreement.vue')
-const QuotaApplicationForm = () => import(/* webpackChunkName: "chunkname2" */ '@/pages/QuotaApplicationForm.vue')
 const Investigate = () => import(/* webpackChunkName: "chunkname3" */ '@/pages/Investigate.vue')
 const CustomerPool = () => import(/* webpackChunkName: "chunkname3" */ '@/pages/CustomerPool.vue')
 const ApplyDetail = () => import(/* webpackChunkName: "chunkname3" */ '@/pages/ApplyDetail.vue')
@@ -78,11 +74,6 @@ let zhRouter = [
         meta: {
             keepAlive: true // 需要被缓存
         }
-    },
-    {
-        path: '/QuotaApplicationForm',
-        name: '授信额度申请表',
-        component: QuotaApplicationForm
     },
     {
         path: '/customerApplication',
@@ -175,11 +166,6 @@ let enRouter = [
         meta: {
             keepAlive: true // 需要被缓存
         }
-    },
-    {
-        path: '/QuotaApplicationForm',
-        name: '授信额度申请表',
-        component: QuotaApplicationForm
     },
     {
         path: '/customerApplication',

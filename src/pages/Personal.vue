@@ -144,7 +144,6 @@
                 default:
                     this.getLangType = 'zh';
             }
-            console.log(this.getLangType)
         },
 //        beforeRouteLeave(to, from, next) {
 //            // 设置下一个路由的 meta

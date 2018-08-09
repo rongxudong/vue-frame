@@ -23,7 +23,7 @@
             </el-form-item>
             <el-form-item :label="$t('personal.authenticName')">
                 <p v-if="$store.state.user.baIdentifyStatus == 1">{{baName}}</p>
-                <el-button size="small" type="primary" v-else @click="navRealName">去实名认证</el-button>
+                <el-button size="small" type="primary" v-else @click="navRealName">{{ $t('personal.realNameAuthentication') }}</el-button>
             </el-form-item>
         </el-form>
     </div>

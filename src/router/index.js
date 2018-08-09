@@ -230,7 +230,7 @@ let enRouter = [
 ];
 
 let localLang = window.localStorage.getItem('user_lang');
-alert(localLang)
+// alert(localLang)
 if (localLang === 'en') {
 
 } else {

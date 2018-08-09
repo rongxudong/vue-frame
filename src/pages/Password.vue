@@ -39,35 +39,42 @@
                 if (!this.businessAccountResetPasswordModel.oldPassword) {
                     this.$message({
                         type: 'error',
-                        message: '请输入原密码'
+                        message: this.$t('password.enterOriginalPassword')
                     })
                     return;
                 }
                 if (!this.businessAccountResetPasswordModel.newPassword) {
                     this.$message({
                         type: 'error',
-                        message: '请输入新密码'
+                        message: this.$t('password.enterNewPassword')
                     })
                     return;
                 }
                 if (!this.businessAccountResetPasswordModel.newPasswordAgain) {
                     this.$message({
                         type: 'error',
-                        message: '请输入确认新密码'
+                        message: this.$t('password.enterNewRepassword')
                     })
                     return;
                 }
                 if (this.businessAccountResetPasswordModel.newPasswordAgain !== this.businessAccountResetPasswordModel.newPassword) {
                     this.$message({
                         type: 'error',
-                        message: '两次密码不一致'
+                        message: this.$t('password.passwordDoesntMatch')
+                    })
+                    return;
+                }
+                if (this.businessAccountResetPasswordModel.oldPassword === this.businessAccountResetPasswordModel.newPassword) {
+                    this.$message({
+                        type: 'error',
+                        message: this.$t('password.enterNewOldPassword')
                     })
                     return;
                 }
                 this.$ajax.post('/api/bussiness/account/user/updatePassword',this.businessAccountResetPasswordModel,(res)=>{
                     if (res.code == 0){
-                        this.$alert('修改成功！', '提示', {
-                            confirmButtonText: '确定',
+                        this.$alert(this.$t('password.success'), this.$t('dialog.tips'), {
+                            confirmButtonText: this.$t('dialog.ok'),
                             callback: action => {
                                 this.businessAccountResetPasswordModel.oldPassword = '';
                                 this.businessAccountResetPasswordModel.newPasswordAgain = '';

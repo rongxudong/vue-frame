@@ -4,9 +4,9 @@
             <div class="real-fail-wrap flex_start align_items" v-show="ruleForm['auditFlag'] == '3'">
                 <img src="../assets/img/RealName/real-fail.png"/>
                 <div class="fail-text">
-                    <h1>抱歉，您的实名认证审核未通过，请修改后重新提交！</h1>
+                    <h1>{{ $t('realName.failureTips') }}</h1>
                     <p class="flex_start">
-                        <span>失败原因：</span>
+                        <span>{{ $t('realName.failureReasons') }}：</span>
                         <span>{{failDesc}}</span>
                     </p>
                 </div>
@@ -132,8 +132,8 @@
                     </span>
                 </span>
                 <span slot="footer" class="dialog-footer">
-                    <el-button @click="refreshPage">{{ $t('realName.cancel') }}</el-button>
-                    <el-button type="primary" @click="refreshPage">{{ $t('realName.ok') }}</el-button>
+                    <el-button @click="refreshPage">{{ $t('dialog.cancel') }}</el-button>
+                    <el-button type="primary" @click="refreshPage">{{ $t('dialog.ok') }}</el-button>
                 </span>
             </el-dialog>
             <div class="real-icon">
@@ -286,10 +286,10 @@
                 const isLt20M = file.size / 1024 / 1024 < 20;
 
                 if (!isJPG && !isGIF && !isPNG && !isBMP && !isPDF) {
-                    this.$message.error('上传图片必须是JPG/GIF/PNG/BMP/PDF 格式!');
+                    this.$message.error(this.$t('realName.upLoadImgFormat'));
                 }
                 if (!isLt20M) {
-                    this.$message.error('上传头像图片大小不能超过 20MB!');
+                    this.$message.error(this.$t('realName.upLoadImgSize'));
                 }
                 return (isJPG || isBMP || isGIF || isPNG || isPDF) && isLt20M;
             },

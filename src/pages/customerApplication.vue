@@ -2,15 +2,15 @@
     <div class="bg-style">
         <div class="application-main">
             <div class="basic" v-show="serveOrderType != 4 && serveOrderType != 1">
-                <div class="title">请选择您想申请的额度范围</div>
+                <div class="title">{{ $t('customerApplication.selectRange') }}</div>
                 <ul class="select-range">
-                    <li class="item iconfont" :class="{'is-active': array['quotaRange'] == '1'}" @click="selectRange('1')">十万以上</li>
-                    <li class="item iconfont" :class="{'is-active': array['quotaRange'] == '2'}" @click="selectRange('2')">十万以下</li>
+                    <li class="item iconfont" :class="{'is-active': array['quotaRange'] == '1'}" @click="selectRange('1')">{{ $t('customerApplication.above') }}</li>
+                    <li class="item iconfont" :class="{'is-active': array['quotaRange'] == '2'}" @click="selectRange('2')">{{ $t('customerApplication.under') }}</li>
                 </ul>
             </div>
             <div class="basic">
                 <div class="title">
-                    GTCP申请表
+                    {{ $t('customerApplication.applicationForm') }}
                     <!--<span class="btn-block">-->
                         <!--<button type="button" class="btn">下 载</button>-->
                         <!--<button type="button" class="btn">打 印</button>-->
@@ -28,14 +28,14 @@
                             <li v-for="(children, $index) in inputItem.sub" :key="$index">
                                 <div v-if="children.name == 'iiCompanyName'" class="select-suffix">
                                     <input v-model="array['iiCompanyName']" name="iiCompanyName" class="formInput" type="text"
-                                           :placeholder="$t('personal.placeholder')" autocomplete="off"/>
+                                           :placeholder="$t('realName.placeholder')" autocomplete="off"/>
                                     <el-select
                                             class="suffix"
                                             v-model="array['iiCompanyNameSuffix']"
                                             filterable
                                             remote
                                             reserve-keyword
-                                            placeholder="后缀名"
+                                            :placeholder="$t('customerApplication.suffix')"
                                             :remote-method="remoteMethod"
                                             :loading="loading">
                                         <el-option
@@ -47,7 +47,7 @@
                                     </el-select>
                                 </div>
                                 <input v-else v-model="array[children.name]" :name="children.name" class="formInput"
-                                       type="text" :placeholder="$t('personal.placeholder')" autocomplete="off"/>
+                                       type="text" :placeholder="$t('realName.placeholder')" autocomplete="off"/>
                             </li>
                         </ul>
                     </div>
@@ -60,7 +60,7 @@
                         <ul class="block-bottom">
                             <li>
                                 <input v-model="array['iiProducts']" name="iiProducts" class="formInput" type="text"
-                                       :placeholder="$t('personal.placeholder')" autocomplete="off"/>
+                                       :placeholder="$t('realName.placeholder')" autocomplete="off"/>
                             </li>
                             <li class="creditInput horizontal_center" v-show="serveOrderType != 4">
                                 <el-radio-group v-model="array['iiCreditTermsRequest']">
@@ -73,11 +73,11 @@
                                  && array['iiCreditTermsRequest'] != 150"
                                        v-on:blur="change(array['iiCreditTermsRequest'])"
                                        v-model="array['iiCreditTermsRequest']" name="iiCreditTermsRequest" class="formInput"
-                                       type="text" :placeholder="$t('personal.placeholder')" autocomplete="off" style="width: 96px;margin-left: 20px;"/>
+                                       type="text" :placeholder="$t('realName.placeholder')" autocomplete="off" style="width: 96px;margin-left: 20px;"/>
                             </li>
                             <li v-show="serveOrderType != 4">
                                 <input v-model="array['iiTotalCreditLineRequired']" name="iiTotalCreditLineRequired" class="formInput"
-                                       type="text" :placeholder="$t('personal.placeholder')" autocomplete="off"/>
+                                       type="text" :placeholder="$t('realName.placeholder')" autocomplete="off"/>
                             </li>
                         </ul>
                     </div>
@@ -92,14 +92,14 @@
                             <li v-for="(children, $index) in inputItem.sub" :key="$index">
                                 <div v-if="children.name == 'iiCompanyName'" class="select-suffix">
                                     <input v-model="array['iiCompanyName']" name="iiCompanyName" class="formInput" type="text"
-                                           :placeholder="$t('personal.placeholder')" autocomplete="off"/>
+                                           :placeholder="$t('realName.placeholder')" autocomplete="off"/>
                                     <el-select
                                             class="suffix"
                                             v-model="array['iiCompanyNameSuffix']"
                                             filterable
                                             remote
                                             reserve-keyword
-                                            placeholder="后缀名"
+                                            :placeholder="$t('customerApplication.suffix')"
                                             :remote-method="remoteMethod"
                                             :loading="loading">
                                         <el-option
@@ -111,7 +111,7 @@
                                     </el-select>
                                 </div>
                                 <input v-else-if="children.name !== 'iiTotalCreditLimitRequest'" v-model="array[children.name]" :name="children.name"
-                                       class="formInput" type="text" :placeholder="$t('personal.placeholder')" autocomplete="off"/>
+                                       class="formInput" type="text" :placeholder="$t('realName.placeholder')" autocomplete="off"/>
                                 <div v-else>
                                     <el-radio v-model="array['iiTotalCreditLimitRequest']" label="1" border>$100,000</el-radio>
                                     <el-radio v-model="array['iiTotalCreditLimitRequest']" label="2" border>$50,000</el-radio>
@@ -127,7 +127,7 @@
                         </ul>
                         <ul class="block-bottom">
                             <li>
-                                <input v-model="array['iiPhoneNo']" name="iiPhoneNo" class="formInput" type="text" :placeholder="$t('personal.placeholder')"
+                                <input v-model="array['iiPhoneNo']" name="iiPhoneNo" class="formInput" type="text" :placeholder="$t('realName.placeholder')"
                                        autocomplete="off"/>
                             </li>
                             <li class="creditInput horizontal_center">
@@ -137,11 +137,11 @@
                                     <el-radio :label="Others">Others</el-radio>
                                 </el-radio-group>
                                 <input v-show="array['iiCreditTermsRequest'] != 60 && array['iiCreditTermsRequest'] != 90" v-model="array['iiCreditTermsRequest']" v-on:blur="change(array['iiCreditTermsRequest'])"
-                                       name="iiCreditTermsRequest" class="formInput" type="text" :placeholder="$t('personal.placeholder')" autocomplete="off" style="width: 96px;margin-left: 20px;"/>
+                                       name="iiCreditTermsRequest" class="formInput" type="text" :placeholder="$t('realName.placeholder')" autocomplete="off" style="width: 96px;margin-left: 20px;"/>
                             </li>
                             <li>
                                 <input v-model="array['iiEmailAddress']" name="iiEmailAddress" class="formInput" type="text"
-                                       :placeholder="$t('personal.placeholder')" autocomplete="off"/>
+                                       :placeholder="$t('realName.placeholder')" autocomplete="off"/>
                             </li>
                         </ul>
                     </div>
@@ -157,7 +157,7 @@
                         <ul class="block-bottom">
                             <li v-for="children in inputItem.sub" :key="children.text">
                                 <input v-model="array[children.name]" :name="children.name" class="formInput"
-                                       type="text" :placeholder="$t('personal.placeholder')" autocomplete="off"/>
+                                       type="text" :placeholder="$t('realName.placeholder')" autocomplete="off"/>
                             </li>
                         </ul>
                     </div>
@@ -168,7 +168,7 @@
                         <ul class="block-bottom">
                             <li>
                                 <input v-model="array['siDurationOfCooperation']" name="siDurationOfCooperation"
-                                       class="formInput" type="text" :placeholder="$t('personal.placeholder')" autocomplete="off"/>
+                                       class="formInput" type="text" :placeholder="$t('realName.placeholder')" autocomplete="off"/>
                             </li>
                         </ul>
                         <ul class="block-top" style="border-top: 1px solid #cccccc;border-bottom: none;">
@@ -184,7 +184,7 @@
                     <ul class="block-bottom">
                         <li v-for="children in inputItem.sub" :key="children.text">
                             <input  v-model="array[children.name]" :name="children.name" class="formInput" type="text"
-                                    :placeholder="$t('personal.placeholder')" autocomplete="off"/>
+                                    :placeholder="$t('realName.placeholder')" autocomplete="off"/>
                         </li>
                     </ul>
                 </div>
@@ -197,7 +197,7 @@
                     <ul class="block-bottom">
                         <li v-for="children in inputItem.sub" :key="children.text">
                             <input  v-model="array[children.name]" :name="children.name" class="formInput" type="text"
-                                    :placeholder="$t('personal.placeholder')" autocomplete="off"/>
+                                    :placeholder="$t('realName.placeholder')" autocomplete="off"/>
                         </li>
                     </ul>
                 </div>
@@ -245,9 +245,9 @@
                 </div>
             </div>
             <div class="basic" v-show="serveOrderType != 1">
-                <div class="title">相关文件上传</div>
+                <div class="title">{{ $t('customerApplication.title') }}</div>
                 <div class="upload-wrap">
-                    <p class="text-upload">请上传公司基本资料、贸易资料、财务资料、产品图片、公司图片以及相关视频，具体需上传的资料以顾问的要求为主</p>
+                    <p class="text-upload">{{ $t('customerApplication.uploadTips') }}</p>
                     <div class="file-upload">
                         <el-upload
                                 class="upload-demo"
@@ -261,15 +261,15 @@
                                 :before-remove="beforeRemove"
                                 :before-upload="beforeUpload"
                                 :file-list="fileList">
-                            <el-button size="small" type="primary">点击上传</el-button>
-                            <div slot="tip" class="el-upload__tip">只能上传jpg/png、word、pdf、xlsx等相关文件，且不超过50M</div>
+                            <el-button size="small" type="primary">{{ $t('customerApplication.uploadBtn') }}</el-button>
+                            <div slot="tip" class="el-upload__tip">{{ $t('customerApplication.uploadTypeTips') }}</div>
                         </el-upload>
                     </div>
                 </div>
             </div>
             <div class="basic text-center">
-                <button type="button" value="保存" class="save-btn" @click="saveBtn()">保 存</button>
-                <button type="button" value="提交" class="submit-btn" @click="submitBtn()">提 交</button>
+                <button type="button" class="save-btn" @click="saveBtn()">{{ $t('dialog.save') }}</button>
+                <button type="button" class="submit-btn" @click="submitBtn()">{{ $t('dialog.submit') }}</button>
             </div>
         </div>
     </div>
@@ -453,7 +453,7 @@
                     if(value == 90 || value == 120 || value == 150) {
                         this.$message({
                             type: 'error',
-                            message: '请输入其他的天数'
+                            message: this.$t('customerApplication.enterOtherDays')
                         });
                         this.Others = 0;
                         this.array['iiCreditTermsRequest'] = 0;
@@ -464,7 +464,7 @@
                     if(value == 60 || value == 90) {
                         this.$message({
                             type: 'error',
-                            message: '请输入其他的天数'
+                            message: this.$t('customerApplication.enterOtherDays')
                         });
                         this.Others = 0;
                         this.array['iiCreditTermsRequest'] = 0;
@@ -490,22 +490,22 @@
 //                const isJPG = file.type === 'image/jpeg';
                 const isLt2M = file.size / 1024 / 1024 < 50;
                 if (!isLt2M) {
-                    this.$message.error('上传文件大小不能超过 50MB!');
+                    this.$message.error(this.$t('customerApplication.messageErrorSize'));
                 }
                 return isLt2M;
             },
             // 删除文件之前的钩子
             beforeRemove(file, fileList) {
-                this.$confirm(`确定移除 ${ file.name }?`, '提示', {
-                    confirmButtonText: '确定',
-                    cancelButtonText: '取消',
+                this.$confirm(this.$t('customerApplication.sureToRemove') + ` ${ file.name }?`, this.$t('dialog.tips'), {
+                    confirmButtonText: this.$t('dialog.ok'),
+                    cancelButtonText: this.$t('dialog.cancel'),
                     type: 'warning'
                 }).then(() => {
                     this.asyncReq(file,fileList) // 在这里真正的处理图片列表
                 }).catch(() => {
                     this.$message({
                         type: 'info',
-                        message: '已取消删除'
+                        message: this.$t('customerApplication.deleted')
                     });
                 });
                 return false; // 这是重点,不管上面的操作结果如何都返回false
@@ -1076,7 +1076,7 @@
             }
             .file-upload {
                 width: 100%;
-                max-width: 360px;
+                max-width: 480px;
                 min-width: 200px;
             }
         }

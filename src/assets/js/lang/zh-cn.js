@@ -1,8 +1,15 @@
 'use strict';
 
 module.exports = {
+    dialog: {
+        cancel: "取 消",
+        ok: "确 定",
+        tips: "提 示",
+        save: "保 存",
+        submit: "提 交"
+    },
     header: {
-        name: "大道保理融资增信系统",
+        name: "用户中心",
         versions: 'v1.0'
     },
     menu: {
@@ -56,6 +63,23 @@ module.exports = {
         pleaseSelect: "请选择",
         pleaseEnterTheContent: "请输入内容"
     },
+    customerApplication: {
+        selectRange: "请选择您想申请的额度范围",
+        above: "十万以上",
+        under : "十万以下",
+        applicationForm: "GTCP申请表",
+        suffix: "后缀名",
+        enterOtherDays: "请输入其他的天数",
+
+        messageErrorSize: "上传文件大小不能超过 50MB!",
+        sureToRemove: "确定移除",
+        deleted: "已取消删除",
+
+        title: "相关文件上传",
+        uploadTips: "请上传公司基本资料、贸易资料、财务资料、产品图片、公司图片以及相关视频，具体需上传的资料以顾问的要求为主",
+        uploadBtn: "点击上传",
+        uploadTypeTips: "只能上传jpg/png、word、pdf、xlsx等相关文件，且不超过50M!"
+    },
     realName: {
         basicInformation: "基本信息",
         name: "姓名",
@@ -77,22 +101,30 @@ module.exports = {
         paragraphOne: "恭喜您实名认证提交成功。",
         paragraphTwo: "我们将为你进行实名认证审核，请耐心等待",
         paragraphThree: "个工作日。",
-        cancel: "取 消",
-        ok: "确 定"
+
+        upLoadImgFormat: "上传图片必须是JPG/GIF/PNG/BMP/PDF 格式!",
+        upLoadImgSize: "上传头像图片大小不能超过 20MB!",
+
+        failureTips: "抱歉，您的实名认证审核未通过，请修改后重新提交！",
+        failureReasons: "失败原因"
     },
     personal: {
         profilePhoto: "头像",
         accountNo: "帐号",
         authenticName: "真实姓名",
-        changeProfilePhoto: "更换头像"
+        changeProfilePhoto: "更换头像",
+        realNameAuthentication: "去实名认证"
     },
     password: {
         oldPassword: "原密码",
         newPassword: "新密码",
         confirmPassword: "确认新密码",
-        change: "修改"
-    },
-    customerApplication: {
-
+        change: "修改",
+        enterOriginalPassword: "请输入原密码",
+        enterNewPassword: "请输入新密码",
+        enterNewRepassword: "请输入确认新密码",
+        passwordDoesntMatch: "两次密码不一致",
+        enterNewOldPassword: "新密码与旧密码不能相同",
+        success: "修改成功"
     }
 };

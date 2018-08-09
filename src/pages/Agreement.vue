@@ -7,13 +7,13 @@
 
                     <div class="justify_content_center sign-btn-wrap" v-if="item.status == 4">
                         <div>
-                            <el-button type="primary" style="width: 140px">已完成签署</el-button>
+                            <el-button type="primary" style="width: 140px">{{ $t('agreement.alreadySigned') }}</el-button>
                         </div>
                     </div>
                     <div class="flex_direction_column align_items-center sign-btn-wrap" v-else>
-                        <el-checkbox :id="item.checkId" style="margin-bottom: 0.25rem" v-model="checked[index]">同意以上协议</el-checkbox>
+                        <el-checkbox :id="item.checkId" style="margin-bottom: 0.25rem" v-model="checked[index]">{{ $t('agreement.agreeOnAgreementsAbove') }}</el-checkbox>
                         <div>
-                            <el-button type="primary" style="width: 120px" v-on:click="signAgreement(item.id)">签署</el-button>
+                            <el-button type="primary" style="width: 120px" v-on:click="signAgreement(item.id)">{{ $t('agreement.sign') }}</el-button>
                         </div>
                     </div>
                 </div>
@@ -25,7 +25,6 @@
 <script>
 
     export default {
-
         data() {
             return {
                 activeName: '',
@@ -47,8 +46,7 @@
                     this.orderInfo = this.$route.query;
                     this.fetchData();
                 }
-
-            },
+            }
         },
         methods: {
             handleClick(tab, event) {
@@ -62,7 +60,7 @@
                 } else {
                     this.$message({
                         type: 'error',
-                        message: '文件出错'
+                        message: this.$t('applyDetail.fileError')
                     })
                 }
             },
@@ -76,9 +74,7 @@
                             this.agreementList[i].nameId = 'name'+i;
                             this.checked[i] = false;
                         }
-
                         this.selectRecentTab();
-
                     } else {
                         this.$message({
                             type: 'error',
@@ -93,7 +89,7 @@
                         if (res.code == 0) {
                             this.$message({
                                 type: 'success',
-                                message: '签署成功'
+                                message: this.$t('agreement.success')
                             })
                             for (let i = 0; i < res.data.length; i++) {
                                 if (res.data[i].status == 3) {
@@ -123,7 +119,7 @@
                 } else {
                     this.$message({
                         type: 'info',
-                        message: '请勾选协议'
+                        message: this.$t('agreement.pleaseChooseAgreement')
                     })
                 }
             },
@@ -146,7 +142,6 @@
                         this.isFirst = false;
                     },1000)
                 }
-
             }
         }
     }
@@ -169,6 +164,5 @@
         padding: 20px;
         background-color: #fff;
     }
-
 </style>
 

@@ -1,6 +1,6 @@
 <template>
     <footer class="copy">
-        Copy &copy; DEMO
+        Footer
     </footer>
 </template>
 

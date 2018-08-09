@@ -75,6 +75,13 @@ module.exports = {
         pleaseSelect: "请选择",
         pleaseEnterTheContent: "请输入内容"
     },
+    agreement: {
+        alreadySigned: "已完成签署",
+        agreeOnAgreementsAbove: "同意以上协议",
+        sign: "签署",
+        success: "签署成功",
+        pleaseChooseAgreement: "请勾选协议"
+    },
     customerApplication: {
         selectRange: "请选择您想申请的额度范围",
         above: "十万以上",

@@ -75,6 +75,13 @@ module.exports = {
         pleaseSelect: "Please select",
         pleaseEnterTheContent: "Please enter the content"
     },
+    agreement: {
+        alreadySigned: "Already signed",
+        agreeOnAgreementsAbove: "Agree on agreements above",
+        sign: "Sign",
+        success: "Success",
+        pleaseChooseAgreement: "Please choose agreement"
+    },
     customerApplication: {
         selectRange: "Choose the type of application",
         above: "Above 100K",

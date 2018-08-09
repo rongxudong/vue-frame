@@ -1,6 +1,5 @@
 <template>
     <div class="hello">
-        <c-title :text="title"></c-title>
         <p class="welcome">欢迎使用 vue</p>
         <div v-html="content"></div>
         <div class="block">
@@ -54,8 +53,6 @@
 
 <script>
 
-    import cTitle from '@/components/Title';
-
     export default {
         data () {
             return {
@@ -83,9 +80,6 @@
             handleCurrentChange(val) {
                 console.log(`当前页: ${val}`);
             }
-        },
-        components: {
-            cTitle
         }
     }
 

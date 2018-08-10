@@ -40,6 +40,15 @@
         computed: {
             options() {
                 return this.$store.state.options;
+            },
+            listenLanguage () {
+                return this.$store.state.isLanguage
+            }
+        },
+        watch: {
+            listenLanguage: function (a, b) {
+                const routeName = localStorage.getItem('currentRouteName');
+                console.log(routeName);
             }
         },
         mounted() {

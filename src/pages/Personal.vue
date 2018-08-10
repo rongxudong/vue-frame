@@ -96,6 +96,18 @@
                 this.imgDataUrl = this.$store.state.resUrl + this.$store.state.avatarImg;
                 this.username = this.$store.state.user.username;
                 this.baName = this.$store.state.user.baName;
+            },
+            switchFunc (ele) {
+                switch (ele) {
+                    case 'zh_CN':
+                        this.getLangType = 'zh';
+                        break;
+                    case 'en':
+                        this.getLangType = 'en';
+                        break;
+                    default:
+                        this.getLangType = 'zh';
+                }
             }
         },
         computed: {
@@ -118,33 +130,15 @@
                 this.imgDataUrl = this.$store.state.resUrl + a;
             },
             listenLanguage: function (a, b) {
-                switch (a) {
-                    case 'zh_CN':
-                        this.getLangType = 'zh';
-                        break;
-                    case 'en':
-                        this.getLangType = 'en';
-                        break;
-                    default:
-                        this.getLangType = 'zh';
-                }
+                this.switchFunc(a);
             }
         },
         created () {
             setTimeout(()=>{
                 this.getAvatarImg();
             },1000);
-            switch (this.$store.state.isLanguage) {
-                case 'zh_CN':
-                    this.getLangType = 'zh';
-                    break;
-                case 'en':
-                    this.getLangType = 'en';
-                    break;
-                default:
-                    this.getLangType = 'zh';
-            }
-        },
+            this.switchFunc(this.$store.state.isLanguage);
+        }
 //        beforeRouteLeave(to, from, next) {
 //            // 设置下一个路由的 meta
 //            to.meta.keepAlive = true;  // 让 A 缓存，即不刷新

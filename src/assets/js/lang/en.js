@@ -84,7 +84,8 @@ module.exports = {
         pleaseSelect: "Please select",
         pleaseEnterTheContent: "Please enter the content",
         fillIn: "Fill in",
-        application: "Application"
+        application: "Application",
+        unpaidMessage: "Tips: you cannot fill in the application form. Please contact the financial advisor for payment."
     },
     agreement: {
         alreadySigned: "Already signed",

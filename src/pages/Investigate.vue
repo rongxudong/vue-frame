@@ -411,6 +411,7 @@
                 });
             },
             navRoute(name,query){
+                console.log(name,query);
                 if (this.$t('menu.signAgreements') == name){
                     this.$router.push({
                         name: name,
@@ -425,10 +426,17 @@
                         });
                     }
                     if (query.applyStatusBtnDesc == this.$t('investigate.fillIn')){
-                        this.$router.push({
-                            name: this.$t('menu.customerApplication'),
-                            query: query
-                        });
+                        if(query.payStatus == '1') {
+                            this.$router.push({
+                                name: this.$t('menu.customerApplication'),
+                                query: query
+                            });
+                        } else if (query.payStatus == '2') {
+                            this.$message({
+                                type: 'warning',
+                                message: this.$t('investigate.unpaidMessage')
+                            });
+                        }
                     }
                 }
             },

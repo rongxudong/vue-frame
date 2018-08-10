@@ -84,7 +84,8 @@ module.exports = {
         pleaseSelect: "请选择",
         pleaseEnterTheContent: "请输入内容",
         fillIn: "填写",
-        application: "申请"
+        application: "申请",
+        unpaidMessage: "温馨提示：您还未进行缴费，无法填写申请表，请先联系融资顾问进行缴费。"
     },
     agreement: {
         alreadySigned: "已完成签署",

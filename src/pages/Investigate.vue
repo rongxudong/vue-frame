@@ -2,7 +2,7 @@
     <div class="bg-style">
         <div class="investigate-main">
             <div class="basic">
-                <div class="title process-title line">{{this.serviceTitle[this.serviceType]}}服务流程</div>
+                <div class="title process-title line">{{this.serviceTitle[this.serviceType]}}&nbsp;{{$t('investigate.procedure')}}</div>
                 <ul class="content flex_start">
                     <li v-for="(item, idx) in content" :key="idx" class="flex_start">
                         <div class="step-item">
@@ -22,7 +22,7 @@
                 <div class="search-container flex_direction_column">
                     <div class="flex_direction_row container-head-bg">
                         <img class="image-search" src="../assets/img/investigate/search-icon.png">
-                        <h1 class="text-head" style="margin-left: 0.12rem">{{ $t('investigate.filterQuery') }}</h1>
+                        <h1 class="text-head" style="margin-left: 0.12rem;">{{ $t('investigate.filterQuery') }}</h1>
                     </div>
                     <div class="flex_direction_column">
                         <div class="filter-query flex_start" :class="isLanguage == 'en' ? 'en-input' : ''">
@@ -43,7 +43,7 @@
                                 <el-input
                                     class="amStatus"
                                     :placeholder="$t('investigate.pleaseEnterTheContent')"
-                                    v-model="QueryOrderListModel.userCompanyName"
+                                    v-model="QueryOrderListModel.respondent"
                                     clearable>
                                 </el-input>
                             </div>
@@ -80,7 +80,9 @@
                                     </el-option>
                                 </el-select>
                             </div>
-                            <el-button class="mg17" type="primary" round style="margin-left: 0.2rem;" @click="this.fetchData">{{ $t('investigate.submit') }}</el-button>
+                            <el-button class="mg17" type="primary" round style="margin-left: 0.2rem;" @click="this.fetchData">
+                                {{ $t('investigate.submit') }}
+                            </el-button>
                         </div>
                     </div>
                 </div>
@@ -89,8 +91,13 @@
                 <div class="table-container flex_direction_column">
                     <div class="flex_direction_row container-head-bg">
                         <img class="image-search" src="../assets/img/investigate/tips.png">
-                        <h1 class="text-head flex-1" style="margin-left: 0.12rem;">您可重新创建一个新的{{this.serviceTitle[this.serviceType]}}服务，需重新签署协议，详细情况请联系融资顾问</h1>
-                        <el-button type="primary" size="small" style="margin-right: 0.2rem" @click="showDialog">{{$t('investigate.createANewService')}}</el-button>
+                        <h1 class="text-head flex-1" style="margin-left: 0.12rem;">
+                            {{$t('investigate.tipHeaderPart')}}&nbsp;{{this.serviceTitle[this.serviceType]}}.&nbsp;
+                            {{$t('investigate.tipFooterPart')}}
+                        </h1>
+                        <el-button type="primary" size="small" style="margin-right: 0.2rem" @click="showDialog">
+                            {{$t('investigate.createANewService')}}
+                        </el-button>
                     </div>
                     <el-table
                         border
@@ -125,13 +132,13 @@
                             :label="$t('investigate.statusOfAgreements')"
                             width="180">
                             <template slot-scope="scope">
-                                <span style="margin-left: 10px">{{ scope.row.agreementStatus_str}}</span>
+                                <span style="margin-left: 10px;">{{ scope.row.agreementStatus_str}}</span>
                                 <el-button
                                     v-if="scope.row.btnVisible"
-                                    style="margin-left: 0.1rem"
+                                    style="margin-left: 0.1rem;"
                                     size="mini"
                                     type="primary"
-                                    @click="navRoute('签署协议', scope.row)">{{ scope.row.btnDesc }}</el-button>
+                                    @click="navRoute($t('menu.signAgreements'), scope.row)">{{ scope.row.btnDesc }}</el-button>
                             </template>
                         </el-table-column>
                         <el-table-column
@@ -161,10 +168,10 @@
                             <template slot-scope="scope">
                                 <el-button
                                     v-if="scope.row.applyStatusBtnVisible"
-                                    style="margin-left: 0.1rem"
+                                    style="margin-left: 0.1rem;"
                                     size="mini"
                                     type="primary"
-                                    @click="navRoute('申请', scope.row)">{{ scope.row.applyStatusBtnDesc }}</el-button>
+                                    @click="navRoute($t('investigate.application'), scope.row)">{{ scope.row.applyStatusBtnDesc }}</el-button>
                             </template>
                         </el-table-column>
                         <el-table-column
@@ -182,8 +189,12 @@
                             <template slot-scope="scope">
                                 <ul>
                                     <li v-for="item in scope.row.filesList">
-                                        <el-button type="primary" @click="auditReportDialog(item.url)" v-if="serviceType == 4">{{item.fileName}}</el-button>
-                                        <a v-bind:href="'http://image.financegt.com'+item.url" style="color: #2fa8fd" target="_blank" v-else>{{item.fileName}}</a>
+                                        <el-button type="primary" @click="auditReportDialog(item.url)" v-if="serviceType == 4">
+                                            {{item.fileName}}
+                                        </el-button>
+                                        <a v-bind:href="'http://image.financegt.com'+item.url" style="color: #2fa8fd" target="_blank" v-else>
+                                            {{item.fileName}}
+                                        </a>
                                     </li>
                                 </ul>
                             </template>
@@ -251,7 +262,7 @@
                     orderType: 1,
                     beginDate: '',
                     endDate: '',
-                    userCompanyName: '',
+                    respondent: '',
                     applyStatus: '',
                     payStatus: '',
                     agreementStatus: '',
@@ -266,7 +277,8 @@
                         }
                     }
                 },
-                serviceTitle: ['占位','尽职调查','GTR评估','授信申请','商账管理'],
+                serviceTitle: ['',this.$t('menu.dueDiligence'),this.$t('menu.GTREvaluation'),
+                    this.$t('menu.financialSupport'),this.$t('menu.accountManagement')],
                 serviceType: 1,
                 reportContent: '',
                 dialogVisible: false,
@@ -302,49 +314,49 @@
                         for (let i = 0;i < res.data.list.length;i++){
                             let tableData = res.data.list[i];
                             if (tableData.orderType == 1){
-                                tableData.orderType_str = '尽职调查';
+                                tableData.orderType_str = this.$t('menu.dueDiligence');
                             }else if (tableData.orderType == 2){
-                                tableData.orderType_str = 'GTR评估';
+                                tableData.orderType_str = this.$t('menu.GTREvaluation');
                             }else if (tableData.orderType == 3){
-                                tableData.orderType_str = '授信申请';
+                                tableData.orderType_str = this.$t('menu.dueDiligence');
                             }else if (tableData.orderType == 4){
-                                tableData.orderType_str = '商账管理';
+                                tableData.orderType_str = this.$t('menu.accountManagement');
                             }
 
                             if (tableData.agreementStatus == 1){
-                                tableData.agreementStatus_str = '未编辑';
+                                tableData.agreementStatus_str = this.$t('selectAgreementStatus.unedited');
                                 tableData.btnVisible = false;
                             }else if (tableData.agreementStatus == 2){
-                                tableData.agreementStatus_str = '未审核';
+                                tableData.agreementStatus_str = this.$t('selectAgreementStatus.unreviewed');
                                 tableData.btnVisible = false;
                             }else if (tableData.agreementStatus == 3){
-                                tableData.agreementStatus_str = '未签署';
+                                tableData.agreementStatus_str = this.$t('selectAgreementStatus.unsigned');
                                 tableData.btnVisible = true;
-                                tableData.btnDesc = '签署';
+                                tableData.btnDesc = this.$t('agreement.sign');
                             }else if (tableData.agreementStatus == 4){
-                                tableData.agreementStatus_str = '已签署';
+                                tableData.agreementStatus_str = this.$t('selectAgreementStatus.signed');
                                 tableData.btnVisible = true;
-                                tableData.btnDesc = '查看';
+                                tableData.btnDesc = this.$t('button.check');
                             }
 
                             if (tableData.payStatus == 1){
-                                tableData.payStatus_str = '已支付';
+                                tableData.payStatus_str = this.$t('selectPayStatus.paid');
                             }else if (tableData.payStatus == 2){
-                                tableData.payStatus_str = '未支付';
+                                tableData.payStatus_str = this.$t('selectPayStatus.unpaid');
                             }
 
                             if (tableData.applyStatus == 1){
-                                tableData.applyStatus_str = '未提交';
+                                tableData.applyStatus_str = this.$t('selectApplyStatus.uncommitted');
                             }else if (tableData.applyStatus == 2){
-                                tableData.applyStatus_str = '审核中';
+                                tableData.applyStatus_str = this.$t('selectApplyStatus.shortAuditing');
                             }else if (tableData.applyStatus == 3){
-                                tableData.applyStatus_str = '已驳回';
+                                tableData.applyStatus_str = this.$t('selectApplyStatus.shortRejected');
                             }else if (tableData.applyStatus == 4){
-                                tableData.applyStatus_str = '已通过';
+                                tableData.applyStatus_str = this.$t('selectApplyStatus.shortPassed');
                             }else if (tableData.applyStatus == 5){
-                                tableData.applyStatus_str = '已终止';
+                                tableData.applyStatus_str = this.$t('selectApplyStatus.shortTerminated');
                             }else if (tableData.applyStatus == 6){
-                                tableData.applyStatus_str = '已通过';
+                                tableData.applyStatus_str = this.$t('selectApplyStatus.shortPassed');
                             }
                             //----------------------------------------------------
                             if (tableData.applyStatus  == 1 || tableData.applyStatus  == 3){
@@ -352,11 +364,11 @@
                                     tableData.applyStatusBtnVisible = false;
                                 } else {
                                     tableData.applyStatusBtnVisible = true;
-                                    tableData.applyStatusBtnDesc = '填写';
+                                    tableData.applyStatusBtnDesc = this.$t('investigate.fillIn');
                                 }
                             } else {
                                 tableData.applyStatusBtnVisible = true;
-                                tableData.applyStatusBtnDesc = '查看';
+                                tableData.applyStatusBtnDesc = this.$t('button.check');
                             }
                             //----------------------------------------------------
                             arrayData.push(tableData);
@@ -399,27 +411,26 @@
                 });
             },
             navRoute(name,query){
-                if ('签署协议' == name){
+                if (this.$t('menu.signAgreements') == name){
                     this.$router.push({
                         name: name,
                         query: query
                     });
                 }
-                if ('申请' == name){
-                    if (query.applyStatusBtnDesc == '查看'){
+                if (this.$t('investigate.application') == name){
+                    if (query.applyStatusBtnDesc == this.$t('button.check')){
                         this.$router.push({
-                            name: '申请详情',
+                            name: this.$t('menu.applicationDetails'),
                             query: query
                         });
                     }
-                    if (query.applyStatusBtnDesc == '填写'){
+                    if (query.applyStatusBtnDesc == this.$t('investigate.fillIn')){
                         this.$router.push({
-                            name: '客户申请',
+                            name: this.$t('menu.customerApplication'),
                             query: query
                         });
                     }
                 }
-
             },
             auditReportDialog (orderId) {
                 this.$ajax.post('/api/bussiness/account/order/getBusinessManageHtml/' + orderId, null, res => {
@@ -428,7 +439,7 @@
                     setTimeout(function () {
                         $('#reportContent button').css('display','none');
                         $('#reportContent input.layui-input,textarea.layui-textarea').addClass('layui-disabled').attr('disabled', 'true');
-                    },100)
+                    }, 100);
                 })
             }
         }

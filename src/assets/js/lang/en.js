@@ -23,30 +23,35 @@ module.exports = {
         logOutHasBeenCanceled: "Log out has been canceled"
     },
     menu: {
-        index: "index",
+        overview: "Overview",
         investigate: "Investigate",
         dueDiligence: "Due Diligence",
         GTREvaluation: "GTR Evaluation",
         financialSupport: "Financial Support",
         accountManagement: "Account Management",
-        personalInformation: "Personal information",
-        verificationOfIdentityCertificate: "Verification of Identity Certificate",
-        personalDetails: "Personal details",
-        passwordChange: "Password change"
+        signAgreements: "Sign Agreements",
+        customerApplication: "Customer Application",
+        applicationDetails: "Application Details",
+        AnnounceList: "Announce List",
+        MessageList:"Message List",
+        personalInformation: "Personal",
+        verificationOfIdentityCertificate: "Certification",
+        personalDetails: "Personal Details",
+        passwordChange: "Password Change"
     },
     home: {
-        checkProcedures: "Check procedures",
+        checkProcedures: "Check Procedures",
         messages: "Messages",
         notice: "Notice",
         details: "Details",
         allRead: "Mark as read"
     },
     investigate: {
+        procedure: "Procedure",
         signTheAgreement: "Sign the agreement",
         submitAnApplication: "Submit an application",
         payTheApplicationFee: "Pay the application fee",
         getDDReport: "Get DD report",
-
         serviceInformation: "Service Information",
         filterQuery: "Filter Query",
         dateOfApplication: "Date of application",
@@ -58,13 +63,13 @@ module.exports = {
         stateOfPayment: "State of payment",
         stateOfAgreement: "State of agreement",
         submit: "Submit",
-
+        tipHeaderPart: "You can start a new service for",
+        tipFooterPart: "The agreement should be re-signed, contact financial consultant for details",
         createANewService: "Create a new service",
         accountManagementAuditReport: "Account management audit report",
         newDialogService: "The agreements will be resigned and the service will be started once creating a new service. Please contact financial consultant first",
         createAService: "Create a service",
         createSuccessMessage: "Succeed in applying for DD service, related agreements is being audited, please wait",
-
         orderID: "Order ID",
         typeOfService: "Type of service",
         dateOfSubmit: "Date of submit",
@@ -76,9 +81,10 @@ module.exports = {
         applicationFormOperation: "Application form operation",
         amountOfPayment: "Amount of payment",
         feedback: "Feedback",
-
         pleaseSelect: "Please select",
-        pleaseEnterTheContent: "Please enter the content"
+        pleaseEnterTheContent: "Please enter the content",
+        fillIn: "Fill in",
+        application: "Application"
     },
     agreement: {
         alreadySigned: "Already signed",
@@ -94,11 +100,9 @@ module.exports = {
         applicationForm: "Application form",
         suffix: "Name suffix",
         enterOtherDays: "Please enter other days",
-
         messageErrorSize: "Upload file size cannot exceed 50MB!",
         sureToRemove: "Sure to remove",
         deleted: "Cancel delete",
-
         title: "Upload related files",
         uploadTips: "Please upload basic information, trading documents, financial statement, related videos, and pictures of products and company. Contact financial consultants for specific requirement.",
         uploadBtn: "Upload",
@@ -121,7 +125,6 @@ module.exports = {
         idPicBehind: "Back side of ID card",
         idPicHand: "Holding ID card photo",
         placeholder: "Please enter",
-
         enterpriseInformation: "Enterprise information",
         businessLicense: "Business license",
         fullNameOfCompany: "Full name of company",
@@ -129,15 +132,12 @@ module.exports = {
         legalPersonIdCard: "ID card no. of legal representative",
         address: "Registered address",
         submitCheck: "Submit",
-
         tips: "Warm prompt",
         paragraphOne: "Congratulations on the successful submission of your real-name certification.",
         paragraphTwo: "We will carry out real-name certification for you. Please wait patiently",
         paragraphThree: "working days.",
-
         upLoadImgFormat: "The image must be JPG/GIF/PNG/BMP/PDF!",
         upLoadImgSize: "Avatar can’t be larger than 20MB!",
-
         failureTips: "Sorry, your verification of real name authentication failed, please revise it and submit it again！",
         failureReasons: "Failure reasons"
     },
@@ -166,7 +166,11 @@ module.exports = {
         waitingForAudit: "Waiting for audit",
         rejected: "Rejected",
         passed: "Passed",
-        terminated: "Terminated"
+        terminated: "Terminated",
+        shortAuditing: "Auditing",
+        shortRejected: "Rejected",
+        shortPassed: "Passed",
+        shortTerminated: "Terminated"
     },
     selectAgreementStatus: {
         unedited: "Unedited",

@@ -12,7 +12,7 @@
         active-text-color="#2fa8fd">
         <el-menu-item index="/">
             <i class="iconfont icon-shouye1"></i>
-            <span slot="title">总览</span>
+            <span slot="title">{{ $t('menu.overview') }}</span>
         </el-menu-item>
         <el-submenu v-for="item in menu" :index="item.id" :key="item.id">
             <template slot="title">
@@ -28,16 +28,14 @@
 </template>
 
 <script>
-    import menu from '@/config/menu-config'
+    import zhMenu from '@/config/zh-menu-config'
+    import enMenu from '@/config/en-menu-config'
 
     export default {
         data() {
             return {
-                menu: menu
+                menu: []
             }
-        },
-        created() {
-
         },
         computed: {
             options() {
@@ -48,11 +46,11 @@
             const routePath = localStorage.getItem('currentRoutePath');
             const routeName = localStorage.getItem('currentRouteName');
             if (routePath !== '/') {
-                this.$store.commit('add_tabs', {route: '/', name: '总览'});
+                this.$store.commit('add_tabs', {route: '/', name: this.$t('menu.overview')});
                 this.$store.commit('add_tabs', {route: routePath, name: routeName});
                 this.$store.commit('set_active_index', this.$route.path);
             } else {
-                this.$store.commit('add_tabs', {route: '/', name: '总览'});
+                this.$store.commit('add_tabs', {route: '/', name: this.$t('menu.overview')});
                 this.$store.commit('set_active_index', '/');
                 this.$router.push('/');
             }
@@ -66,7 +64,23 @@
             },
             selectItems(index, indexPath) {
                 localStorage.setItem('currentRoutePath', index);
+            },
+            changeMenu () {
+                this.$store.commit('set_language', this.$i18n.locale);
+                switch (this.$store.state.isLanguage) {
+                    case 'zh_CN':
+                        this.menu = zhMenu;
+                        break;
+                    case 'en':
+                        this.menu = enMenu;
+                        break;
+                    default:
+                        this.menu = zhMenu;
+                }
             }
+        },
+        created() {
+            this.changeMenu();
         }
     }
 </script>
@@ -81,7 +95,7 @@
 
     .el-menu .iconfont {
         font-size: 16px;
-        margin-right: 20px;
+        margin-right: 15px;
         color: #afb8c1;
     }
 
@@ -91,7 +105,7 @@
 
     .el-submenu .el-menu-item {
         height: 36px;
-        padding-left: 60px !important;
+        padding-left: 55px !important;
         padding-right: 20px !important;
         line-height: 36px;
         background-color: #232832 !important;
@@ -114,5 +128,24 @@
 
     .is-opened i {
         color: @base !important;
+    }
+
+    //针对ipad/平板
+    @media (min-width: 768px) and (max-width: 1023px) {
+        .el-menu .iconfont {
+            margin-right: 10px;
+        }
+        .el-submenu .el-menu-item {
+            padding-left: 50px!important;
+        }
+    }
+
+    @media (min-width: 1024px) and (max-width: 1279px) {
+        .el-menu .iconfont {
+            margin-right: 10px;
+        }
+        .el-submenu .el-menu-item {
+            padding-left: 50px!important;
+        }
     }
 </style>

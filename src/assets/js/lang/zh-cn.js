@@ -23,12 +23,17 @@ module.exports = {
         logOutHasBeenCanceled: "已取消退出登录"
     },
     menu: {
-        index: "总览",
+        overview: "总览",
         investigate: "授信管理",
         dueDiligence: "尽职调查",
         GTREvaluation: "GTR评估",
         financialSupport: "融资授信",
         accountManagement: "商账管理",
+        signAgreements: "签署协议",
+        customerApplication: "客户申请",
+        applicationDetails: "申请详情",
+        AnnounceList: "公告列表",
+        MessageList:"消息列表",
         personalInformation: "个人信息",
         verificationOfIdentityCertificate: "实名认证",
         personalDetails: "个人资料",
@@ -42,11 +47,11 @@ module.exports = {
         allRead: "全部标为已读"
     },
     investigate: {
+        procedure: "服务流程",
         signTheAgreement: "签署协议",
         submitAnApplication: "填写申请表",
         payTheApplicationFee: "金额支付",
         getDDReport: "结果反馈",
-
         serviceInformation: "服务信息",
         filterQuery: "筛选查询",
         dateOfApplication: "发起时间",
@@ -58,13 +63,13 @@ module.exports = {
         stateOfPayment: "支付状态",
         stateOfAgreement: "协议状态",
         submit: "查询",
-
+        tipHeaderPart: "您可重新创建一个新的",
+        tipFooterPart: "服务，需重新签署协议，详细情况请联系融资顾问",
         createANewService: "创建新服务",
         accountManagementAuditReport: "商管审核报告",
         newDialogService: "创建新服务后，将重新签署协议，并且服务将立即开启请与融资顾问确认后，再创建服务",
         createAService: "创建服务",
         createSuccessMessage: "创建尽职调查服务成功，相关协议编辑中，请耐心等待",
-
         orderID: "订单ID",
         typeOfService: "服务类型",
         dateOfSubmit: "发起时间",
@@ -76,9 +81,10 @@ module.exports = {
         applicationFormOperation: "申请表操作",
         amountOfPayment: "金额支付",
         feedback: "结果反馈",
-
         pleaseSelect: "请选择",
-        pleaseEnterTheContent: "请输入内容"
+        pleaseEnterTheContent: "请输入内容",
+        fillIn: "填写",
+        application: "申请"
     },
     agreement: {
         alreadySigned: "已完成签署",
@@ -94,11 +100,9 @@ module.exports = {
         applicationForm: "GTCP申请表",
         suffix: "后缀名",
         enterOtherDays: "请输入其他的天数",
-
         messageErrorSize: "上传文件大小不能超过 50MB!",
         sureToRemove: "确定移除",
         deleted: "已取消删除",
-
         title: "相关文件上传",
         uploadTips: "请上传公司基本资料、贸易资料、财务资料、产品图片、公司图片以及相关视频，具体需上传的资料以顾问的要求为主",
         uploadBtn: "点击上传",
@@ -121,7 +125,6 @@ module.exports = {
         idPicBehind: "证件反面照片",
         idPicHand: "手持证件照片",
         placeholder: "请输入",
-
         enterpriseInformation: "企业信息",
         businessLicense: "营业执照",
         fullNameOfCompany: "公司全称",
@@ -129,15 +132,12 @@ module.exports = {
         legalPersonIdCard: "法人证件号",
         address: "住所地",
         submitCheck: "提交审核",
-
         tips: "温馨提示",
         paragraphOne: "恭喜您实名认证提交成功。",
         paragraphTwo: "我们将为你进行实名认证审核，请耐心等待",
         paragraphThree: "个工作日。",
-
         upLoadImgFormat: "上传图片必须是JPG/GIF/PNG/BMP/PDF 格式!",
         upLoadImgSize: "上传头像图片大小不能超过 20MB!",
-
         failureTips: "抱歉，您的实名认证审核未通过，请修改后重新提交！",
         failureReasons: "失败原因"
     },
@@ -166,7 +166,11 @@ module.exports = {
         waitingForAudit: "已提交待审核",
         rejected: "已审核驳回",
         passed: "已审核通过",
-        terminated: "已审核终止"
+        terminated: "已审核终止",
+        shortAuditing: "审核中",
+        shortRejected: "已驳回",
+        shortPassed: "已通过",
+        shortTerminated: "已终止"
     },
     selectAgreementStatus: {
         unedited: "未编辑",

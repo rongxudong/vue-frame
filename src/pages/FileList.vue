@@ -184,9 +184,6 @@
         created () {
             this.getResList(this.fileListModel);
         },
-//        components: {
-//            pagination,
-//        },
         watch: {
             fileListModel: 'getResList'
         }

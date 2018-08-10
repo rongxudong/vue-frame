@@ -4,8 +4,12 @@
             <div class="basic" v-show="serveOrderType != 4 && serveOrderType != 1">
                 <div class="title">{{ $t('customerApplication.selectRange') }}</div>
                 <ul class="select-range">
-                    <li class="item iconfont" :class="{'is-active': array['quotaRange'] == '1'}" @click="selectRange('1')">{{ $t('customerApplication.above') }}</li>
-                    <li class="item iconfont" :class="{'is-active': array['quotaRange'] == '2'}" @click="selectRange('2')">{{ $t('customerApplication.under') }}</li>
+                    <li class="item iconfont" :class="{'is-active': array['quotaRange'] == '1'}" @click="selectRange('1')">
+                        {{ $t('customerApplication.above') }}
+                    </li>
+                    <li class="item iconfont" :class="{'is-active': array['quotaRange'] == '2'}" @click="selectRange('2')">
+                        {{ $t('customerApplication.under') }}
+                    </li>
                 </ul>
             </div>
             <div class="basic">
@@ -54,7 +58,9 @@
                     <div v-else>
                         <ul class="block-top">
                             <li>PRODUCTS</li>
-                            <li class="creditInput text-center" v-show="serveOrderType != 4">CREDIT TERMS REQUEST (DAYS FROM DATE OF BILL OF LADING)</li>
+                            <li class="creditInput text-center" v-show="serveOrderType != 4">
+                                CREDIT TERMS REQUEST (DAYS FROM DATE OF BILL OF LADING)
+                            </li>
                             <li v-show="serveOrderType != 4">TOTAL CREDIT LINE REQUIRED</li>
                         </ul>
                         <ul class="block-bottom">
@@ -70,8 +76,7 @@
                                     <el-radio :label="Others">Others</el-radio>
                                 </el-radio-group>
                                 <input v-if="array['iiCreditTermsRequest'] != 90 && array['iiCreditTermsRequest'] != 120
-                                 && array['iiCreditTermsRequest'] != 150"
-                                       v-on:blur="change(array['iiCreditTermsRequest'])"
+                                 && array['iiCreditTermsRequest'] != 150" v-on:blur="change(array['iiCreditTermsRequest'])"
                                        v-model="array['iiCreditTermsRequest']" name="iiCreditTermsRequest" class="formInput"
                                        type="text" :placeholder="$t('realName.placeholder')" autocomplete="off" style="width: 96px;margin-left: 20px;"/>
                             </li>
@@ -127,8 +132,8 @@
                         </ul>
                         <ul class="block-bottom">
                             <li>
-                                <input v-model="array['iiPhoneNo']" name="iiPhoneNo" class="formInput" type="text" :placeholder="$t('realName.placeholder')"
-                                       autocomplete="off"/>
+                                <input v-model="array['iiPhoneNo']" name="iiPhoneNo" class="formInput" type="text"
+                                       :placeholder="$t('realName.placeholder')" autocomplete="off"/>
                             </li>
                             <li class="creditInput horizontal_center">
                                 <el-radio-group v-model="array['iiCreditTermsRequest']">
@@ -136,8 +141,10 @@
                                     <el-radio :label="90">90days</el-radio>
                                     <el-radio :label="Others">Others</el-radio>
                                 </el-radio-group>
-                                <input v-show="array['iiCreditTermsRequest'] != 60 && array['iiCreditTermsRequest'] != 90" v-model="array['iiCreditTermsRequest']" v-on:blur="change(array['iiCreditTermsRequest'])"
-                                       name="iiCreditTermsRequest" class="formInput" type="text" :placeholder="$t('realName.placeholder')" autocomplete="off" style="width: 96px;margin-left: 20px;"/>
+                                <input v-show="array['iiCreditTermsRequest'] != 60 && array['iiCreditTermsRequest'] != 90"
+                                       v-model="array['iiCreditTermsRequest']" v-on:blur="change(array['iiCreditTermsRequest'])"
+                                       name="iiCreditTermsRequest" class="formInput" type="text"
+                                       :placeholder="$t('realName.placeholder')" autocomplete="off" style="width: 96px;margin-left: 20px;"/>
                             </li>
                             <li>
                                 <input v-model="array['iiEmailAddress']" name="iiEmailAddress" class="formInput" type="text"

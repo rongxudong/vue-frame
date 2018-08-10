@@ -7,14 +7,14 @@
         <h4 class="apply-status" v-if="BusinessAccountGtcpApply.status == 2">{{ $t('applyDetail.submitted') }}</h4>
         <h4 class="apply-status" v-else-if="BusinessAccountGtcpApply.status == 4">{{ $t('applyDetail.passed') }}</h4>
         <h4 class="apply-status" v-else-if="BusinessAccountGtcpApply.status == 5">{{ $t('applyDetail.terminated') }}</h4>
-        <div class="align_items-center" style="height: 50px;margin-bottom: .1rem">
+        <div class="align_items-center" style="height: 50px;margin-bottom: .1rem;">
             <div class="rectangle"></div>
             <h5 class="head-text">{{ $t('applyDetail.GTCPApplicationForm') }}</h5>
         </div>
         <div id="pdf" class="pdfobject-container"></div>
         <div class="align_items-center head-border" style="height: 50px;margin-top: 0.14rem;">
             <div class="rectangle"></div>
-            <h5 class="head-text" style="margin-left: 0.1rem">{{ $t('applyDetail.relatedFiles') }}</h5>
+            <h5 class="head-text" style="margin-left: 0.1rem;">{{ $t('applyDetail.relatedFiles') }}</h5>
         </div>
         <div class="right-list" style="width: 450px;margin-top: 0.2rem;border: 1px solid transparent;">
             <div class="item" v-for="(item, index) in BusinessAccountGtcpApply.files" :key="index">

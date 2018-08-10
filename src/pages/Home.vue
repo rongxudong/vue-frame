@@ -235,6 +235,7 @@
                 }
             },
             navRoute (item) {
+                console.log(item);
                 let messageListModel = {
                     messageId: item._id,
                     pageNum: 1,
@@ -251,43 +252,43 @@
                     }
                 });
                 switch (item.title) {
-                    case '实名认证' :
+                    case this.$t('menu.verificationOfIdentityCertificate'):
                         this.$router.push({
-                            name: '实名认证',
+                            name: this.$t('menu.verificationOfIdentityCertificate'),
                         });
                         break;
-                    case '签署协议':
+                    case this.$t('menu.signAgreements'):
                         item.id = item.targetUrl;
                         this.$router.push({
-                            name: '签署协议',
+                            name: this.$t('menu.signAgreements'),
                             query:item
                         });
                         break;
-                    case 'GTCP申请':
+                    case this.$t('menu.applicationDetails'):
                         item.id = item.targetUrl;
                         this.$router.push({
-                            name: '申请详情',
+                            name: this.$t('menu.applicationDetails'),
                             query:item
                         });
                         break;
-                    case '尽职调查':
+                    case this.$t('menu.dueDiligence'):
                         this.$router.push({
-                            name: '尽职调查',
+                            name: this.$t('menu.dueDiligence'),
                         });
                         break;
-                    case 'GTR评估':
+                    case this.$t('menu.GTREvaluation'):
                         this.$router.push({
-                            name: 'GTR评估',
+                            name: this.$t('menu.GTREvaluation'),
                         });
                         break;
-                    case '授信申请':
+                    case this.$t('menu.financialSupport'):
                         this.$router.push({
-                            name: '授信申请',
+                            name: this.$t('menu.financialSupport'),
                         });
                         break;
-                    case '商账管理':
+                    case this.$t('menu.accountManagement'):
                         this.$router.push({
-                            name: '商账管理',
+                            name: this.$t('menu.accountManagement'),
                         });
                         break;
                 }

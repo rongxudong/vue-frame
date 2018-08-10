@@ -53,8 +53,9 @@
                 </el-dropdown>
                 <li class="head-language align_items">
                     <div class="select">
-                        <span :class="{'isActive': value === item.value}" v-for="item in options"
-                              @click="selectLanguage(item.value)">{{item.label}}</span>
+                        <span :class="{'isActive': value === item.value}" v-for="item in options" @click="selectLanguage(item.value)">
+                            {{item.label}}
+                        </span>
                     </div>
                 </li>
             </ul>
@@ -152,7 +153,6 @@
                     default:
                         this.moment.locale('zh-cn');
                 }
-//                console.log(`${this.moment.locale()}`);
                 LangStorage.setLang(val);
                 this.$store.commit('set_language', val);
             },

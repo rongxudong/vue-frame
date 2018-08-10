@@ -4,16 +4,19 @@
             <el-tab-pane v-for="(item,index) in agreementList" :key="index" :label="item.agreementTitle" :name="item.nameId">
                 <div class="ag-content flex_direction_column">
                     <div :id="item.selectId" class="sign-am-pdf"></div>
-
                     <div class="justify_content_center sign-btn-wrap" v-if="item.status == 4">
                         <div>
-                            <el-button type="primary" style="width: 140px">{{ $t('agreement.alreadySigned') }}</el-button>
+                            <el-button type="primary" style="width: 140px;">{{ $t('agreement.alreadySigned') }}</el-button>
                         </div>
                     </div>
                     <div class="flex_direction_column align_items-center sign-btn-wrap" v-else>
-                        <el-checkbox :id="item.checkId" style="margin-bottom: 0.25rem" v-model="checked[index]">{{ $t('agreement.agreeOnAgreementsAbove') }}</el-checkbox>
+                        <el-checkbox :id="item.checkId" style="margin-bottom: 0.25rem;" v-model="checked[index]">
+                            {{ $t('agreement.agreeOnAgreementsAbove') }}
+                        </el-checkbox>
                         <div>
-                            <el-button type="primary" style="width: 120px" v-on:click="signAgreement(item.id)">{{ $t('agreement.sign') }}</el-button>
+                            <el-button type="primary" style="width: 120px;" v-on:click="signAgreement(item.id)">
+                                {{ $t('agreement.sign') }}
+                            </el-button>
                         </div>
                     </div>
                 </div>
@@ -41,8 +44,7 @@
         },
         watch: {
             $route(to , from){
-                console.log()
-                if (to.name == '签署协议'){
+                if (to.name == this.$t('menu.signAgreements')){
                     this.orderInfo = this.$route.query;
                     this.fetchData();
                 }

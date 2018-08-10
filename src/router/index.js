@@ -161,7 +161,7 @@ let enRouter = [
     },
     {
         path: '/Agreement',
-        name: '签署协议',
+        name: 'Sign Agreements',
         component: Agreement,
         meta: {
             keepAlive: true // 需要被缓存
@@ -169,17 +169,17 @@ let enRouter = [
     },
     {
         path: '/customerApplication',
-        name: '客户申请',
+        name: 'Customer Application',
         component: customerApplication
     },
     {
         path: '/ApplyDetail',
-        name: '申请详情',
+        name: 'Application Details',
         component: ApplyDetail,
     },
     {
         path: '/RealName',
-        name: 'Verification of Identity Certificate',
+        name: 'Certification',
         component: RealName,
         meta: {
             keepAlive: true // 需要被缓存
@@ -187,7 +187,7 @@ let enRouter = [
     },
     {
         path: '/personal',
-        name: 'Personal details',
+        name: 'Personal Details',
         component: Personal,
         meta: {
             keepAlive: true // 需要被缓存
@@ -195,35 +195,34 @@ let enRouter = [
     },
     {
         path: '/password',
-        name: 'Password change',
+        name: 'Password Change',
         component: Password,
     },
     {
         path: '/CustomerPool',
-        name: '客户池',
+        name: 'CustomerPool',
         component: CustomerPool,
     },
     {
         path: '/FileList',
-        name: '公告列表',
+        name: 'Announce List',
         component: FileList,
     },
     {
         path: '/MessageList',
-        name: '消息列表',
+        name: 'Message List',
         component: MessageList,
     }
 ];
+let routerList;
 
 let localLang = window.localStorage.getItem('user_lang');
-// alert(localLang)
+
 if (localLang === 'en') {
-
-} else {
-
+    routerList = enRouter;
+} else if(localLang === 'zh_CN'){
+    routerList = zhRouter;
 }
-
-let routerList = zhRouter;
 
 export default new Router({
     routes: routerList

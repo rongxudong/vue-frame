@@ -48,7 +48,7 @@
         },
         beforeCreate () {
             localStorage.setItem('user_lang', this.$i18n.locale);
-            localStorage.setItem("User_token", process.env.NODE_ENV == 'development' ? '9dd3056e6b972a9e921c3b2b4aa90d28' : $.cookie('bl_sid'));
+            localStorage.setItem("User_token", process.env.NODE_ENV == 'development' ? 'c9b37ccef1c4579f35447c7629f931d4' : $.cookie('bl_sid'));
             this.$store.state.token = localStorage.getItem("User_token");
 
             let baseUrl = 'http://account.financegt.com'

@@ -235,7 +235,6 @@
                 }
             },
             navRoute (item) {
-                console.log(item);
                 let messageListModel = {
                     messageId: item._id,
                     pageNum: 1,
@@ -251,42 +250,42 @@
                         });
                     }
                 });
-                switch (item.title) {
-                    case this.$t('menu.verificationOfIdentityCertificate'):
+                switch (item.messageType) {
+                    case 1:
                         this.$router.push({
                             name: this.$t('menu.verificationOfIdentityCertificate'),
                         });
                         break;
-                    case this.$t('menu.signAgreements'):
+                    case 2:
                         item.id = item.targetUrl;
                         this.$router.push({
                             name: this.$t('menu.signAgreements'),
                             query:item
                         });
                         break;
-                    case this.$t('menu.applicationDetails'):
+                    case 3:
                         item.id = item.targetUrl;
                         this.$router.push({
                             name: this.$t('menu.applicationDetails'),
                             query:item
                         });
                         break;
-                    case this.$t('menu.dueDiligence'):
+                    case 4:
                         this.$router.push({
                             name: this.$t('menu.dueDiligence'),
                         });
                         break;
-                    case this.$t('menu.GTREvaluation'):
+                    case 5:
                         this.$router.push({
                             name: this.$t('menu.GTREvaluation'),
                         });
                         break;
-                    case this.$t('menu.financialSupport'):
+                    case 6:
                         this.$router.push({
                             name: this.$t('menu.financialSupport'),
                         });
                         break;
-                    case this.$t('menu.accountManagement'):
+                    case 7:
                         this.$router.push({
                             name: this.$t('menu.accountManagement'),
                         });

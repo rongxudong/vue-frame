@@ -411,7 +411,6 @@
                 });
             },
             navRoute(name,query){
-                console.log(name,query);
                 if (this.$t('menu.signAgreements') == name){
                     this.$router.push({
                         name: name,

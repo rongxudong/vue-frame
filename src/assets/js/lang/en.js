@@ -64,7 +64,7 @@ module.exports = {
         stateOfAgreement: "State of agreement",
         submit: "Submit",
         tipHeaderPart: "You can start a new service for",
-        tipFooterPart: "The agreement should be re-signed, contact financial consultant for details",
+        tipFooterPart: ".The agreement should be re-signed, contact financial consultant for details.",
         createANewService: "Create a new service",
         accountManagementAuditReport: "Account management audit report",
         newDialogService: "The agreements will be resigned and the service will be started once creating a new service. Please contact financial consultant first",
@@ -85,7 +85,8 @@ module.exports = {
         pleaseEnterTheContent: "Please enter the content",
         fillIn: "Fill in",
         application: "Application",
-        unpaidMessage: "Tips: you cannot fill in the application form. Please contact the financial advisor for payment."
+        unpaidMessage: "Tips: you cannot fill in the application form. Please contact the financial advisor for payment.",
+        clickNotifyMessage: "The agreement is being edited, please wait patiently"
     },
     agreement: {
         alreadySigned: "Already signed",

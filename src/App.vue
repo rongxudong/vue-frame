@@ -1,5 +1,5 @@
 <template>
-    <div id="app">
+    <div id="app" style="overflow: hidden">
         <el-container>
             <el-header>
                 <web-header></web-header>
@@ -8,7 +8,7 @@
                 <el-aside class="aside">
                     <nav-menu></nav-menu>
                 </el-aside>
-                <el-main>
+                <el-main class="el-scrollbar">
                     <div class="main-shadow" @click="closeMenuBurgerBtn"></div>
                     <el-tabs
                             class="main-tab"
@@ -31,6 +31,9 @@
                         </keep-alive>
                         <router-view v-if="!$route.meta.keepAlive"></router-view>
                     </div>
+                    <div class="el-scrollbar__bar is-vertical">
+                        <div class="el-scrollbar__thumb"></div>
+                    </div>
                 </el-main>
             </el-container>
         </el-container>
@@ -48,7 +51,7 @@
         },
         beforeCreate () {
             localStorage.setItem('user_lang', this.$i18n.locale);
-            localStorage.setItem("User_token", process.env.NODE_ENV == 'development' ? 'c9b37ccef1c4579f35447c7629f931d4' : $.cookie('bl_sid'));
+            localStorage.setItem("User_token", process.env.NODE_ENV == 'development' ? 'd888a4b9652877ee47e87d55670e16c6' : $.cookie('bl_sid'));
             this.$store.state.token = localStorage.getItem("User_token");
 
             let baseUrl = 'http://account.financegt.com'
@@ -181,7 +184,6 @@
     /*@import "assets/css/_variable";*/
     @import "assets/css/_mixin";
     @import "assets/css/_common";
-
     //Home.vue
     .el-tabs--card>.el-tabs__header {
         border-bottom: none;
@@ -213,18 +215,16 @@
             color: #000!important;
         }
     }
-
-
     .el-header {
         line-height: 60px;
         background-color: #fff;
         .common_box_shadow(0 2px 4px rgba(7, 17, 27, .15));
     }
     .el-main {
-        display:block;
+        display: block;
         width: 87.5%;
-        min-height: 100%;
-        margin-top: 5px;
+        height: 100%;
+        margin: 5px -17px 0 0;
         padding: 20px .35rem;
         background-color: #f7f5fb;
         .box-sizing(border-box);
@@ -245,11 +245,6 @@
     }
     #app .app-wrap {
         width: 100%;
-        /*height: 100%;*/
-        height: calc(~'100% - 40px');
-        height: -ms-calc(~'100% - 40px');
-        height: -moz-calc(~'100% - 40px');
-        height: -webkit-calc(~'100% - 40px');
     }
     //针对ipad/平板
     @media (min-width: 768px) and (max-width: 1279px) {

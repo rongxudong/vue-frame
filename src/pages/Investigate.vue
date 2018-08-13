@@ -92,7 +92,7 @@
                     <div class="flex_direction_row container-head-bg">
                         <img class="image-search" src="../assets/img/investigate/tips.png">
                         <h1 class="text-head flex-1" style="margin-left: 0.12rem;">
-                            {{$t('investigate.tipHeaderPart')}}&nbsp;{{this.serviceTitle[this.serviceType]}}.&nbsp;
+                            {{$t('investigate.tipHeaderPart')}}&nbsp;{{this.serviceTitle[this.serviceType]}}
                             {{$t('investigate.tipFooterPart')}}
                         </h1>
                         <el-button type="primary" size="small" style="margin-right: 0.2rem" @click="showDialog">
@@ -102,6 +102,7 @@
                     <el-table
                         border
                         :data="tableData"
+                        @row-click="tableHandleMouseEnter"
                         style="width: 100%">
                         <el-table-column
                             align="center"
@@ -306,6 +307,14 @@
             }
         },
         methods: {
+            tableHandleMouseEnter (row, column, cell, event) {
+                if(row.agreementStatus == '1') {
+                    this.$notify.info({
+                        title: this.$t('home.messages'),
+                        message: this.$t('investigate.clickNotifyMessage')
+                    });
+                }
+            },
             fetchData () {
                 this.$ajax.post('/api/bussiness/account/order/getOrderList', this.QueryOrderListModel, res => {
                     const arrayData = [];
@@ -318,7 +327,7 @@
                             }else if (tableData.orderType == 2){
                                 tableData.orderType_str = this.$t('menu.GTREvaluation');
                             }else if (tableData.orderType == 3){
-                                tableData.orderType_str = this.$t('menu.dueDiligence');
+                                tableData.orderType_str = this.$t('menu.financialSupport');
                             }else if (tableData.orderType == 4){
                                 tableData.orderType_str = this.$t('menu.accountManagement');
                             }

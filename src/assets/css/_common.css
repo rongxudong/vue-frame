@@ -211,10 +211,10 @@ a:focus {
   margin-top: 15px;
 }
 .app-container {
-  min-height: calc(100vh - 60px);
-  min-height: -ms-calc(100vh - 60px);
-  min-height: -moz-calc(100vh - 60px);
-  min-height: -webkit-calc(100vh - 60px);
+  height: calc(100vh - 60px);
+  height: -ms-calc(100vh - 60px);
+  height: -moz-calc(100vh - 60px);
+  height: -webkit-calc(100vh - 60px);
 }
 .app-container .aside {
   width: 12.5%!important;

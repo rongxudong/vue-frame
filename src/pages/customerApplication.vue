@@ -4,10 +4,10 @@
             <div class="basic" v-show="serveOrderType != 4 && serveOrderType != 1">
                 <div class="title">{{ $t('customerApplication.selectRange') }}</div>
                 <ul class="select-range">
-                    <li class="item iconfont" :class="{'is-active': array['quotaRange'] == '1'}" @click="selectRange('1')">
+                    <li class="item iconfont" :class="{'is-active': array['quotaRange'] == '1'}" @click="selectRange('1')" v-show="showAbove">
                         {{ $t('customerApplication.above') }}
                     </li>
-                    <li class="item iconfont" :class="{'is-active': array['quotaRange'] == '2'}" @click="selectRange('2')">
+                    <li class="item iconfont" :class="{'is-active': array['quotaRange'] == '2'}" @click="selectRange('2')" v-show="showUnder">
                         {{ $t('customerApplication.under') }}
                     </li>
                 </ul>
@@ -428,8 +428,11 @@
                     piName: null,
                     piCompanyName: null,
                     piPosition: null,
-                    piPhoneNo: null
-                }
+                    piPhoneNo: null,
+                    status: null
+                },
+                showAbove: true,
+                showUnder: true
             }
         },
         mounted() {
@@ -585,6 +588,7 @@
                             }
                             let getLabelNum = this.array['iiCreditTermsRequest'];
                             let getQuotaRange = this.array['quotaRange'];
+                            let status = this.array['status'];
                             if( getQuotaRange == '1') {
                                 if( getLabelNum != 90 && getLabelNum != 120 && getLabelNum != 150 && getLabelNum != null) {
                                     this.Others = getLabelNum;
@@ -599,6 +603,13 @@
                                 } else {
                                     this.Others = 0;
                                     this.array['iiCreditTermsRequest'] = 0;
+                                }
+                            }
+                            if( status == 3) {
+                                if( getQuotaRange == '1' ) {
+                                    this.showUnder = false;
+                                } else if( getQuotaRange == '2' ) {
+                                    this.showAbove = false;
                                 }
                             }
                         }

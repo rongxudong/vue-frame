@@ -64,7 +64,7 @@ module.exports = {
         stateOfAgreement: "协议状态",
         submit: "查询",
         tipHeaderPart: "您可重新创建一个新的",
-        tipFooterPart: "服务，需重新签署协议，详细情况请联系融资顾问",
+        tipFooterPart: "服务，需重新签署协议，详细情况请联系融资顾问。",
         createANewService: "创建新服务",
         accountManagementAuditReport: "商管审核报告",
         newDialogService: "创建新服务后，将重新签署协议，并且服务将立即开启请与融资顾问确认后，再创建服务",
@@ -85,7 +85,8 @@ module.exports = {
         pleaseEnterTheContent: "请输入内容",
         fillIn: "填写",
         application: "申请",
-        unpaidMessage: "温馨提示：您还未进行缴费，无法填写申请表，请先联系融资顾问进行缴费。"
+        unpaidMessage: "温馨提示：您还未进行缴费，无法填写申请表，请先联系融资顾问进行缴费。",
+        clickNotifyMessage: "协议正在编辑中，请耐心等候"
     },
     agreement: {
         alreadySigned: "已完成签署",

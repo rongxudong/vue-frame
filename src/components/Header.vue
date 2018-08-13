@@ -73,7 +73,7 @@
                 activeIndex: '1',
                 options: [
                     {
-                        value: 'zh_CN',
+                        value: 'zh_cn',
                         label: 'CN'
                     }, {
                         value: 'en',
@@ -96,7 +96,7 @@
                     text: 'Loading'
                 });
                 setTimeout(() => {
-                    this.$router.go(0);
+                    location.reload();
                     loading.close();
                     this.value = key;
                 }, 1000);
@@ -144,7 +144,7 @@
             value (val) {
                 this.$i18n.locale = val;
                 switch (val) {
-                    case 'zh_CN':
+                    case 'zh_cn':
                         this.moment.locale('zh-cn');
                         break;
                     case 'en':

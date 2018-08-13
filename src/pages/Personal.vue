@@ -99,7 +99,7 @@
             },
             switchFunc (ele) {
                 switch (ele) {
-                    case 'zh_CN':
+                    case 'zh_cn':
                         this.getLangType = 'zh';
                         break;
                     case 'en':

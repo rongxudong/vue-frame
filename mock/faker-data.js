@@ -1,6 +1,6 @@
 module.exports = function () {
     let faker = require("faker");
-    faker.locale = "zh_CN";
+    faker.locale = "zh_cn";
     let _ = require("lodash");
     return {
         topics: _.times(20, function (n) {

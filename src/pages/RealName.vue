@@ -137,8 +137,8 @@
                 </span>
             </el-dialog>
             <div class="real-icon">
-                <img src="../assets/img/RealName/real-audit-success.png" v-show="ruleForm['auditFlag'] == '1' && isLanguage == 'zh_CN'"/>
-                <img src="../assets/img/RealName/real-in-review.png" v-show="ruleForm['auditFlag'] == '4' && isLanguage == 'zh_CN'"/>
+                <img src="../assets/img/RealName/real-audit-success.png" v-show="ruleForm['auditFlag'] == '1' && isLanguage == 'zh_cn'"/>
+                <img src="../assets/img/RealName/real-in-review.png" v-show="ruleForm['auditFlag'] == '4' && isLanguage == 'zh_cn'"/>
 
                 <img src="../assets/img/RealName/real-audit-success-en.png" v-show="ruleForm['auditFlag'] == '1' && isLanguage == 'en'"/>
                 <img src="../assets/img/RealName/real-in-review-en.png" v-show="ruleForm['auditFlag'] == '4' && isLanguage == 'en'"/>

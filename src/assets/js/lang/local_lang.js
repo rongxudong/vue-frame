@@ -5,7 +5,7 @@ export default {
         switch(true){
             case element.indexOf('zh') > -1 :
                 moment.locale('zh-cn');
-                return 'zh_CN';
+                return 'zh_cn';
                 break;
             case element.indexOf('en') > -1 :
                 moment.locale('en-gb');
@@ -13,7 +13,7 @@ export default {
                 break;
             default:
                 moment.locale('zh-cn');
-                return 'zh_CN';
+                return 'zh_cn';
         }
     },
     setLang(lang) {

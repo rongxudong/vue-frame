@@ -217,10 +217,11 @@ let enRouter = [
 let routerList;
 
 let localLang = window.localStorage.getItem('user_lang');
-
 if (localLang === 'en') {
     routerList = enRouter;
-} else if(localLang === 'zh_CN'){
+} else if(localLang === 'zh_cn'){
+    routerList = zhRouter;
+} else {
     routerList = zhRouter;
 }
 

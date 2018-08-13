@@ -48,7 +48,6 @@
         watch: {
             listenLanguage: function (a, b) {
                 const routeName = localStorage.getItem('currentRouteName');
-                console.log(routeName);
             }
         },
         mounted() {
@@ -56,7 +55,9 @@
             const routeName = localStorage.getItem('currentRouteName');
             if (routePath !== '/') {
                 this.$store.commit('add_tabs', {route: '/', name: this.$t('menu.overview')});
-                this.$store.commit('add_tabs', {route: routePath, name: routeName});
+                if(routePath != null){
+                    this.$store.commit('add_tabs', {route: routePath, name: routeName});
+                }
                 this.$store.commit('set_active_index', this.$route.path);
             } else {
                 this.$store.commit('add_tabs', {route: '/', name: this.$t('menu.overview')});
@@ -77,7 +78,7 @@
             changeMenu () {
                 this.$store.commit('set_language', this.$i18n.locale);
                 switch (this.$store.state.isLanguage) {
-                    case 'zh_CN':
+                    case 'zh_cn':
                         this.menu = zhMenu;
                         break;
                     case 'en':

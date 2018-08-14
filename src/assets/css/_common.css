@@ -393,7 +393,7 @@ a:focus {
   float: left;
   width: 62%;
   min-width: 320px;
-  padding: .3rem 20px;
+  padding: .15rem .3rem;
   border-bottom-right-radius: 5px;
   border-bottom-left-radius: 5px;
   border-top-right-radius: 5px;
@@ -714,10 +714,19 @@ a:focus {
   html {
     font-size: 500%!important;
   }
+  .el-radio + .el-radio {
+    margin-left: 10px;
+  }
+  .suffix {
+    width: 64px;
+  }
 }
 @media (min-width: 1024px) and (max-width: 1279px) {
   html {
     font-size: 500%!important;
+  }
+  .el-radio + .el-radio {
+    margin-left: 10px;
   }
 }
 @media (min-width: 1280px) and (max-width: 1365px) {

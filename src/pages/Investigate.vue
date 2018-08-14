@@ -95,7 +95,7 @@
                             {{$t('investigate.tipHeaderPart')}}&nbsp;{{this.serviceTitle[this.serviceType]}}
                             {{$t('investigate.tipFooterPart')}}
                         </h1>
-                        <el-button type="primary" size="small" style="margin-right: 0.2rem" @click="showDialog">
+                        <el-button type="primary" size="small" @click="showDialog">
                             {{$t('investigate.createANewService')}}
                         </el-button>
                     </div>
@@ -512,6 +512,7 @@
             li {
                 .step-item {
                     .img {
+                        margin: 0 auto;
                         width: 1.48rem;
                         min-width: 100px;
                         height: 1.48rem;
@@ -575,15 +576,15 @@
     .image-search{
         width: 0.18rem;
         height: 0.18rem;
-        margin-left: 0.2rem;
     }
     .text-head{
         font-size: 0.14rem;
         color: @general-col;
     }
     .container-head-bg{
-        background-color: #ECF1F5;
         height: 0.53rem;
+        padding: 0 .2rem;
+        background-color: #ECF1F5;
         .align_items;
     }
     //针对ipad/平板

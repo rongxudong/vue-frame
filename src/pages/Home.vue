@@ -5,7 +5,7 @@
                 <div class="title">
                     <span>{{ $t('home.checkProcedures') }}</span>
                 </div>
-                <div class="left-wrapper flex_start" style="padding-left: .18rem;">
+                <div class="left-wrapper flex_start">
                     <div v-for="(item, index) in UseStep" :key="index" class="flex_start">
                         <div class="step" @click="toService(item.route)">
                             <div class="step-icon-wrap horizontal_center">
@@ -318,6 +318,9 @@
         max-width: 100%;
         margin: auto;
     }
+    .Home-main .left .left-wrapper div:last-child .step{
+        margin-right: 0;
+    }
     //针对ipad/平板
     @media (min-width: 768px) and (max-width: 1023px) {
         .Home-main {
@@ -326,9 +329,13 @@
                 clear: none;
                 width: 100%;
                 .left-wrapper {
+                    .justify_content;
+                    padding-left: .2rem;
+                    padding-right: .2rem;
                     .step-icon-wrap {
                         width: 1rem;
                         height: 1rem;
+                        margin: 0 auto;
                     }
                     .step {
                         margin-right: .5rem;

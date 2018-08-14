@@ -8,7 +8,7 @@
                 <el-aside class="aside">
                     <nav-menu></nav-menu>
                 </el-aside>
-                <el-main class="el-scrollbar">
+                <el-main>
                     <div class="main-shadow" @click="closeMenuBurgerBtn"></div>
                     <el-tabs
                             class="main-tab"
@@ -30,9 +30,6 @@
                             <router-view v-if="$route.meta.keepAlive"></router-view>
                         </keep-alive>
                         <router-view v-if="!$route.meta.keepAlive"></router-view>
-                    </div>
-                    <div class="el-scrollbar__bar is-vertical">
-                        <div class="el-scrollbar__thumb"></div>
                     </div>
                 </el-main>
             </el-container>

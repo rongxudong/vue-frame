@@ -1,6 +1,6 @@
 <template>
     <div class="Home-main">
-        <div class="right bg-style">
+        <div class="right bg-style" v-if="DataResList.length > 0">
             <div class="title" style="margin: .18rem 0;">
                 <span>{{ $t('home.notice') }}</span>
                 <!--<a href="#">MORE &gt;&gt;</a>-->
@@ -36,6 +36,9 @@
                         @current-change="handleCurrentChange">
                 </el-pagination>
             </div>
+        </div>
+        <div class="right bg-style" v-else>
+            <h1 class="nullDataTip">暂时没有相关消息</h1>
         </div>
         <el-dialog :visible.sync="outerVisible" id="view-dialog">
             <iframe :src="previewUrl" width="100%" height="100%" frameborder="1" id='viewPhoto' v-show="iframeShow">
@@ -199,6 +202,13 @@
             &:hover {
                 background-color: #f5f5f5;
             }
+        }
+        .nullDataTip {
+            width: 100%;
+            padding: 150px 0;
+            color: #cccccc;
+            font-size: .3rem;
+            text-align: center;
         }
     }
 </style>

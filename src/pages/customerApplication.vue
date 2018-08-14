@@ -77,8 +77,8 @@
                                 </el-radio-group>
                                 <input v-if="array['iiCreditTermsRequest'] != 90 && array['iiCreditTermsRequest'] != 120
                                  && array['iiCreditTermsRequest'] != 150" v-on:blur="change(array['iiCreditTermsRequest'])"
-                                       v-model="array['iiCreditTermsRequest']" name="iiCreditTermsRequest" class="formInput"
-                                       type="text" :placeholder="$t('realName.placeholder')" autocomplete="off" style="width: 96px;margin-left: 20px;"/>
+                                       v-model="array['iiCreditTermsRequest']" name="iiCreditTermsRequest" class="formInput el-radio-others"
+                                       type="text" :placeholder="$t('realName.placeholder')" autocomplete="off"/>
                             </li>
                             <li v-show="serveOrderType != 4">
                                 <input v-model="array['iiTotalCreditLineRequired']" name="iiTotalCreditLineRequired" class="formInput"
@@ -117,7 +117,7 @@
                                 </div>
                                 <input v-else-if="children.name !== 'iiTotalCreditLimitRequest'" v-model="array[children.name]" :name="children.name"
                                        class="formInput" type="text" :placeholder="$t('realName.placeholder')" autocomplete="off"/>
-                                <div v-else>
+                                <div class="width-radio" v-else>
                                     <el-radio v-model="array['iiTotalCreditLimitRequest']" label="1" border>$100,000</el-radio>
                                     <el-radio v-model="array['iiTotalCreditLimitRequest']" label="2" border>$50,000</el-radio>
                                 </div>
@@ -143,8 +143,8 @@
                                 </el-radio-group>
                                 <input v-show="array['iiCreditTermsRequest'] != 60 && array['iiCreditTermsRequest'] != 90"
                                        v-model="array['iiCreditTermsRequest']" v-on:blur="change(array['iiCreditTermsRequest'])"
-                                       name="iiCreditTermsRequest" class="formInput" type="text"
-                                       :placeholder="$t('realName.placeholder')" autocomplete="off" style="width: 96px;margin-left: 20px;"/>
+                                       name="iiCreditTermsRequest" class="formInput el-radio-others" type="text"
+                                       :placeholder="$t('realName.placeholder')" autocomplete="off">
                             </li>
                             <li>
                                 <input v-model="array['iiEmailAddress']" name="iiEmailAddress" class="formInput" type="text"
@@ -1086,16 +1086,22 @@
                 .placeholder(@minor-col);
                 border: 1px solid rgba(153, 153, 153, 1);
             }
+            input.el-radio-others {
+                margin-left: 20px;
+            }
         }
         .upload-wrap {
-            padding-left: 20px;
+            width: 100%;
+            margin-top: 40px;
+            padding: 0 20px;
             .text-upload {
-                margin: 40px 0;
+                width: 100%;
             }
             .file-upload {
                 width: 100%;
                 max-width: 480px;
                 min-width: 200px;
+                margin-top: 40px;
             }
         }
         .note {
@@ -1127,6 +1133,50 @@
             background-color: @Success;
             &:hover {
                 .lighten-hover(@Success);
+            }
+        }
+    }
+
+    //针对ipad/平板
+    @media (min-width: 768px) and (max-width: 1023px) {
+        .application-main {
+            ul.select-range {
+                padding: 15px 0;
+            }
+            .upload-wrap {
+                margin-top: 20px;
+                .file-upload {
+                    max-width: 100%;
+                    margin-top: 20px;
+                }
+            }
+            div.input-block ul.block-top,
+            div.input-block ul.block-bottom {
+                padding: 0 10px;
+                .width-radio {
+                    width: 400px;
+                }
+            }
+            div.input-block input.el-radio-others {
+                width: 64px;
+                min-width: 64px;
+                margin-left: 10px;
+            }
+        }
+    }
+
+    @media (min-width: 1024px) and (max-width: 1279px) {
+        .application-main {
+            .upload-wrap {
+                margin-top: 20px;
+                .file-upload {
+                    margin-top: 20px;
+                }
+            }
+            div.input-block input.el-radio-others {
+                width: 90px;
+                min-width: 90px;
+                margin-left: 20px;
             }
         }
     }

@@ -1,6 +1,6 @@
 <template>
     <div class="Home-main MessageList-main">
-        <div class="left bg-style">
+        <div class="left bg-style" v-if="DataMessageList.length > 10">
             <div class="bottom">
                 <div class="title">
                     <span>{{ $t('home.messages') }}</span>
@@ -40,11 +40,13 @@
                 </el-pagination>
             </div>
         </div>
+        <div class="left bg-style" v-else>
+            <h1 class="nullDataTip">暂时没有相关消息</h1>
+        </div>
     </div>
 </template>
 
 <script>
-//    import Pagination from '@/components/Pagination'
     import moment from 'moment';
 
     export default {
@@ -220,6 +222,13 @@
         width: 100%;
         .bottom {
             padding-top: 0;
+        }
+        .nullDataTip {
+            width: 100%;
+            padding: 150px 0;
+            color: #cccccc;
+            font-size: .3rem;
+            text-align: center;
         }
     }
 </style>

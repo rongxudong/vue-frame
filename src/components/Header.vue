@@ -102,7 +102,7 @@
                 }, 1000);
             },
             toClient () {
-                document.location.replace(this.$store.state.baseUrl.replace('account.', ''));
+                document.location.replace("http://" + window.location.host);
             },
             toView (path) {
                 this.$router.push({path: path});
@@ -115,7 +115,7 @@
                 }).then(() => {
                     this.$ajax.post('/api/bussiness/account/user/logout', null, res => {
                         if (res.code == 0) {
-                            document.location.replace(this.$store.state.baseUrl.replace('account.', ''));
+                            document.location.replace("http://" + window.location.host);
                             localStorage.clear();
                         } else {
                             this.$message({

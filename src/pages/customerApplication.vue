@@ -1087,7 +1087,9 @@
                 border: 1px solid rgba(153, 153, 153, 1);
             }
             input.el-radio-others {
-                margin-left: 20px;
+                width: 100px;
+                min-width: 100px;
+                margin-left: 15px;
             }
         }
         .upload-wrap {

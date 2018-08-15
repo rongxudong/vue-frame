@@ -733,6 +733,9 @@ a:focus {
   html {
     font-size: 500%!important;
   }
+  .el-radio + .el-radio {
+    margin-left: 15px;
+  }
 }
 @media (min-width: 1366px) and (max-width: 1439px) {
   html {

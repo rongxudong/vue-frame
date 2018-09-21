@@ -210,6 +210,9 @@ a:focus {
 .mt15 {
   margin-top: 15px;
 }
+.mg15 {
+  margin: 15px 0;
+}
 .app-container {
   height: calc(100vh - 60px);
   height: -ms-calc(100vh - 60px);
@@ -364,6 +367,9 @@ a:focus {
 }
 .basic .el-upload-list__item {
   height: 25px;
+}
+.forward-main .el-textarea__inner {
+  min-height: 120px!important;
 }
 .el-date-editor .el-range-separator {
   width: 8%;

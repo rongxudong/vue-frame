@@ -20,6 +20,7 @@ const Investigate = () => import(/* webpackChunkName: "chunkname3" */ '@/pages/I
 const CustomerPool = () => import(/* webpackChunkName: "chunkname3" */ '@/pages/CustomerPool.vue')
 const ApplyDetail = () => import(/* webpackChunkName: "chunkname3" */ '@/pages/ApplyDetail.vue')
 
+const ForwardDirection = () => import(/* webpackChunkName: "chunkname1" */ '@/pages/ForwardDirection.vue')
 const customerApplication = () => import(/* webpackChunkName: "chunkname1" */ '@/pages/customerApplication.vue')
 const RealName = () => import(/* webpackChunkName: "chunkname1" */ '@/pages/RealName.vue')
 const Password = () => import(/* webpackChunkName: "chunkname1" */ '@/pages/Password.vue')

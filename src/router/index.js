@@ -82,6 +82,11 @@ let zhRouter = [
         component: customerApplication
     },
     {
+        path: '/ForwardDirection',
+        name: '正向客户申请',
+        component: ForwardDirection
+    },
+    {
         path: '/ApplyDetail',
         name: '申请详情',
         component: ApplyDetail,
@@ -172,6 +177,11 @@ let enRouter = [
         path: '/customerApplication',
         name: 'Customer Application',
         component: customerApplication
+    },
+    {
+        path: '/ForwardDirection',
+        name: 'Forward Direction',
+        component: ForwardDirection
     },
     {
         path: '/ApplyDetail',

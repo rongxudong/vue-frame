@@ -283,7 +283,8 @@
                 serviceType: 1,
                 reportContent: '',
                 dialogVisible: false,
-                isLanguage: this.$store.state.isLanguage
+                isLanguage: this.$store.state.isLanguage,
+                factoringType: ''
             }
         },
         created () {
@@ -435,10 +436,19 @@
                     }
                     if (query.applyStatusBtnDesc == this.$t('investigate.fillIn')){
                         if(query.payStatus == '1') {
-                            this.$router.push({
-                                name: this.$t('menu.customerApplication'),
-                                query: query
-                            });
+                            console.log(query.factoringType)
+                            if(query.factoringType == '2') {
+                                this.$router.push({
+                                    name: this.$t('menu.customerApplication'),
+                                    query: query
+                                });
+                            }
+                            else if(query.factoringType == '1') {
+                                this.$router.push({
+                                    name: this.$t('menu.forwardDirection'),
+                                    query: query
+                                });
+                            }
                         } else if (query.payStatus == '2') {
                             this.$message({
                                 type: 'warning',

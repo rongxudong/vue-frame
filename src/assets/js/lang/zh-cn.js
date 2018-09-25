@@ -10,7 +10,9 @@ module.exports = {
     },
     button: {
         check: "查看",
-        download: "下载"
+        download: "下载",
+        operation: "操作",
+        delete: '删除'
     },
     header: {
         name: "用户中心",
@@ -31,6 +33,7 @@ module.exports = {
         accountManagement: "商账管理",
         signAgreements: "签署协议",
         customerApplication: "客户申请",
+        forwardDirection: "正向客户申请",
         applicationDetails: "申请详情",
         AnnounceList: "公告列表",
         MessageList:"消息列表",

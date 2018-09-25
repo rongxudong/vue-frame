@@ -10,7 +10,9 @@ module.exports = {
     },
     button: {
         check: "Check",
-        download: "Down"
+        download: "Down",
+        operation: "Operation",
+        delete: 'Delete'
     },
     header: {
         name: "User Center",
@@ -31,6 +33,7 @@ module.exports = {
         accountManagement: "Account Management",
         signAgreements: "Sign Agreements",
         customerApplication: "Customer Application",
+        forwardDirection: "Forward Direction",
         applicationDetails: "Application Details",
         AnnounceList: "Announce List",
         MessageList:"Message List",

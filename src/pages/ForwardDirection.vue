@@ -52,8 +52,8 @@
                             </li>
                             <li class="align_items-center">
                                 <el-radio-group v-model="array['haveExportQualification']">
-                                    <el-radio :label="1">具有</el-radio>
-                                    <el-radio :label="2">不具有</el-radio>
+                                    <el-radio label="1">具有</el-radio>
+                                    <el-radio label="2">不具有</el-radio>
                                 </el-radio-group>
                             </li>
                             <li class="align_items-center">
@@ -120,26 +120,26 @@
                         <ul class="block-bottom mg15">
                             <li>
                                 <el-radio-group v-model="array['haveQualityProblem']">
-                                    <el-radio :label="1">曾出现过质量问题</el-radio>
-                                    <el-radio :label="2">未出现过质量问题</el-radio>
+                                    <el-radio label="1">曾出现过质量问题</el-radio>
+                                    <el-radio label="2">未出现过质量问题</el-radio>
                                 </el-radio-group>
                             </li>
                             <li>
                                 <el-radio-group v-model="array['haveOffshoreAccounts']">
-                                    <el-radio :label="1">是</el-radio>
-                                    <el-radio :label="2">否</el-radio>
+                                    <el-radio label="1">是</el-radio>
+                                    <el-radio label="2">否</el-radio>
                                 </el-radio-group>
                             </li>
                             <li>
                                 <el-radio-group v-model="array['isAgentExport']">
-                                    <el-radio :label="1">是</el-radio>
-                                    <el-radio :label="2">否</el-radio>
+                                    <el-radio label="1">是</el-radio>
+                                    <el-radio label="2">否</el-radio>
                                 </el-radio-group>
                             </li>
                             <li>
                                 <el-radio-group v-model="array['isMiddlemen']">
-                                    <el-radio :label="1">是</el-radio>
-                                    <el-radio :label="2">否</el-radio>
+                                    <el-radio label="1">是</el-radio>
+                                    <el-radio label="2">否</el-radio>
                                 </el-radio-group>
                             </li>
                         </ul>
@@ -152,7 +152,7 @@
                         <ul class="block-bottom">
                             <li class="creditInput align_items-center">
                                 <el-radio-group v-model="array['haveInsured']">
-                                    <el-radio :label="1">是
+                                    <el-radio label="1">是
                                         <span v-if="haveInsuredShow">
                                             （请选择具体险种）：
                                             <el-radio-group v-model="array['insuranceType']">
@@ -163,19 +163,19 @@
                                             </el-radio-group>
                                         </span>
                                     </el-radio>
-                                    <el-radio :label="2">否</el-radio>
+                                    <el-radio label="2">否</el-radio>
                                 </el-radio-group>
                             </li>
                             <li class="creditInput">
                                 <el-radio-group v-model="lossAmountShow">
-                                    <el-radio :label="1">是
-                                        <span v-if="lossAmountShow == 1">
+                                    <el-radio label="1">是
+                                        <span v-if="lossAmountShow == '1'">
                                             ，累计报损
                                             <input v-model="array['lossAmount']" name="lossAmount" class="formInput width100" type="text"
                                                    :placeholder="$t('realName.placeholder')" autocomplete="off"/>万美元
                                         </span>
                                     </el-radio>
-                                    <el-radio :label="0">否</el-radio>
+                                    <el-radio label="0">否</el-radio>
                                 </el-radio-group>
                             </li>
                         </ul>
@@ -185,24 +185,18 @@
             <div class="basic">
                 <div class="title">其他事项：（包括但不限于贸易合同如何签订、卖家对买家的付款评价等）</div>
                 <div class="content">
-                    <el-input type="textarea" v-model="array['desc']"></el-input>
+                    <el-input type="textarea" v-model="array['otherMatters']"></el-input>
                     <span class="statement">
                         声明：因我司与上述拟授信买家贸易往来，特委托浙江大道保理有限公司对买家进行资信和
                         双方历史贸易进行调查评估，我司承诺以上内容真实有效，如有虚假隐瞒，本人承担一切责任。
                     </span>
-                    <div style="text-align: right;">
-                        <el-date-picker
-                            v-model="array['dateTime']"
-                            align="right"
-                            type="date"
-                            placeholder="选择日期"
-                            :picker-options="pickerOptions">
-                        </el-date-picker>
-                    </div>
                 </div>
+            </div>
+            <div class="basic">
+                <div class="title">拟授信买家清单</div>
                 <div class="content">
                     <div class="table-head justify_content align_items-center">
-                        <p>拟授信买家清单<span class="table-tip">（货币单位：万美元）</span></p>
+                        <span class="table-tip">（货币单位：万美元）</span>
                         <el-button size="small" type="primary" icon="el-icon-edit" @click="addRow">添加一条</el-button>
                     </div>
                     <el-table
@@ -210,25 +204,56 @@
                             border
                             fit
                             :data="tableData"
-                            @row-click="tableHandleMouseEnter"
                             style="width: 100%">
                         <el-table-column
                                 v-for="(column, index) in columns"
                                 :align="column.align"
                                 :label="column.label"
                                 :width="column.width"
-                                :key="index" >
+                                :key="index">
                             <template slot-scope="scope">
-                                <div v-if="column.render">
+                                <div v-if="column.type == 'input'">
                                     <el-input v-model="scope.row[column.prop]" style="width: 100%;"></el-input>
                                 </div>
-                                <span v-else>
-                                    <!--{{scope.row[column.prop]}}-->
-                                    {{ column.prop }}
+                                <span v-else="column.type == 'text'">
+                                    {{(scope.$index + 1)}}
                                 </span>
                             </template>
                         </el-table-column>
+                        <el-table-column
+                                fixed="right"
+                                align="center"
+                                prop="filesList"
+                                :label="$t('button.operation')"
+                                min-width="100">
+                            <template slot-scope="scope">
+                                <el-button type="danger" size="mini" @click="delRow(scope.$index, tableData)" round>{{ $t('button.delete') }}</el-button>
+                            </template>
+                        </el-table-column>
                     </el-table>
+                </div>
+            </div>
+            <div class="basic mt15">
+                <div class="title">{{ $t('customerApplication.title') }}</div>
+                <div class="upload-wrap">
+                    <p class="text-upload">{{ $t('customerApplication.uploadTips') }}</p>
+                    <div class="file-upload">
+                        <el-upload
+                                class="upload-demo"
+                                :action="actions"
+                                :headers="myHeaders"
+                                :data="upLoadData"
+                                :on-change="handleChange"
+                                :on-error="uploadError"
+                                :on-success="uploadSuccess"
+                                :on-remove="handleRemove"
+                                :before-remove="beforeRemove"
+                                :before-upload="beforeUpload"
+                                :file-list="fileList">
+                            <el-button size="small" type="primary">{{ $t('customerApplication.uploadBtn') }}</el-button>
+                            <div slot="tip" class="el-upload__tip">{{ $t('customerApplication.uploadTypeTips') }}</div>
+                        </el-upload>
+                    </div>
                 </div>
             </div>
             <div class="basic text-center">
@@ -297,103 +322,60 @@
                     }
                 ],
                 array: {
-                    demandAmount: null,
-                    companyName: null,
-                    companyEnglishName: null,
-                    businessAddress: null,
-                    contactPerson: null,
-                    contactMethod: null,
-                    employeesAmount: null,
-                    officeSpace: null,
-                    creditNumber: null,
-                    creditAmount: null,
-                    guaranteeNumber: null,
-                    guaranteeAmount: null,
-                    mainProducts: null,
-                    haveExportQualification: null,
-                    domesticBuyerNumber: null,
-                    foreignBuyerNumber: null,
-                    domesticSales: null,
-                    domesticChargeSales: null,
-                    exportSales: null,
-                    exportChargeSales: null,
-                    purchaseAmount: null,
-                    purchaseChargeAmount: null,
-                    supplierNumber: null,
-                    logisticsPartner: null,
-                    haveQualityProblem: null,
-                    haveOffshoreAccounts: null,
-                    isAgentExport: null,
-                    isMiddlemen: null,
-                    haveInsured: null,
-                    insuranceType: null,
-                    lossAmount: null,
-                    desc: null,
-                    dateTime: null
+                    orderId: null,
+                    businessAddress: '',
+                    companyName: '',
+                    companyEnglishName: '',
+                    contactPerson: '',
+                    contactMethod: '',
+                    creditNumber: '',
+                    creditAmount: '',
+                    auditDate: '',
+                    demandAmount: '',
+                    otherMatters: '',
+                    domesticBuyerNumber: 0,
+                    domesticSales: '',
+                    domesticChargeSales: '',
+                    employeesAmount: '',
+                    exportSales: '',
+                    exportChargeSales: '',
+                    foreignBuyerNumber: 0,
+                    guaranteeNumber: '',
+                    guaranteeAmount: '',
+                    haveExportQualification: '',
+                    haveInsured: '',
+                    haveQualityProblem: '',
+                    haveOffshoreAccounts: '',
+                    isAgentExport: '',
+                    isMiddlemen: '',
+                    insuranceType: '',
+                    logisticsPartner: '',
+                    lossAmount: '',
+                    mainProducts: '',
+                    officeSpace: '',
+                    purchaseAmount: '',
+                    purchaseChargeAmount: '',
+                    supplierNumber: ''
                 },
                 haveInsuredShow: false,
                 lossAmountShow: null,
-                pickerOptions: {
-                    disabledDate(time) {
-                        return time.getTime() > Date.now();
-                    },
-                    shortcuts: [{
-                        text: '今天',
-                        onClick(picker) {
-                            picker.$emit('pick', new Date());
-                        }
-                    }, {
-                        text: '昨天',
-                        onClick(picker) {
-                            const date = new Date();
-                            date.setTime(date.getTime() - 3600 * 1000 * 24);
-                            picker.$emit('pick', date);
-                        }
-                    }, {
-                        text: '一周前',
-                        onClick(picker) {
-                            const date = new Date();
-                            date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
-                            picker.$emit('pick', date);
-                        }
-                    }]
-                },
                 tableData: [
                     {
-                        serialNumber: 1,
-                        demandAmount: '分额度需求',
-                        creditCompanyName: '拟授信买家名称',
-                        country: '国别/地区',
-                        address: '详细地址',
-                        contactPhone: '联系电话',
-                        exportProducts: '出口产品',
-                        cooperationStartTime: '合作起始时间',
-                        averageAnnualTurnover: '年均交易额',
-                        payMethod: '付款方式',
-                        paymentDays: '账期',
-                        contractAmount: '当前合同金额',
-                        haveInsured: '是否已投保出口信用险',
-                        haveApprovedQuota: '是否已批限额',
-                        isAssignedClaim: '能否转让债权',
-                        isInformFinancing: '能否告知买家融资事宜'
-                    },
-                    {
-                        serialNumber: 2,
-                        demandAmount: '分额度需求',
-                        creditCompanyName: '拟授信买家名称',
-                        country: '国别/地区',
-                        address: '详细地址',
-                        contactPhone: '联系电话',
-                        exportProducts: '出口产品',
-                        cooperationStartTime: '合作起始时间',
-                        averageAnnualTurnover: '年均交易额',
-                        payMethod: '付款方式',
-                        paymentDays: '账期',
-                        contractAmount: '当前合同金额',
-                        haveInsured: '是否已投保出口信用险',
-                        haveApprovedQuota: '是否已批限额',
-                        isAssignedClaim: '能否转让债权',
-                        isInformFinancing: '能否告知买家融资事宜'
+                        demandAmount: '',
+                        creditCompanyName: '',
+                        country: '',
+                        address: '',
+                        contactPhone: '',
+                        exportProducts: '',
+                        cooperationStartTime: '',
+                        averageAnnualTurnover: '',
+                        payMethod: '',
+                        paymentDays: '',
+                        contractAmount: '',
+                        haveInsured: '',
+                        haveApprovedQuota: '',
+                        isAssignedClaim: '',
+                        isInformFinancing: ''
                     }
                 ],
                 columns: [
@@ -402,230 +384,123 @@
                         prop: 'serialNumber',
                         label: '序号',
                         width: '80',
-                        render: (h, params) => {
-                            return h('input', {
-                                style: {
-                                    width: '100%',
-                                    height: '36px',
-                                },
-                            })
-                        }
+                        type: 'text'
                     },
                     {
                         align: 'center',
                         prop: 'demandAmount',
                         label: '分额度需求',
                         width: '120',
-                        render: (h, params) => {
-                            return h('input', {
-                                style: {
-                                    width: '100%',
-                                    height: '36px',
-                                },
-                            })
-                        }
+                        type: 'input'
                     },
                     {
                         align: 'center',
                         prop: 'creditCompanyName',
                         label: '拟授信买家名称',
                         width: '150',
-                        render: (h, params) => {
-                            return h('input', {
-                                style: {
-                                    width: '100%',
-                                    height: '36px',
-                                },
-                            })
-                        }
+                        type: 'input'
                     },
                     {
                         align: 'center',
                         prop: 'country',
                         label: '国别/地区',
                         width: '120',
-                        render: (h, params) => {
-                            return h('input', {
-                                style: {
-                                    width: '100%',
-                                    height: '36px',
-                                },
-                            })
-                        }
+                        type: 'input'
                     },
                     {
                         align: 'center',
                         prop: 'address',
                         label: '详细地址',
                         width: '180',
-                        render: (h, params) => {
-                            return h('input', {
-                                style: {
-                                    width: '100%',
-                                    height: '36px',
-                                },
-                            })
-                        }
+                        type: 'input'
                     },
                     {
                         align: 'center',
                         prop: 'contactPhone',
                         label: '联系电话',
                         width: '120',
-                        render: (h, params) => {
-                            return h('input', {
-                                style: {
-                                    width: '100%',
-                                    height: '36px',
-                                },
-                            })
-                        }
+                        type: 'input'
                     },
                     {
                         align: 'center',
                         prop: 'exportProducts',
                         label: '出口产品',
                         width: '120',
-                        render: (h, params) => {
-                            return h('input', {
-                                style: {
-                                    width: '100%',
-                                    height: '36px',
-                                },
-                            })
-                        }
+                        type: 'input'
                     },
                     {
                         align: 'center',
                         prop: 'cooperationStartTime',
                         label: '合作起始时间',
                         width: '150',
-                        render: (h, params) => {
-                            return h('input', {
-                                style: {
-                                    width: '100%',
-                                    height: '36px',
-                                },
-                            })
-                        }
+                        type: 'input'
                     },
                     {
                         align: 'center',
                         prop: 'averageAnnualTurnover',
                         label: '年均交易额',
                         width: '120',
-                        render: (h, params) => {
-                            return h('input', {
-                                style: {
-                                    width: '100%',
-                                    height: '36px',
-                                },
-                            })
-                        }
+                        type: 'input'
                     },
                     {
                         align: 'center',
                         prop: 'payMethod',
                         label: '付款方式',
                         width: '120',
-                        render: (h, params) => {
-                            return h('input', {
-                                style: {
-                                    width: '100%',
-                                    height: '36px',
-                                },
-                            })
-                        }
+                        type: 'input'
                     },
                     {
                         align: 'center',
                         prop: 'paymentDays',
                         label: '账期',
                         width: '120',
-                        render: (h, params) => {
-                            return h('input', {
-                                style: {
-                                    width: '100%',
-                                    height: '36px',
-                                },
-                            })
-                        }
+                        type: 'input'
                     },
                     {
                         align: 'center',
                         prop: 'contractAmount',
                         label: '当前合同金额',
                         width: '150',
-                        render: (h, params) => {
-                            return h('input', {
-                                style: {
-                                    width: '100%',
-                                    height: '36px',
-                                },
-                            })
-                        }
+                        type: 'input'
                     },
                     {
                         align: 'center',
                         prop: 'haveInsured',
                         label: '是否已投保出口信用险',
                         width: '180',
-                        render: (h, params) => {
-                            return h('input', {
-                                style: {
-                                    width: '100%',
-                                    height: '36px',
-                                },
-                            })
-                        }
+                        type: 'input'
                     },
                     {
                         align: 'center',
                         prop: 'haveApprovedQuota',
                         label: '是否已批限额',
                         width: '120',
-                        render: (h, params) => {
-                            return h('input', {
-                                style: {
-                                    width: '100%',
-                                    height: '36px',
-                                },
-                            })
-                        }
+                        type: 'input'
                     },
                     {
                         align: 'center',
                         prop: 'isAssignedClaim',
                         label: '能否转让债权',
                         width: '120',
-                        render: (h, params) => {
-                            return h('input', {
-                                style: {
-                                    width: '100%',
-                                    height: '36px',
-                                },
-                            })
-                        }
+                        type: 'input'
                     },
                     {
                         align: 'center',
                         prop: 'isInformFinancing',
                         label: '能否告知买家融资事宜',
                         width: '180',
-                        render: (h, params) => {
-                            return h('input', {
-                                style: {
-                                    width: '100%',
-                                    height: '36px',
-                                },
-                            })
-                        }
+                        type: 'input'
                     }
-                ]
+                ],
+                actions: this.$store.state.baseUrl + "/api/bussiness/account/order/uploadCustomerFile",
+                upLoadData: {
+                    orderId: null
+                },
+                myHeaders: {
+                    token: this.$store.state.token
+                },
+                fileList: []
             }
-        },
-        mounted() {
-
         },
         computed: {
             haveInsured () {
@@ -642,22 +517,201 @@
             }
         },
         methods: {
+            // 监听文件状态改变
+            handleChange(file, fileList) {
+                // console.log(file)
+            },
+            // 上传错误
+            uploadError (response, file, fileList) {
+                this.$message({
+                    showClose: true,
+                    type: 'error',
+                    message: response.message
+                });
+            },
+            // 上传成功后的回调
+            uploadSuccess (response, file, fileList) {
+                console.log(response)
+                if(response.code == 0){
+                    this.fileList = this.File(response.data.filesList);
+                    this.$message({
+                        showClose: true,
+                        type: 'success',
+                        message: response.message
+                    });
+                } else {
+                    this.$message({
+                        showClose: true,
+                        type: 'error',
+                        message: response.message
+                    });
+                }
+            },
+            // 文件列表移除文件时的钩子
+            handleRemove(file, fileList) {
+                console.log(file, fileList);
+            },
+            // 删除文件之前的钩子
+            beforeRemove(file, fileList) {
+                this.$confirm(this.$t('customerApplication.sureToRemove') + ` ${ file.name }?`, this.$t('dialog.tips'), {
+                    confirmButtonText: this.$t('dialog.ok'),
+                    cancelButtonText: this.$t('dialog.cancel'),
+                    type: 'warning'
+                }).then(() => {
+                    this.asyncReq(file,fileList) // 在这里真正的处理图片列表
+                }).catch(() => {
+                    this.$message({
+                        type: 'info',
+                        message: this.$t('customerApplication.deleted')
+                    });
+                });
+                return false; // 这是重点,不管上面的操作结果如何都返回false
+            },
+            // 图片上传时，文件类型大小等判断
+            beforeUpload(file) {
+//                const isJPG = file.type === 'image/jpeg';
+                const isLt2M = file.size / 1024 / 1024 < 50;
+                if (!isLt2M) {
+                    this.$message.error(this.$t('customerApplication.messageErrorSize'));
+                }
+                return isLt2M;
+            },
+            // 远请求服务器如果成功则把fileList中要删除的file移除即可
+            asyncReq (file,fileList) {
+                this.$ajax.post('/api/bussiness/account/order/deleteCustomerFile?fileId=' + file.id + '&orderId=' + this.array['orderId'], null, res => {
+                    console.log(res.data)
+                    if(res.data){
+                        this.fileList = this.File(res.data.filesList);
+                    }
+                })
+            },
+            // 用户保存客户信息
             saveBtn: function () {
-                console.log(this.array)
+                if( this.array.infoPdfFile ) {
+                    delete this.array.infoPdfFile
+                }
+                if(this.lossAmountShow == 0) {
+                    this.array['lossAmount'] = 0;
+                }
+                for( let i = 0; i < this.tableData.length; i ++ ) {
+                    this.tableData[i].serialNumber = i+1;
+                }
+                let jsonData = {
+                    'businessAccountCreditBuyerLists': this.tableData,
+                    'businessAccountCustomerInfo': this.array
+                }
+                this.$ajax.post('/api/bussiness/account/order/saveCustomerInfo?orderId=' + this.array['orderId'], jsonData, res => {
+                    if(res.code === 0){
+                        this.$message({
+                            type: 'success',
+                            message: res.message
+                        });
+                    } else {
+                        this.$message({
+                            type: 'error',
+                            message: res.message
+                        });
+                    }
+                })
             },
+            //用户提交客户信息
             submitBtn: function () {
-                console.log(this.tableData)
+                if( this.array.infoPdfFile ) {
+                    delete this.array.infoPdfFile
+                }
+                if(this.lossAmountShow == 0) {
+                    this.array['lossAmount'] = 0;
+                }
+                for( let i = 0; i < this.tableData.length; i ++ ) {
+                    this.tableData[i].serialNumber = i+1;
+                }
+                let jsonData = {
+                    'businessAccountCreditBuyerLists': this.tableData,
+                    'businessAccountCustomerInfo': this.array
+                }
+                this.$ajax.post('/api/bussiness/account/order/submitCustomer?orderId=' + this.array['orderId'], jsonData, res => {
+                    if(res.code === 0){
+                        this.$router.push({path: '/Investigate/' + this.$route.query.orderType});
+                        this.$message({
+                            type: 'success',
+                            message: res.message
+                        });
+                    } else {
+                        this.$message({
+                            type: 'error',
+                            message: res.message
+                        });
+                    }
+                })
             },
-            tableHandleMouseEnter: function () {
-                
+            getGtcpDetail () {
+                this.$ajax.get('/api/bussiness/account/order/getCustomerDetail/' + this.array['orderId'], null, res => {
+                    if( res.code == 0 ) {
+                        let getDetail = res.data;
+                        if( getDetail ) {
+                            this.array = getDetail;
+                            this.fileList = this.File(getDetail.filesList);
+                            this.tableData = getDetail.buyerList;
+                            if(parseFloat(this.array.lossAmount) > 0) {
+                                this.lossAmountShow = '1';
+                            } else {
+                                this.lossAmountShow = '0';
+                            }
+                        } else {
+
+                        }
+                    } else {
+                        this.$message({
+                            type: 'error',
+                            message: res.message
+                        });
+                    }
+                })
             },
             handleCurrentChange (val) {
                 this.currentRow = val;
                 console.log(val.date,val.name,val.address)
             },
             addRow () {
-                this.tableData.push({});
+                let _data = {
+                    demandAmount: '',
+                    creditCompanyName: '',
+                    country: '',
+                    address: '',
+                    contactPhone: '',
+                    exportProducts: '',
+                    cooperationStartTime: '',
+                    averageAnnualTurnover: '',
+                    payMethod: '',
+                    paymentDays: '',
+                    contractAmount: '',
+                    haveInsured: '',
+                    haveApprovedQuota: '',
+                    isAssignedClaim: '',
+                    isInformFinancing: ''
+                }
+                this.tableData.push(_data);
+            },
+            delRow (index, rows) {
+                rows.splice(index, 1);
+            },
+            File (Array) {
+                let list = [];
+                Array.forEach(function (val,index,array) {
+                    let item = {
+                        'id': val.id,
+                        'name': val.fileName,
+                        'url': val.url
+                    }
+                    list.push(item);
+                })
+                return list;
             }
+        },
+        mounted () {
+            this.array['orderId'] = this.$route.query.id;
+            this.upLoadData['orderId'] = this.$route.query.id;
+            this.getGtcpDetail();
         }
     }
 </script>
@@ -693,6 +747,19 @@
             }
         }
     }
+    .upload-wrap {
+        width: 100%;
+        margin-top: 40px;
+        .text-upload {
+            width: 100%;
+        }
+        .file-upload {
+            width: 100%;
+            max-width: 480px;
+            min-width: 200px;
+            margin-top: 40px;
+        }
+    }
     .content {
         width: 100%;
         margin-top: 20px;
@@ -706,13 +773,9 @@
             line-height: .53rem;
             padding: 0 .2rem;
             background-color: #ECF1F5;
-            & > p {
-                font-size: 18px;
-                color: #303133;
-                span.table-tip {
-                    font-size: 12px;
-                    color: #999;
-                }
+            span.table-tip {
+                font-size: 12px;
+                color: #999;
             }
         }
     }

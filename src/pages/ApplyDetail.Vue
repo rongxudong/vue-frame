@@ -63,20 +63,38 @@
         watch: {},
         methods: {
             fetchData() {
-                this.$ajax.get('/api/bussiness/account/order/getGtcpDetail/' + this.orderInfo.id, null, (res) => {
-                    console.log(res)
-                    if (res.code == 0) {
-                        this.BusinessAccountGtcpApply = res.data;
-                        setTimeout(()=>{
-                            this.preViewPDF(this.BusinessAccountGtcpApply.gtcpApplyPdf.url)
-                        },500)
-                    }else {
-                        this.$message({
-                            type:'error',
-                            message:res.message
-                        })
-                    }
-                });
+                if( this.orderInfo.factoringType == '1' ) {
+                    this.$ajax.get('/api/bussiness/account/order/getCustomerDetail/' + this.orderInfo.id, null, (res) => {
+                        console.log(res.data)
+                        if (res.code == 0) {
+                            this.BusinessAccountGtcpApply = res.data;
+                            setTimeout(()=>{
+                                this.preViewPDF(this.BusinessAccountGtcpApply.infoPdfFile.url)
+                            },500)
+                        }else {
+                            this.$message({
+                                type:'error',
+                                message:res.message
+                            })
+                        }
+                    })
+                }
+                else if ( this.orderInfo.factoringType == '2' ) {
+                    this.$ajax.get('/api/bussiness/account/order/getGtcpDetail/' + this.orderInfo.id, null, (res) => {
+                        console.log(res)
+                        if (res.code == 0) {
+                            this.BusinessAccountGtcpApply = res.data;
+                            setTimeout(()=>{
+                                this.preViewPDF(this.BusinessAccountGtcpApply.gtcpApplyPdf.url)
+                            },500)
+                        }else {
+                            this.$message({
+                                type:'error',
+                                message:res.message
+                            })
+                        }
+                    });
+                }
             },
             preViewPDF(pdfPath) {
                 if (pdfPath) {

@@ -323,42 +323,42 @@
                 ],
                 array: {
                     orderId: null,
-                    businessAddress: '',
-                    companyName: '',
-                    companyEnglishName: '',
-                    contactPerson: '',
-                    contactMethod: '',
-                    creditNumber: '',
-                    creditAmount: '',
-                    auditDate: '',
-                    demandAmount: '',
-                    otherMatters: '',
-                    domesticBuyerNumber: 0,
-                    domesticSales: '',
-                    domesticChargeSales: '',
-                    employeesAmount: '',
-                    exportSales: '',
-                    exportChargeSales: '',
-                    foreignBuyerNumber: 0,
-                    guaranteeNumber: '',
-                    guaranteeAmount: '',
-                    haveExportQualification: '',
-                    haveInsured: '',
-                    haveQualityProblem: '',
-                    haveOffshoreAccounts: '',
-                    isAgentExport: '',
-                    isMiddlemen: '',
-                    insuranceType: '',
-                    logisticsPartner: '',
-                    lossAmount: '',
-                    mainProducts: '',
-                    officeSpace: '',
-                    purchaseAmount: '',
-                    purchaseChargeAmount: '',
-                    supplierNumber: ''
+                    businessAddress: null,
+                    companyName: null,
+                    companyEnglishName: null,
+                    contactPerson: null,
+                    contactMethod: null,
+                    creditNumber: null,
+                    creditAmount: null,
+                    auditDate: null,
+                    demandAmount: null,
+                    otherMatters: null,
+                    domesticBuyerNumber: null,
+                    domesticSales: null,
+                    domesticChargeSales: null,
+                    employeesAmount: null,
+                    exportSales: null,
+                    exportChargeSales: null,
+                    foreignBuyerNumber: null,
+                    guaranteeNumber: null,
+                    guaranteeAmount: null,
+                    haveExportQualification: null,
+                    haveInsured: null,
+                    haveQualityProblem: null,
+                    haveOffshoreAccounts: null,
+                    isAgentExport: null,
+                    isMiddlemen: null,
+                    insuranceType: null,
+                    logisticsPartner: null,
+                    lossAmount: null,
+                    mainProducts: null,
+                    officeSpace: null,
+                    purchaseAmount: null,
+                    purchaseChargeAmount: null,
+                    supplierNumber: null
                 },
                 haveInsuredShow: false,
-                lossAmountShow: null,
+                lossAmountShow: '0',
                 tableData: [
                     {
                         demandAmount: '',
@@ -579,7 +579,6 @@
             // 远请求服务器如果成功则把fileList中要删除的file移除即可
             asyncReq (file,fileList) {
                 this.$ajax.post('/api/bussiness/account/order/deleteCustomerFile?fileId=' + file.id + '&orderId=' + this.array['orderId'], null, res => {
-                    console.log(res.data)
                     if(res.data){
                         this.fileList = this.File(res.data.filesList);
                     }
@@ -600,6 +599,7 @@
                     'businessAccountCreditBuyerLists': this.tableData,
                     'businessAccountCustomerInfo': this.array
                 }
+                console.log(jsonData)
                 this.$ajax.post('/api/bussiness/account/order/saveCustomerInfo?orderId=' + this.array['orderId'], jsonData, res => {
                     if(res.code === 0){
                         this.$message({

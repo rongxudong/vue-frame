@@ -202,13 +202,13 @@
                         </el-table-column>
                     </el-table>
                 </div>
-                <div class="justify-content-center" style="width: 100%;margin-top: 0.2rem;">
+                <div class="justify-content-center" style="width: 100%;margin-top: 0.2rem;" v-if="total > 0">
                     <el-pagination
                         @current-change="handleCurrentChange"
                         :current-page="QueryOrderListModel.pageNum"
                         :page-size="QueryOrderListModel.pageSize"
                         layout="prev, pager, next, jumper"
-                        :total=total>
+                        :total="total">
                     </el-pagination>
                 </div>
             </div>
@@ -287,7 +287,7 @@
                 factoringType: ''
             }
         },
-        created () {
+        mounted () {
             this.serviceType = this.$route.path.split('/')[2];
             this.QueryOrderListModel.orderType = this.$route.path.split('/')[2];
             this.fetchData();
@@ -319,78 +319,80 @@
             fetchData () {
                 this.$ajax.post('/api/bussiness/account/order/getOrderList', this.QueryOrderListModel, res => {
                     const arrayData = [];
-                    if (res.code == 0 && res.data.list){
+                    if ( res.code == 0 ){
                         this.total = res.data.total;
-                        for (let i = 0;i < res.data.list.length;i++){
-                            let tableData = res.data.list[i];
-                            if (tableData.orderType == 1){
-                                tableData.orderType_str = this.$t('menu.dueDiligence');
-                            }else if (tableData.orderType == 2){
-                                tableData.orderType_str = this.$t('menu.GTREvaluation');
-                            }else if (tableData.orderType == 3){
-                                tableData.orderType_str = this.$t('menu.financialSupport');
-                            }else if (tableData.orderType == 4){
-                                tableData.orderType_str = this.$t('menu.accountManagement');
-                            }
+                        if(res.data.list) {
+                            for (let i = 0;i < res.data.list.length;i++){
+                                let tableData = res.data.list[i];
+                                if (tableData.orderType == 1){
+                                    tableData.orderType_str = this.$t('menu.dueDiligence');
+                                }else if (tableData.orderType == 2){
+                                    tableData.orderType_str = this.$t('menu.GTREvaluation');
+                                }else if (tableData.orderType == 3){
+                                    tableData.orderType_str = this.$t('menu.financialSupport');
+                                }else if (tableData.orderType == 4){
+                                    tableData.orderType_str = this.$t('menu.accountManagement');
+                                }
 
-                            if (tableData.agreementStatus == 1){
-                                tableData.agreementStatus_str = this.$t('selectAgreementStatus.unedited');
-                                tableData.btnVisible = false;
-                            }else if (tableData.agreementStatus == 2){
-                                tableData.agreementStatus_str = this.$t('selectAgreementStatus.unreviewed');
-                                tableData.btnVisible = false;
-                            }else if (tableData.agreementStatus == 3){
-                                tableData.agreementStatus_str = this.$t('selectAgreementStatus.unsigned');
-                                tableData.btnVisible = true;
-                                tableData.btnDesc = this.$t('agreement.sign');
-                            }else if (tableData.agreementStatus == 4){
-                                tableData.agreementStatus_str = this.$t('selectAgreementStatus.signed');
-                                tableData.btnVisible = true;
-                                tableData.btnDesc = this.$t('button.check');
-                            }
+                                if (tableData.agreementStatus == 1){
+                                    tableData.agreementStatus_str = this.$t('selectAgreementStatus.unedited');
+                                    tableData.btnVisible = false;
+                                }else if (tableData.agreementStatus == 2){
+                                    tableData.agreementStatus_str = this.$t('selectAgreementStatus.unreviewed');
+                                    tableData.btnVisible = false;
+                                }else if (tableData.agreementStatus == 3){
+                                    tableData.agreementStatus_str = this.$t('selectAgreementStatus.unsigned');
+                                    tableData.btnVisible = true;
+                                    tableData.btnDesc = this.$t('agreement.sign');
+                                }else if (tableData.agreementStatus == 4){
+                                    tableData.agreementStatus_str = this.$t('selectAgreementStatus.signed');
+                                    tableData.btnVisible = true;
+                                    tableData.btnDesc = this.$t('button.check');
+                                }
 
-                            if (tableData.payStatus == 1){
-                                tableData.payStatus_str = this.$t('selectPayStatus.paid');
-                            }else if (tableData.payStatus == 2){
-                                tableData.payStatus_str = this.$t('selectPayStatus.unpaid');
-                            }
+                                if (tableData.payStatus == 1){
+                                    tableData.payStatus_str = this.$t('selectPayStatus.paid');
+                                }else if (tableData.payStatus == 2){
+                                    tableData.payStatus_str = this.$t('selectPayStatus.unpaid');
+                                }
 
-                            if (tableData.applyStatus == 1){
-                                tableData.applyStatus_str = this.$t('selectApplyStatus.uncommitted');
-                            }else if (tableData.applyStatus == 2){
-                                tableData.applyStatus_str = this.$t('selectApplyStatus.shortAuditing');
-                            }else if (tableData.applyStatus == 3){
-                                tableData.applyStatus_str = this.$t('selectApplyStatus.shortRejected');
-                            }else if (tableData.applyStatus == 4){
-                                tableData.applyStatus_str = this.$t('selectApplyStatus.shortPassed');
-                            }else if (tableData.applyStatus == 5){
-                                tableData.applyStatus_str = this.$t('selectApplyStatus.shortTerminated');
-                            }else if (tableData.applyStatus == 6){
-                                tableData.applyStatus_str = this.$t('selectApplyStatus.shortPassed');
-                            }
-                            //----------------------------------------------------
-                            if (tableData.applyStatus  == 1 || tableData.applyStatus  == 3){
-                                if (tableData.agreementStatus == 1 || tableData.agreementStatus == 2 || tableData.agreementStatus == 3){
-                                    tableData.applyStatusBtnVisible = false;
+                                if (tableData.applyStatus == 1){
+                                    tableData.applyStatus_str = this.$t('selectApplyStatus.uncommitted');
+                                }else if (tableData.applyStatus == 2){
+                                    tableData.applyStatus_str = this.$t('selectApplyStatus.shortAuditing');
+                                }else if (tableData.applyStatus == 3){
+                                    tableData.applyStatus_str = this.$t('selectApplyStatus.shortRejected');
+                                }else if (tableData.applyStatus == 4){
+                                    tableData.applyStatus_str = this.$t('selectApplyStatus.shortPassed');
+                                }else if (tableData.applyStatus == 5){
+                                    tableData.applyStatus_str = this.$t('selectApplyStatus.shortTerminated');
+                                }else if (tableData.applyStatus == 6){
+                                    tableData.applyStatus_str = this.$t('selectApplyStatus.shortPassed');
+                                }
+                                //----------------------------------------------------
+                                if (tableData.applyStatus  == 1 || tableData.applyStatus  == 3){
+                                    if (tableData.agreementStatus == 1 || tableData.agreementStatus == 2 || tableData.agreementStatus == 3){
+                                        tableData.applyStatusBtnVisible = false;
+                                    } else {
+                                        tableData.applyStatusBtnVisible = true;
+                                        tableData.applyStatusBtnDesc = this.$t('investigate.fillIn');
+                                    }
                                 } else {
                                     tableData.applyStatusBtnVisible = true;
-                                    tableData.applyStatusBtnDesc = this.$t('investigate.fillIn');
+                                    tableData.applyStatusBtnDesc = this.$t('button.check');
                                 }
-                            } else {
-                                tableData.applyStatusBtnVisible = true;
-                                tableData.applyStatusBtnDesc = this.$t('button.check');
+                                //----------------------------------------------------
+                                arrayData.push(tableData);
                             }
-                            //----------------------------------------------------
-                            arrayData.push(tableData);
                         }
-                    }
-                    if (res.code != 0){
+                    } else {
                         this.$message({
                             type: 'error',
                             message: res.message
                         })
                     }
                     this.tableData = arrayData;
+                    console.log(this.tableData);
                 })
             },
             handleCurrentChange(curPage){

@@ -214,7 +214,7 @@ a:focus {
   margin: 15px 0;
 }
 .el-table {
-  overflow: auto!important;
+  overflow: visible;
 }
 .el-table__empty-block {
   height: auto!important;

@@ -533,7 +533,7 @@
             uploadSuccess (response, file, fileList) {
                 console.log(response)
                 if(response.code == 0){
-                    this.fileList = this.File(response.data.filesList);
+                    this.fileList = this.File(response.data.files);
                     this.$message({
                         showClose: true,
                         type: 'success',
@@ -580,7 +580,7 @@
             asyncReq (file,fileList) {
                 this.$ajax.post('/api/bussiness/account/order/deleteCustomerFile?fileId=' + file.id + '&orderId=' + this.array['orderId'], null, res => {
                     if(res.data){
-                        this.fileList = this.File(res.data.filesList);
+                        this.fileList = this.File(res.data.files);
                     }
                 })
             },
@@ -650,7 +650,7 @@
                         let getDetail = res.data;
                         if( getDetail ) {
                             this.array = getDetail;
-                            this.fileList = this.File(getDetail.filesList);
+                            this.fileList = this.File(getDetail.files);
                             this.tableData = getDetail.buyerList;
                             if(parseFloat(this.array.lossAmount) > 0) {
                                 this.lossAmountShow = '1';

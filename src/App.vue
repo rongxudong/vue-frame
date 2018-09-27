@@ -64,8 +64,8 @@
             }
             //http://192.168.50.18:8081
             //http://192.168.50.11:8081
-            localStorage.setItem("baseUrl", process.env.NODE_ENV == 'development' ? 'http://account.dev.financegt.com' : baseUrl);
-//             localStorage.setItem("baseUrl", 'http://192.168.20.1:8081');
+//            localStorage.setItem("baseUrl", process.env.NODE_ENV == 'development' ? 'http://account.dev.financegt.com' : baseUrl);
+             localStorage.setItem("baseUrl", 'http://192.168.20.1:8081');
             this.$store.state.baseUrl = localStorage.getItem("baseUrl");
 
             this.$ajax.get('/api/user/'+this.$store.state.token, null, res => {

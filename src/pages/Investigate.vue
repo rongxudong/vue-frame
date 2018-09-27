@@ -392,7 +392,6 @@
                         })
                     }
                     this.tableData = arrayData;
-                    console.log(this.tableData);
                 })
             },
             handleCurrentChange(curPage){

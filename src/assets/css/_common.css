@@ -213,6 +213,12 @@ a:focus {
 .mg15 {
   margin: 15px 0;
 }
+.el-table {
+  overflow: auto!important;
+}
+.el-table__empty-block {
+  height: auto!important;
+}
 .app-container {
   height: calc(100vh - 60px);
   height: -ms-calc(100vh - 60px);

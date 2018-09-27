@@ -632,6 +632,8 @@
                 this.$ajax.post('/api/bussiness/account/order/submitCustomer?orderId=' + this.array['orderId'], jsonData, res => {
                     if(res.code === 0){
                         this.$router.push({path: '/Investigate/' + this.$route.query.orderType});
+                        let routePath = localStorage.getItem('currentRoutePath');
+                        this.$store.commit('delete_tabs', routePath);
                         this.$message({
                             type: 'success',
                             message: res.message

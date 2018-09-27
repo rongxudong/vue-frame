@@ -125,6 +125,7 @@
                 if(targetName == '/') {
                     return;
                 }
+                console.log(targetName)
                 this.$store.commit('delete_tabs', targetName);
                 if (this.activeIndex === targetName) {
                     // 设置当前激活的路由

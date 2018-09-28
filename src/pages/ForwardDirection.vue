@@ -659,8 +659,20 @@
                             } else {
                                 this.lossAmountShow = '0';
                             }
+//                            haveQualityProblem: null,
+//                                haveOffshoreAccounts: null,
+//                                isAgentExport: null,
+//                                isMiddlemen: null,
+//                            if() {
+//
+//                            }
                         } else {
-
+                            this.array.haveExportQualification = '1';
+                            this.array.haveQualityProblem = '2';
+                            this.array.haveOffshoreAccounts = '1';
+                            this.array.isAgentExport = '1';
+                            this.array.isMiddlemen = '1';
+                            this.array.haveInsured = '2';
                         }
                     } else {
                         this.$message({

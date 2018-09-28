@@ -190,7 +190,8 @@
                             <template slot-scope="scope">
                                 <ul>
                                     <li v-for="item in scope.row.filesList">
-                                        <el-button type="primary" @click="auditReportDialog(item.url)" v-if="serviceType == 4">
+                                        <el-button type="primary" @click="auditReportDialog(item.url)"
+                                                   v-if="serviceType == 4 && scope.row.factoringType == '2'">
                                             {{item.fileName}}
                                         </el-button>
                                         <a v-bind:href="'http://image.financegt.com'+item.url" style="color: #2fa8fd" target="_blank" v-else>
@@ -283,8 +284,7 @@
                 serviceType: 1,
                 reportContent: '',
                 dialogVisible: false,
-                isLanguage: this.$store.state.isLanguage,
-                factoringType: ''
+                isLanguage: this.$store.state.isLanguage
             }
         },
         mounted () {

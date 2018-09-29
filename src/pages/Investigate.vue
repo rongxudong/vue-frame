@@ -191,7 +191,7 @@
                                 <ul>
                                     <li v-for="item in scope.row.filesList">
                                         <el-button type="primary" @click="auditReportDialog(item.url)"
-                                                   v-if="serviceType == 4 && scope.row.factoringType == '2'">
+                                                   v-if="serviceType == 4 && (scope.row.factoringType == '2' || scope.row.factoringType == '')">
                                             {{item.fileName}}
                                         </el-button>
                                         <a v-bind:href="'http://image.financegt.com'+item.url" style="color: #2fa8fd" target="_blank" v-else>

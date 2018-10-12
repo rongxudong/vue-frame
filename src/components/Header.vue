@@ -115,7 +115,7 @@
                 }).then(() => {
                     this.$ajax.post('/api/bussiness/account/user/logout', null, res => {
                         if (res.code == 0) {
-                            document.location.replace("http://" + window.location.host);
+                            document.location.replace("http://" + window.location.host.replace("account.","") + '/user/logout');
                             localStorage.clear();
                         } else {
                             this.$message({

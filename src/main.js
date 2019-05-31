@@ -58,7 +58,7 @@ const messages = {
         ...enLocale,
         ...elementEnLocale
     }
-}
+};
 
 // 国际化
 const i18n = new VueI18n({
@@ -77,4 +77,4 @@ new Vue({
     i18n,
     components: { App },
     template: '<App/>'
-})
+});

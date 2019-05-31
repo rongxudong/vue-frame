@@ -5,25 +5,25 @@ MyPlugin.install = function (Vue, options) {
     Vue.myGlobalMethod = function () {
         // 逻辑...
         console.log("添加全局方法或属性");
-    }
+    };
 
     // 2. 添加全局资源
     Vue.directive('my-directive', {
         bind (el, binding, vnode, oldVnode) {
             // 逻辑...
         }
-    })
+    });
     // filter
     Vue.filter('time', function(value) {
         return new Date(parseInt(value) * 1000).toLocaleString().replace(/年|月/g, "-").replace(/日/g, " ");
-    })
+    });
 
     // 3. 注入组件
     Vue.mixin({
         created: function () {
             // 逻辑...
         }
-    })
+    });
 
     // 4. 添加实例方法
     // 简要判断游览器类型
@@ -86,7 +86,7 @@ MyPlugin.install = function (Vue, options) {
         if (userAgent.indexOf("Trident") > -1) {
             return "Edge";
         }
-    }
+    };
 
     // 下载文件
 
@@ -99,7 +99,7 @@ MyPlugin.install = function (Vue, options) {
         let evObj = document.createEvent('MouseEvents');
         evObj.initMouseEvent( 'click', true, true, window, 0, 0, 0, 0, 0, true, false, true, false, 0, null);
         $a.dispatchEvent(evObj);
-    }
+    };
 
     Vue.prototype.$ChromeFfIedownload = function (data, strFileName, strMimeType) {
         let self = window, // this script is only for browsers anyway...
@@ -238,5 +238,5 @@ MyPlugin.install = function (Vue, options) {
     Vue.prototype.getRandColor = '#ADADAD';
 
 
-}
+};
 module.exports = MyPlugin;

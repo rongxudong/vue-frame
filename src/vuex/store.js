@@ -66,7 +66,7 @@ const options = {
             state.isHeaderMenuActive = !state.isHeaderMenuActive;
         }
     }
-}
+};
 
 // 为每个 state 字段生成对应的 mutations 方法
 Object.keys(options.state).forEach((key) => {

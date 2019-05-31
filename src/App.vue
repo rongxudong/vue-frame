@@ -51,7 +51,7 @@
             localStorage.setItem("User_token", process.env.NODE_ENV == 'development' ? '3a5b72474af224d751f4053469c7ab7d' : $.cookie('bl_sid'));
             this.$store.state.token = localStorage.getItem("User_token");
 
-            let baseUrl = 'http://account.financegt.com'
+            let baseUrl = 'http://account.financegt.com';
             let domain = document.domain;
             if (domain.indexOf('dev') != -1) {
                 baseUrl = 'http://account.dev.financegt.com';

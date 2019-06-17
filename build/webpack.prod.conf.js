@@ -1,21 +1,21 @@
-'use strict'
-const path = require('path')
-const utils = require('./utils')
-const webpack = require('webpack')
-const config = require('../config')
-const merge = require('webpack-merge')
-const baseWebpackConfig = require('./webpack.base.conf')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+'use strict';
+const path = require('path');
+const utils = require('./utils');
+const webpack = require('webpack');
+const config = require('../config');
+const merge = require('webpack-merge');
+const baseWebpackConfig = require('./webpack.base.conf');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 // 图片压缩插件
-const ImageminPlugin = require('imagemin-webpack-plugin').default
+const ImageminPlugin = require('imagemin-webpack-plugin').default;
 
 const env = process.env.NODE_ENV === 'testing'
     ? require('../config/test.env')
-    : require('../config/prod.env')
+    : require('../config/prod.env');
 
 const webpackConfig = merge(baseWebpackConfig, {
     // module的处理,主要是针对css的处理
@@ -140,7 +140,7 @@ const webpackConfig = merge(baseWebpackConfig, {
             }
         })
     ]
-})
+});
 
 if (config.build.productionGzip) {
     // 引入压缩文件的组件,该插件会对生成的文件进行压缩，生成一个.gz文件
@@ -166,4 +166,4 @@ if (config.build.bundleAnalyzerReport) {
     webpackConfig.plugins.push(new BundleAnalyzerPlugin())
 }
 
-module.exports = webpackConfig
+module.exports = webpackConfig;

@@ -112,7 +112,7 @@
                             else {
                                 res.data.filesList[index].type = 4;
                             }
-                        })
+                        });
                         this.DataResList = res.data.filesList;
                     }
                     else {

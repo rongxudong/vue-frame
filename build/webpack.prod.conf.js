@@ -66,8 +66,8 @@ const webpackConfig = merge(baseWebpackConfig, {
         //压缩提取出的css，并解决ExtractTextPlugin分离出的js重复问题(多个文件引入同一css文件)
         new OptimizeCSSPlugin({
             cssProcessorOptions: config.build.productionSourceMap
-                ? { safe: true, map: { inline: false } }
-                : { safe: true }
+                ? {safe: true, map: {inline: false}}
+                : {safe: true}
         }),
         // generate dist index.html with correct asset hash for caching.
         // you can customize output by editing /index.html

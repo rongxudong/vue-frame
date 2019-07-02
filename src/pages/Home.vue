@@ -118,7 +118,7 @@
                 let messageListModel = {
                     pageNum: 1,
                     pageSize: 15
-                }
+                };
                 this.$ajax.post('/api/bussiness/account/message/getFileList', messageListModel, res => {
                     if (res.code == 0) {
                         let fileExtension;

@@ -41,6 +41,7 @@ module.exports = {
             ? config.build.assetsPublicPath
             : config.dev.assetsPublicPath
     },
+    //全局挂载插件: webpack内置插件
     plugins: [
         new webpack.ProvidePlugin({
             $:"jquery",
@@ -67,12 +68,17 @@ module.exports = {
             {
                 test: /\.js$/,
                 loader: 'babel-loader',
-                include: [resolve('src'), resolve('test'), resolve('node_modules/webpack-dev-server/client')]
+                include: [
+                    resolve('src'),
+                    resolve('test'),
+                    resolve('node_modules/webpack-dev-server/client')
+                ]
             },
             {
                 test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
                 loader: 'url-loader',
-                // query是对loader做额外的选项配置,关于query 仅由于兼容性原因而存在。请使用 options 代替。
+                // query是对loader做额外的选项配置,关于query 仅由于兼容性原因而存在。
+                // 请使用 options 代替。
                 options: {
                     limit: 10000,//图片小于10000字节时以base64的方式引用
                     name: utils.assetsPath('img/[name].[hash:7].[ext]') //文件名为name.7位hash值.拓展名

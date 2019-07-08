@@ -120,7 +120,7 @@ const webpackConfig = merge(baseWebpackConfig, {
             name: 'app',
             async: 'vendor-async',
             children: true,
-            minChunks: 3
+            minChunks: 2
         }),
 
         // copy custom static assets
@@ -144,7 +144,7 @@ const webpackConfig = merge(baseWebpackConfig, {
 
 if (config.build.productionGzip) {
     // 引入压缩文件的组件,该插件会对生成的文件进行压缩，生成一个.gz文件
-    const CompressionWebpackPlugin = require('compression-webpack-plugin')
+    const CompressionWebpackPlugin = require('compression-webpack-plugin');
 
     webpackConfig.plugins.push(
         new CompressionWebpackPlugin({
@@ -156,7 +156,8 @@ if (config.build.productionGzip) {
                 ')$'
             ),
             threshold: 10240, // 资源文件大于10240B=10kB时会被压缩
-            minRatio: 0.8 // 最小压缩比达到0.8时才会被压缩
+            minRatio: 0.8, // 最小压缩比达到0.8时才会被压缩
+            deleteOriginalAssets: false // 是否删除原文件
         })
     )
 }
